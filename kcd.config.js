@@ -5,6 +5,6 @@ module.exports = {
     extends: [path.join(__dirname, './.eslintrc')],
   },
   jest: {
-    coverageThreshold: {},
+    coverageThreshold: null,
   },
 }

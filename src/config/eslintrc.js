@@ -3,12 +3,11 @@ const {ifAnyDep} = require('../utils')
 module.exports = {
   extends: [
     'kentcdodds',
-    ifAnyDep('jest', 'kentcdodds/jest'),
-    ifAnyDep('webpack', 'kentcdodds/webpack'),
+    'kentcdodds/jest',
     ifAnyDep('react', 'kentcdodds/jsx-a11y'),
     ifAnyDep('react', 'kentcdodds/react'),
     'prettier',
-    ifAnyDep('prettier', 'kentcdodds/prettier'),
+    'kentcdodds/prettier',
   ].filter(Boolean),
   rules: Object.assign(
     {

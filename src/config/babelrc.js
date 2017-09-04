@@ -2,8 +2,8 @@ const {ifAnyDep} = require('../utils')
 
 const isTest = process.env.NODE_ENV === 'test'
 const isPreact = process.env.LIBRARY === 'preact'
-const isRollup = Boolean(JSON.parse(process.env.ROLLUP_BUILD || '"false"'))
-const isWebpack = Boolean(JSON.parse(process.env.WEBPACK_BUILD || '"false"'))
+const isRollup = JSON.parse(process.env.ROLLUP_BUILD || 'false')
+const isWebpack = JSON.parse(process.env.WEBPACK_BUILD || 'false')
 const treeshake = isRollup || isWebpack
 
 module.exports = {

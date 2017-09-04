@@ -1,19 +1,20 @@
 {
-  "extends": ["./src/config/eslintrc.js"],
+  "extends": [
+    "kentcdodds",
+    "kentcdodds/jest",
+    "kentcdodds/prettier",
+    "prettier",
+  ],
   "rules": {
     // stuff I haven't gotten around to updating in my config
     "func-style": "off",
     "no-process-exit": "off",
     "import/no-dynamic-require": "off",
     "import/no-unassigned-import": "off",
-
-    // prettier does this for us
-    "max-len": "off",
-    "semi": "off",
-    "quotes": "off",
-    "comma-dangle": "off",
+    "no-unused-vars": [
+      "error",
+      {argsIgnorePattern: "^_", varsIgnorePattern: "^ignored"},
+    ],
     "no-console": "off",
-    "indent": "off",
-    "babel/object-curly-spacing": "off"
   }
 }

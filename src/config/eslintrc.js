@@ -17,5 +17,6 @@ module.exports = {
     ],
     'func-style': 'off',
     'no-process-exit': 'off',
+    'comma-dangle': 'off',
   },
 }

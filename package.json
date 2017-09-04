@@ -20,7 +20,7 @@
     "uninstall": "node dist uninstall",
     "precommit": "node src precommit"
   },
-  "files": ["dist", "babel", "eslint", "config"],
+  "files": ["dist", "babel.js", "eslint.js", "config.js"],
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",

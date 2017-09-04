@@ -5,7 +5,7 @@ const spawn = require('cross-spawn')
 const {fromRoot} = require('../paths')
 const {hasPkgProp} = require('../utils')
 
-const [ignoredExecutor, ignoredBin, ignoredScript, ...args] = process.argv
+const args = process.argv.slice(2)
 const here = p => path.join(__dirname, p)
 
 const useBuiltinConfig =

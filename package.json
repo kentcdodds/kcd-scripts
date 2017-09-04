@@ -2,10 +2,12 @@
   "name": "kcd-scripts",
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
-  "main": "dist/index.js",
   "engines": {
-    "node": "> 4",
-    "npm": "> 3"
+    "node": ">= 8",
+    "npm": ">= 5"
+  },
+  "bin": {
+    "kcd-scripts": "dist/index.js"
   },
   "scripts": {
     "start": "nps",

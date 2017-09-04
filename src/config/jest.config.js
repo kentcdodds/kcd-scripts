@@ -1,4 +1,7 @@
-const {ifDevDep, applyOverrides} = require('../utils')
+const path = require('path')
+const {ifDevDep} = require('../utils')
+
+const here = p => path.join(__dirname, p)
 
 const ignores = [
   '/node_modules/',
@@ -7,23 +10,22 @@ const ignores = [
   '__mocks__',
 ]
 
-const config = applyOverrides({
-  type: 'jest',
-  config: {
-    testEnvironment: ifDevDep('webpack', 'jsdom', 'node'),
-    collectCoverageFrom: ['src/**/*.js'],
-    testMatch: ['**/__tests__/**/*.js'],
-    testPathIgnorePatterns: ignores,
-    coveragePathIgnorePatterns: ignores,
-    coverageThreshold: {
-      global: {
-        branches: 100,
-        functions: 100,
-        lines: 100,
-        statements: 100,
-      },
+module.exports = {
+  testEnvironment: ifDevDep(['webpack', 'rollup'], 'jsdom', 'node'),
+  collectCoverageFrom: ['src/**/*.js'],
+  testMatch: ['**/__tests__/**/*.js'],
+  testPathIgnorePatterns: ignores,
+  coveragePathIgnorePatterns: ignores,
+  transform: {
+    '^.+\\.js$': here('./babel-transform'),
+  },
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
     },
   },
-})
-
-module.exports = config
+}

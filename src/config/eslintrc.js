@@ -1,17 +1,17 @@
-const {applyOverrides, ifDevDep} = require('../utils')
+const {ifAnyDep} = require('../utils')
 
-const config = applyOverrides({
-  type: 'eslint',
-  config: {
-    extends: [
-      'kentcdodds',
-      ifDevDep('jest', 'kentcdodds/jest'),
-      ifDevDep('webpack', 'kentcdodds/webpack'),
-      ifDevDep('react', 'kentcdodds/jsx-a11y'),
-      ifDevDep('react', 'kentcdodds/react'),
-      ifDevDep('prettier', 'kentcdodds/prettier'),
-    ].filter(Boolean),
-    rules: {
+module.exports = {
+  extends: [
+    'kentcdodds',
+    ifAnyDep('jest', 'kentcdodds/jest'),
+    ifAnyDep('webpack', 'kentcdodds/webpack'),
+    ifAnyDep('react', 'kentcdodds/jsx-a11y'),
+    ifAnyDep('react', 'kentcdodds/react'),
+    'prettier',
+    ifAnyDep('prettier', 'kentcdodds/prettier'),
+  ].filter(Boolean),
+  rules: Object.assign(
+    {
       // stuff I haven't gotten around to updating in my config
       'no-unused-vars': [
         'error',
@@ -21,21 +21,19 @@ const config = applyOverrides({
       'no-process-exit': 'off',
 
       // prettier does this for us
-      ...ifDevDep(
-        'prettier',
-        {
-          'max-len': 'off',
-          semi: 'off',
-          quotes: 'off',
-          'comma-dangle': 'off',
-          'no-console': 'off',
-          indent: 'off',
-          'babel/object-curly-spacing': 'off',
-        },
-        {}
-      ),
     },
-  },
-})
-
-module.exports = config
+    ifAnyDep(
+      'prettier',
+      {
+        'max-len': 'off',
+        semi: 'off',
+        quotes: 'off',
+        'comma-dangle': 'off',
+        'no-console': 'off',
+        indent: 'off',
+        'babel/object-curly-spacing': 'off',
+      },
+      {},
+    ),
+  ),
+}

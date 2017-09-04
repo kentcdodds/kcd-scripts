@@ -1,90 +1,42 @@
 const fs = require('fs')
 const path = require('path')
-const {mergeWith} = require('lodash')
 const readPkgUp = require('read-pkg-up')
+const arrify = require('arrify')
 
-function hasDevDependency(dep) {
-  return getPkgProp('devDependencies').hasOwnProperty(dep)
-}
+const getPkgProp = prop => readPkgUp.sync({cwd: process.cwd()}).pkg[prop]
+const hasPkgProp = (pkgProp, props) =>
+  arrify(props).some(prop => (getPkgProp(pkgProp) || {}).hasOwnProperty(prop))
+const ifPkgProp = (pkgProp, props, t, f) => (hasPkgProp(pkgProp, props) ? t : f)
 
-function getPkgProp(prop) {
-  const {pkg} = readPkgUp.sync({cwd: process.cwd()})
-  return pkg[prop]
-}
+const hasPeerDep = hasPkgProp.bind(null, 'peerDependencies')
+const hasDep = hasPkgProp.bind(null, 'dependencies')
+const hasDevDep = hasPkgProp.bind(null, 'devDependencies')
+const hasAnyDep = (...args) =>
+  [hasDep, hasDevDep, hasPeerDep].some(fn => fn(...args))
 
-function hasScript(script) {
-  return getPkgProp('scripts').hasOwnProperty(script)
-}
+const ifPeerDep = ifPkgProp.bind(null, 'peerDependencies')
+const ifDep = ifPkgProp.bind(null, 'dependencies')
+const ifDevDep = ifPkgProp.bind(null, 'devDependencies')
+const ifAnyDep = (deps, t, f) => (hasAnyDep(deps) ? t : f)
 
-function ifScript(script, t, f) {
-  return hasScript(script) ? t : f
-}
+const ifScript = ifPkgProp.bind(null, 'scripts')
 
-function ifDevDep(dep, t, f) {
-  return hasDevDependency(dep) ? t : f
-}
-
-// this will do a deep merge of two objects
-// If the object has a value that's an array,
-// then the source's value will be concat-ed with it.
-function mergeWithArrayConcat(object, source) {
-  return mergeWith(object, source, (objValue, srcValue) => {
-    if (Array.isArray(objValue)) {
-      return objValue.concat(srcValue)
-    }
-    return srcValue
-  })
-}
-
-function applyOverrides({config = {}, type}) {
-  config = applyOverridesToPath({
-    config,
-    type,
-    overrideConfig: readUserConfig()[type],
-  })
-  return config
-}
-
-function readUserConfig() {
+function ifConfig(type, defaultConfig) {
   const appDirectory = fs.realpathSync(process.cwd())
   const configPath = path.resolve(path.join(appDirectory, '/kcd.config.js'))
   if (fs.existsSync(configPath)) {
-    return require(configPath)
+    return require(configPath)[type] || defaultConfig
   } else {
     return {}
   }
 }
 
-// eslint-disable-next-line complexity
-function applyOverridesToPath({config, type, overrideConfig}) {
-  if (!overrideConfig) {
-    return config
-  }
-  try {
-    if (typeof overrideConfig === 'function') {
-      const overrides = overrideConfig(config, process.env.NODE_ENV)
-      if (!overrides) {
-        throw new Error(
-          `${type} overrides function provided, but the config was not returned. You need to return the config`
-        )
-      }
-      return overrides
-    } else if (typeof overrideConfig === 'object') {
-      return mergeWithArrayConcat(config, overrideConfig)
-    }
-  } catch (error) {
-    console.error(
-      `There was a problem trying to apply ${type} config overrides`
-    )
-    throw error
-  }
-  return config
-}
-
 module.exports = {
-  applyOverrides,
-  hasDevDependency,
   ifDevDep,
-  hasScript,
+  ifPeerDep,
   ifScript,
+  ifDep,
+  ifAnyDep,
+  ifConfig,
+  hasPkgProp,
 }

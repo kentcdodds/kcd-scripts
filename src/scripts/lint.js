@@ -1,21 +1,33 @@
+const fs = require('fs')
 const path = require('path')
 const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
+const {fromRoot} = require('../paths')
+const {hasPkgProp} = require('../utils')
 
 const [ignoredExecutor, ignoredBin, ignoredScript, ...args] = process.argv
-
 const here = p => path.join(__dirname, p)
+
+const useBuiltinConfig =
+  !args.includes('--config') &&
+  !fs.existsSync(fromRoot('.eslintrc')) &&
+  !hasPkgProp('eslint')
+const config = useBuiltinConfig
+  ? ['--config', here('../config/eslintrc.js')]
+  : []
+
+const useBuiltinIgnore =
+  !args.includes('--ignore-path') && !fs.existsSync(fromRoot('.eslintignore'))
+const ignore = useBuiltinIgnore
+  ? ['--ignore-path', here('../config/eslintignore')]
+  : []
+
+const cache = args.includes('--no-cache') ? [] : ['--cache']
 
 const result = spawn.sync(
   resolveBin.sync('eslint'),
-  // prettier-ignore
-  [
-    '--config', here('../config/eslintrc.js'),
-    '--ignore-path', here('../config/eslintignore'),
-    '--cache',
-    '.',
-  ].concat(args),
-  {stdio: 'inherit'}
+  [...config, ...ignore, ...cache, '.'].concat(args),
+  {stdio: 'inherit'},
 )
 
 if (result.status === 0) {

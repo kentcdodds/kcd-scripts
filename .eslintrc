@@ -1,15 +1,11 @@
 {
-  "extends": [
-    "kentcdodds",
-    "kentcdodds/jest",
-    "kentcdodds/prettier"
-  ],
+  "extends": ["./src/config/eslintrc.js"],
   "rules": {
     // stuff I haven't gotten around to updating in my config
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^ignored" }],
     "func-style": "off",
     "no-process-exit": "off",
     "import/no-dynamic-require": "off",
+    "import/no-unassigned-import": "off",
 
     // prettier does this for us
     "max-len": "off",

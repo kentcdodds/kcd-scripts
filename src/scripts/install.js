@@ -1,0 +1,1 @@
+require('husky/bin/install')

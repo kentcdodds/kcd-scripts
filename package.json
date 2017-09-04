@@ -12,50 +12,50 @@
   "scripts": {
     "start": "nps",
     "test": "node src test",
-    "precommit":
-      "lint-staged && opt --in pre-commit --exec \"npm start validate\""
+    "test:update": "node src test --updateSnapshot",
+    "build": "node src build",
+    "lint": "node src lint",
+    "validate": "node src validate",
+    "install": "node src install",
+    "uninstall": "node src uninstall",
+    "precommit": "node src precommit"
   },
-  "files": ["dist"],
+  "files": ["dist", "babel", "eslint", "config"],
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
     "all-contributors-cli": "^4.3.0",
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.6.0",
+    "arrify": "^1.0.1",
+    "babel-cli": "^6.26.0",
     "babel-jest": "^20.0.3",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.2.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.8",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.0",
     "cross-spawn": "^5.1.0",
-    "eslint-config-kentcdodds": "^12.4.1",
     "eslint": "^4.2.0",
+    "eslint-config-kentcdodds": "^12.4.1",
+    "eslint-config-prettier": "^2.4.0",
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.1",
-    "lodash": "^4.17.4",
+    "lodash.merge": "^4.6.0",
     "opt-cli": "^1.5.1",
     "prettier": "^1.6.1",
     "read-pkg-up": "^2.0.0",
+    "resolve": "^1.4.0",
     "resolve-bin": "^0.4.0",
     "rimraf": "^2.6.1"
   },
   "devDependencies": {
     "nps": "^5.4.0",
     "nps-utils": "^1.2.0"
-  },
-  "lint-staged": {
-    "*.+(js|json)": ["prettier --write", "git add"]
-  },
-  "prettier": {
-    "printWidth": 80,
-    "tabWidth": 2,
-    "useTabs": false,
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "bracketSpacing": false,
-    "jsxBraketSameLine": false
   },
   "repository": {
     "type": "git",

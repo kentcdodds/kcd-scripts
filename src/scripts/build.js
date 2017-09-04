@@ -16,7 +16,7 @@ const result = spawn.sync(
     '--ignore', '__tests__,__mocks__',
     'src',
   ].concat(argv),
-  {stdio: 'inherit'}
+  {stdio: 'inherit'},
 )
 
-process.exit(result)
+process.exit(result.status)

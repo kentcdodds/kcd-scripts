@@ -16,8 +16,8 @@
     "build": "node src build",
     "lint": "node src lint",
     "validate": "node src validate",
-    "install": "node src install",
-    "uninstall": "node src uninstall",
+    "install": "node dist install",
+    "uninstall": "node dist uninstall",
     "precommit": "node src precommit"
   },
   "files": ["dist", "babel", "eslint", "config"],

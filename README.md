@@ -12,7 +12,7 @@
 [![downloads][downloads-badge]][npmcharts]
 [![MIT License][license-badge]][LICENSE]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
@@ -22,11 +22,13 @@
 
 ## The problem
 
-// TODO
+I do a bunch of open source and want to make it easier to maintain so many
+projects.
 
 ## This solution
 
-// TODO
+This is a CLI that abstracts away all configuration for my open source projects
+for linting, testing, building, and more.
 
 ## Installation
 
@@ -39,24 +41,30 @@ npm install --save-dev kcd-scripts
 
 ## Usage
 
-// TODO
+This is a CLI and exposes a bin called `kcd-scripts`. I don't really plan on
+documenting or testing it super duper well because it's really specific to my
+needs. You'll find all available scripts in `src/scripts`.
+
+This project actually dogfoods itself. If you look in the `package.json`, you'll
+find scripts with `node src {scriptName}`. This serves as an example of some
+of the things you can do with `kcd-scripts`.
 
 ## Inspiration
 
-// TODO
+This is inspired by `react-scripts`.
 
 ## Other Solutions
 
 I'm not aware of any, if you are please [make a pull request][prs] and add it
-here!
+here! Again, this is a very specific-to-me solution.
 
 ## Contributors
 
 Thanks goes to these people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Tests") | [<img src="https://avatars2.githubusercontent.com/u/1436?v=4" width="100px;"/><br /><sub>Vadim Kalion</sub>](https://github.com/bob)<br />[💬](#question-bob "Answering Questions") |
-| :---: | :---: |
+| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Tests") |
+| :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.

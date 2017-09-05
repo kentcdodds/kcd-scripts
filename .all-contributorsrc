@@ -18,15 +18,6 @@
         "infra",
         "test"
       ]
-    },
-    {
-      "login": "bob",
-      "name": "Vadim Kalion",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/1436?v=4",
-      "profile": "https://github.com/bob",
-      "contributions": [
-        "question"
-      ]
     }
   ]
 }

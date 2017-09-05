@@ -1,9 +1,29 @@
+const fs = require('fs')
+const path = require('path')
 const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
 const rimraf = require('rimraf')
 const {fromRoot} = require('../paths')
+const {hasPkgProp} = require('../utils')
 
-const argv = process.argv.slice(2)
+const args = process.argv.slice(2)
+const here = p => path.join(__dirname, p)
+
+const useBuiltinConfig =
+  !args.includes('--presets') &&
+  !fs.existsSync(fromRoot('.babelrc')) &&
+  !hasPkgProp('babel')
+const config = useBuiltinConfig
+  ? ['--presets', here('../config/babelrc.js')]
+  : []
+
+const ignore = args.includes('--ignore')
+  ? []
+  : ['--ignore', '__tests__,__mocks__']
+
+const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files']
+
+const outDir = args.includes('--out-dir') ? [] : ['--out-dir', 'dist']
 
 rimraf.sync(fromRoot('dist'))
 
@@ -11,11 +31,12 @@ const result = spawn.sync(
   resolveBin.sync('babel-cli', {executable: 'babel'}),
   // prettier-ignore
   [
-    '--copy-files',
-    '--out-dir', 'dist',
-    '--ignore', '__tests__,__mocks__',
+    ...outDir,
+    ...copyFiles,
+    ...ignore,
+    ...config,
     'src',
-  ].concat(argv),
+  ].concat(args),
   {stdio: 'inherit'},
 )
 

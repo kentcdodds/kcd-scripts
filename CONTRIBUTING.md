@@ -9,11 +9,8 @@ Thanks for being willing to contribute!
 
 1. Fork and clone the repo
 2. `$ npm install` to install dependencies
-3. `$ npm start validate` to validate you've got it working
+3. `$ npm run validate` to validate you've got it working
 4. Create a branch for your PR
-
-This project uses [`nps`][nps] and you can run `npm start help` to see what
-scripts are available.
 
 > Tip: Keep your `master` branch pointing at the original repository and make
 > pull requests from branches on your fork. To do this, run:
@@ -34,11 +31,11 @@ scripts are available.
 ## Add yourself as a contributor
 
 This project follows the [all contributors][all-contributors] specification.
-To add yourself to the table of contributors on the README.md, please use the
+To add yourself to the table of contributors on the `README.md`, please use the
 automated script as part of your PR:
 
 ```console
-npm start contributors.add
+npm run add-contributor
 ```
 
 Follow the prompt and commit `.all-contributorsrc` and `README.md` in the PR.
@@ -51,11 +48,11 @@ contribution type.
 This project uses [`semantic-release`][semantic-release] to do automatic
 releases and generate a changelog based on the commit history. So we follow
 [a convention][convention] for commit messages. You don't have to follow this
-convention if you don't like to. Just know that when we merge your commit, we'll
+convention if you don't want to. Just know that when we merge your commit, we'll
 probably use "Squash and Merge" so we can change the commit message :)
 
 Please make sure to run the tests before you commit your changes. You can run
-`npm start test.update` which will update any snapshots that need updating.
+`npm run test:update` which will update any snapshots that need updating.
 Make sure to include those changes (if they exist) in your commit.
 
 ### opt into git hooks
@@ -74,11 +71,11 @@ pre-commit
 
 Please checkout the [the open issues][issues]
 
-Also, please watch the repo and respond to questions/bug reports/feature requests! Thanks!
+Also, please watch the repo and respond to questions/bug reports/feature
+requests! Thanks!
 
 [egghead]: https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github
 [semantic-release]: https://npmjs.com/package/semantic-release
 [convention]: https://github.com/conventional-changelog/conventional-changelog-angular/blob/ed32559941719a130bb0327f886d6a32a8cbc2ba/convention.md
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [issues]: https://github.com/kentcdodds/kcd-scripts/issues
-[nps]: https://github.com/kentcdodds/nps

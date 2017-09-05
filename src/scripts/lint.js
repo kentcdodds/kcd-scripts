@@ -30,8 +30,4 @@ const result = spawn.sync(
   {stdio: 'inherit'},
 )
 
-if (result.status === 0) {
-  console.error(`All's good 👍`)
-}
-
 process.exit(result.status)

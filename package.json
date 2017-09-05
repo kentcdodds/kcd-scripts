@@ -10,15 +10,15 @@
     "kcd-scripts": "dist/index.js"
   },
   "scripts": {
-    "start": "nps",
+    "add-contributor": "node src contributors add",
     "test": "node src test",
     "test:update": "node src test --updateSnapshot",
     "build": "node src build",
     "lint": "node src lint",
     "validate": "node src validate",
+    "precommit": "node src precommit",
     "install": "node dist install",
-    "uninstall": "node dist uninstall",
-    "precommit": "node src precommit"
+    "uninstall": "node dist uninstall"
   },
   "files": ["dist", "babel.js", "eslint.js", "config.js"],
   "keywords": [],
@@ -52,10 +52,6 @@
     "resolve": "^1.4.0",
     "resolve-bin": "^0.4.0",
     "rimraf": "^2.6.1"
-  },
-  "devDependencies": {
-    "nps": "^5.4.0",
-    "nps-utils": "^1.2.0"
   },
   "repository": {
     "type": "git",

@@ -16,7 +16,10 @@ const config = useBuiltinConfig
   : []
 
 const useBuiltinIgnore =
-  !args.includes('--ignore-path') && !fs.existsSync(fromRoot('.eslintignore'))
+  !args.includes('--ignore-path') &&
+  !fs.existsSync(fromRoot('.eslintignore')) &&
+  !hasPkgProp('eslintIgnore')
+
 const ignore = useBuiltinIgnore
   ? ['--ignore-path', here('../config/eslintignore')]
   : []

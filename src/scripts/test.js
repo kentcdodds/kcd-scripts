@@ -5,7 +5,7 @@ process.env.NODE_ENV = 'test'
 const fs = require('fs')
 const jest = require('jest')
 const {hasPkgProp} = require('../utils')
-const {fromRoot} = require('../paths')
+const {fromRoot} = require('../utils')
 
 const args = process.argv.slice(2)
 

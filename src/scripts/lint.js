@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
-const {fromRoot} = require('../paths')
+const {fromRoot} = require('../utils')
 const {hasPkgProp} = require('../utils')
 
 const args = process.argv.slice(2)

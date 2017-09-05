@@ -2,6 +2,10 @@ const fs = require('fs')
 const path = require('path')
 const readPkgUp = require('read-pkg-up')
 const arrify = require('arrify')
+const isWindows = require('is-windows')
+
+const appDirectory = fs.realpathSync(process.cwd())
+const fromRoot = (...p) => path.join(appDirectory, ...p)
 
 const getPkgProp = prop => readPkgUp.sync({cwd: process.cwd()}).pkg[prop]
 const hasPkgProp = (pkgProp, props) =>
@@ -22,7 +26,6 @@ const ifAnyDep = (deps, t, f) => (hasAnyDep(deps) ? t : f)
 const ifScript = ifPkgProp.bind(null, 'scripts')
 
 function ifConfig(type, defaultConfig) {
-  const appDirectory = fs.realpathSync(process.cwd())
   const configPath = path.resolve(path.join(appDirectory, '/kcd.config.js'))
   if (fs.existsSync(configPath)) {
     return require(configPath)[type] || defaultConfig
@@ -30,6 +33,8 @@ function ifConfig(type, defaultConfig) {
     return {}
   }
 }
+
+const ifWindows = (t, f) => (isWindows() ? t : f)
 
 module.exports = {
   ifDevDep,
@@ -39,4 +44,7 @@ module.exports = {
   ifAnyDep,
   ifConfig,
   hasPkgProp,
+  appDirectory,
+  fromRoot,
+  ifWindows,
 }

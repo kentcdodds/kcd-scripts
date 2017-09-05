@@ -3,7 +3,7 @@ const path = require('path')
 const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
 const rimraf = require('rimraf')
-const {fromRoot} = require('../paths')
+const {fromRoot} = require('../utils')
 const {hasPkgProp} = require('../utils')
 
 const args = process.argv.slice(2)
@@ -23,9 +23,11 @@ const ignore = args.includes('--ignore')
 
 const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files']
 
-const outDir = args.includes('--out-dir') ? [] : ['--out-dir', 'dist']
-
-rimraf.sync(fromRoot('dist'))
+const useDistOutDir = args.includes('--out-dir')
+const outDir = useDistOutDir ? [] : ['--out-dir', 'dist']
+if (useDistOutDir) {
+  rimraf.sync(fromRoot('dist'))
+}
 
 const result = spawn.sync(
   resolveBin.sync('babel-cli', {executable: 'babel'}),

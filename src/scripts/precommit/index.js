@@ -1,6 +1,6 @@
 const fs = require('fs')
 const spawn = require('cross-spawn')
-const {fromRoot} = require('../../paths')
+const {fromRoot} = require('../../utils')
 
 const [executor, ...args] = process.argv
 
@@ -13,11 +13,9 @@ const lintStagedResult = spawn.sync(
 if (lintStagedResult.status !== 0 || !isOptedIntoValidate()) {
   process.exit(lintStagedResult.status)
 } else {
-  const validateResult = spawn.sync(
-    executor,
-    [require.resolve('../../'), 'validate'].concat(args),
-    {stdio: 'inherit'},
-  )
+  const validateResult = spawn.sync('npm', ['run', 'validate'], {
+    stdio: 'inherit',
+  })
 
   process.exit(validateResult.status)
 }

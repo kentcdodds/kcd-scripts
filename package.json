@@ -43,6 +43,7 @@
     "eslint-config-kentcdodds": "^12.4.1",
     "eslint-config-prettier": "^2.4.0",
     "husky": "^0.14.3",
+    "is-windows": "^1.0.1",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.1",
     "lodash.merge": "^4.6.0",

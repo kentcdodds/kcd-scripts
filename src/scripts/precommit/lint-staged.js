@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const resolve = require('resolve')
-const {fromRoot} = require('../../paths')
+const {fromRoot} = require('../../utils')
 const {hasPkgProp} = require('../../utils')
 
 const useBuiltinConfig =

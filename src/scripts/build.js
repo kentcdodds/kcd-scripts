@@ -1,10 +1,9 @@
 const fs = require('fs')
 const path = require('path')
-const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
 const rimraf = require('rimraf')
 const {fromRoot} = require('../utils')
-const {hasPkgProp} = require('../utils')
+const {hasPkgProp, resolveBin} = require('../utils')
 
 const args = process.argv.slice(2)
 const here = p => path.join(__dirname, p)
@@ -30,7 +29,7 @@ if (useDistOutDir) {
 }
 
 const result = spawn.sync(
-  resolveBin.sync('babel-cli', {executable: 'babel'}),
+  resolveBin('babel-cli', {executable: 'babel'}),
   // prettier-ignore
   [
     ...outDir,

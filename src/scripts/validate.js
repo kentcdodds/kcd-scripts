@@ -1,6 +1,5 @@
-const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
-const {ifScript} = require('../utils')
+const {ifScript, resolveBin} = require('../utils')
 
 const args = process.argv.slice(2)
 
@@ -33,7 +32,7 @@ const colors = [
 ].join(',')
 
 const result = spawn.sync(
-  resolveBin.sync('concurrently'),
+  resolveBin('concurrently'),
   // prettier-ignore
   [
     '--kill-others-on-fail',

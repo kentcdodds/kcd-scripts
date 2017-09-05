@@ -1,9 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
 const {fromRoot} = require('../utils')
-const {hasPkgProp} = require('../utils')
+const {hasPkgProp, resolveBin} = require('../utils')
 
 const args = process.argv.slice(2)
 
@@ -26,7 +25,7 @@ const ignore = useBuiltinIgnore
 const write = args.includes('--no-write') ? [] : ['--write']
 
 const result = spawn.sync(
-  resolveBin.sync('prettier'),
+  resolveBin('prettier'),
   [...config, ...ignore, ...write].concat(args),
   {stdio: 'inherit'},
 )

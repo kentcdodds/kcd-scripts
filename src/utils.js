@@ -3,6 +3,16 @@ const path = require('path')
 const readPkgUp = require('read-pkg-up')
 const arrify = require('arrify')
 
+function resolveBin(modName, {executable = modName} = {}) {
+  const pkgPath = require.resolve(`${modName}/package.json`)
+  const pkgDir = path.dirname(pkgPath)
+  const {bin} = require(pkgPath)
+  if (typeof bin === 'string') {
+    return path.join(pkgDir, bin)
+  }
+  return path.join(pkgDir, bin[executable])
+}
+
 const appDirectory = fs.realpathSync(process.cwd())
 const fromRoot = (...p) => path.join(appDirectory, ...p)
 
@@ -43,4 +53,5 @@ module.exports = {
   hasPkgProp,
   appDirectory,
   fromRoot,
+  resolveBin,
 }

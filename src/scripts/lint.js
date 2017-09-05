@@ -1,9 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const resolveBin = require('resolve-bin')
 const spawn = require('cross-spawn')
 const {fromRoot} = require('../utils')
-const {hasPkgProp} = require('../utils')
+const {hasPkgProp, resolveBin} = require('../utils')
 
 const args = process.argv.slice(2)
 const here = p => path.join(__dirname, p)
@@ -25,7 +24,7 @@ const ignore = useBuiltinIgnore
 const cache = args.includes('--no-cache') ? [] : ['--cache']
 
 const result = spawn.sync(
-  resolveBin.sync('eslint'),
+  resolveBin('eslint'),
   [...config, ...ignore, ...cache, '.'].concat(args),
   {stdio: 'inherit'},
 )

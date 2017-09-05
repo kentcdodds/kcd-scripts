@@ -16,9 +16,10 @@ function resolveBin(modName, {executable = modName} = {}) {
 const appDirectory = fs.realpathSync(process.cwd())
 const fromRoot = (...p) => path.join(appDirectory, ...p)
 
-const getPkgProp = prop => readPkgUp.sync({cwd: process.cwd()}).pkg[prop]
 const hasPkgProp = (pkgProp, props) =>
-  arrify(props).some(prop => (getPkgProp(pkgProp) || {}).hasOwnProperty(prop))
+  arrify(props).some(prop =>
+    readPkgUp.sync({cwd: process.cwd()}).pkg.hasOwnProperty(prop),
+  )
 const ifPkgProp = (pkgProp, props, t, f) => (hasPkgProp(pkgProp, props) ? t : f)
 
 const hasPeerDep = hasPkgProp.bind(null, 'peerDependencies')

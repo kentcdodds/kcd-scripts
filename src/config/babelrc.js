@@ -9,7 +9,7 @@ const treeshake = isRollup || isWebpack
 module.exports = {
   presets: [
     [
-      'env',
+      require.resolve('babel-preset-env'),
       treeshake
         ? {modules: false}
         : {
@@ -18,18 +18,25 @@ module.exports = {
             },
           },
     ],
-    ifAnyDep('react'),
+    ifAnyDep('react', require.resolve('babel-preset-react')),
   ].filter(Boolean),
   plugins: [
-    isRollup ? 'external-helpers' : null,
+    isRollup ? require.resolve('babel-plugin-external-helpers') : null,
     // we're actually not using JSX at all, but I'm leaving this
     // in here just in case we ever do (this would be easy to miss).
-    isPreact ? ['transform-react-jsx', {pragma: 'h'}] : null,
     isPreact
-      ? ['transform-react-remove-prop-types', {removeImport: true}]
+      ? [require.resolve('babel-plugin-transform-react-jsx'), {pragma: 'h'}]
       : null,
-    isTest || isRollup ? 'transform-inline-environment-variables' : null,
-    'transform-class-properties',
-    'transform-object-rest-spread',
+    isPreact
+      ? [
+          require.resolve('babel-plugin-transform-react-remove-prop-types'),
+          {removeImport: true},
+        ]
+      : null,
+    isTest || isRollup
+      ? require.resolve('babel-plugin-transform-inline-environment-variables')
+      : null,
+    require.resolve('babel-plugin-transform-class-properties'),
+    require.resolve('babel-plugin-transform-object-rest-spread'),
   ].filter(Boolean),
 }

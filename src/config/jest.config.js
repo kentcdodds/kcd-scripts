@@ -1,5 +1,5 @@
 const path = require('path')
-const {ifDevDep} = require('../utils')
+const {ifAnyDep} = require('../utils')
 
 const here = p => path.join(__dirname, p)
 
@@ -11,7 +11,7 @@ const ignores = [
 ]
 
 module.exports = {
-  testEnvironment: ifDevDep(['webpack', 'rollup'], 'jsdom', 'node'),
+  testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
   collectCoverageFrom: ['src/**/*.js'],
   testMatch: ['**/__tests__/**/*.js'],
   testPathIgnorePatterns: ignores,

@@ -49,6 +49,45 @@ This project actually dogfoods itself. If you look in the `package.json`, you'll
 find scripts with `node src {scriptName}`. This serves as an example of some
 of the things you can do with `kcd-scripts`.
 
+### Overriding Config
+
+Unlike `react-scripts`, `kcd-scripts` allows you to specify your own
+configuration for things and have that plug directly into the way things work
+with `kcd-scripts`. There are various ways that it works, but basically if you
+want to have your own config for something, just add the configuration and
+`kcd-scripts` will use that instead of it's own internal config. In addition,
+`kcd-scripts` exposes its configuration so you can use it and override only
+the parts of the config you need to.
+
+This can be a very helpful way to make editor integration work for tools like
+ESLint which require project-based ESLint configuration to be present to work.
+
+So, if we were to do this for ESLint, you could create an `.eslintrc` with the
+contents of:
+
+```
+{"extends": "kcd-scripts/eslint"}
+```
+
+Or, for `babel`, a `.babelrc` with:
+
+```
+{"presets": ["kcd-scripts/babel"]}
+```
+
+Or, for `jest`:
+
+```javascript
+const {jest: jestConfig} = require('kcd-scripts/config')
+module.exports = Object.assign(jestConfig, {
+  // your overrides here
+})
+```
+
+> Note: `kcd-scripts` intentionally does not merge things for you when you start
+> configuring things to make it less magical and more straightforward. Extending
+> can take place on your terms. I think this is actually a great way to do this.
+
 ## Inspiration
 
 This is inspired by `react-scripts`.

@@ -20,6 +20,9 @@
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
 
+<a href="https://app.codesponsor.io/link/PKGFLnhDiFvsUA5P4kAXfiPs/kentcdodds/babel-plugin-preval" rel="nofollow"><img src="https://app.codesponsor.io/embed/PKGFLnhDiFvsUA5P4kAXfiPs/kentcdodds/babel-plugin-preval.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
+
+
 ## The problem
 
 I do a bunch of open source and want to make it easier to maintain so many

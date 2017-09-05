@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const readPkgUp = require('read-pkg-up')
 const arrify = require('arrify')
+const has = require('lodash.has')
 
 function resolveBin(modName, {executable = modName} = {}) {
   const pkgPath = require.resolve(`${modName}/package.json`)
@@ -16,34 +17,27 @@ function resolveBin(modName, {executable = modName} = {}) {
 const appDirectory = fs.realpathSync(process.cwd())
 const fromRoot = (...p) => path.join(appDirectory, ...p)
 
-const getPkg = () => readPkgUp.sync({cwd: process.cwd()}).pkg
+const getPkg = () => readPkgUp.sync({cwd: process.cwd()}).pkg || {}
 
-const hasPkgProp = (pkgProp, props) =>
-  arrify(props).some(prop => getPkg().hasOwnProperty(prop))
-const ifPkgProp = (pkgProp, props, t, f) => (hasPkgProp(pkgProp, props) ? t : f)
+const hasPkgProp = props => arrify(props).some(prop => has(getPkg(), prop))
 
-const hasPeerDep = hasPkgProp.bind(null, 'peerDependencies')
-const hasDep = hasPkgProp.bind(null, 'dependencies')
-const hasDevDep = hasPkgProp.bind(null, 'devDependencies')
+const hasPkgSubProp = pkgProp => props =>
+  hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`))
+
+const ifPkgSubProp = pkgProp => (props, t, f) =>
+  hasPkgSubProp(pkgProp, props) ? t : f
+
+const hasPeerDep = hasPkgSubProp('peerDependencies')
+const hasDep = hasPkgSubProp('dependencies')
+const hasDevDep = hasPkgSubProp('devDependencies')
 const hasAnyDep = (...args) =>
   [hasDep, hasDevDep, hasPeerDep].some(fn => fn(...args))
 
-const ifPeerDep = ifPkgProp.bind(null, 'peerDependencies')
-const ifDep = ifPkgProp.bind(null, 'dependencies')
-const ifDevDep = ifPkgProp.bind(null, 'devDependencies')
+const ifPeerDep = ifPkgSubProp('peerDependencies')
+const ifDep = ifPkgSubProp('dependencies')
+const ifDevDep = ifPkgSubProp('devDependencies')
 const ifAnyDep = (deps, t, f) => (hasAnyDep(deps) ? t : f)
-
-const ifScript = (script, t, f) =>
-  (getPkg().scripts || {}).hasOwnProperty(script) ? t : f
-
-function ifConfig(type, defaultConfig) {
-  const configPath = path.resolve(path.join(appDirectory, '/kcd.config.js'))
-  if (fs.existsSync(configPath)) {
-    return require(configPath)[type] || defaultConfig
-  } else {
-    return {}
-  }
-}
+const ifScript = ifPkgSubProp('scripts')
 
 module.exports = {
   ifDevDep,
@@ -51,7 +45,6 @@ module.exports = {
   ifScript,
   ifDep,
   ifAnyDep,
-  ifConfig,
   hasPkgProp,
   appDirectory,
   fromRoot,

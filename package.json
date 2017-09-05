@@ -52,6 +52,7 @@
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.1",
+    "lodash.has": "^4.5.2",
     "lodash.merge": "^4.6.0",
     "prettier": "^1.6.1",
     "read-pkg-up": "^2.0.0",

@@ -11,7 +11,7 @@ const here = p => path.join(__dirname, p)
 const useBuiltinConfig =
   !args.includes('--config') &&
   !fs.existsSync(fromRoot('.eslintrc')) &&
-  !hasPkgProp('eslint')
+  !hasPkgProp('eslintConfig')
 const config = useBuiltinConfig
   ? ['--config', here('../config/eslintrc.js')]
   : []

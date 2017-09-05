@@ -8,7 +8,16 @@ const treeshake = isRollup || isWebpack
 
 module.exports = {
   presets: [
-    ['env', treeshake ? {modules: false} : {}],
+    [
+      'env',
+      treeshake
+        ? {modules: false}
+        : {
+            targets: {
+              node: '4.5',
+            },
+          },
+    ],
     ifAnyDep('react'),
   ].filter(Boolean),
   plugins: [

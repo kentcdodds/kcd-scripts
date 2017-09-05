@@ -1,7 +1,7 @@
 const spawn = require('cross-spawn')
 const {ifScript, resolveBin} = require('../utils')
 
-const args = process.argv.slice(2)
+const validateScripts = process.argv[3]
 
 const scriptNames = (...scripts) =>
   scripts
@@ -9,18 +9,18 @@ const scriptNames = (...scripts) =>
     .filter(Boolean)
     .join(',')
 
-const useDefaultScripts = args.length > 0
+const useDefaultScripts = typeof validateScripts !== 'string'
 
 const scripts = useDefaultScripts
-  ? args[0].split(',').map(npmScript => `npm run ${npmScript} -s`)
-  : [
+  ? [
       ifScript('build', 'npm run build --silent'),
       ifScript('lint', 'npm run lint --silent'),
       ifScript('test', 'npm run test --silent -- --coverage'),
     ].filter(Boolean)
+  : validateScripts.split(',').map(npmScript => `npm run ${npmScript} -s`)
 const names = useDefaultScripts
-  ? args[0].split(',')
-  : scriptNames('build', 'lint', 'test')
+  ? scriptNames('build', 'lint', 'test')
+  : validateScripts.split(',')
 
 const colors = [
   'bgBlue.bold',

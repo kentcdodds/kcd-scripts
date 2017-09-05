@@ -16,10 +16,10 @@ function resolveBin(modName, {executable = modName} = {}) {
 const appDirectory = fs.realpathSync(process.cwd())
 const fromRoot = (...p) => path.join(appDirectory, ...p)
 
+const getPkg = () => readPkgUp.sync({cwd: process.cwd()}).pkg
+
 const hasPkgProp = (pkgProp, props) =>
-  arrify(props).some(prop =>
-    readPkgUp.sync({cwd: process.cwd()}).pkg.hasOwnProperty(prop),
-  )
+  arrify(props).some(prop => getPkg().hasOwnProperty(prop))
 const ifPkgProp = (pkgProp, props, t, f) => (hasPkgProp(pkgProp, props) ? t : f)
 
 const hasPeerDep = hasPkgProp.bind(null, 'peerDependencies')
@@ -33,7 +33,8 @@ const ifDep = ifPkgProp.bind(null, 'dependencies')
 const ifDevDep = ifPkgProp.bind(null, 'devDependencies')
 const ifAnyDep = (deps, t, f) => (hasAnyDep(deps) ? t : f)
 
-const ifScript = ifPkgProp.bind(null, 'scripts')
+const ifScript = (script, t, f) =>
+  (getPkg().scripts || {}).hasOwnProperty(script) ? t : f
 
 function ifConfig(type, defaultConfig) {
   const configPath = path.resolve(path.join(appDirectory, '/kcd.config.js'))

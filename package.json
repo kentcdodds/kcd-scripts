@@ -20,7 +20,14 @@
     "install": "node install",
     "uninstall": "node uninstall"
   },
-  "files": ["dist", "babel.js", "eslint.js", "config.js"],
+  "files": [
+    "dist",
+    "babel.js",
+    "eslint.js",
+    "config.js",
+    "install.js",
+    "uninstall.js"
+  ],
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",

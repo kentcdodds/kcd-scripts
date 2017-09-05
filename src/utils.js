@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const readPkgUp = require('read-pkg-up')
 const arrify = require('arrify')
-const isWindows = require('is-windows')
 
 const appDirectory = fs.realpathSync(process.cwd())
 const fromRoot = (...p) => path.join(appDirectory, ...p)
@@ -34,8 +33,6 @@ function ifConfig(type, defaultConfig) {
   }
 }
 
-const ifWindows = (t, f) => (isWindows() ? t : f)
-
 module.exports = {
   ifDevDep,
   ifPeerDep,
@@ -46,5 +43,4 @@ module.exports = {
   hasPkgProp,
   appDirectory,
   fromRoot,
-  ifWindows,
 }

@@ -1,46 +1,29 @@
 const spawn = require('cross-spawn')
-const {ifScript, resolveBin} = require('../utils')
+const {getConcurrentlyArgs, hasScript, resolveBin} = require('../utils')
 
-const validateScripts = process.argv[3]
-
-const scriptNames = (...scripts) =>
-  scripts
-    .map(s => ifScript(s, s))
-    .filter(Boolean)
-    .join(',')
+const validateScripts = process.argv[2]
 
 const useDefaultScripts = typeof validateScripts !== 'string'
 
 const scripts = useDefaultScripts
-  ? [
-      ifScript('build', 'npm run build --silent'),
-      ifScript('lint', 'npm run lint --silent'),
-      ifScript('test', 'npm run test --silent -- --coverage'),
-    ].filter(Boolean)
-  : validateScripts.split(',').map(npmScript => `npm run ${npmScript} -s`)
-const names = useDefaultScripts
-  ? scriptNames('build', 'lint', 'test')
-  : validateScripts.split(',')
-
-const colors = [
-  'bgBlue.bold',
-  'bgGreen.bold',
-  'bgMagenta.bold',
-  'black.bgWhite.bold',
-  'white.bgBlack.bold',
-  'bgRed.bold',
-].join(',')
+  ? Object.entries({
+      build: 'npm run build --silent',
+      lint: 'npm run lint --silent',
+      test: 'npm run test --silent -- --coverage',
+    }).reduce((scriptsToRun, [name, script]) => {
+      if (hasScript(name)) {
+        scriptsToRun[name] = script
+      }
+      return scriptsToRun
+    }, {})
+  : validateScripts.split(',').reduce((scriptsToRun, name) => {
+      scriptsToRun[name] = `npm run ${name} --silent`
+      return scriptsToRun
+    }, {})
 
 const result = spawn.sync(
   resolveBin('concurrently'),
-  // prettier-ignore
-  [
-    '--kill-others-on-fail',
-    '--prefix', '[{name}]',
-    '--names', names,
-    '--prefix-colors', colors,
-    ...scripts,
-  ],
+  getConcurrentlyArgs(scripts),
   {stdio: 'inherit'},
 )
 

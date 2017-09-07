@@ -16,5 +16,6 @@
       {argsIgnorePattern: "^_", varsIgnorePattern: "^ignored"},
     ],
     "no-console": "off",
+    "no-nested-ternary": "off",
   }
 }

@@ -1,10 +1,10 @@
-const {ifAnyDep} = require('../utils')
+const {ifAnyDep, parseEnv} = require('../utils')
 
 const isTest = process.env.NODE_ENV === 'test'
-const isPreact = process.env.LIBRARY === 'preact'
-const isRollup = JSON.parse(process.env.ROLLUP_BUILD || 'false')
-const isWebpack = JSON.parse(process.env.WEBPACK_BUILD || 'false')
-const treeshake = isRollup || isWebpack
+const isPreact = parseEnv('BUILD_PREACT', false)
+const isRollup = parseEnv('BUILD_ROLLUP', false)
+const isWebpack = parseEnv('BUILD_WEBPACK', false)
+const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 
 module.exports = {
   presets: [
@@ -18,7 +18,7 @@ module.exports = {
             },
           },
     ],
-    ifAnyDep('react', require.resolve('babel-preset-react')),
+    ifAnyDep(['react', 'preact'], require.resolve('babel-preset-react')),
   ].filter(Boolean),
   plugins: [
     isRollup ? require.resolve('babel-plugin-external-helpers') : null,

@@ -11,6 +11,7 @@ const args = process.argv.slice(2)
 
 const watch =
   !process.env.CI &&
+  !args.includes('--no-watch') &&
   !args.includes('--coverage') &&
   !args.includes('--updateSnapshot')
     ? ['--watch']

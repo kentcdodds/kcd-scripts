@@ -27,7 +27,7 @@ const hasPkgSubProp = pkgProp => props =>
 const ifPkgSubProp = pkgProp => (props, t, f) =>
   hasPkgSubProp(pkgProp, props) ? t : f
 
-const hasScript = hasPkgSubProp('script')
+const hasScript = hasPkgSubProp('scripts')
 const hasPeerDep = hasPkgSubProp('peerDependencies')
 const hasDep = hasPkgSubProp('dependencies')
 const hasDevDep = hasPkgSubProp('devDependencies')

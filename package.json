@@ -16,18 +16,9 @@
     "build": "node src build",
     "lint": "node src lint",
     "validate": "node src validate",
-    "precommit": "node src precommit",
-    "install": "node install",
-    "uninstall": "node uninstall"
+    "precommit": "node src precommit"
   },
-  "files": [
-    "dist",
-    "babel.js",
-    "eslint.js",
-    "config.js",
-    "install.js",
-    "uninstall.js"
-  ],
+  "files": ["dist", "babel.js", "eslint.js", "config.js"],
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",

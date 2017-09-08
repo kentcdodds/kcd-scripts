@@ -6,9 +6,8 @@ const nodeResolve = require('rollup-plugin-node-resolve')
 const json = require('rollup-plugin-json')
 const uglify = require('rollup-plugin-uglify')
 const rollupAlias = require('rollup-plugin-alias')
-const {getPkg, hasFile, hasPkgProp, parseEnv} = require('../utils')
+const {pkg, hasFile, hasPkgProp, parseEnv} = require('../utils')
 
-const pkg = getPkg()
 const here = p => path.join(__dirname, p)
 
 const minify = parseEnv('BUILD_MINIFY', false)

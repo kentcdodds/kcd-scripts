@@ -2,24 +2,27 @@ const fs = require('fs')
 const path = require('path')
 const arrify = require('arrify')
 const has = require('lodash.has')
+const readPkgUp = require('read-pkg-up')
+
+const {pkg, path: pkgPath} = readPkgUp.sync({
+  cwd: fs.realpathSync(process.cwd()),
+})
+const appDirectory = path.dirname(pkgPath)
 
 function resolveBin(modName, {executable = modName} = {}) {
-  const pkgPath = require.resolve(`${modName}/package.json`)
-  const pkgDir = path.dirname(pkgPath)
-  const {bin} = require(pkgPath)
+  const modPkgPath = require.resolve(`${modName}/package.json`)
+  const modPkgDir = path.dirname(modPkgPath)
+  const {bin} = require(modPkgPath)
   if (typeof bin === 'string') {
-    return path.join(pkgDir, bin)
+    return path.join(modPkgDir, bin)
   }
-  return path.join(pkgDir, bin[executable])
+  return path.join(modPkgDir, bin[executable])
 }
 
-const appDirectory = fs.realpathSync(process.cwd())
 const fromRoot = (...p) => path.join(appDirectory, ...p)
 const hasFile = (...p) => fs.existsSync(fromRoot(...p))
 
-const getPkg = () => require(fromRoot('package.json'))
-
-const hasPkgProp = props => arrify(props).some(prop => has(getPkg(), prop))
+const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop))
 
 const hasPkgSubProp = pkgProp => props =>
   hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`))
@@ -88,7 +91,7 @@ module.exports = {
   hasScript,
   resolveBin,
   parseEnv,
-  getPkg,
+  pkg,
   hasFile,
   getConcurrentlyArgs,
 }

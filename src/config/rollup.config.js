@@ -16,12 +16,14 @@ const isPreact = parseEnv('BUILD_PREACT', false)
 
 const capitalize = s => s[0].toUpperCase() + s.slice(1)
 
-const defaultGlobals = Object.keys(pkg.peerDependencies).reduce((deps, dep) => {
+const defaultGlobals = Object.keys(
+  pkg.peerDependencies || {},
+).reduce((deps, dep) => {
   deps[dep] = capitalize(camelcase(dep))
   return deps
 }, {})
 
-const defaultExternal = Object.keys(pkg.peerDependencies)
+const defaultExternal = Object.keys(pkg.peerDependencies || {})
 
 const filenameSuffix = parseEnv(
   'BUILD_FILENAME_SUFFIX',

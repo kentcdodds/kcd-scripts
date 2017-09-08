@@ -9,12 +9,12 @@ const rollupAlias = require('rollup-plugin-alias')
 const {pkg, hasFile, hasPkgProp, parseEnv} = require('../utils')
 
 const here = p => path.join(__dirname, p)
+const capitalize = s => s[0].toUpperCase() + s.slice(1)
 
 const minify = parseEnv('BUILD_MINIFY', false)
 const format = process.env.BUILD_FORMAT
 const isPreact = parseEnv('BUILD_PREACT', false)
-
-const capitalize = s => s[0].toUpperCase() + s.slice(1)
+const name = process.env.BUILD_NAME || capitalize(camelcase(pkg.name))
 
 const defaultGlobals = Object.keys(
   pkg.peerDependencies || {},
@@ -88,7 +88,7 @@ module.exports = {
   input: 'src/index.js',
   output,
   exports: esm ? 'named' : 'default',
-  name: capitalize(camelcase(pkg.name)),
+  name,
   external,
   globals,
   plugins: [

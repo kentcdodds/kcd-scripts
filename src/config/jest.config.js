@@ -1,7 +1,9 @@
 const path = require('path')
-const {ifAnyDep, fromRoot} = require('../utils')
+const {ifAnyDep, hasFile, hasPkgProp, fromRoot} = require('../utils')
 
 const here = p => path.join(__dirname, p)
+
+const useBuiltInBabelConfig = !hasFile('.babelrc') && !hasPkgProp('babel')
 
 const ignores = [
   '/node_modules/',
@@ -10,16 +12,13 @@ const ignores = [
   '__mocks__',
 ]
 
-module.exports = {
+const jestConfig = {
   roots: [fromRoot('src')],
   testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
   collectCoverageFrom: ['src/**/*.js'],
   testMatch: ['**/__tests__/**/*.js'],
   testPathIgnorePatterns: ignores,
   coveragePathIgnorePatterns: ignores,
-  transform: {
-    '^.+\\.js$': here('./babel-transform'),
-  },
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
   coverageThreshold: {
     global: {
@@ -30,3 +29,9 @@ module.exports = {
     },
   },
 }
+
+if (useBuiltInBabelConfig) {
+  jestConfig.transform = {'^.+\\.js$': here('./babel-transform')}
+}
+
+module.exports = jestConfig

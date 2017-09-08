@@ -1,6 +1,5 @@
 const {ifAnyDep, parseEnv} = require('../utils')
 
-const isTest = process.env.NODE_ENV === 'test'
 const isPreact = parseEnv('BUILD_PREACT', false)
 const isRollup = parseEnv('BUILD_ROLLUP', false)
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
@@ -33,7 +32,7 @@ module.exports = {
           {removeImport: true},
         ]
       : null,
-    isTest || isRollup
+    isRollup || isWebpack
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,
     require.resolve('babel-plugin-transform-class-properties'),

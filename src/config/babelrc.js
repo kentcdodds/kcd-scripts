@@ -20,6 +20,7 @@ module.exports = {
     ifAnyDep(['react', 'preact'], require.resolve('babel-preset-react')),
   ].filter(Boolean),
   plugins: [
+    require.resolve('babel-macros'),
     isRollup ? require.resolve('babel-plugin-external-helpers') : null,
     // we're actually not using JSX at all, but I'm leaving this
     // in here just in case we ever do (this would be easy to miss).

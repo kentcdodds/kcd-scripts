@@ -1,5 +1,5 @@
 const path = require('path')
-const {ifAnyDep} = require('../utils')
+const {ifAnyDep, fromRoot} = require('../utils')
 
 const here = p => path.join(__dirname, p)
 
@@ -11,6 +11,7 @@ const ignores = [
 ]
 
 module.exports = {
+  roots: [fromRoot('src')],
   testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
   collectCoverageFrom: ['src/**/*.js'],
   testMatch: ['**/__tests__/**/*.js'],

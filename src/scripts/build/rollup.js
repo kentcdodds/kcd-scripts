@@ -26,6 +26,12 @@ const environment = parsedArgs.environment
   : ''
 const watch = parsedArgs.watch ? '--watch' : ''
 
+let formats = ['esm', 'cjs', 'umd', 'umd.min']
+
+if (typeof parsedArgs.bundle === 'string') {
+  formats = parsedArgs.bundle.split(',')
+}
+
 const defaultEnv = 'BUILD_ROLLUP=true'
 
 const getCommand = env =>
@@ -35,12 +41,7 @@ const getCommand = env =>
 
 const scripts = args.includes('--p-react')
   ? getPReactScripts()
-  : getConcurrentlyArgs({
-      esm: getCommand('BUILD_FORMAT=esm'),
-      cjs: getCommand('BUILD_FORMAT=cjs'),
-      umd: getCommand('BUILD_FORMAT=umd'),
-      'umd.min': getCommand('BUILD_FORMAT=umd BUILD_MINIFY=true'),
-    })
+  : getConcurrentlyArgs(getCommands())
 
 rimraf.sync(fromRoot('dist'))
 
@@ -49,18 +50,26 @@ const result = spawn.sync(resolveBin('concurrently'), scripts, {
 })
 
 function getPReactScripts() {
-  return getConcurrentlyArgs({
-    'react.esm': getCommand('BUILD_FORMAT=esm'),
-    'react.cjs': getCommand('BUILD_FORMAT=cjs'),
-    'react.umd': getCommand('BUILD_FORMAT=umd'),
-    'react.umd.min': getCommand('BUILD_FORMAT=umd BUILD_MINIFY=true'),
-    'preact.esm': getCommand('BUILD_PREACT=true BUILD_FORMAT=esm'),
-    'preact.cjs': getCommand('BUILD_PREACT=true BUILD_FORMAT=cjs'),
-    'preact.umd': getCommand('BUILD_PREACT=true BUILD_FORMAT=umd'),
-    'preact.umd.min': getCommand(
-      'BUILD_PREACT=true BUILD_FORMAT=umd BUILD_MINIFY=true',
-    ),
-  })
+  const reactCommands = prefixKeys('react.', getCommands())
+  const preactCommands = prefixKeys('preact.', getCommands('BUILD_PREACT=true'))
+  return getConcurrentlyArgs(Object.assign(reactCommands, preactCommands))
+}
+
+function prefixKeys(prefix, object) {
+  return Object.entries(object).reduce((cmds, [key, value]) => {
+    cmds[`${prefix}${key}`] = value
+    return cmds
+  }, {})
+}
+
+function getCommands(env = '') {
+  return formats.reduce((cmds, format) => {
+    const [formatName, minify = false] = format.split('.')
+    cmds[format] = getCommand(
+      `BUILD_FORMAT=${formatName} BUILD_MINIFY=${Boolean(minify)} ${env}`,
+    )
+    return cmds
+  }, {})
 }
 
 process.exit(result.status)

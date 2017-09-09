@@ -6,6 +6,8 @@ const nodeResolve = require('rollup-plugin-node-resolve')
 const json = require('rollup-plugin-json')
 const uglify = require('rollup-plugin-uglify')
 const rollupAlias = require('rollup-plugin-alias')
+const nodeBuiltIns = require('rollup-plugin-node-builtins')
+const nodeGlobals = require('rollup-plugin-node-globals')
 const {pkg, hasFile, hasPkgProp, parseEnv} = require('../utils')
 
 const here = p => path.join(__dirname, p)
@@ -44,6 +46,8 @@ if (isPreact) {
   delete globals['prop-types'] // TODO: is this necessary?
   external.splice(external.indexOf('react'), 1)
 }
+
+console.log(process.env.BUILD_EXTERNAL, external)
 
 const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
 const esm = format === 'esm'
@@ -94,6 +98,8 @@ module.exports = {
   globals,
   plugins: [
     alias ? rollupAlias(alias) : null,
+    isNode ? nodeBuiltIns() : null,
+    isNode ? nodeGlobals() : null,
     nodeResolve({preferBuiltins: isNode, jsnext: true, main: true}),
     commonjs({include: 'node_modules/**'}),
     json(),

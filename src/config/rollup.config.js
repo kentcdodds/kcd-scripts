@@ -14,6 +14,7 @@ const capitalize = s => s[0].toUpperCase() + s.slice(1)
 const minify = parseEnv('BUILD_MINIFY', false)
 const format = process.env.BUILD_FORMAT
 const isPreact = parseEnv('BUILD_PREACT', false)
+const isNode = parseEnv('BUILD_NODE', false)
 const name = process.env.BUILD_NAME || capitalize(camelcase(pkg.name))
 
 const defaultGlobals = Object.keys(
@@ -93,7 +94,7 @@ module.exports = {
   globals,
   plugins: [
     alias ? rollupAlias(alias) : null,
-    nodeResolve({jsnext: true, main: true}),
+    nodeResolve({preferBuiltins: isNode, jsnext: true, main: true}),
     commonjs({include: 'node_modules/**'}),
     json(),
     rollupBabel({

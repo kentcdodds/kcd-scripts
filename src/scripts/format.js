@@ -24,9 +24,14 @@ const ignore = useBuiltinIgnore
 
 const write = args.includes('--no-write') ? [] : ['--write']
 
+// this ensures that when running format as a pre-commit hook and we get
+// the full file path, we make that non-absolute so it is treated as a glob,
+// This way the prettierignore will be applied
+const relativeArgs = args.map(a => a.replace(`${process.cwd()}/`, ''))
+
 const result = spawn.sync(
   resolveBin('prettier'),
-  [...config, ...ignore, ...write].concat(args),
+  [...config, ...ignore, ...write].concat(relativeArgs),
   {stdio: 'inherit'},
 )
 

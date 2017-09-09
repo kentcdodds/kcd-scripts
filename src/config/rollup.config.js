@@ -47,8 +47,6 @@ if (isPreact) {
   external.splice(external.indexOf('react'), 1)
 }
 
-console.log(process.env.BUILD_EXTERNAL, external)
-
 const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
 const esm = format === 'esm'
 const umd = format === 'umd'

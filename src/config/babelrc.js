@@ -1,5 +1,6 @@
 const {ifAnyDep, parseEnv} = require('../utils')
 
+const isTest = (process.env.BABEL_ENV || process.env.NODE_ENV) === 'test'
 const isPreact = parseEnv('BUILD_PREACT', false)
 const isRollup = parseEnv('BUILD_ROLLUP', false)
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
@@ -13,7 +14,7 @@ module.exports = {
         ? {modules: false}
         : {
             targets: {
-              node: '4.5',
+              node: isTest ? 'current' : '4.5',
             },
           },
     ],

@@ -34,7 +34,7 @@ module.exports = {
           {removeImport: true},
         ]
       : null,
-    isRollup || isWebpack
+    isWebpack || isRollup
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,
     require.resolve('babel-plugin-transform-class-properties'),

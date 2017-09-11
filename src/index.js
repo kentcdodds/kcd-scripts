@@ -21,6 +21,9 @@ if (!scriptPath) {
 
 const result = spawn.sync(executor, [scriptPath, ...args], {
   stdio: 'inherit',
+  env: Object.assign({}, process.env, {
+    [`SCRIPTS_${script.toUpperCase()}`]: true,
+  }),
 })
 
 if (result.signal) {

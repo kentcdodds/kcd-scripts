@@ -1,29 +1,52 @@
 const spawn = require('cross-spawn')
-const {getConcurrentlyArgs, hasScript, resolveBin} = require('../utils')
+const {ifScript, hasScript, parseEnv, resolveBin} = require('../utils')
 
-const validateScripts = process.argv[2]
+// precommit runs linting and tests on the relevant files
+// so those scripts don't need to be run if we're running
+// this in the context of a precommit hook.
+const ifScriptAndNotPreCommit = (scriptName, script) =>
+  !parseEnv('SCRIPTS_PRECOMMIT', false) && hasScript(scriptName) ? script : null
+
+const validateScripts = process.argv[3]
+
+const scriptNames = (...scripts) =>
+  scripts
+    .map(s => ifScript(s, s))
+    .filter(Boolean)
+    .join(',')
 
 const useDefaultScripts = typeof validateScripts !== 'string'
 
 const scripts = useDefaultScripts
-  ? Object.entries({
-      build: 'npm run build --silent',
-      lint: 'npm run lint --silent',
-      test: 'npm run test --silent -- --coverage',
-    }).reduce((scriptsToRun, [name, script]) => {
-      if (hasScript(name)) {
-        scriptsToRun[name] = script
-      }
-      return scriptsToRun
-    }, {})
-  : validateScripts.split(',').reduce((scriptsToRun, name) => {
-      scriptsToRun[name] = `npm run ${name} --silent`
-      return scriptsToRun
-    }, {})
+  ? [
+      ifScript('build', 'npm run build --silent'),
+      ifScriptAndNotPreCommit('lint', 'npm run lint --silent'),
+      ifScriptAndNotPreCommit('test', 'npm run test --silent -- --coverage'),
+    ].filter(Boolean)
+  : validateScripts.split(',').map(npmScript => `npm run ${npmScript} -s`)
+const names = useDefaultScripts
+  ? scriptNames('build', 'lint', 'test')
+  : validateScripts.split(',')
+
+const colors = [
+  'bgBlue.bold',
+  'bgGreen.bold',
+  'bgMagenta.bold',
+  'black.bgWhite.bold',
+  'white.bgBlack.bold',
+  'bgRed.bold',
+].join(',')
 
 const result = spawn.sync(
   resolveBin('concurrently'),
-  getConcurrentlyArgs(scripts),
+  // prettier-ignore
+  [
+    '--kill-others-on-fail',
+    '--prefix', '[{name}]',
+    '--names', names,
+    '--prefix-colors', colors,
+    ...scripts,
+  ],
   {stdio: 'inherit'},
 )
 

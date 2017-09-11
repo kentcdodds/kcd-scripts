@@ -2,16 +2,14 @@
 process.env.BABEL_ENV = 'test'
 process.env.NODE_ENV = 'test'
 
-const fs = require('fs')
 const jest = require('jest')
-const {hasPkgProp} = require('../utils')
-const {fromRoot} = require('../utils')
+const {hasPkgProp, parseEnv, hasFile} = require('../utils')
 
 const args = process.argv.slice(2)
 
 const watch =
   !process.env.CI &&
-  !args.includes('--no-watch') &&
+  !parseEnv('SCRIPTS_PRECOMMIT', false) &&
   !args.includes('--coverage') &&
   !args.includes('--updateSnapshot')
     ? ['--watch']
@@ -19,7 +17,7 @@ const watch =
 
 const useBuiltinConfig =
   !args.includes('--config') &&
-  !fs.existsSync(fromRoot('jest.config.js')) &&
+  !hasFile('jest.config.js') &&
   !hasPkgProp('jest')
 
 const config = useBuiltinConfig

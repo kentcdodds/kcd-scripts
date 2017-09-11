@@ -16,7 +16,7 @@ const scriptPath = attemptResolve(relativeScriptPath)
 
 if (!scriptPath) {
   console.log(`Unknown script "${script}".`)
-  console.log('Perhaps you need to update paypal-scripts?')
+  console.log('Perhaps you need to update kcd-scripts?')
 }
 
 const result = spawn.sync(executor, [scriptPath, ...args], {

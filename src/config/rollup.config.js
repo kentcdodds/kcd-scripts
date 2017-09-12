@@ -7,7 +7,7 @@ const json = require('rollup-plugin-json')
 const uglify = require('rollup-plugin-uglify')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
-const {pkg, hasFile, hasPkgProp, parseEnv} = require('../utils')
+const {pkg, hasFile, hasPkgProp, parseEnv, ifFile} = require('../utils')
 
 const here = p => path.join(__dirname, p)
 const capitalize = s => s[0].toUpperCase() + s.slice(1)
@@ -69,7 +69,11 @@ const useBuiltinConfig = !hasFile('.babelrc') && !hasPkgProp('babel')
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : []
 
 module.exports = {
-  input: 'src/index.js',
+  input: ifFile(
+    `src/${format}-entry.js`,
+    `src/${format}-entry.js`,
+    'src/index.js',
+  ),
   output,
   exports: esm ? 'named' : 'default',
   name,

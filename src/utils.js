@@ -21,6 +21,8 @@ function resolveBin(modName, {executable = modName} = {}) {
 
 const fromRoot = (...p) => path.join(appDirectory, ...p)
 const hasFile = (...p) => fs.existsSync(fromRoot(...p))
+const ifFile = (files, t, f) =>
+  arrify(files).some(file => hasFile(file)) ? t : f
 
 const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop))
 
@@ -93,5 +95,6 @@ module.exports = {
   parseEnv,
   pkg,
   hasFile,
+  ifFile,
   getConcurrentlyArgs,
 }

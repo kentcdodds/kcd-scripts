@@ -64,7 +64,7 @@ const result = spawn.sync(resolveBin('concurrently'), scripts, {
   stdio: 'inherit',
 })
 
-if (result.status === 0 && buildPreact) {
+if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
   const preactPkg = fromRoot('preact/package.json')
   const cjsFile = glob.sync(fromRoot('preact/**/*.cjs.js'))[0]
   const esmFile = glob.sync(fromRoot('preact/**/*.esm.js'))[0]

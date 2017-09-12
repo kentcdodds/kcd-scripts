@@ -43,7 +43,9 @@ const scripts = args.includes('--p-react')
   ? getPReactScripts()
   : getConcurrentlyArgs(getCommands())
 
-rimraf.sync(fromRoot('dist'))
+if (!args.includes('--no-clean')) {
+  rimraf.sync(fromRoot('dist'))
+}
 
 const result = spawn.sync(resolveBin('concurrently'), scripts, {
   stdio: 'inherit',

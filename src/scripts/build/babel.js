@@ -18,9 +18,10 @@ const ignore = args.includes('--ignore')
 
 const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files']
 
-const useDistOutDir = args.includes('--out-dir')
-const outDir = useDistOutDir ? [] : ['--out-dir', 'dist']
-if (useDistOutDir) {
+const useSpecifiedOutDir = args.includes('--out-dir')
+const outDir = useSpecifiedOutDir ? [] : ['--out-dir', 'dist']
+
+if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
   rimraf.sync(fromRoot('dist'))
 }
 

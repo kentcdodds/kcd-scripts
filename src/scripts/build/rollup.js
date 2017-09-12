@@ -67,8 +67,10 @@ function prefixKeys(prefix, object) {
 function getCommands(env = '') {
   return formats.reduce((cmds, format) => {
     const [formatName, minify = false] = format.split('.')
+    const nodeEnv = minify ? 'production' : 'development'
+    const buildMinify = Boolean(minify)
     cmds[format] = getCommand(
-      `BUILD_FORMAT=${formatName} BUILD_MINIFY=${Boolean(minify)} ${env}`,
+      `BUILD_FORMAT=${formatName} BUILD_MINIFY=${buildMinify} NODE_ENV=${nodeEnv} ${env}`,
     )
     return cmds
   }, {})

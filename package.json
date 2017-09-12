@@ -29,6 +29,7 @@
     "babel-jest": "^20.0.3",
     "babel-macros": "^1.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-minify-dead-code-elimination": "^0.2.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

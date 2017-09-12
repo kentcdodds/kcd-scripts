@@ -3,6 +3,7 @@ const {ifAnyDep, parseEnv} = require('../utils')
 const isTest = (process.env.BABEL_ENV || process.env.NODE_ENV) === 'test'
 const isPreact = parseEnv('BUILD_PREACT', false)
 const isRollup = parseEnv('BUILD_ROLLUP', false)
+const isUMD = process.env.BUILD_FORMAT === 'umd'
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 
@@ -31,10 +32,11 @@ module.exports = {
           {removeImport: true},
         ]
       : null,
-    isWebpack || isRollup
+    isUMD
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,
     require.resolve('babel-plugin-transform-class-properties'),
     require.resolve('babel-plugin-transform-object-rest-spread'),
+    require.resolve('babel-plugin-minify-dead-code-elimination'),
   ].filter(Boolean),
 }

@@ -1,5 +1,8 @@
 const path = require('path')
+const fs = require('fs')
 const spawn = require('cross-spawn')
+const mkdirp = require('mkdirp')
+const glob = require('glob')
 const rimraf = require('rimraf')
 const yargsParser = require('yargs-parser')
 const {
@@ -39,17 +42,41 @@ const getCommand = env =>
     .filter(Boolean)
     .join(' ')
 
-const scripts = args.includes('--p-react')
+const buildPreact = args.includes('--p-react')
+const scripts = buildPreact
   ? getPReactScripts()
   : getConcurrentlyArgs(getCommands())
 
-if (!args.includes('--no-clean')) {
+const cleanBuildDirs = !args.includes('--no-clean')
+
+if (cleanBuildDirs) {
   rimraf.sync(fromRoot('dist'))
+}
+
+if (buildPreact) {
+  if (cleanBuildDirs) {
+    rimraf.sync(fromRoot('preact'))
+  }
+  mkdirp.sync(fromRoot('preact'))
 }
 
 const result = spawn.sync(resolveBin('concurrently'), scripts, {
   stdio: 'inherit',
 })
+
+if (result.status === 0 && buildPreact) {
+  const preactPkg = fromRoot('preact/package.json')
+  const cjsFile = glob.sync(fromRoot('preact/**/*.cjs.js'))[0]
+  const esmFile = glob.sync(fromRoot('preact/**/*.esm.js'))[0]
+  fs.writeFileSync(
+    preactPkg,
+    JSON.stringify({
+      main: path.relative(preactPkg, cjsFile),
+      'jsnext:main': path.relative(preactPkg, esmFile),
+      module: path.relative(preactPkg, esmFile),
+    }),
+  )
+}
 
 function getPReactScripts() {
   const reactCommands = prefixKeys('react.', getCommands())

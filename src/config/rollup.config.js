@@ -27,9 +27,10 @@ const defaultGlobals = Object.keys(
 
 const defaultExternal = Object.keys(pkg.peerDependencies || {})
 
-const filenameSuffix = parseEnv(
-  'BUILD_FILENAME_SUFFIX',
-  isPreact ? '.preact' : '',
+const filenameSuffix = parseEnv('BUILD_FILENAME_SUFFIX', '')
+const filenamePrefix = parseEnv(
+  'BUILD_FILENAME_PREFIX',
+  isPreact ? 'preact/' : '',
 )
 const globals = parseEnv(
   'BUILD_GLOBALS',
@@ -47,40 +48,22 @@ if (isPreact) {
 }
 
 const esm = format === 'esm'
-const umd = format === 'umd'
-const cjs = format === 'cjs'
 
-let output
+const filename = [
+  pkg.name,
+  filenameSuffix,
+  `.${format}`,
+  minify ? '.min' : null,
+  '.js',
+]
+  .filter(Boolean)
+  .join('')
 
-const filename = path.join('dist', pkg.name)
+const filepath = path.join(
+  ...[filenamePrefix, 'dist', filename].filter(Boolean),
+)
 
-if (esm) {
-  output = [{file: `${filename}${filenameSuffix}.es.js`, format: 'es'}]
-} else if (umd) {
-  if (minify) {
-    output = [
-      {
-        file: `${filename}${filenameSuffix}.umd.min.js`,
-        format: 'umd',
-        sourcemap: true,
-      },
-    ]
-  } else {
-    output = [
-      {
-        file: `${filename}${filenameSuffix}.umd.js`,
-        format: 'umd',
-        sourcemap: true,
-      },
-    ]
-  }
-} else if (cjs) {
-  output = [{file: `${filename}${filenameSuffix}.cjs.js`, format: 'cjs'}]
-} else if (format) {
-  throw new Error(`invalid format specified: "${format}".`)
-} else {
-  throw new Error('no format specified. --environment FORMAT:xxx')
-}
+const output = [{file: filepath, format: esm ? 'es' : format}]
 
 const useBuiltinConfig = !hasFile('.babelrc') && !hasPkgProp('babel')
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : []

@@ -6,6 +6,7 @@ const isRollup = parseEnv('BUILD_ROLLUP', false)
 const isUMD = process.env.BUILD_FORMAT === 'umd'
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
+const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
 
 const envModules = treeshake ? {modules: false} : {}
 const envTargets = isTest
@@ -23,6 +24,12 @@ module.exports = {
     isRollup ? require.resolve('babel-plugin-external-helpers') : null,
     // we're actually not using JSX at all, but I'm leaving this
     // in here just in case we ever do (this would be easy to miss).
+    alias
+      ? [
+          require.resolve('babel-plugin-module-resolver'),
+          {root: ['./src'], alias},
+        ]
+      : null,
     isPreact
       ? [require.resolve('babel-plugin-transform-react-jsx'), {pragma: 'h'}]
       : null,

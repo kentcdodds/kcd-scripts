@@ -5,7 +5,6 @@ const commonjs = require('rollup-plugin-commonjs')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const json = require('rollup-plugin-json')
 const uglify = require('rollup-plugin-uglify')
-const rollupAlias = require('rollup-plugin-alias')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
 const {pkg, hasFile, hasPkgProp, parseEnv} = require('../utils')
@@ -47,7 +46,6 @@ if (isPreact) {
   external.splice(external.indexOf('react'), 1)
 }
 
-const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
 const esm = format === 'esm'
 const umd = format === 'umd'
 const cjs = format === 'cjs'
@@ -95,7 +93,6 @@ module.exports = {
   external,
   globals,
   plugins: [
-    alias ? rollupAlias(alias) : null,
     isNode ? nodeBuiltIns() : null,
     isNode ? nodeGlobals() : null,
     nodeResolve({preferBuiltins: isNode, jsnext: true, main: true}),

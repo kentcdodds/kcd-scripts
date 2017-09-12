@@ -6,18 +6,15 @@ const isRollup = parseEnv('BUILD_ROLLUP', false)
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 
+const envModules = treeshake ? {modules: false} : {}
+const envTargets = isTest
+  ? {node: 'current'}
+  : isWebpack || isRollup ? {browsers: ['ie 10', 'ios 7']} : {node: '4.5'}
+const envOptions = Object.assign({}, envModules, {targets: envTargets})
+
 module.exports = {
   presets: [
-    [
-      require.resolve('babel-preset-env'),
-      treeshake
-        ? {modules: false}
-        : {
-            targets: {
-              node: isTest ? 'current' : '4.5',
-            },
-          },
-    ],
+    [require.resolve('babel-preset-env'), envOptions],
     ifAnyDep(['react', 'preact'], require.resolve('babel-preset-react')),
   ].filter(Boolean),
   plugins: [

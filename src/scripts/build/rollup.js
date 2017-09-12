@@ -66,15 +66,16 @@ const result = spawn.sync(resolveBin('concurrently'), scripts, {
 
 if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
   const preactPkg = fromRoot('preact/package.json')
+  const preactDir = fromRoot('preact')
   const cjsFile = glob.sync(fromRoot('preact/**/*.cjs.js'))[0]
   const esmFile = glob.sync(fromRoot('preact/**/*.esm.js'))[0]
   fs.writeFileSync(
     preactPkg,
     JSON.stringify(
       {
-        main: path.relative(preactPkg, cjsFile),
-        'jsnext:main': path.relative(preactPkg, esmFile),
-        module: path.relative(preactPkg, esmFile),
+        main: path.relative(preactDir, cjsFile),
+        'jsnext:main': path.relative(preactDir, esmFile),
+        module: path.relative(preactDir, esmFile),
       },
       null,
       2,

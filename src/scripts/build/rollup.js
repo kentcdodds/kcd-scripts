@@ -70,11 +70,15 @@ if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
   const esmFile = glob.sync(fromRoot('preact/**/*.esm.js'))[0]
   fs.writeFileSync(
     preactPkg,
-    JSON.stringify({
-      main: path.relative(preactPkg, cjsFile),
-      'jsnext:main': path.relative(preactPkg, esmFile),
-      module: path.relative(preactPkg, esmFile),
-    }),
+    JSON.stringify(
+      {
+        main: path.relative(preactPkg, cjsFile),
+        'jsnext:main': path.relative(preactPkg, esmFile),
+        module: path.relative(preactPkg, esmFile),
+      },
+      null,
+      2,
+    ),
   )
 }
 

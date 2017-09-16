@@ -27,6 +27,10 @@ const defaultGlobals = Object.keys(
 
 const defaultExternal = Object.keys(pkg.peerDependencies || {})
 
+const input =
+  process.env.BUILD_INPUT ||
+  ifFile(`src/${format}-entry.js`, `src/${format}-entry.js`, 'src/index.js')
+
 const filenameSuffix = parseEnv('BUILD_FILENAME_SUFFIX', '')
 const filenamePrefix = parseEnv(
   'BUILD_FILENAME_PREFIX',
@@ -69,11 +73,7 @@ const useBuiltinConfig = !hasFile('.babelrc') && !hasPkgProp('babel')
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : []
 
 module.exports = {
-  input: ifFile(
-    `src/${format}-entry.js`,
-    `src/${format}-entry.js`,
-    'src/index.js',
-  ),
+  input,
   output,
   exports: esm ? 'named' : 'default',
   name,

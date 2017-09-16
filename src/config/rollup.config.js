@@ -31,11 +31,9 @@ const input =
   process.env.BUILD_INPUT ||
   ifFile(`src/${format}-entry.js`, `src/${format}-entry.js`, 'src/index.js')
 
-const filenameSuffix = parseEnv('BUILD_FILENAME_SUFFIX', '')
-const filenamePrefix = parseEnv(
-  'BUILD_FILENAME_PREFIX',
-  isPreact ? 'preact/' : '',
-)
+const filenameSuffix = process.env.BUILD_FILENAME_SUFFIX || ''
+const filenamePrefix =
+  process.env.BUILD_FILENAME_PREFIX || isPreact ? 'preact/' : ''
 const globals = parseEnv(
   'BUILD_GLOBALS',
   isPreact ? Object.assign(defaultGlobals, {preact: 'preact'}) : defaultGlobals,

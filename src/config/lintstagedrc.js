@@ -1,19 +1,15 @@
-const [executor] = process.argv
-
-const scripts = `${executor} ${require.resolve('../')}`
-
 module.exports = {
   linters: {
     '**/*.+(js|json|less|css|ts)': [
-      `${scripts} format`,
-      `${scripts} lint`,
-      `${scripts} test --findRelatedTests`,
+      'kcd-scripts format',
+      'kcd-scripts lint',
+      'kcd-scripts test --findRelatedTests',
       'git add',
     ],
     '.all-contributorsrc': [
       // lint-staged passes arguments to the scripts.
       // to avoid passing these arguments, we do the echo thing
-      `${scripts} contributors generate`,
+      'kcd-scripts contributors generate',
       'git add README.md',
     ],
   },

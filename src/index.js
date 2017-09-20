@@ -19,11 +19,21 @@ if (!scriptPath) {
   console.log('Perhaps you need to update kcd-scripts?')
 }
 
+const env = Object.keys(process.env)
+  .filter(key => process.env[key] !== undefined)
+  .reduce(
+    (envCopy, key) => {
+      envCopy[key] = process.env[key]
+      return envCopy
+    },
+    {
+      [`SCRIPTS_${script.toUpperCase()}`]: true,
+    },
+  )
+
 const result = spawn.sync(executor, [scriptPath, ...args], {
   stdio: 'inherit',
-  env: Object.assign({}, process.env, {
-    [`SCRIPTS_${script.toUpperCase()}`]: true,
-  }),
+  env,
 })
 
 if (result.signal) {

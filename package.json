@@ -15,8 +15,10 @@
     "test:update": "node src test --updateSnapshot",
     "build": "node src build",
     "lint": "node src lint",
+    "format": "node src format",
     "validate": "node src validate",
-    "precommit": "node src precommit"
+    "precommit": "node src precommit",
+    "kcd-scripts": "dist/index.js"
   },
   "files": ["dist", "babel.js", "eslint.js", "config.js"],
   "keywords": [],

@@ -3,20 +3,39 @@ const path = require('path')
 const arrify = require('arrify')
 const has = require('lodash.has')
 const readPkgUp = require('read-pkg-up')
+const which = require('which')
 
 const {pkg, path: pkgPath} = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
 })
 const appDirectory = path.dirname(pkgPath)
 
+// eslint-disable-next-line complexity
 function resolveBin(modName, {executable = modName} = {}) {
-  const modPkgPath = require.resolve(`${modName}/package.json`)
-  const modPkgDir = path.dirname(modPkgPath)
-  const {bin} = require(modPkgPath)
-  if (typeof bin === 'string') {
-    return path.join(modPkgDir, bin)
+  let pathFromWhich
+  try {
+    pathFromWhich = which.sync(executable)
+  } catch (_error) {
+    // ignore _error
   }
-  return path.join(modPkgDir, bin[executable])
+  try {
+    const modPkgPath = require.resolve(`${modName}/package.json`)
+    const modPkgDir = path.dirname(modPkgPath)
+    const {bin} = require(modPkgPath)
+    if (typeof bin === 'string') {
+      return path.join(modPkgDir, bin)
+    }
+    const fullPathToBin = path.join(modPkgDir, bin[executable])
+    if (fullPathToBin === pathFromWhich) {
+      return executable
+    }
+    return fullPathToBin
+  } catch (error) {
+    if (pathFromWhich) {
+      return executable
+    }
+    throw error
+  }
 }
 
 const fromRoot = (...p) => path.join(appDirectory, ...p)

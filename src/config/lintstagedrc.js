@@ -1,15 +1,19 @@
+const {resolveBin} = require('../utils')
+
+const kcdScripts = resolveBin('kcd-scripts')
+
 module.exports = {
   linters: {
     '**/*.+(js|json|less|css|ts)': [
-      'kcd-scripts format',
-      'kcd-scripts lint',
-      'kcd-scripts test --findRelatedTests',
+      `${kcdScripts} format`,
+      `${kcdScripts} lint`,
+      `${kcdScripts} test --findRelatedTests`,
       'git add',
     ],
     '.all-contributorsrc': [
       // lint-staged passes arguments to the scripts.
       // to avoid passing these arguments, we do the echo thing
-      'kcd-scripts contributors generate',
+      `${kcdScripts} contributors generate`,
       'git add README.md',
     ],
   },

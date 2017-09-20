@@ -19,6 +19,8 @@ if (!scriptPath) {
   console.log('Perhaps you need to update kcd-scripts?')
 }
 
+// this is required to address an issue in cross-spawn
+// https://github.com/kentcdodds/kcd-scripts/issues/4
 const env = Object.keys(process.env)
   .filter(key => process.env[key] !== undefined)
   .reduce(

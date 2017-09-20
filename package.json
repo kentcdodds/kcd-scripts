@@ -17,7 +17,7 @@
     "lint": "node src lint",
     "format": "node src format",
     "validate": "node src validate",
-    "precommit": "node other/symlink && node src precommit"
+    "precommit": "node src precommit"
   },
   "files": ["dist", "babel.js", "eslint.js", "config.js"],
   "keywords": [],

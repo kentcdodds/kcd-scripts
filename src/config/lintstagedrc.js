@@ -1,6 +1,6 @@
-const {resolveBin} = require('../utils')
+const {resolveKcdScripts} = require('../utils')
 
-const kcdScripts = resolveBin('kcd-scripts')
+const kcdScripts = resolveKcdScripts()
 
 module.exports = {
   linters: {

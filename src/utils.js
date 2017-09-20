@@ -10,6 +10,13 @@ const {pkg, path: pkgPath} = readPkgUp.sync({
 })
 const appDirectory = path.dirname(pkgPath)
 
+function resolveKcdScripts() {
+  if (pkg.name === 'kcd-scripts') {
+    return require.resolve('./')
+  }
+  return resolveBin('kcd-scripts')
+}
+
 // eslint-disable-next-line complexity
 function resolveBin(modName, {executable = modName} = {}) {
   let pathFromWhich
@@ -111,6 +118,7 @@ module.exports = {
   fromRoot,
   hasScript,
   resolveBin,
+  resolveKcdScripts,
   parseEnv,
   pkg,
   hasFile,

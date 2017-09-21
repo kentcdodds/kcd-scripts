@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getConcurrentlyArgs gives good args to pass to concurrently 1`] = `
+Array [
+  "--kill-others-on-fail",
+  "--prefix",
+  "[{name}]",
+  "--names",
+  "build,lint,test,validate,a,b,c,d,e,f,g,h,i,j",
+  "--prefix-colors",
+  "bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset,bgCyan.bold.reset,bgWhite.bold.reset,bgRed.bold.reset,bgBlack.bold.reset,bgYellow.bold.reset,bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset,bgCyan.bold.reset,bgWhite.bold.reset,bgRed.bold.reset",
+  "\\"echo build\\"",
+  "\\"echo lint\\"",
+  "\\"echo test\\"",
+  "\\"echo validate\\"",
+  "\\"echo a\\"",
+  "\\"echo b\\"",
+  "\\"echo c\\"",
+  "\\"echo d\\"",
+  "\\"echo e\\"",
+  "\\"echo f\\"",
+  "\\"echo g\\"",
+  "\\"echo h\\"",
+  "\\"echo i\\"",
+  "\\"echo j\\"",
+]
+`;

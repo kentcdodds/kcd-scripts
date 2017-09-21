@@ -69,6 +69,17 @@
     "which": "^1.3.0",
     "yargs-parser": "^7.0.0"
   },
+  "eslintConfig": {
+    "extends": ["kentcdodds", "kentcdodds/jest"],
+    "rules": {
+      "no-process-exit": "off",
+      "import/no-dynamic-require": "off",
+      "import/no-unassigned-import": "off",
+      "no-console": "off",
+      "no-nested-ternary": "off"
+    }
+  },
+  "eslintIgnored": ["node_modules", "coverage", "dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/kentcdodds/kcd-scripts.git"

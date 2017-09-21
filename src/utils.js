@@ -29,10 +29,8 @@ function resolveBin(modName, {executable = modName} = {}) {
     const modPkgPath = require.resolve(`${modName}/package.json`)
     const modPkgDir = path.dirname(modPkgPath)
     const {bin} = require(modPkgPath)
-    if (typeof bin === 'string') {
-      return path.join(modPkgDir, bin)
-    }
-    const fullPathToBin = path.join(modPkgDir, bin[executable])
+    const binPath = typeof bin === 'string' ? bin : bin[executable]
+    const fullPathToBin = path.join(modPkgDir, binPath)
     if (fullPathToBin === pathFromWhich) {
       return executable
     }
@@ -56,7 +54,7 @@ const hasPkgSubProp = pkgProp => props =>
   hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`))
 
 const ifPkgSubProp = pkgProp => (props, t, f) =>
-  hasPkgSubProp(pkgProp, props) ? t : f
+  hasPkgSubProp(pkgProp)(props) ? t : f
 
 const hasScript = hasPkgSubProp('scripts')
 const hasPeerDep = hasPkgSubProp('peerDependencies')

@@ -21,7 +21,7 @@ function resolveKcdScripts() {
 function resolveBin(modName, {executable = modName} = {}) {
   let pathFromWhich
   try {
-    pathFromWhich = which.sync(executable)
+    pathFromWhich = fs.realpathSync(which.sync(executable))
   } catch (_error) {
     // ignore _error
   }

@@ -17,8 +17,8 @@ const jestConfig = {
   testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
   collectCoverageFrom: ['src/**/*.js'],
   testMatch: ['**/__tests__/**/*.js'],
-  testPathIgnorePatterns: ignores,
-  coveragePathIgnorePatterns: ignores,
+  testPathIgnorePatterns: [...ignores],
+  coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.js$'],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
   coverageThreshold: {
     global: {

@@ -37,8 +37,8 @@ if (typeof parsedArgs.bundle === 'string') {
 
 const defaultEnv = 'BUILD_ROLLUP=true'
 
-const getCommand = env =>
-  [crossEnv, defaultEnv, env, rollup, config, environment, watch]
+const getCommand = (env, ...flags) =>
+  [crossEnv, defaultEnv, env, rollup, config, environment, watch, ...flags]
     .filter(Boolean)
     .join(' ')
 
@@ -78,8 +78,8 @@ if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
         module: path.relative(preactDir, esmFile),
       },
       null,
-      2,
-    ),
+      2
+    )
   )
 }
 
@@ -100,9 +100,11 @@ function getCommands(env = '') {
   return formats.reduce((cmds, format) => {
     const [formatName, minify = false] = format.split('.')
     const nodeEnv = minify ? 'production' : 'development'
+    const sourceMap = format === 'umd' ? '--sourcemap' : ''
     const buildMinify = Boolean(minify)
     cmds[format] = getCommand(
       `BUILD_FORMAT=${formatName} BUILD_MINIFY=${buildMinify} NODE_ENV=${nodeEnv} ${env}`,
+      sourceMap
     )
     return cmds
   }, {})

@@ -100,7 +100,7 @@ function getCommands(env = '') {
   return formats.reduce((cmds, format) => {
     const [formatName, minify = false] = format.split('.')
     const nodeEnv = minify ? 'production' : 'development'
-    const sourceMap = format === 'umd' ? '--sourcemap' : ''
+    const sourceMap = formatName === 'umd' ? '--sourcemap' : ''
     const buildMinify = Boolean(minify)
     cmds[format] = getCommand(
       `BUILD_FORMAT=${formatName} BUILD_MINIFY=${buildMinify} NODE_ENV=${nodeEnv} ${env}`,

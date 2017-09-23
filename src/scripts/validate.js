@@ -11,7 +11,7 @@ const {
 // this in the context of a precommit hook.
 const precommit = parseEnv('SCRIPTS_PRECOMMIT', false)
 
-const validateScripts = process.argv[3]
+const validateScripts = process.argv[2]
 
 const useDefaultScripts = typeof validateScripts !== 'string'
 

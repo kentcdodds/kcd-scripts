@@ -1,0 +1,46 @@
+import cases from 'jest-in-case'
+
+// this removes the quotes around strings...
+expect.addSnapshotSerializer({
+  print: val => val,
+  test: val => typeof val === 'string',
+})
+
+cases(
+  'format',
+  ({args}) => {
+    // beforeEach
+    const {sync: crossSpawnSyncMock} = require('cross-spawn')
+    const originalExit = process.exit
+    const originalArgv = process.argv
+    process.exit = jest.fn()
+
+    // tests
+    process.argv = ['node', '../format', ...args]
+    crossSpawnSyncMock.mockClear()
+    require('../format')
+    expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
+    const [firstCall] = crossSpawnSyncMock.mock.calls
+    const [script, calledArgs] = firstCall
+    expect(`${[script, ...calledArgs].join(' ')}`).toMatchSnapshot()
+
+    // afterEach
+    process.exit = originalExit
+    process.argv = originalArgv
+    jest.resetModules()
+  },
+  {
+    'calls prettier CLI with args': {
+      args: ['"my-src/**/*.js"'],
+    },
+    '--no-write prevents --write argument from being added': {
+      args: ['--no-write'],
+    },
+    '--config arg can be used for a custom config': {
+      args: ['--config', './my-config.js'],
+    },
+    '--ignore-path arg can be used for a custom ignore file': {
+      args: ['--ignore-path', './.myignore'],
+    },
+  },
+)

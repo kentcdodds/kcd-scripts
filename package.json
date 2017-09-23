@@ -88,5 +88,8 @@
   "bugs": {
     "url": "https://github.com/kentcdodds/kcd-scripts/issues"
   },
-  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme"
+  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
+  "devDependencies": {
+    "jest-in-case": "^1.0.2"
+  }
 }

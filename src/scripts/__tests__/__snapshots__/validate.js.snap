@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validate allows you to specify your own npm scripts 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names specialbuild,specialtest,speciallint --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset "npm run specialbuild --silent" "npm run specialtest --silent" "npm run speciallint --silent"`;
+
+exports[`validate calls concurrently with all scripts 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,lint,test,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset,bgCyan.bold.reset "npm run build --silent" "npm run lint --silent" "npm run test --silent -- --coverage" "npm run flow --silent"`;
+
+exports[`validate does not include "build" if it doesn't have that script 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names lint,test,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset "npm run lint --silent" "npm run test --silent -- --coverage" "npm run flow --silent"`;
+
+exports[`validate does not include "flow" if it doesn't have that script 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,lint,test --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset "npm run build --silent" "npm run lint --silent" "npm run test --silent -- --coverage"`;
+
+exports[`validate does not include "lint" if it doesn't have that script 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,test,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset "npm run build --silent" "npm run test --silent -- --coverage" "npm run flow --silent"`;
+
+exports[`validate does not include "test" if it doesn't have that script 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,lint,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset "npm run build --silent" "npm run lint --silent" "npm run flow --silent"`;
+
+exports[`validate doesn't use test or lint if it's in precommit 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "npm run build --silent" "npm run flow --silent"`;

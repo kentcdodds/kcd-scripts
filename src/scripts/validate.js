@@ -1,8 +1,8 @@
 const spawn = require('cross-spawn')
 const {
-  hasScript,
   parseEnv,
   resolveBin,
+  ifScript,
   getConcurrentlyArgs,
 } = require('../utils')
 
@@ -16,17 +16,14 @@ const validateScripts = process.argv[3]
 const useDefaultScripts = typeof validateScripts !== 'string'
 
 const scripts = useDefaultScripts
-  ? Object.entries({
-      build: 'npm run build --silent',
-      lint: precommit ? null : 'npm run lint --silent',
-      test: precommit ? null : 'npm run test --silent -- --coverage',
-      flow: 'npm run flow --silent',
-    }).reduce((scriptsToRun, [name, script]) => {
-      if (script && hasScript(name)) {
-        scriptsToRun[name] = script
-      }
-      return scriptsToRun
-    }, {})
+  ? {
+      build: ifScript('build', 'npm run build --silent'),
+      lint: precommit ? null : ifScript('lint', 'npm run lint --silent'),
+      test: precommit
+        ? null
+        : ifScript('test', 'npm run test --silent -- --coverage'),
+      flow: ifScript('flow', 'npm run flow --silent'),
+    }
   : validateScripts.split(',').reduce((scriptsToRun, name) => {
       scriptsToRun[name] = `npm run ${name} --silent`
       return scriptsToRun

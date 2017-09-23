@@ -87,6 +87,12 @@ function getConcurrentlyArgs(scripts, {killOthers = true} = {}) {
     'bgBlack',
     'bgYellow',
   ]
+  scripts = Object.entries(scripts).reduce((all, [name, script]) => {
+    if (script) {
+      all[name] = script
+    }
+    return all
+  }, {})
   const prefixColors = Object.keys(scripts)
     .reduce(
       (pColors, _s, i) =>

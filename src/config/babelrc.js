@@ -8,7 +8,6 @@ const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
 const preserveBuildEnv = parseEnv('BUILD_PRESERVE', isTest)
-console.log(process.env.BUILD_PRESERVE)
 
 const envModules = treeshake ? {modules: false} : {}
 const envTargets = isTest

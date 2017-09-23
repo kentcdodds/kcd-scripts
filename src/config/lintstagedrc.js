@@ -1,6 +1,7 @@
-const {resolveKcdScripts} = require('../utils')
+const {resolveKcdScripts, resolveBin} = require('../utils')
 
 const kcdScripts = resolveKcdScripts()
+const doctoc = resolveBin('doctoc')
 
 module.exports = {
   linters: {
@@ -14,5 +15,6 @@ module.exports = {
       `${kcdScripts} contributors generate`,
       'git add README.md',
     ],
+    'README.md': [`${doctoc} --maxlevel 2 --notitle`],
   },
 }

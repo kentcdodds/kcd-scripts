@@ -1,7 +1,7 @@
 <div align="center">
-<h1>kcd-scripts</h1>
+<h1>kcd-scripts 🛠📦</h1>
 
-<strong>CLI for common scripts for my projects</strong>
+<p>CLI toolkit for common scripts for my projects</p>
 </div>
 
 <hr />

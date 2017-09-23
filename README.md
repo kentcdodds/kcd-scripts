@@ -32,6 +32,20 @@ projects.
 This is a CLI that abstracts away all configuration for my open source projects
 for linting, testing, building, and more.
 
+## Table of Contents
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Inspiration](#inspiration)
+- [Other Solutions](#other-solutions)
+- [Contributors](#contributors)
+- [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Installation
 
 This module is distributed via [npm][npm] which is bundled with [node][node] and

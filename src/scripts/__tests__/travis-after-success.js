@@ -11,17 +11,18 @@ cases(
   ({version = '0.0.0-semantically-released', hasCoverageDir = true}) => {
     // beforeEach
     const {sync: crossSpawnSyncMock} = require('cross-spawn')
-    const utilsMock = require('../../utils')
+    const utils = require('../../utils')
+    utils.resolveBin = (modName, {executable = modName} = {}) => executable
     const originalExit = process.exit
     process.exit = jest.fn()
 
     // tests
     crossSpawnSyncMock.mockClear()
     if (version) {
-      utilsMock.pkg.version = version
+      utils.pkg.version = version
     }
     if (!hasCoverageDir) {
-      utilsMock.hasFile = () => false
+      utils.hasFile = () => false
     }
     require('../travis-after-success')
     expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)

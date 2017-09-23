@@ -13,6 +13,8 @@ cases(
     const {sync: crossSpawnSyncMock} = require('cross-spawn')
     const originalExit = process.exit
     const originalArgv = process.argv
+    const utils = require('../../utils')
+    utils.resolveBin = (modName, {executable = modName} = {}) => executable
     process.exit = jest.fn()
 
     // tests

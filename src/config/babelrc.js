@@ -7,6 +7,8 @@ const isUMD = process.env.BUILD_FORMAT === 'umd'
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
+const preserveBuildEnv = parseEnv('BUILD_PRESERVE', !isTest)
+console.log(process.env.BUILD_PRESERVE)
 
 const envModules = treeshake ? {modules: false} : {}
 const envTargets = isTest
@@ -20,7 +22,7 @@ module.exports = {
     ifAnyDep(['react', 'preact'], require.resolve('babel-preset-react')),
   ].filter(Boolean),
   plugins: [
-    isTest ? null : require.resolve('./babel-plugin-env-build'),
+    preserveBuildEnv ? null : require.resolve('./babel-plugin-env-build'),
     require.resolve('babel-macros'),
     isRollup ? require.resolve('babel-plugin-external-helpers') : null,
     // we're actually not using JSX at all, but I'm leaving this

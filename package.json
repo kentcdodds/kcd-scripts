@@ -13,7 +13,7 @@
     "add-contributor": "node src contributors add",
     "test": "node src test",
     "test:update": "node src test --updateSnapshot",
-    "build": "node src build",
+    "build": "cross-env BUILD_PRESERVE=true node src build",
     "lint": "node src lint",
     "format": "node src format",
     "validate": "node src validate",

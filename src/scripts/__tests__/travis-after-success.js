@@ -21,9 +21,7 @@ cases(
     if (version) {
       utils.pkg.version = version
     }
-    if (!hasCoverageDir) {
-      utils.hasFile = () => false
-    }
+    utils.hasFile = () => hasCoverageDir
     require('../travis-after-success')
     expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
     const [firstCall] = crossSpawnSyncMock.mock.calls

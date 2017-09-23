@@ -25,7 +25,9 @@ test('appDirectory is the dirname to the package.json', () => {
 
 test('resolveKcdScripts resolves to src/index.js when in the kcd-scripts package', () => {
   mockPkg({pkg: {name: 'kcd-scripts'}})
-  expect(require('../utils').resolveKcdScripts()).toBe(require.resolve('../'))
+  expect(require('../utils').resolveKcdScripts()).toBe(
+    require.resolve('../').replace(process.cwd(), '.'),
+  )
 })
 
 test('resolveKcdScripts resolves to kcd-scripts if not in the kcd-scripts package', () => {
@@ -36,13 +38,13 @@ test('resolveKcdScripts resolves to kcd-scripts if not in the kcd-scripts packag
 
 test(`resolveBin resolves to the full path when it's not in $PATH`, () => {
   expect(require('../utils').resolveBin('cross-env')).toBe(
-    require.resolve('cross-env/dist/bin/cross-env'),
+    require.resolve('cross-env/dist/bin/cross-env').replace(process.cwd(), '.'),
   )
 })
 
 test(`resolveBin resolves to the binary if it's in $PATH`, () => {
   whichSyncMock.mockImplementationOnce(() =>
-    require.resolve('cross-env/dist/bin/cross-env'),
+    require.resolve('cross-env/dist/bin/cross-env').replace(process.cwd(), '.'),
   )
   expect(require('../utils').resolveBin('cross-env')).toBe('cross-env')
   expect(whichSyncMock).toHaveBeenCalledTimes(1)

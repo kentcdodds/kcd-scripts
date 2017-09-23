@@ -5,6 +5,7 @@ const {hasPkgProp, resolveBin, hasFile} = require('../utils')
 
 let args = process.argv.slice(2)
 const here = p => path.join(__dirname, p)
+const hereRelative = p => here(p).replace(process.cwd(), '.')
 const parsedArgs = yargsParser(args)
 
 const useBuiltinConfig =
@@ -12,7 +13,7 @@ const useBuiltinConfig =
   !hasFile('.eslintrc') &&
   !hasPkgProp('eslintConfig')
 const config = useBuiltinConfig
-  ? ['--config', here('../config/eslintrc.js')]
+  ? ['--config', hereRelative('../config/eslintrc.js')]
   : []
 
 const useBuiltinIgnore =
@@ -21,7 +22,7 @@ const useBuiltinIgnore =
   !hasPkgProp('eslintIgnore')
 
 const ignore = useBuiltinIgnore
-  ? ['--ignore-path', here('../config/eslintignore')]
+  ? ['--ignore-path', hereRelative('../config/eslintignore')]
   : []
 
 const cache = args.includes('--no-cache') ? [] : ['--cache']

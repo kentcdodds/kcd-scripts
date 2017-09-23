@@ -12,13 +12,13 @@ const appDirectory = path.dirname(pkgPath)
 
 function resolveKcdScripts() {
   if (pkg.name === 'kcd-scripts') {
-    return require.resolve('./')
+    return require.resolve('./').replace(process.cwd(), '.')
   }
   return resolveBin('kcd-scripts')
 }
 
 // eslint-disable-next-line complexity
-function resolveBin(modName, {executable = modName} = {}) {
+function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
   let pathFromWhich
   try {
     pathFromWhich = fs.realpathSync(which.sync(executable))
@@ -34,7 +34,7 @@ function resolveBin(modName, {executable = modName} = {}) {
     if (fullPathToBin === pathFromWhich) {
       return executable
     }
-    return fullPathToBin
+    return fullPathToBin.replace(cwd, '.')
   } catch (error) {
     if (pathFromWhich) {
       return executable

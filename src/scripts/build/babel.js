@@ -27,15 +27,8 @@ if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
 
 const result = spawn.sync(
   resolveBin('babel-cli', {executable: 'babel'}),
-  // prettier-ignore
-  [
-    ...outDir,
-    ...copyFiles,
-    ...ignore,
-    ...config,
-    'src',
-  ].concat(args),
-  {stdio: 'inherit'},
+  [...outDir, ...copyFiles, ...ignore, ...config, 'src'].concat(args),
+  {stdio: 'inherit'}
 )
 
 process.exit(result.status)

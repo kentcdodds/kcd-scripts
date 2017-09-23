@@ -7,19 +7,20 @@ const args = process.argv.slice(2)
 const parsedArgs = yargsParser(args)
 
 const here = p => path.join(__dirname, p)
+const hereRelative = p => here(p).replace(process.cwd(), '.')
 
 const useBuiltinConfig =
   !args.includes('--config') &&
   !hasFile('.prettierrc') &&
   !hasPkgProp('prettierrc')
 const config = useBuiltinConfig
-  ? ['--config', here('../config/prettierrc.js')]
+  ? ['--config', hereRelative('../config/prettierrc.js')]
   : []
 
 const useBuiltinIgnore =
   !args.includes('--ignore-path') && !hasFile('.prettierignore')
 const ignore = useBuiltinIgnore
-  ? ['--ignore-path', here('../config/prettierignore')]
+  ? ['--ignore-path', hereRelative('../config/prettierignore')]
   : []
 
 const write = args.includes('--no-write') ? [] : ['--write']

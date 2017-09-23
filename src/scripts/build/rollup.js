@@ -16,12 +16,13 @@ const crossEnv = resolveBin('cross-env')
 const rollup = resolveBin('rollup')
 const args = process.argv.slice(2)
 const here = p => path.join(__dirname, p)
+const hereRelative = p => here(p).replace(process.cwd(), '.')
 const parsedArgs = yargsParser(args)
 
 const useBuiltinConfig =
   !args.includes('--config') && !hasFile('rollup.config.js')
 const config = useBuiltinConfig
-  ? `--config ${here('../../config/rollup.config.js')}`
+  ? `--config ${hereRelative('../../config/rollup.config.js')}`
   : args.includes('--config') ? '' : '--config' // --config will pick up the rollup.config.js file
 
 const environment = parsedArgs.environment

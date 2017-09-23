@@ -11,8 +11,6 @@ module.exports = {
       'git add',
     ],
     '.all-contributorsrc': [
-      // lint-staged passes arguments to the scripts.
-      // to avoid passing these arguments, we do the echo thing
       `${kcdScripts} contributors generate`,
       'git add README.md',
     ],

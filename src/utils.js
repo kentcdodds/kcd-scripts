@@ -76,7 +76,7 @@ function parseEnv(name, def) {
   return def
 }
 
-function getConcurrentlyArgs(scripts) {
+function getConcurrentlyArgs(scripts, {killOthers = true} = {}) {
   const colors = [
     'bgBlue',
     'bgGreen',
@@ -97,12 +97,12 @@ function getConcurrentlyArgs(scripts) {
 
   // prettier-ignore
   return [
-    '--kill-others-on-fail',
+    killOthers ? '--kill-others-on-fail' : null,
     '--prefix', '[{name}]',
     '--names', Object.keys(scripts).join(','),
     '--prefix-colors', prefixColors,
     ...Object.values(scripts).map(s => JSON.stringify(s)), // stringify escapes quotes ✨
-  ]
+  ].filter(Boolean)
 }
 
 module.exports = {

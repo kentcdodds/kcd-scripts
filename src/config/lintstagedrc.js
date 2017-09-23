@@ -16,6 +16,6 @@ module.exports = {
       `${kcdScripts} contributors generate`,
       'git add README.md',
     ],
-    'README.md': [`${doctoc} --maxlevel 2 --notitle`, 'git add README.md'],
+    'README.md': [`${doctoc} --maxlevel 2 --notitle`, 'git add'],
   },
 }

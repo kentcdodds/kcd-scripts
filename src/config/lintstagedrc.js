@@ -4,6 +4,7 @@ const kcdScripts = resolveKcdScripts()
 const doctoc = resolveBin('doctoc')
 
 module.exports = {
+  concurrent: false,
   linters: {
     '**/*.+(js|json|less|css|ts)': [
       `${kcdScripts} format`,

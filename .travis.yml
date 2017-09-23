@@ -7,11 +7,8 @@ notifications:
   email: false
 node_js:
   - '8'
-script:
-  - npm run validate
-after_success:
-  - npx codecov
-  - npx -p semantic-release@7 -c "semantic-release pre && npm publish && semantic-release post"
+script: npm run validate
+after_success: node src travis-after-success
 branches:
   only:
     - master

@@ -70,7 +70,11 @@ const ifAnyDep = (deps, t, f) => (hasAnyDep(deps) ? t : f)
 const ifScript = ifPkgSubProp('scripts')
 
 function parseEnv(name, def) {
-  if (process.env.hasOwnProperty(name)) {
+  if (
+    process.env.hasOwnProperty(name) &&
+    process.env[name] &&
+    process.env[name] !== 'undefined'
+  ) {
     return JSON.parse(process.env[name])
   }
   return def

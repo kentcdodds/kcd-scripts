@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`format calls jest.run with default args 1`] = `--config {"builtInConfig":true} --watch`;
+
+exports[`format does not watch --updateSnapshot 1`] = `--config {"builtInConfig":true} --updateSnapshot`;
+
+exports[`format does not watch on CI 1`] = `--config {"builtInConfig":true}`;
+
+exports[`format does not watch on SCRIPTS_PRECOMMIT 1`] = `--config {"builtInConfig":true}`;
+
+exports[`format does not watch with --coverage 1`] = `--config {"builtInConfig":true} --coverage`;
+
+exports[`format does not watch with --no-watch 1`] = `--config {"builtInConfig":true} --no-watch`;
+
+exports[`format forwards args 1`] = `--config {"builtInConfig":true} --coverage --watch`;
+
+exports[`format uses custom config with --config 1`] = `--watch --config ./my-config.js`;
+
+exports[`format uses custom config with jest prop in pkg 1`] = `--watch`;
+
+exports[`format uses custom config with jest.config.js file 1`] = `--watch`;

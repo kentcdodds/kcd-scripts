@@ -26,7 +26,7 @@ cases(
     expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
     const [firstCall] = crossSpawnSyncMock.mock.calls
     const [script, calledArgs] = firstCall
-    expect(`${[script, ...calledArgs].join(' ')}`).toMatchSnapshot()
+    expect([script, ...calledArgs].join(' ')).toMatchSnapshot()
 
     // afterEach
     process.exit = originalExit

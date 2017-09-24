@@ -11,7 +11,9 @@ const parsedArgs = yargsParser(args)
 const useBuiltinConfig =
   !args.includes('--config') &&
   !hasFile('.eslintrc') &&
+  !hasFile('.eslintrc.js') &&
   !hasPkgProp('eslintConfig')
+
 const config = useBuiltinConfig
   ? ['--config', hereRelative('../config/eslintrc.js')]
   : []
@@ -40,7 +42,7 @@ if (filesGiven) {
 
 const result = spawn.sync(
   resolveBin('eslint'),
-  [...config, ...ignore, ...cache, ...filesToApply, ...args],
+  [...config, ...ignore, ...cache, ...args, ...filesToApply],
   {stdio: 'inherit'},
 )
 

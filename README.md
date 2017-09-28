@@ -12,7 +12,6 @@
 [![downloads][downloads-badge]][npmcharts]
 [![MIT License][license-badge]][LICENSE]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
@@ -41,7 +40,6 @@ for linting, testing, building, and more.
 - [Usage](#usage)
 - [Inspiration](#inspiration)
 - [Other Solutions](#other-solutions)
-- [Contributors](#contributors)
 - [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -116,18 +114,6 @@ This is inspired by `react-scripts`.
 I'm not aware of any, if you are please [make a pull request][prs] and add it
 here! Again, this is a very specific-to-me solution.
 
-## Contributors
-
-Thanks goes to these people ([emoji key][emojis]):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Tests") | [<img src="https://avatars2.githubusercontent.com/u/22251956?v=4" width="100px;"/><br /><sub>Suhas Karanth</sub>](https://github.com/sudo-suhas)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=sudo-suhas "Code") [🐛](https://github.com/kentcdodds/kcd-scripts/issues?q=author%3Asudo-suhas "Bug reports") |
-| :---: | :---: |
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors][all-contributors] specification.
-Contributions of any kind welcome!
-
 ## LICENSE
 
 MIT
@@ -155,5 +141,3 @@ MIT
 [github-star]: https://github.com/kentcdodds/kcd-scripts/stargazers
 [twitter]: https://twitter.com/intent/tweet?text=Check%20out%20kcd-scripts!%20https://github.com/kentcdodds/kcd-scripts%20%F0%9F%91%8D
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/kentcdodds/kcd-scripts.svg?style=social
-[emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
-[all-contributors]: https://github.com/kentcdodds/all-contributors

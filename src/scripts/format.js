@@ -25,7 +25,6 @@ const relativeArgs = args.map(a => a.replace(`${process.cwd()}/`, ''));
 
 const filesToApply = parsedArgs._.length ? [] : ['**/*.+(js|json|less|css|ts)'];
 
-console.log(config);
 const result = spawn.sync(
 	resolveBin('prettier'),
 	[...config, ...ignore, ...write, ...filesToApply].concat(relativeArgs),

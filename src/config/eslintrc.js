@@ -1,13 +1,13 @@
-// const {ifAnyDep} = require('../utils')
+const { ifAnyDep } = require('../utils');
 
 module.exports = {
 	extends: [
-		require.resolve('eslint-config-tradeshift')
+		require.resolve('eslint-config-tradeshift'),
 		// require.resolve('eslint-config-tradeshift/jest'),
-		// ifAnyDep('react', require.resolve('eslint-config-kentcdodds/jsx-a11y')),
+		ifAnyDep('react', 'plugin:react/recommended')
 		// ifAnyDep('react', require.resolve('eslint-config-kentcdodds/react')),
 	].filter(Boolean),
-	plugins: ['jest'],
+	plugins: ['jest', ifAnyDep('react', 'react')].filter(Boolean),
 	rules: {
 		'jest/no-disabled-tests': 1,
 		'jest/no-focused-tests': 2,

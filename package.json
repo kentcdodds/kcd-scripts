@@ -77,12 +77,12 @@
 	"eslintIgnored": ["node_modules", "coverage", "dist"],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/wejendorp/kcd-scripts.git"
+		"url": "https://github.com/wejendorp/tradeshift-scripts.git"
 	},
 	"bugs": {
-		"url": "https://github.com/wejendorp/kcd-scripts/issues"
+		"url": "https://github.com/wejendorp/tradeshift-scripts/issues"
 	},
-	"homepage": "https://github.com/wejendorp/kcd-scripts#readme",
+	"homepage": "https://github.com/wejendorp/tradeshift-scripts#readme",
 	"devDependencies": {
 		"jest-in-case": "^1.0.2"
 	}

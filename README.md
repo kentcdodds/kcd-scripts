@@ -18,7 +18,7 @@
 ## The problem
 
 Creating new tradeshift npm libraries requires a lot of boilerplate configuration,
-and is prone to errors. Configurations will commonly diverge, or never be updated.
+and is prone to errors. Configurations will often diverge or never be updated.
 
 ## This solution
 
@@ -47,6 +47,9 @@ should be installed as one of your project's `devDependencies`:
 npm install --save-dev tradeshift-scripts
 ```
 
+> Note: for now, you'll have to include an `.eslintignore` in your project until
+> [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).
+
 ## Usage
 
 This is a CLI and exposes a bin called `tradeshift-scripts`.
@@ -55,9 +58,15 @@ This project actually dogfoods itself. If you look in the `package.json`, you'll
 find scripts with `node src {scriptName}`. This serves as an example of some
 of the things you can do with `tradeshift-scripts`.
 
-### Example package:
+To use the `after-success` hooks and automatic [semantic release][semantic-release],
+you need to set up your build env with `GH_TOKEN` and `NPM_TOKEN`.
 
-`package.json`
+If you want to automatically publish coverage reports to [codecov][codecov], add
+a `CODECOV_TOKEN`.
+
+<details>
+<summary>Example `package.json`</summary>
+
 ```json
 {
   "name": "awesome-library",
@@ -79,9 +88,10 @@ of the things you can do with `tradeshift-scripts`.
   }
 }
 ```
+</details>
 
 <details>
-<summary>example `.travis.yml`</summary>
+<summary>Example `.travis.yml`</summary>
 
 ```yaml
 sudo: false
@@ -112,7 +122,7 @@ want to have your own config for something, just add the configuration and
 `tradeshift-scripts` exposes its configuration so you can use it and override only
 the parts of the config you need to.
 
-This can be a very helpful way to make editor integration work for tools like
+This can be a very helpful way to make *editor integration* work for tools like
 ESLint which require project-based ESLint configuration to be present to work.
 
 So, if we were to do this for ESLint, you could create an `.eslintrc` with the
@@ -121,9 +131,6 @@ contents of:
 ```
 {"extends": "./node_modules/tradeshift-scripts/eslint.js"}
 ```
-
-> Note: for now, you'll have to include an `.eslintignore` in your project until
-> [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).
 
 Or, for `babel`, a `.babelrc` with:
 
@@ -176,3 +183,5 @@ MIT
 [twitter]: https://twitter.com/intent/tweet?text=Check%20out%20tradeshift-scripts!%20https://github.com/wejendorp/tradeshift-scripts%20%F0%9F%91%8D
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/wejendorp/tradeshift-scripts.svg?style=social
 [kcd]: https://github.com/kentcdodds/kcd-scripts
+[semantic-release]: https://github.com/semantic-release/semantic-release
+[codecov]: https://codecov.io

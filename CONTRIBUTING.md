@@ -55,7 +55,7 @@ Please make sure to run the tests before you commit your changes. You can run
 `npm run test:update` which will update any snapshots that need updating.
 Make sure to include those changes (if they exist) in your commit.
 
-### opt into git hooks
+### opt in/out of git hooks
 
 There are git hooks set up with this project that are automatically installed
 when you install dependencies. They're really handy, but are turned off by
@@ -65,6 +65,16 @@ inside:
 
 ```
 pre-commit
+```
+
+One of the things that the git hooks does is automatically format the files you
+change. It does this by reformating the entire file and running `git add` on
+the file after. This breaks workflows where you're trying to commit portions of
+the file only. You can always run your commit with `--no-verify`, but if this
+is a bummer to your workflow, you can add an `.opt-out` file with the contents:
+
+```
+autoformat
 ```
 
 ## Help needed

@@ -1,7 +1,7 @@
 <div align="center">
 <h1>tradeshift-scripts 🛠📦</h1>
 
-<p>CLI toolbox for common scripts for my projects</p>
+<p>Making `npm init` "gg ez"</p>
 </div>
 
 <hr />
@@ -15,18 +15,14 @@
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
-[![Tweet][twitter-badge]][twitter]
-
 ## The problem
 
-I do a bunch of open source and want to make it easier to maintain so many
-projects.
+Creating new tradeshift npm libraries requires a lot of boilerplate configuration,
+and is prone to errors. Configurations will commonly diverge, or never be updated.
 
 ## This solution
 
-This is a CLI that abstracts away all configuration for my open source projects
+This is a CLI that abstracts away all configuration for open source projects
 for linting, testing, building, and more.
 
 ## Table of Contents
@@ -53,13 +49,58 @@ npm install --save-dev tradeshift-scripts
 
 ## Usage
 
-This is a CLI and exposes a bin called `tradeshift-scripts`. I don't really plan on
-documenting or testing it super duper well because it's really specific to my
-needs. You'll find all available scripts in `src/scripts`.
+This is a CLI and exposes a bin called `tradeshift-scripts`.
 
 This project actually dogfoods itself. If you look in the `package.json`, you'll
 find scripts with `node src {scriptName}`. This serves as an example of some
 of the things you can do with `tradeshift-scripts`.
+
+### Example package:
+
+`package.json`
+```json
+{
+  "name": "awesome-library",
+  "version": "0.0.0-semantically-released",
+  "main": "dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "test": "tradeshift-scripts test",
+    "test:update": "tradeshift-scripts test --updateSnapshot",
+    "build": "tradeshift-scripts build",
+    "lint": "tradeshift-scripts lint",
+    "format": "tradeshift-scripts format",
+    "validate": "tradeshift-scripts validate",
+    "precommit": "tradeshift-scripts precommit",
+    "after-success": "tradeshift-scripts travis-after-success"
+  },
+  "devDependencies": {
+    "tradeshift-scripts": "1.1.0"
+  }
+}
+```
+
+<details>
+<summary>example `.travis.yml`</summary>
+
+```yaml
+sudo: false
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+node_js:
+  - '8'
+script: npm run validate
+after_success:
+  - npm run after-success
+branches:
+  only:
+    - master
+```
+</details>
 
 ### Overriding Config
 
@@ -109,8 +150,7 @@ This is inspired by `react-scripts`.
 
 ## Other Solutions
 
-I'm not aware of any, if you are please [make a pull request][prs] and add it
-here! Again, this is a very specific-to-me solution.
+`tradeshift-scripts` is a fork of [kcd-scripts][kcd], adapted to tradeshift.
 
 ## LICENSE
 
@@ -133,9 +173,6 @@ MIT
 [donate-badge]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/wejendorp/tradeshift-scripts/blob/master/other/CODE_OF_CONDUCT.md
-[github-watch-badge]: https://img.shields.io/github/watchers/wejendorp/tradeshift-scripts.svg?style=social
-[github-watch]: https://github.com/wejendorp/tradeshift-scripts/watchers
-[github-star-badge]: https://img.shields.io/github/stars/wejendorp/tradeshift-scripts.svg?style=social
-[github-star]: https://github.com/wejendorp/tradeshift-scripts/stargazers
 [twitter]: https://twitter.com/intent/tweet?text=Check%20out%20tradeshift-scripts!%20https://github.com/wejendorp/tradeshift-scripts%20%F0%9F%91%8D
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/wejendorp/tradeshift-scripts.svg?style=social
+[kcd]: https://github.com/kentcdodds/kcd-scripts

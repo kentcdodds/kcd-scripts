@@ -1,1 +1,1 @@
-require('husky/bin/install')
+require('husky/bin/install');

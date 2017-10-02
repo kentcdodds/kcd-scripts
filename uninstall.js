@@ -1,1 +1,1 @@
-require('husky/bin/uninstall')
+require('husky/bin/uninstall');

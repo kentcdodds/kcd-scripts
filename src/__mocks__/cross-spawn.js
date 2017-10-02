@@ -1,3 +1,3 @@
 module.exports = {
-  sync: jest.fn(() => ({status: 0})),
-}
+	sync: jest.fn(() => ({ status: 0 }))
+};

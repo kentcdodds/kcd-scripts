@@ -1,8 +1,8 @@
 import cases from 'jest-in-case'
+import {normalizePath} from '../../utils'
 
-// this removes the quotes around strings...
 expect.addSnapshotSerializer({
-  print: val => val,
+  print: val => normalizePath(val),
   test: val => typeof val === 'string',
 })
 

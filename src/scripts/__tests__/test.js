@@ -2,6 +2,8 @@ import cases from 'jest-in-case'
 
 jest.mock('jest', () => ({run: jest.fn()}))
 jest.mock('../../config/jest.config', () => ({builtInConfig: true}))
+let mockIsCI = false
+jest.mock('is-ci', () => mockIsCI)
 
 // this removes the quotes around strings...
 expect.addSnapshotSerializer({
@@ -17,15 +19,15 @@ cases(
     pkgHasJestProp = false,
     hasJestConfigFile = false,
     setup = () => () => {},
-    ci = 'false',
+    ci = false,
     precommit = 'false',
   }) => {
     // beforeEach
     const {run: jestRunMock} = require('jest')
     const originalArgv = process.argv
-    const prevCI = process.env.CI
+    const prevCI = mockIsCI
     const prevPrecommit = process.env.SCRIPTS_PRECOMMIT
-    process.env.CI = ci
+    mockIsCI = ci
     process.env.SCRIPTS_PRECOMMIT = precommit
     Object.assign(utils, {
       hasPkgProp: () => pkgHasJestProp,
@@ -50,7 +52,7 @@ cases(
       teardown()
       // afterEach
       process.argv = originalArgv
-      process.env.CI = prevCI
+      mockIsCI = prevCI
       process.env.SCRIPTS_PRECOMMIT = prevPrecommit
       jest.resetModules()
     }
@@ -58,7 +60,7 @@ cases(
   {
     'calls jest.run with default args': {},
     'does not watch on CI': {
-      ci: 'true',
+      ci: true,
     },
     'does not watch on SCRIPTS_PRECOMMIT': {
       precommit: 'true',

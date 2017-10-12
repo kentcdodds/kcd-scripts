@@ -1,4 +1,4 @@
-const {resolveKcdScripts, resolveBin} = require('../utils')
+const {resolveKcdScripts, resolveBin, isOptedOut} = require('../utils')
 
 const kcdScripts = resolveKcdScripts()
 const doctoc = resolveBin('doctoc')
@@ -7,11 +7,11 @@ module.exports = {
   concurrent: false,
   linters: {
     '**/*.+(js|json|less|css|ts)': [
-      `${kcdScripts} format`,
+      isOptedOut('autoformat', null, `${kcdScripts} format`),
       `${kcdScripts} lint`,
       `${kcdScripts} test --findRelatedTests`,
-      'git add',
-    ],
+      isOptedOut('autoformat', null, 'git add'),
+    ].filter(Boolean),
     '.all-contributorsrc': [
       `${kcdScripts} contributors generate`,
       'git add README.md',

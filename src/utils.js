@@ -115,7 +115,25 @@ function getConcurrentlyArgs(scripts, {killOthers = true} = {}) {
   ].filter(Boolean)
 }
 
+function isOptedOut(key, t = true, f = false) {
+  if (!fs.existsSync(fromRoot('.opt-out'))) {
+    return f
+  }
+  const contents = fs.readFileSync(fromRoot('.opt-out'), 'utf-8')
+  return contents.includes(key) ? t : f
+}
+
+function isOptedIn(key, t = true, f = false) {
+  if (!fs.existsSync(fromRoot('.opt-in'))) {
+    return f
+  }
+  const contents = fs.readFileSync(fromRoot('.opt-in'), 'utf-8')
+  return contents.includes(key) ? t : f
+}
+
 module.exports = {
+  isOptedOut,
+  isOptedIn,
   ifDevDep,
   ifPeerDep,
   ifScript,

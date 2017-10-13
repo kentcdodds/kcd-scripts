@@ -31,7 +31,16 @@ function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
     const {bin} = require(modPkgPath)
     const binPath = typeof bin === 'string' ? bin : bin[executable]
     const fullPathToBin = path.join(modPkgDir, binPath)
-    if (fullPathToBin === pathFromWhich) {
+    // eslint-disable-next-line
+    console.log({
+      executable,
+      fullPathToBin,
+      pathFromWhich,
+      nFullPahtToBin: normalizePath(fullPathToBin),
+      nPathFromWhich: normalizePath(pathFromWhich),
+      equal: normalizePath(fullPathToBin) === normalizePath(pathFromWhich),
+    })
+    if (normalizePath(fullPathToBin) === normalizePath(pathFromWhich)) {
       return executable
     }
     return fullPathToBin.replace(cwd, '.')
@@ -131,6 +140,14 @@ function isOptedIn(key, t = true, f = false) {
   return contents.includes(key) ? t : f
 }
 
+// this is here to convert a windows path to a unix path
+// So: ".\node_modules\concurrently\src\main.js"
+// turns to "./node_modules/concurrently/src/main.js"
+// Useful when comparing paths and for snapshots.
+function normalizePath(p = '') {
+  return p.replace(/\\/g, '/')
+}
+
 module.exports = {
   isOptedOut,
   isOptedIn,
@@ -150,4 +167,5 @@ module.exports = {
   hasFile,
   ifFile,
   getConcurrentlyArgs,
+  normalizePath,
 }

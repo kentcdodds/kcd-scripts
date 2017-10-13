@@ -1,11 +1,11 @@
 import cases from 'jest-in-case'
+import {normalizePath} from '../../utils'
 
 jest.mock('jest', () => ({run: jest.fn()}))
 jest.mock('../../config/jest.config', () => ({builtInConfig: true}))
 
-// this removes the quotes around strings...
 expect.addSnapshotSerializer({
-  print: val => val,
+  print: val => normalizePath(val),
   test: val => typeof val === 'string',
 })
 

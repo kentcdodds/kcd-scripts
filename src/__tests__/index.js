@@ -1,16 +1,15 @@
 import path from 'path'
 import cases from 'jest-in-case'
+import {normalizePath} from '../utils'
 
-// this removes the quotes around strings...
 const projectRoot = path.join(__dirname, '../../').replace(/\\/g, '/')
 
 expect.addSnapshotSerializer({
-  print(val) {
-    return val.split(projectRoot).join('<PROJECT_ROOT>/')
-  },
-  test(val) {
-    return typeof val === 'string'
-  },
+  print: val =>
+    normalizePath(val)
+      .split(projectRoot)
+      .join('<PROJECT_ROOT>/'),
+  test: val => typeof val === 'string',
 })
 
 cases(

@@ -60,13 +60,13 @@ const hasScript = hasPkgSubProp('scripts')
 const hasPeerDep = hasPkgSubProp('peerDependencies')
 const hasDep = hasPkgSubProp('dependencies')
 const hasDevDep = hasPkgSubProp('devDependencies')
-const hasAnyDep = (...args) =>
+const hasAnyDep = args =>
   [hasDep, hasDevDep, hasPeerDep].some(fn => fn(...args))
 
 const ifPeerDep = ifPkgSubProp('peerDependencies')
 const ifDep = ifPkgSubProp('dependencies')
 const ifDevDep = ifPkgSubProp('devDependencies')
-const ifAnyDep = (deps, t, f) => (hasAnyDep(deps) ? t : f)
+const ifAnyDep = (deps, t, f) => (hasAnyDep(arrify(deps)) ? t : f)
 const ifScript = ifPkgSubProp('scripts')
 
 function parseEnv(name, def) {
@@ -136,23 +136,23 @@ function isOptedIn(key, t = true, f = false) {
 }
 
 module.exports = {
-  isOptedOut,
-  isOptedIn,
+  appDirectory,
+  envIsSet,
+  fromRoot,
+  getConcurrentlyArgs,
+  hasFile,
+  hasPkgProp,
+  hasScript,
+  ifAnyDep,
+  ifDep,
   ifDevDep,
+  ifFile,
   ifPeerDep,
   ifScript,
-  ifDep,
-  ifAnyDep,
-  hasPkgProp,
-  appDirectory,
-  fromRoot,
-  hasScript,
+  isOptedIn,
+  isOptedOut,
+  parseEnv,
+  pkg,
   resolveBin,
   resolveKcdScripts,
-  parseEnv,
-  envIsSet,
-  pkg,
-  hasFile,
-  ifFile,
-  getConcurrentlyArgs,
 }

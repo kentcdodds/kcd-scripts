@@ -15,13 +15,7 @@ expect.addSnapshotSerializer({
 
 cases(
   'format',
-  ({
-    snapshotLog = false,
-    throws = false,
-    setup = () => () => {},
-    signal = false,
-    args = [],
-  }) => {
+  ({snapshotLog = false, throws = false, signal = false, args = []}) => {
     // beforeEach
     const {sync: crossSpawnSyncMock} = require('cross-spawn')
     const originalExit = process.exit
@@ -29,8 +23,6 @@ cases(
     const originalLog = console.log
     process.exit = jest.fn()
     console.log = jest.fn()
-    const teardown = setup()
-
     try {
       // tests
       process.argv = ['node', '../', ...args]
@@ -58,7 +50,6 @@ cases(
         throw error
       }
     } finally {
-      teardown()
       // afterEach
       process.exit = originalExit
       process.argv = originalArgv

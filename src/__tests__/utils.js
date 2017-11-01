@@ -94,6 +94,14 @@ test('ifAnyDep returns the true argument if true and false argument if false', (
   expect(require('../utils').ifAnyDep('preact', t, f)).toBe(f)
 })
 
+test('ifAnyDep works with arrays of dependencies', () => {
+  mockPkg({pkg: {peerDependencies: {react: '*'}}})
+  const t = {a: 'b'}
+  const f = {c: 'd'}
+  expect(require('../utils').ifAnyDep(['preact', 'react'], t, f)).toBe(t)
+  expect(require('../utils').ifAnyDep(['preact', 'webpack'], t, f)).toBe(f)
+})
+
 test('ifScript returns the true argument if true and the false argument if false', () => {
   mockPkg({pkg: {scripts: {build: 'echo build'}}})
   const t = {e: 'f'}

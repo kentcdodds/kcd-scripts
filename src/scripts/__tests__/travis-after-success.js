@@ -1,10 +1,7 @@
 import cases from 'jest-in-case'
+import {unquoteSerializer} from './helpers/serializers'
 
-// this removes the quotes around strings...
-expect.addSnapshotSerializer({
-  print: val => val,
-  test: val => typeof val === 'string',
-})
+expect.addSnapshotSerializer(unquoteSerializer)
 
 cases(
   'travis-after-success',

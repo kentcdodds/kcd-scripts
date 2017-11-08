@@ -8,7 +8,10 @@ if (script) {
 } else {
   const scriptsPath = path.join(__dirname, 'scripts/')
   const scriptsAvailable = glob.sync(path.join(__dirname, 'scripts', '*'))
+  // `glob.sync` returns paths with unix style path separators even on Windows.
+  // So we normalize it before attempting to strip out the scripts path.
   const scriptsAvailableMessage = scriptsAvailable
+    .map(path.normalize)
     .map(s =>
       s
         .replace(scriptsPath, '')

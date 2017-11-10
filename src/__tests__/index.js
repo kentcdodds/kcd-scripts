@@ -1,16 +1,14 @@
 import path from 'path'
+import slash from 'slash'
 import cases from 'jest-in-case'
+import {unquoteSerializer} from '../scripts/__tests__/helpers/serializers'
 
-// this removes the quotes around strings...
-const projectRoot = path.join(__dirname, '../../').replace(/\\/g, '/')
+const projectRoot = path.join(__dirname, '../../')
 
+expect.addSnapshotSerializer(unquoteSerializer)
 expect.addSnapshotSerializer({
-  print(val) {
-    return val.split(projectRoot).join('<PROJECT_ROOT>/')
-  },
-  test(val) {
-    return typeof val === 'string'
-  },
+  print: val => slash(val.replace(projectRoot, '<PROJECT_ROOT>/')),
+  test: val => typeof val === 'string' && val.includes(projectRoot),
 })
 
 cases(

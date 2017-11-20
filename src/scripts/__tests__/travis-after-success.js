@@ -8,6 +8,7 @@ cases(
   ({
     version = '0.0.0-semantically-released',
     hasCoverageDir = true,
+    isOptedOutOfCoverage = false,
     env = {
       TRAVIS: 'true',
       TRAVIS_BRANCH: 'master',
@@ -35,6 +36,7 @@ cases(
       utils.pkg.version = version
     }
     utils.hasFile = () => hasCoverageDir
+    process.env.SKIP_CODECOV = isOptedOutOfCoverage
     require('../travis-after-success')
     if (runsNothing) {
       expect(console.log.mock.calls).toMatchSnapshot()
@@ -60,6 +62,9 @@ cases(
     },
     'does not do the codecov script when there is no coverage directory': {
       hasCoverageDir: false,
+    },
+    'does not do the codecov script when opted out': {
+      isOptedOutOfCoverage: true,
     },
     'does not do autorelease script when running on travis but in a pull request': {
       env: {

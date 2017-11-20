@@ -13,7 +13,7 @@ const autorelease =
   process.env.TRAVIS_BRANCH === 'master' &&
   !parseEnv('TRAVIS_PULL_REQUEST', false)
 
-const reportCoverage = hasFile('coverage')
+const reportCoverage = hasFile('coverage') && !parseEnv('SKIP_CODECOV', false)
 
 if (!autorelease && !reportCoverage) {
   console.log(

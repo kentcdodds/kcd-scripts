@@ -6,16 +6,16 @@ const doctoc = resolveBin('doctoc')
 module.exports = {
   concurrent: false,
   linters: {
+    'README.md': [`${doctoc} --maxlevel 3 --notitle`, 'git add'],
+    '.all-contributorsrc': [
+      `${kcdScripts} contributors generate`,
+      'git add README.md',
+    ],
     '**/*.+(js|json|less|css|ts)': [
       isOptedOut('autoformat', null, `${kcdScripts} format`),
       `${kcdScripts} lint`,
       `${kcdScripts} test --findRelatedTests`,
       isOptedOut('autoformat', null, 'git add'),
     ].filter(Boolean),
-    '.all-contributorsrc': [
-      `${kcdScripts} contributors generate`,
-      'git add README.md',
-    ],
-    'README.md': [`${doctoc} --maxlevel 2 --notitle`, 'git add'],
   },
 }

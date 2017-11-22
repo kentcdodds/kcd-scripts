@@ -19,7 +19,14 @@
     "validate": "node src validate",
     "precommit": "node src precommit"
   },
-  "files": ["dist", "babel.js", "eslint.js", "config.js"],
+  "files": [
+    "dist",
+    "babel.js",
+    "eslint.js",
+    "config.js",
+    "prettier.js",
+    "jest.js"
+  ],
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",

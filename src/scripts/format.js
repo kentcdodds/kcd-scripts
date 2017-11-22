@@ -30,7 +30,9 @@ const write = args.includes('--no-write') ? [] : ['--write']
 // This way the prettierignore will be applied
 const relativeArgs = args.map(a => a.replace(`${process.cwd()}/`, ''))
 
-const filesToApply = parsedArgs._.length ? [] : ['**/*.+(js|json|less|css|ts)']
+const filesToApply = parsedArgs._.length
+  ? []
+  : ['**/*.+(js|json|less|css|ts|md)']
 
 const result = spawn.sync(
   resolveBin('prettier'),

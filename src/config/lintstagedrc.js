@@ -11,7 +11,7 @@ module.exports = {
       `${kcdScripts} contributors generate`,
       'git add README.md',
     ],
-    '**/*.+(js|json|less|css|ts)': [
+    '**/*.+(js|json|less|css|ts|md)': [
       isOptedOut('autoformat', null, `${kcdScripts} format`),
       `${kcdScripts} lint`,
       `${kcdScripts} test --findRelatedTests`,

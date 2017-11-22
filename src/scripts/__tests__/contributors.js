@@ -18,7 +18,7 @@ test('calls all-contributors CLI with args', () => {
   require('../contributors')
   expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
   expect(crossSpawnSyncMock).toHaveBeenCalledWith(
-    expect.stringMatching('all-contributors-cli'),
+    expect.stringMatching('all-contributors'),
     ['add'],
     {stdio: 'inherit'},
   )

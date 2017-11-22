@@ -11,6 +11,7 @@ const lintStagedPath = require.resolve('lint-staged')
 const cosmiconfigPath = resolve.sync('cosmiconfig', {
   basedir: path.dirname(lintStagedPath),
 })
+const realCosmicConfig = require(cosmiconfigPath)
 
 // lint-staged uses cosmiconfig to find its configuration
 // and it has no other way to provide config
@@ -19,9 +20,13 @@ const cosmiconfigPath = resolve.sync('cosmiconfig', {
 // config so folks don't have to have that in their package.json
 function fakeCosmiconfig(...args) {
   if (args[0] === 'lint-staged') {
-    return Promise.resolve({config: require('../../config/lintstagedrc')})
+    return {
+      load() {
+        return Promise.resolve({config: require('../../config/lintstagedrc')})
+      },
+    }
   } else {
-    return require(cosmiconfigPath)(...args)
+    return realCosmicConfig(...args)
   }
 }
 

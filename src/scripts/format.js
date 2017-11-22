@@ -12,6 +12,7 @@ const hereRelative = p => here(p).replace(process.cwd(), '.')
 const useBuiltinConfig =
   !args.includes('--config') &&
   !hasFile('.prettierrc') &&
+  !hasFile('prettier.config.js') &&
   !hasPkgProp('prettierrc')
 const config = useBuiltinConfig
   ? ['--config', hereRelative('../config/prettierrc.js')]

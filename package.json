@@ -31,7 +31,7 @@
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
-    "all-contributors-cli": "^4.9.0",
+    "all-contributors-cli": "^4.9.1",
     "arrify": "^1.0.1",
     "babel-cli": "^6.26.0",
     "babel-jest": "^21.2.0",

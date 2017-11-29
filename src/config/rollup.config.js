@@ -18,12 +18,13 @@ const isPreact = parseEnv('BUILD_PREACT', false)
 const isNode = parseEnv('BUILD_NODE', false)
 const name = process.env.BUILD_NAME || capitalize(camelcase(pkg.name))
 
-const defaultGlobals = Object.keys(
-  pkg.peerDependencies || {},
-).reduce((deps, dep) => {
-  deps[dep] = capitalize(camelcase(dep))
-  return deps
-}, {})
+const defaultGlobals = Object.keys(pkg.peerDependencies || {}).reduce(
+  (deps, dep) => {
+    deps[dep] = capitalize(camelcase(dep))
+    return deps
+  },
+  {},
+)
 
 const defaultExternal = Object.keys(pkg.peerDependencies || {})
 
@@ -33,7 +34,7 @@ const input =
 
 const filenameSuffix = process.env.BUILD_FILENAME_SUFFIX || ''
 const filenamePrefix =
-  process.env.BUILD_FILENAME_PREFIX || isPreact ? 'preact/' : ''
+  process.env.BUILD_FILENAME_PREFIX || (isPreact ? 'preact/' : '')
 const globals = parseEnv(
   'BUILD_GLOBALS',
   isPreact ? Object.assign(defaultGlobals, {preact: 'preact'}) : defaultGlobals,

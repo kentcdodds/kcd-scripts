@@ -1,13 +1,13 @@
 {
-  "name": "kcd-scripts",
+  "name": "iopipe-scripts",
   "version": "0.0.0-semantically-released",
-  "description": "CLI for common scripts for my projects",
+  "description": "CLI for common scripts for IOpipe projects",
   "engines": {
     "node": ">= 8",
     "npm": ">= 5"
   },
   "bin": {
-    "kcd-scripts": "dist/index.js"
+    "iopipe-scripts": "dist/index.js"
   },
   "scripts": {
     "add-contributor": "node src contributors add",
@@ -17,7 +17,9 @@
     "lint": "node src lint",
     "format": "node src format",
     "validate": "node src validate",
-    "precommit": "node src precommit"
+    "precommit": "node src precommit",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist",
@@ -28,7 +30,7 @@
     "jest.js"
   ],
   "keywords": [],
-  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "author": "IOpipe <dev@iopipe.com> (https://iopipe.com/)",
   "license": "MIT",
   "dependencies": {
     "all-contributors-cli": "^4.9.1",
@@ -53,6 +55,7 @@
     "eslint": "^4.11.0",
     "eslint-config-kentcdodds": "^13.0.1",
     "eslint-config-prettier": "^2.8.0",
+    "eslint-import-resolver-babel-module": "^4.0.0-beta.3",
     "glob": "^7.1.2",
     "husky": "^0.14.3",
     "is-ci": "^1.0.10",
@@ -77,7 +80,10 @@
     "yargs-parser": "^8.0.0"
   },
   "eslintConfig": {
-    "extends": ["kentcdodds", "kentcdodds/jest"],
+    "extends": [
+      "kentcdodds",
+      "kentcdodds/jest"
+    ],
     "rules": {
       "no-process-exit": "off",
       "import/no-dynamic-require": "off",
@@ -86,15 +92,19 @@
       "no-nested-ternary": "off"
     }
   },
-  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kentcdodds/kcd-scripts.git"
+    "url": "https://github.com/iopipe/iopipe-scripts.git"
   },
   "bugs": {
-    "url": "https://github.com/kentcdodds/kcd-scripts/issues"
+    "url": "https://github.com/iopipe/iopipe-scripts/issues"
   },
-  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
+  "homepage": "https://github.com/iopipe/iopipe-scripts#readme",
   "devDependencies": {
     "jest-in-case": "^1.0.2",
     "slash": "^1.0.0"

@@ -2,10 +2,12 @@ const { ifAnyDep } = require('../utils');
 
 module.exports = {
   extends: [
-    require.resolve('eslint-config-kentcdodds'),
-    require.resolve('eslint-config-kentcdodds/jest'),
-    ifAnyDep('react', require.resolve('eslint-config-kentcdodds/jsx-a11y')),
-    ifAnyDep('react', require.resolve('eslint-config-kentcdodds/react'))
+    require.resolve('@iopipe/eslint-config-iopipe'),
+    require.resolve('@iopipe/eslint-config-iopipe/jest'),
+    // jsx-a11y relies on the npm package array-includes
+    // which has a weird peer dependency setup that was causing install issues
+    // ifAnyDep('react', require.resolve('eslint-config-kentcdodds/jsx-a11y')),
+    ifAnyDep('react', require.resolve('@iopipe/eslint-config-iopipe/react'))
   ].filter(Boolean),
   rules: {
     // this is too real for some of our projects right now

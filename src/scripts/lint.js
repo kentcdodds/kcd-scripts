@@ -23,6 +23,9 @@ const useBuiltinIgnore =
   !hasFile('.eslintignore') &&
   !hasPkgProp('eslintIgnore');
 
+// this doesn't seem to be working as intended
+// possibly this is the cause?
+// https://github.com/eslint/eslint/pull/9430/files
 const ignore = useBuiltinIgnore
   ? ['--ignore-path', hereRelative('../config/eslintignore')]
   : [];

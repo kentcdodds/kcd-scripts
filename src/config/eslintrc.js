@@ -11,9 +11,12 @@ module.exports = {
   ].filter(Boolean),
   plugins: ['eslint-plugin-prettier'],
   rules: {
-    'prettier/prettier': [2, {
-      singleQuote: true
-    }],
+    'prettier/prettier': [
+      2,
+      {
+        singleQuote: true
+      }
+    ],
     // this is too real for some of our projects right now
     complexity: 0,
     // add our own regex

@@ -11,7 +11,7 @@ const { pkg, path: pkgPath } = readPkgUp.sync({
 const appDirectory = path.dirname(pkgPath);
 
 function resolveIOpipeScripts() {
-  if (pkg.name === 'iopipe-scripts') {
+  if (pkg.name === '@iopipe/scripts') {
     return require.resolve('./').replace(process.cwd(), '.');
   }
   return resolveBin('iopipe-scripts');

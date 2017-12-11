@@ -24,7 +24,7 @@ test('appDirectory is the dirname to the package.json', () => {
 });
 
 test('resolveIOpipeScripts resolves to src/index.js when in the iopipe-scripts package', () => {
-  mockPkg({ pkg: { name: 'iopipe-scripts' } });
+  mockPkg({ pkg: { name: '@iopipe/scripts' } });
   expect(require('../utils').resolveIOpipeScripts()).toBe(
     require.resolve('../').replace(process.cwd(), '.')
   );

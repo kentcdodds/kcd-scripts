@@ -2,20 +2,20 @@
 
 exports[`format --no-cache will disable caching 1`] = `eslint --config ./src/config/eslintrc.js --ignore-path ./src/config/eslintignore --no-cache .`;
 
-exports[`format calls eslint CLI with default args 1`] = `eslint --config ./src/config/eslintrc.js --ignore-path ./src/config/eslintignore --cache .`;
+exports[`format calls eslint CLI with default args 1`] = `eslint --config ./src/config/eslintrc.js --ignore-path ./src/config/eslintignore .`;
 
-exports[`format does not use built-in config with .eslintrc file 1`] = `eslint --ignore-path ./src/config/eslintignore --cache .`;
+exports[`format does not use built-in config with .eslintrc file 1`] = `eslint --ignore-path ./src/config/eslintignore .`;
 
-exports[`format does not use built-in config with .eslintrc.js file 1`] = `eslint --ignore-path ./src/config/eslintignore --cache .`;
+exports[`format does not use built-in config with .eslintrc.js file 1`] = `eslint --ignore-path ./src/config/eslintignore .`;
 
-exports[`format does not use built-in config with --config 1`] = `eslint --ignore-path ./src/config/eslintignore --cache --config ./custom-config.js .`;
+exports[`format does not use built-in config with --config 1`] = `eslint --ignore-path ./src/config/eslintignore --config ./custom-config.js .`;
 
-exports[`format does not use built-in config with eslintConfig pkg prop 1`] = `eslint --ignore-path ./src/config/eslintignore --cache .`;
+exports[`format does not use built-in config with eslintConfig pkg prop 1`] = `eslint --ignore-path ./src/config/eslintignore .`;
 
-exports[`format does not use built-in ignore with .eslintignore file 1`] = `eslint --config ./src/config/eslintrc.js --cache .`;
+exports[`format does not use built-in ignore with .eslintignore file 1`] = `eslint --config ./src/config/eslintrc.js .`;
 
-exports[`format does not use built-in ignore with --ignore-path 1`] = `eslint --config ./src/config/eslintrc.js --cache --ignore-path ./my-ignore .`;
+exports[`format does not use built-in ignore with --ignore-path 1`] = `eslint --config ./src/config/eslintrc.js --ignore-path ./my-ignore .`;
 
-exports[`format does not use built-in ignore with eslintIgnore pkg prop 1`] = `eslint --config ./src/config/eslintrc.js --cache .`;
+exports[`format does not use built-in ignore with eslintIgnore pkg prop 1`] = `eslint --config ./src/config/eslintrc.js .`;
 
-exports[`format runs on given files, but only js files 1`] = `eslint --config ./src/config/eslintrc.js --ignore-path ./src/config/eslintignore --cache ./src/index.js ./src/component.js`;
+exports[`format runs on given files, but only js files 1`] = `eslint --config ./src/config/eslintrc.js --ignore-path ./src/config/eslintignore ./src/index.js ./src/component.js`;

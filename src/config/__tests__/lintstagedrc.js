@@ -1,3 +1,4 @@
+import keys from 'lodash.keys';
 import * as utilsMock from '../../utils';
 
 jest.mock('../../utils', () => ({
@@ -35,8 +36,6 @@ function hasGitAdd(linter) {
 }
 
 function getJsLinter(linters) {
-  const key = Object.keys(linters).find(
-    k => k.includes('**') && k.includes('js')
-  );
+  const key = keys(linters).find(k => k.includes('**') && k.includes('js'));
   return linters[key];
 }

@@ -4,5 +4,5 @@ module.exports = {
   jest: require('./jest.config'),
   lintStaged: require('./lintstagedrc'),
   prettier: require('./prettierrc'),
-  getRollupConfig: () => require('./rollup.config'),
-}
+  getRollupConfig: () => require('./rollup.config')
+};

@@ -7,16 +7,15 @@
 <hr />
 
 ## Table of Contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Inspiration](#inspiration)
-- [Other Solutions](#other-solutions)
-- [Contributors](#contributors)
-- [LICENSE](#license)
+  - [Overriding Config](#overriding-config)
+- [Thank You](#thank-you)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -71,10 +70,10 @@ Or, for `babel`, a `.babelrc` with:
 Or, for `jest`:
 
 ```javascript
-const {jest: jestConfig} = require('iopipe-scripts/config')
+const { jest: jestConfig } = require('iopipe-scripts/config');
 module.exports = Object.assign(jestConfig, {
   // your overrides here
-})
+});
 ```
 
 > Note: `iopipe-scripts` intentionally does not merge things for you when you start

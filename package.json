@@ -33,7 +33,7 @@
   "author": "IOpipe <dev@iopipe.com> (https://iopipe.com/)",
   "license": "MIT",
   "dependencies": {
-    "@iopipe/eslint-config-iopipe": "^1.0.1",
+    "@iopipe/eslint-config-iopipe": "1.0.2",
     "@ljharb/eslint-config": "^12.2.1",
     "all-contributors-cli": "^4.9.1",
     "arrify": "^1.0.1",

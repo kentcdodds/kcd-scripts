@@ -55,14 +55,13 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@iopipe/eslint-config-iopipe@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@iopipe/eslint-config-iopipe/-/eslint-config-iopipe-1.0.1.tgz#49a3ac531aa7a7a2c7bc6e4bffc126df31584b92"
+"@iopipe/eslint-config-iopipe@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@iopipe/eslint-config-iopipe/-/eslint-config-iopipe-1.0.2.tgz#be3206850a35bbc497089ecaa5b0c565564ca7b3"
   dependencies:
     babel-eslint "^8.0.1"
-    babel-plugin-module-resolver "^2.7.1"
     eslint-config-prettier "^2.6.0"
-    eslint-import-resolver-babel-module "^3.0.0"
+    eslint-import-resolver-babel-module "^2.2.1"
     eslint-import-resolver-webpack "^0.8.3"
     eslint-plugin-babel "^4.1.1"
     eslint-plugin-import "^2.7.0"
@@ -618,7 +617,7 @@ babel-plugin-minify-dead-code-elimination@^0.2.0:
     babel-helper-remove-or-void "^0.2.0"
     lodash.some "^4.6.0"
 
-babel-plugin-module-resolver@2.7.1, babel-plugin-module-resolver@^2.7.1:
+babel-plugin-module-resolver@2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-2.7.1.tgz#18be3c42ddf59f7a456c9e0512cd91394f6e4be1"
   dependencies:
@@ -1989,12 +1988,12 @@ eslint-config-prettier@^2.6.0, eslint-config-prettier@^2.8.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-import-resolver-babel-module@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-import-resolver-babel-module/-/eslint-import-resolver-babel-module-3.0.0.tgz#5cadaca5fa0ae2fe2fcb3566ed9db8ab15db39c0"
+eslint-import-resolver-babel-module@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-babel-module/-/eslint-import-resolver-babel-module-2.2.1.tgz#6c42f33a6f09f3944d8cfa9e1de470fc8a3c2cfc"
   dependencies:
-    pkg-up "^1.0.0"
-    resolve "^1.2.0"
+    find-babel-config "^1.0.0"
+    resolve "^1.1.7"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.1"
@@ -2354,7 +2353,7 @@ fill-range@^2.1.0:
     repeat-element "^1.1.2"
     repeat-string "^1.5.2"
 
-find-babel-config@^1.0.1:
+find-babel-config@^1.0.0, find-babel-config@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/find-babel-config/-/find-babel-config-1.1.0.tgz#acc01043a6749fec34429be6b64f542ebb5d6355"
   dependencies:
@@ -4469,12 +4468,6 @@ pkg-dir@^1.0.0:
   dependencies:
     find-up "^1.0.0"
 
-pkg-up@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-1.0.0.tgz#3e08fb461525c4421624a33b9f7e6d0af5b05a26"
-  dependencies:
-    find-up "^1.0.0"
-
 pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
@@ -4891,7 +4884,7 @@ resolve@1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
 
-resolve@^1.1.6, resolve@^1.2.0, resolve@^1.4.0, resolve@^1.5.0:
+resolve@^1.1.6, resolve@^1.1.7, resolve@^1.2.0, resolve@^1.4.0, resolve@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
   dependencies:

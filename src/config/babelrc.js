@@ -11,7 +11,7 @@ const alias = parseEnv('BUILD_ALIAS', isPreact ? { react: 'preact' } : null);
 const envModules = treeshake ? { modules: false } : {};
 const envTargets = isTest
   ? { node: 'current' }
-  : isWebpack || isRollup ? { browsers: ['ie 10', 'ios 7'] } : { node: '4.5' };
+  : isWebpack || isRollup ? { browsers: ['ie 10', 'ios 7'] } : { node: '6.10' };
 const envOptions = Object.assign({}, envModules, { targets: envTargets });
 
 module.exports = {
@@ -22,15 +22,16 @@ module.exports = {
   plugins: [
     require.resolve('babel-macros'),
     isRollup ? require.resolve('babel-plugin-external-helpers') : null,
-    [
-      require.resolve('babel-plugin-module-resolver'),
-      {
-        root: ['./src'],
-        alias: {
-          util: './src/util'
-        }
-      }
-    ],
+    // can't get this working right now
+    // [
+    //   require.resolve('babel-plugin-module-resolver'),
+    //   {
+    //     root: ['./src'],
+    //     alias: {
+    //       util: './src/util'
+    //     }
+    //   }
+    // ],
     // we're actually not using JSX at all, but I'm leaving this
     // in here just in case we ever do (this would be easy to miss).
     alias

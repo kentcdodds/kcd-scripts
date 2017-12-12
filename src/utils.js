@@ -4,6 +4,9 @@ const arrify = require('arrify');
 const has = require('lodash.has');
 const readPkgUp = require('read-pkg-up');
 const which = require('which');
+const toPairs = require('lodash.topairs');
+const keys = require('lodash.keys');
+const values = require('lodash.values');
 
 const { pkg, path: pkgPath } = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd())
@@ -97,13 +100,13 @@ function getConcurrentlyArgs(scripts, { killOthers = true } = {}) {
     'bgBlack',
     'bgYellow'
   ];
-  scripts = Object.entries(scripts).reduce((all, [name, script]) => {
+  scripts = toPairs(scripts).reduce((all, [name, script]) => {
     if (script) {
       all[name] = script;
     }
     return all;
   }, {});
-  const prefixColors = Object.keys(scripts)
+  const prefixColors = keys(scripts)
     .reduce(
       (pColors, _s, i) =>
         pColors.concat([`${colors[i % colors.length]}.bold.reset`]),
@@ -115,9 +118,9 @@ function getConcurrentlyArgs(scripts, { killOthers = true } = {}) {
   return [
     killOthers ? '--kill-others-on-fail' : null,
     '--prefix', '[{name}]',
-    '--names', Object.keys(scripts).join(','),
+    '--names', keys(scripts).join(','),
     '--prefix-colors', prefixColors,
-    ...Object.values(scripts).map(s => JSON.stringify(s)), // stringify escapes quotes ✨
+    ...values(scripts).map(s => JSON.stringify(s)), // stringify escapes quotes ✨
   ].filter(Boolean)
 }
 

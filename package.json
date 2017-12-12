@@ -3,8 +3,8 @@
   "version": "1.0.10",
   "description": "CLI for common scripts for IOpipe projects",
   "engines": {
-    "node": ">= 8",
-    "npm": ">= 5"
+    "node": ">= 6.10",
+    "npm": ">= 3.10"
   },
   "bin": {
     "iopipe-scripts": "dist/index.js"
@@ -65,6 +65,9 @@
     "lint-staged": "^5.0.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.has": "^4.5.2",
+    "lodash.keys": "^4.2.0",
+    "lodash.topairs": "^4.3.0",
+    "lodash.values": "^4.3.0",
     "mkdirp": "^0.5.1",
     "prettier": "1.9.2",
     "read-pkg-up": "^3.0.0",

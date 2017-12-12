@@ -1,6 +1,7 @@
 const path = require('path');
 const spawn = require('cross-spawn');
 const glob = require('glob');
+const keys = require('lodash.keys');
 
 const [executor, ignoredBin, script, ...args] = process.argv;
 if (script) {
@@ -13,7 +14,10 @@ if (script) {
   const scriptsAvailableMessage = scriptsAvailable
     .map(path.normalize)
     .map(s =>
-      s.replace(scriptsPath, '').replace(/__tests__/, '').replace(/\.js$/, '')
+      s
+        .replace(scriptsPath, '')
+        .replace(/__tests__/, '')
+        .replace(/\.js$/, '')
     )
     .filter(Boolean)
     .join('\n  ')
@@ -35,7 +39,7 @@ May the force be with you.
 function getEnv() {
   // this is required to address an issue in cross-spawn
   // https://github.com/kentcdodds/kcd-scripts/issues/4
-  return Object.keys(process.env)
+  return keys(process.env)
     .filter(key => process.env[key] !== undefined)
     .reduce(
       (envCopy, key) => {

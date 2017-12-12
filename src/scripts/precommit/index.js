@@ -1,20 +1,20 @@
-const spawn = require('cross-spawn')
-const {isOptedIn} = require('../../utils')
+const spawn = require('cross-spawn');
+const { isOptedIn } = require('../../utils');
 
-const [executor, ...args] = process.argv
+const [executor, ...args] = process.argv;
 
 const lintStagedResult = spawn.sync(
   executor,
   [require.resolve('./lint-staged')].concat(args),
-  {stdio: 'inherit'},
-)
+  { stdio: 'inherit' }
+);
 
 if (lintStagedResult.status !== 0 || !isOptedIn('pre-commit')) {
-  process.exit(lintStagedResult.status)
+  process.exit(lintStagedResult.status);
 } else {
   const validateResult = spawn.sync('npm', ['run', 'validate'], {
-    stdio: 'inherit',
-  })
+    stdio: 'inherit'
+  });
 
-  process.exit(validateResult.status)
+  process.exit(validateResult.status);
 }

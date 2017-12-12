@@ -3,8 +3,8 @@
   "version": "1.0.10",
   "description": "CLI for common scripts for IOpipe projects",
   "engines": {
-    "node": ">= 8",
-    "npm": ">= 5"
+    "node": ">= 6.10",
+    "npm": ">= 3.10"
   },
   "bin": {
     "iopipe-scripts": "dist/index.js"

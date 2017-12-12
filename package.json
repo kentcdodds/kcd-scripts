@@ -1,6 +1,6 @@
 {
   "name": "@iopipe/scripts",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "CLI for common scripts for IOpipe projects",
   "engines": {
     "node": ">= 6.10",

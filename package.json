@@ -1,6 +1,6 @@
 {
   "name": "@iopipe/scripts",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "CLI for common scripts for IOpipe projects",
   "engines": {
     "node": ">= 6.10",
@@ -44,6 +44,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-minify-dead-code-elimination": "^0.2.0",
     "babel-plugin-module-resolver": "2.7.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

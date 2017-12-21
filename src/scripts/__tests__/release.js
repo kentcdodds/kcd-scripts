@@ -5,15 +5,15 @@ import { unquoteSerializer } from './helpers/serializers';
 expect.addSnapshotSerializer(unquoteSerializer);
 
 cases(
-  'travis-after-success',
+  'release',
   ({
     version = '0.0.0-semantically-released',
     hasCoverageDir = true,
     isOptedOutOfCoverage = false,
     env = {
-      TRAVIS: 'true',
-      TRAVIS_BRANCH: 'master',
-      TRAVIS_PULL_REQUEST: 'false'
+      CIRCLECI: 'true',
+      CIRCLE_BRANCH: 'master',
+      CI_PULL_REQUEST: 'false'
     },
     runsNothing = false
   }) => {
@@ -38,7 +38,7 @@ cases(
     }
     utils.hasFile = () => hasCoverageDir;
     process.env.SKIP_CODECOV = isOptedOutOfCoverage;
-    require('../travis-after-success');
+    require('../release');
     if (runsNothing) {
       expect(console.log.mock.calls).toMatchSnapshot();
     } else {
@@ -57,22 +57,18 @@ cases(
     jest.resetModules();
   },
   {
-    'calls concurrently with both scripts when on travis': {},
+    'calls concurrently with both scripts when on circle': {},
     'does not do the autorelease script when the version is different': {
-      version: '1.2.3'
+      version: '1.2.3',
+      runsNothing: true
     },
-    'does not do the codecov script when there is no coverage directory': {
-      hasCoverageDir: false
-    },
-    'does not do the codecov script when opted out': {
-      isOptedOutOfCoverage: true
-    },
-    'does not do autorelease script when running on travis but in a pull request': {
+    'does not do autorelease script when running on circle but in a pull request': {
       env: {
-        TRAVIS: 'true',
-        TRAVIS_BRANCH: 'master',
-        TRAVIS_PULL_REQUEST: 'true'
-      }
+        CIRCLECI: 'true',
+        CIRCLE_BRANCH: 'master',
+        CI_PULL_REQUEST: 'true'
+      },
+      runsNothing: true
     },
     'does not run either script when no coverage dir and not the right version': {
       runsNothing: true,

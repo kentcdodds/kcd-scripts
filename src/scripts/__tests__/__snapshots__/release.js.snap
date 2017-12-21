@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`release calls concurrently with both scripts when on circle 1`] = `semantic-release --verify-conditions=@semantic-release/npm,@semantic-release/github`;
+
+exports[`release does not do autorelease script when running on circle but in a pull request 1`] = `
+Array [
+  Array [
+    Release conditions not met: should be in CI with pkg.version set correctly. Skipping release script.,
+  ],
+]
+`;
+
+exports[`release does not do the autorelease script when the version is different 1`] = `
+Array [
+  Array [
+    Release conditions not met: should be in CI with pkg.version set correctly. Skipping release script.,
+  ],
+]
+`;
+
+exports[`release does not run either script when no coverage dir and not the right version 1`] = `
+Array [
+  Array [
+    Release conditions not met: should be in CI with pkg.version set correctly. Skipping release script.,
+  ],
+]
+`;

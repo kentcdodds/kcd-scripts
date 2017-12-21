@@ -32,8 +32,8 @@ Available Scripts:
   format
   lint
   precommit
+  release
   test
-  travis-after-success
   validate
 
 Options:

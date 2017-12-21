@@ -1,6 +1,6 @@
 {
   "name": "@iopipe/scripts",
-  "version": "1.1.1",
+  "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for IOpipe projects",
   "engines": {
     "node": ">= 6.10",
@@ -11,15 +11,16 @@
   },
   "scripts": {
     "add-contributor": "node src contributors add",
-    "test": "node src test",
-    "test:update": "node src test --updateSnapshot",
     "build": "node src build",
-    "lint": "node src lint",
     "format": "node src format",
-    "validate": "node src validate",
+    "lint": "node src lint",
     "precommit": "node src precommit",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "release": "node src release",
+    "test": "node src test",
+    "test:update": "node src test --updateSnapshot",
+    "validate": "node src validate"
   },
   "files": [
     "dist",
@@ -35,6 +36,8 @@
   "dependencies": {
     "@iopipe/eslint-config-iopipe": "1.0.2",
     "@ljharb/eslint-config": "^12.2.1",
+    "@semantic-release/github": "^2.2.3",
+    "@semantic-release/npm": "^2.4.0",
     "all-contributors-cli": "^4.9.1",
     "arrify": "^1.0.1",
     "babel-cli": "^6.26.0",
@@ -82,6 +85,7 @@
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
+    "semantic-release": "^11.0.2",
     "which": "^1.3.0",
     "yargs-parser": "^8.0.0"
   },
@@ -112,11 +116,17 @@
   },
   "homepage": "https://github.com/iopipe/iopipe-scripts#readme",
   "devDependencies": {
+    "cz-conventional-changelog": "^2.1.0",
     "jest-in-case": "^1.0.2",
     "precommit": "^1.2.2",
     "slash": "^1.0.0"
   },
   "pre-commit": [
     "precommit"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }

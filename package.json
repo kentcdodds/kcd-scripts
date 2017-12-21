@@ -12,8 +12,6 @@
   "scripts": {
     "add-contributor": "node src contributors add",
     "commit": "node src commit",
-    "test": "node src test",
-    "test:update": "node src test --updateSnapshot",
     "build": "node src build",
     "format": "node src format",
     "lint": "node src lint",

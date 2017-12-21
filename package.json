@@ -33,7 +33,7 @@
     "prettier.js",
     "jest.js"
   ],
-  "keywords": [],
+  "keywords": ["scripts"],
   "author": "IOpipe <dev@iopipe.com> (https://iopipe.com/)",
   "license": "MIT",
   "dependencies": {

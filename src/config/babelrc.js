@@ -7,11 +7,14 @@ const isUMD = process.env.BUILD_FORMAT === 'umd';
 const isWebpack = parseEnv('BUILD_WEBPACK', false);
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack);
 const alias = parseEnv('BUILD_ALIAS', isPreact ? { react: 'preact' } : null);
+const isBrowser = parseEnv('BUILD_BROWSER', false);
 
 const envModules = treeshake ? { modules: false } : {};
+
 const envTargets = isTest
   ? { node: 'current' }
-  : isWebpack || isRollup ? { browsers: ['ie 10', 'ios 7'] } : { node: '6.10' };
+  : isBrowser ? { browsers: ['> 1% in US'] } : { node: '6.10' };
+
 const envOptions = Object.assign({}, envModules, { targets: envTargets });
 
 module.exports = {

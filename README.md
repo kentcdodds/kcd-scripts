@@ -10,7 +10,7 @@
 [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package]
 [![downloads][downloads-badge]][npmcharts]
-[![MIT License][license-badge]][LICENSE]
+[![MIT License][license-badge]][license]
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
@@ -33,16 +33,18 @@ This is a CLI that abstracts away all configuration for my open source projects
 for linting, testing, building, and more.
 
 ## Table of Contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Inspiration](#inspiration)
-- [Other Solutions](#other-solutions)
-- [Contributors](#contributors)
-- [LICENSE](#license)
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Overriding Config](#overriding-config)
+* [Inspiration](#inspiration)
+* [Other Solutions](#other-solutions)
+* [Contributors](#contributors)
+* [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -121,8 +123,11 @@ here! Again, this is a very specific-to-me solution.
 Thanks goes to these people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 | [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub>Kent C. Dodds</sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Tests") | [<img src="https://avatars2.githubusercontent.com/u/22251956?v=4" width="100px;"/><br /><sub>Suhas Karanth</sub>](https://github.com/sudo-suhas)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=sudo-suhas "Code") [🐛](https://github.com/kentcdodds/kcd-scripts/issues?q=author%3Asudo-suhas "Bug reports") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=sudo-suhas "Tests") | [<img src="https://avatars0.githubusercontent.com/u/1402095?v=4" width="100px;"/><br /><sub>Matt Parrish</sub>](https://github.com/pbomb)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=pbomb "Code") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=pbomb "Tests") |
-| :---: | :---: | :---: |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.

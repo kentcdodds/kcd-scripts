@@ -14,7 +14,7 @@ module.exports = {
     '**/*.+(js|json|less|css|ts|md)': [
       isOptedOut('autoformat', null, `${kcdScripts} format`),
       `${kcdScripts} lint`,
-      `${kcdScripts} test --findRelatedTests`,
+      `${kcdScripts} test --findRelatedTests --passWithNoTests`,
       isOptedOut('autoformat', null, 'git add'),
     ].filter(Boolean),
   },

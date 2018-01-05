@@ -39,6 +39,16 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "mateuscb",
+      "name": "Mateus",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1319157?v=4",
+      "profile": "https://github.com/mateuscb",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ]
 }

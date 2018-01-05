@@ -15,8 +15,9 @@ const ignores = [
 const jestConfig = {
   roots: [fromRoot('src')],
   testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
-  collectCoverageFrom: ['src/**/*.js'],
-  testMatch: ['**/__tests__/**/*.js'],
+  moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
+  collectCoverageFrom: ['src/**/*.js', 'src/**/*.js'],
+  testRegex: '/__tests__/.*\\.(ts|tsx|js)$',
   testPathIgnorePatterns: [...ignores],
   coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.js$'],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],

@@ -71,7 +71,7 @@ const output = [
     name,
     file: filepath,
     format: esm ? 'es' : format,
-    exports: esm ? 'named' : 'default',
+    exports: 'named',
     globals,
   },
 ]

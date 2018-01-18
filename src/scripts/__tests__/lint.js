@@ -8,7 +8,7 @@ expect.addSnapshotSerializer(unquoteSerializer)
 expect.addSnapshotSerializer(winPathSerializer)
 
 cases(
-  'format',
+  'lint',
   ({
     args = [],
     utils = require('../../utils'),

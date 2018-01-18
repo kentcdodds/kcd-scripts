@@ -9,7 +9,7 @@ jest.mock('is-ci', () => mockIsCI)
 expect.addSnapshotSerializer(unquoteSerializer)
 
 cases(
-  'format',
+  'test',
   ({
     args = [],
     utils = require('../../utils'),

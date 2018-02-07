@@ -32,12 +32,10 @@ module.exports = {
     isPreact
       ? [require.resolve('babel-plugin-transform-react-jsx'), {pragma: 'h'}]
       : null,
-    isPreact
-      ? [
-          require.resolve('babel-plugin-transform-react-remove-prop-types'),
-          {removeImport: true},
-        ]
-      : null,
+    [
+      require.resolve('babel-plugin-transform-react-remove-prop-types'),
+      isPreact ? {removeImport: true} : {mode: 'unsafe-wrap'},
+    ],
     isUMD
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,

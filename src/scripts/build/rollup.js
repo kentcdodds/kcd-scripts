@@ -86,7 +86,7 @@ if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
 
 function getPReactScripts() {
   const reactCommands = prefixKeys('react.', getCommands())
-  const preactCommands = prefixKeys('preact.', getCommands('BUILD_PREACT=true'))
+  const preactCommands = prefixKeys('preact.', getCommands({ preact: true }))
   return getConcurrentlyArgs(Object.assign(reactCommands, preactCommands))
 }
 
@@ -97,14 +97,24 @@ function prefixKeys(prefix, object) {
   }, {})
 }
 
-function getCommands(env = '') {
+function getCommands({
+  preact = false,
+} = {}) {
   return formats.reduce((cmds, format) => {
     const [formatName, minify = false] = format.split('.')
     const nodeEnv = minify ? 'production' : 'development'
     const sourceMap = formatName === 'umd' ? '--sourcemap' : ''
     const buildMinify = Boolean(minify)
+
     cmds[format] = getCommand(
-      `BUILD_FORMAT=${formatName} BUILD_MINIFY=${buildMinify} NODE_ENV=${nodeEnv} ${env}`,
+      [
+        `BUILD_FORMAT=${formatName}`,
+        `BUILD_MINIFY=${buildMinify}`,
+        `NODE_ENV=${nodeEnv}`,
+        `BUILD_PREACT=${preact}`,
+        `BUILD_NODE=${process.env.BUILD_NODE || false}`,
+        `BUILD_REACT_NATIVE=${process.env.BUILD_REACT_NATIVE || false}`,
+      ].join(' '),
       sourceMap
     )
     return cmds

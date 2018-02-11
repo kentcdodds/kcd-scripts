@@ -50,6 +50,8 @@ if (isPreact) {
   external.splice(external.indexOf('react'), 1)
 }
 
+const externalPattern = new RegExp(`^(${external.join('|')})($|/)`)
+
 const esm = format === 'esm'
 
 const filename = [
@@ -82,7 +84,7 @@ const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : []
 module.exports = {
   input,
   output,
-  external,
+  external: id => externalPattern.test(id),
   plugins: [
     isNode ? nodeBuiltIns() : null,
     isNode ? nodeGlobals() : null,

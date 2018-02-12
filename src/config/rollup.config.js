@@ -4,9 +4,11 @@ const rollupBabel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const json = require('rollup-plugin-json')
+const replace = require('rollup-plugin-replace')
 const uglify = require('rollup-plugin-uglify')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
+const omit = require('lodash.omit')
 const {pkg, hasFile, hasPkgProp, parseEnv, ifFile} = require('../utils')
 
 const here = p => path.join(__dirname, p)
@@ -51,6 +53,7 @@ if (isPreact) {
 }
 
 const esm = format === 'esm'
+const umd = format === 'umd'
 
 const filename = [
   pkg.name,
@@ -79,6 +82,19 @@ const output = [
 const useBuiltinConfig = !hasFile('.babelrc') && !hasPkgProp('babel')
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : []
 
+const replacements = Object.entries(
+  umd ? process.env : omit(process.env, ['NODE_ENV']),
+).reduce((acc, [key, value]) => {
+  let val
+  if (value === 'true' || value === 'false' || Number.isInteger(+value)) {
+    val = value
+  } else {
+    val = JSON.stringify(value)
+  }
+  acc[`process.env.${key}`] = val
+  return acc
+}, {})
+
 module.exports = {
   input,
   output,
@@ -94,6 +110,7 @@ module.exports = {
       presets: babelPresets,
       babelrc: true,
     }),
+    replace(replacements),
     minify ? uglify() : null,
   ].filter(Boolean),
 }

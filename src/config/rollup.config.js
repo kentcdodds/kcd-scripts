@@ -52,6 +52,8 @@ if (isPreact) {
   external.splice(external.indexOf('react'), 1)
 }
 
+const externalPattern = new RegExp(`^(${external.join('|')})($|/)`)
+
 const esm = format === 'esm'
 const umd = format === 'umd'
 
@@ -98,7 +100,7 @@ const replacements = Object.entries(
 module.exports = {
   input,
   output,
-  external,
+  external: id => externalPattern.test(id),
   plugins: [
     isNode ? nodeBuiltIns() : null,
     isNode ? nodeGlobals() : null,

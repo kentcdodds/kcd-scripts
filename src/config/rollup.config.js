@@ -53,6 +53,8 @@ if (isPreact) {
 }
 
 const externalPattern = new RegExp(`^(${external.join('|')})($|/)`)
+const externalPredicate =
+  external.length === 0 ? () => false : id => externalPattern.test(id)
 
 const esm = format === 'esm'
 const umd = format === 'umd'
@@ -100,7 +102,7 @@ const replacements = Object.entries(
 module.exports = {
   input,
   output,
-  external: id => externalPattern.test(id),
+  external: externalPredicate,
   plugins: [
     isNode ? nodeBuiltIns() : null,
     isNode ? nodeGlobals() : null,

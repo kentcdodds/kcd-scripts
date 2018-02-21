@@ -13,7 +13,12 @@ const envModules = treeshake ? { modules: false } : {};
 
 const envTargets = isTest
   ? { node: 'current' }
-  : isBrowser ? { browsers: ['> 1% in US'] } : { node: '6.10' };
+  : isBrowser
+    ? {
+        // support browsers that include generator functions
+        browsers: ['> 1% in US', 'not ie < 12', 'not ios_saf < 10']
+      }
+    : { node: '6.10' };
 
 const envOptions = Object.assign({}, envModules, { targets: envTargets });
 

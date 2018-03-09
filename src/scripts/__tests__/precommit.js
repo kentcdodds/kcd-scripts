@@ -29,7 +29,8 @@ cases(
     try {
       // tests
       require('../precommit')
-      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
+      // once for lint-staged, and once for validate
+      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(2)
       const [firstCall] = crossSpawnSyncMock.mock.calls
       const [script, calledArgs] = firstCall
       expect([script, ...calledArgs].join(' ')).toMatchSnapshot()

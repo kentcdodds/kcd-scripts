@@ -28,7 +28,7 @@ if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
 const result = spawn.sync(
   resolveBin('babel-cli', {executable: 'babel'}),
   [...outDir, ...copyFiles, ...ignore, ...config, 'src'].concat(args),
-  {stdio: 'inherit'}
+  {stdio: 'inherit'},
 )
 
 process.exit(result.status)

@@ -79,14 +79,14 @@ if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
         module: path.relative(preactDir, esmFile),
       },
       null,
-      2
-    )
+      2,
+    ),
   )
 }
 
 function getPReactScripts() {
   const reactCommands = prefixKeys('react.', getCommands())
-  const preactCommands = prefixKeys('preact.', getCommands({ preact: true }))
+  const preactCommands = prefixKeys('preact.', getCommands({preact: true}))
   return getConcurrentlyArgs(Object.assign(reactCommands, preactCommands))
 }
 
@@ -97,9 +97,7 @@ function prefixKeys(prefix, object) {
   }, {})
 }
 
-function getCommands({
-  preact = false,
-} = {}) {
+function getCommands({preact = false} = {}) {
   return formats.reduce((cmds, format) => {
     const [formatName, minify = false] = format.split('.')
     const nodeEnv = minify ? 'production' : 'development'
@@ -115,7 +113,7 @@ function getCommands({
         `BUILD_NODE=${process.env.BUILD_NODE || false}`,
         `BUILD_REACT_NATIVE=${process.env.BUILD_REACT_NATIVE || false}`,
       ].join(' '),
-      sourceMap
+      sourceMap,
     )
     return cmds
   }, {})

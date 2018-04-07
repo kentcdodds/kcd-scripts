@@ -38,7 +38,7 @@ function runAfterSuccessScripts() {
             ? `echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'`
             : null,
           release: autorelease
-            ? `echo installing semantic-release && npx -p semantic-release@8 -c 'echo running semantic-release && semantic-release'`
+            ? `echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'`
             : null,
         },
         {killOthers: false},

@@ -29,10 +29,12 @@ cases(
     try {
       // tests
       require('../precommit')
-      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
-      const [firstCall] = crossSpawnSyncMock.mock.calls
-      const [script, calledArgs] = firstCall
-      expect([script, ...calledArgs].join(' ')).toMatchSnapshot()
+      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(2)
+      const [firstCall, secondCall] = crossSpawnSyncMock.mock.calls
+      const [scriptOne, calledArgsOne] = firstCall
+      expect([scriptOne, ...calledArgsOne].join(' ')).toMatchSnapshot()
+      const [scriptTwo, calledArgsTwo] = secondCall
+      expect([scriptTwo, ...calledArgsTwo].join(' ')).toMatchSnapshot()
     } catch (error) {
       throw error
     } finally {

@@ -2,7 +2,7 @@
 
 exports[`travis-after-success calls concurrently with both scripts when on travis 1`] = `npx travis-deploy-once`;
 
-exports[`travis-after-success calls concurrently with both scripts when on travis 2`] = `concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@8 -c 'echo running semantic-release && semantic-release'"`;
+exports[`travis-after-success calls concurrently with both scripts when on travis 2`] = `concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'"`;
 
 exports[`travis-after-success does not do autorelease script when running on travis but in a pull request 1`] = `npx travis-deploy-once`;
 
@@ -14,11 +14,11 @@ exports[`travis-after-success does not do the autorelease script when the versio
 
 exports[`travis-after-success does not do the codecov script when opted out 1`] = `npx travis-deploy-once`;
 
-exports[`travis-after-success does not do the codecov script when opted out 2`] = `concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@8 -c 'echo running semantic-release && semantic-release'"`;
+exports[`travis-after-success does not do the codecov script when opted out 2`] = `concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'"`;
 
 exports[`travis-after-success does not do the codecov script when there is no coverage directory 1`] = `npx travis-deploy-once`;
 
-exports[`travis-after-success does not do the codecov script when there is no coverage directory 2`] = `concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@8 -c 'echo running semantic-release && semantic-release'"`;
+exports[`travis-after-success does not do the codecov script when there is no coverage directory 2`] = `concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'"`;
 
 exports[`travis-after-success does not run either script when no coverage dir and not the right version 1`] = `
 Array [

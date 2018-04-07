@@ -24,6 +24,7 @@ cases(
     process.exit = jest.fn()
 
     process.argv = ['node', '../precommit', ...args]
+    utils.isOptedIn = optIn => optIn === 'pre-commit'
     crossSpawnSyncMock.mockClear()
 
     try {

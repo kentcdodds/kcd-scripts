@@ -3,6 +3,7 @@ const spawn = require('cross-spawn')
 const glob = require('glob')
 
 const [executor, ignoredBin, script, ...args] = process.argv
+
 if (script) {
   spawnScript()
 } else {

@@ -1,4 +1,5 @@
 const path = require('path')
+const glob = require('glob')
 const camelcase = require('lodash.camelcase')
 const rollupBabel = require('rollup-plugin-babel')
 const commonjs = require('rollup-plugin-commonjs')
@@ -9,7 +10,16 @@ const uglify = require('rollup-plugin-uglify')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
 const omit = require('lodash.omit')
-const {pkg, hasFile, hasPkgProp, parseEnv, ifFile} = require('../utils')
+const {
+  pkg,
+  hasFile,
+  hasPkgProp,
+  parseEnv,
+  ifFile,
+  fromRoot,
+  uniq,
+  writeExtraEntry,
+} = require('../utils')
 
 const here = p => path.join(__dirname, p)
 const capitalize = s => s[0].toUpperCase() + s.slice(1)
@@ -30,9 +40,27 @@ const defaultGlobals = Object.keys(pkg.peerDependencies || {}).reduce(
 
 const defaultExternal = Object.keys(pkg.peerDependencies || {})
 
-const input =
-  process.env.BUILD_INPUT ||
-  ifFile(`src/${format}-entry.js`, `src/${format}-entry.js`, 'src/index.js')
+const input = glob.sync(
+  fromRoot(
+    process.env.BUILD_INPUT ||
+      ifFile(
+        `src/${format}-entry.js`,
+        `src/${format}-entry.js`,
+        'src/index.js',
+      ),
+  ),
+)
+const codeSplitting = input.length > 1
+
+if (
+  codeSplitting &&
+  uniq(input.map(single => path.basename(single))).length !== input.length
+) {
+  throw new Error(
+    'Filenames of code-splitted entries should be unique to get deterministic output filenames.' +
+      `\nReceived those: ${input}.`,
+  )
+}
 
 const filenameSuffix = process.env.BUILD_FILENAME_SUFFIX || ''
 const filenamePrefix =
@@ -69,16 +97,16 @@ const filename = [
   .filter(Boolean)
   .join('')
 
-const filepath = path.join(
-  ...[filenamePrefix, 'dist', filename].filter(Boolean),
-)
+const dirpath = path.join(...[filenamePrefix, 'dist'].filter(Boolean))
 
 const output = [
   {
     name,
-    file: filepath,
+    ...(codeSplitting
+      ? {dir: path.join(dirpath, format)}
+      : {file: path.join(dirpath, filename)}),
     format: esm ? 'es' : format,
-    exports: esm ? 'named' : 'default',
+    exports: esm ? 'named' : 'auto',
     globals,
   },
 ]
@@ -100,8 +128,9 @@ const replacements = Object.entries(
 }, {})
 
 module.exports = {
-  input,
+  input: codeSplitting ? input : input[0],
   output,
+  experimentalCodeSplitting: codeSplitting,
   external: externalPredicate,
   plugins: [
     isNode ? nodeBuiltIns() : null,
@@ -116,5 +145,24 @@ module.exports = {
     }),
     replace(replacements),
     minify ? uglify() : null,
+    codeSplitting &&
+      ((writes = 0) => ({
+        onwrite() {
+          if (++writes !== input.length) {
+            return
+          }
+
+          input
+            .filter(single => single.indexOf('index.js') === -1)
+            .forEach(single => {
+              const chunk = path.basename(single)
+
+              writeExtraEntry(chunk.replace(/\..+$/, ''), {
+                cjs: `${dirpath}/cjs/${chunk}`,
+                esm: `${dirpath}/esm/${chunk}`,
+              })
+            })
+        },
+      }))(),
   ].filter(Boolean),
 }

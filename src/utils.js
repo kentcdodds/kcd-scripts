@@ -1,5 +1,7 @@
 const fs = require('fs')
 const path = require('path')
+const rimraf = require('rimraf')
+const mkdirp = require('mkdirp')
 const arrify = require('arrify')
 const has = require('lodash.has')
 const readPkgUp = require('read-pkg-up')
@@ -138,6 +140,33 @@ function isOptedIn(key, t = true, f = false) {
   return contents.includes(key) ? t : f
 }
 
+function uniq(arr) {
+  return Array.from(new Set(arr))
+}
+
+function writeExtraEntry(name, {cjs, esm}, clean = true) {
+  if (clean) {
+    rimraf.sync(fromRoot(name))
+  }
+  mkdirp.sync(fromRoot(name))
+
+  const pkgJson = fromRoot(`${name}/package.json`)
+  const entryDir = fromRoot(name)
+
+  fs.writeFileSync(
+    pkgJson,
+    JSON.stringify(
+      {
+        main: path.relative(entryDir, cjs),
+        'jsnext:main': path.relative(entryDir, esm),
+        module: path.relative(entryDir, esm),
+      },
+      null,
+      2,
+    ),
+  )
+}
+
 module.exports = {
   appDirectory,
   envIsSet,
@@ -158,4 +187,6 @@ module.exports = {
   pkg,
   resolveBin,
   resolveKcdScripts,
+  uniq,
+  writeExtraEntry,
 }

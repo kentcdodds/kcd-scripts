@@ -69,6 +69,17 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "orther",
+      "name": "Brandon Orther",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/126236?v=4",
+      "profile": "http://uptrend.tech",
+      "contributions": [
+        "code",
+        "infra",
+        "platform"
+      ]
     }
   ],
   "repoType": "github"

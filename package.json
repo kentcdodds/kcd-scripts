@@ -10,6 +10,7 @@
     "uptrend-scripts": "dist/index.js"
   },
   "scripts": {
+    "contributors": "node src contributors",
     "add-contributor": "node src contributors add",
     "test": "node src test",
     "test:update": "node src test --updateSnapshot",
@@ -28,7 +29,7 @@
     "jest.js"
   ],
   "keywords": [],
-  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "author": "Brandon Orther <brandon@uptrend.tech> (http://uptrend.tech/)",
   "license": "MIT",
   "dependencies": {
     "all-contributors-cli": "^4.11.1",

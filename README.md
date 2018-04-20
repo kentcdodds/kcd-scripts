@@ -1,7 +1,7 @@
 <div align="center">
-<h1>uptrend-scripts 🛠📦</h1>
+<h1>uptrend-scripts</h1>
 
-<p>CLI toolbox for common scripts for my projects</p>
+<p>CLI toolbox for common scripts for uptrend projects</p>
 </div>
 
 <hr />
@@ -12,7 +12,7 @@
 [![downloads][downloads-badge]][npmcharts]
 [![MIT License][license-badge]][license]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
@@ -22,8 +22,9 @@
 
 ## The problem
 
-I do a bunch of open source and want to make it easier to maintain so many
-projects.
+Creating new uptrend npm libraries requires a lot of boilerplate
+configuration, and is prone to errors. Configurations will often diverge or
+never be updated.
 
 ## This solution
 
@@ -57,13 +58,67 @@ npm install --save-dev uptrend-scripts
 
 ## Usage
 
-This is a CLI and exposes a bin called `uptrend-scripts`. I don't really plan on
-documenting or testing it super duper well because it's really specific to my
-needs. You'll find all available scripts in `src/scripts`.
+This is a CLI and exposes a bin called `uptrend-scripts`.
 
 This project actually dogfoods itself. If you look in the `package.json`, you'll
 find scripts with `node src {scriptName}`. This serves as an example of some
 of the things you can do with `uptrend-scripts`.
+
+To use the `after-success` hooks and automatic [semantic release][semantic-release],
+you need to set up your build env with `GH_TOKEN` and `NPM_TOKEN`.
+
+If you want to automatically publish coverage reports to [codecov][codecov], add
+a `CODECOV_TOKEN`.
+
+<details>
+<summary>Example `package.json`</summary>
+
+```json
+{
+  "name": "amazing-library",
+  "version": "0.0.0-semantically-released",
+  "main": "dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "test": "uptrend-scripts test",
+    "test:update": "uptrend-scripts test --updateSnapshot",
+    "build": "uptrend-scripts build",
+    "lint": "uptrend-scripts lint",
+    "format": "uptrend-scripts format",
+    "validate": "uptrend-scripts validate",
+    "precommit": "uptrend-scripts precommit",
+    "after-success": "uptrend-scripts travis-after-success"
+  },
+  "devDependencies": {
+    "uptrend-scripts": "1.0.0"
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Example `.travis.yml`</summary>
+
+```yaml
+sudo: false
+language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+node_js:
+  - '8'
+script: npm run validate
+after_success:
+  - npm run after-success
+branches:
+  only:
+    - master
+```
+
+</details>
 
 ### Overriding Config
 
@@ -118,19 +173,16 @@ This is inspired by `react-scripts`.
 
 ## Other Solutions
 
-I'm not aware of any, if you are please [make a pull request][prs] and add it
-here! Again, this is a very specific-to-me solution.
+`uptrend-scripts` is a fork of [kcd-scripts][kcd-scripts], adapted to Uptrend.
 
 ## Contributors
 
 Thanks goes to these people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
 <!-- prettier-ignore -->
-| [<img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;"/><br /><sub><b>Kent C. Dodds</b></sub>](https://kentcdodds.com)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Code") [📖](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Documentation") [🚇](#infra-kentcdodds "Infrastructure (Hosting, Build-Tools, etc)") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=kentcdodds "Tests") | [<img src="https://avatars2.githubusercontent.com/u/22251956?v=4" width="100px;"/><br /><sub><b>Suhas Karanth</b></sub>](https://github.com/sudo-suhas)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=sudo-suhas "Code") [🐛](https://github.com/kentcdodds/kcd-scripts/issues?q=author%3Asudo-suhas "Bug reports") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=sudo-suhas "Tests") | [<img src="https://avatars0.githubusercontent.com/u/1402095?v=4" width="100px;"/><br /><sub><b>Matt Parrish</b></sub>](https://github.com/pbomb)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=pbomb "Code") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=pbomb "Tests") | [<img src="https://avatars3.githubusercontent.com/u/1319157?v=4" width="100px;"/><br /><sub><b>Mateus</b></sub>](https://github.com/mateuscb)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=mateuscb "Code") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=mateuscb "Tests") | [<img src="https://avatars1.githubusercontent.com/u/2344137?v=4" width="100px;"/><br /><sub><b>Macklin Underdown</b></sub>](http://macklin.underdown.me)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=macklinu "Code") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=macklinu "Tests") | [<img src="https://avatars2.githubusercontent.com/u/179534?v=4" width="100px;"/><br /><sub><b>stereobooster</b></sub>](https://github.com/stereobooster)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=stereobooster "Code") [⚠️](https://github.com/kentcdodds/kcd-scripts/commits?author=stereobooster "Tests") | [<img src="https://avatars3.githubusercontent.com/u/126236?v=4" width="100px;"/><br /><sub><b>Brandon Orther</b></sub>](http://uptrend.tech)<br />[💻](https://github.com/kentcdodds/kcd-scripts/commits?author=orther "Code") [🚇](#infra-orther "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-orther "Packaging/porting to new platform") |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-
+| [<img src="https://avatars3.githubusercontent.com/u/126236?v=4" width="100px;"/><br /><sub><b>Brandon Orther</b></sub>](http://uptrend.tech)<br />[💻](https://github.com/uptrend-tech/uptrend-scripts/commits?author=orther "Code") [🚇](#infra-orther "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-orther "Packaging/porting to new platform") |
+| :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.
@@ -165,3 +217,6 @@ MIT
 [twitter-badge]: https://img.shields.io/twitter/url/https/github.com/uptrend-tech/uptrend-scripts.svg?style=social
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
+[kcd-scripts]: https://github.com/kentcdodds/kcd-scripts
+[semantic-release]: https://github.com/semantic-release/semantic-release
+[codecov]: https://codecov.io

@@ -120,6 +120,15 @@ branches:
 
 </details>
 
+Prettier is run by eslint using `eslint-plugin-prettier`. Currently you MUST
+expose the prettier config from `uptrend-scripts` by creating `.prettierrc.js`
+in the root of your project with the following content:
+
+```js
+const {prettier: prettierConfig} = require('uptrend-scripts/config')
+module.exports = prettierConfig
+```
+
 ### Overriding Config
 
 Unlike `react-scripts`, `uptrend-scripts` allows you to specify your own
@@ -142,6 +151,16 @@ contents of:
 
 > Note: for now, you'll have to include an `.eslintignore` in your project until
 > [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).
+
+Or, for `prettier`, a `.prettierrc.js` with:
+
+```javascript
+const {prettier: prettierConfig} = require('uptrend-scripts/config')
+module.exports = Object.assign(prettierConfig, {
+  // your overrides here
+  printWidth: 100,
+})
+```
 
 Or, for `babel`, a `.babelrc` with:
 
@@ -180,9 +199,11 @@ This is inspired by `react-scripts`.
 Thanks goes to these people ([emoji key][emojis]):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 <!-- prettier-ignore -->
 | [<img src="https://avatars3.githubusercontent.com/u/126236?v=4" width="100px;"/><br /><sub><b>Brandon Orther</b></sub>](http://uptrend.tech)<br />[💻](https://github.com/uptrend-tech/uptrend-scripts/commits?author=orther "Code") [🚇](#infra-orther "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-orther "Packaging/porting to new platform") |
 | :---: |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.
@@ -220,3 +241,4 @@ MIT
 [kcd-scripts]: https://github.com/kentcdodds/kcd-scripts
 [semantic-release]: https://github.com/semantic-release/semantic-release
 [codecov]: https://codecov.io
+[prettier-config-file]: https://prettier.io/docs/en/configuration.html

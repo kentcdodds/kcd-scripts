@@ -39,6 +39,7 @@ for linting, testing, building, and more.
 
 * [Installation](#installation)
 * [Usage](#usage)
+  * [Required Config](#required-config)
   * [Overriding Config](#overriding-config)
 * [Inspiration](#inspiration)
 * [Other Solutions](#other-solutions)
@@ -119,6 +120,8 @@ branches:
 ```
 
 </details>
+
+### Required Config
 
 Prettier is run by eslint using `eslint-plugin-prettier`. Currently you MUST
 expose the prettier config from `uptrend-scripts` by creating `.prettierrc.js`

@@ -1,7 +1,5 @@
 const path = require('path')
-const fs = require('fs')
 const spawn = require('cross-spawn')
-const mkdirp = require('mkdirp')
 const glob = require('glob')
 const rimraf = require('rimraf')
 const yargsParser = require('yargs-parser')
@@ -10,6 +8,7 @@ const {
   resolveBin,
   fromRoot,
   getConcurrentlyArgs,
+  writeExtraEntry,
 } = require('../../utils')
 
 const crossEnv = resolveBin('cross-env')
@@ -54,33 +53,18 @@ if (cleanBuildDirs) {
   rimraf.sync(fromRoot('dist'))
 }
 
-if (buildPreact) {
-  if (cleanBuildDirs) {
-    rimraf.sync(fromRoot('preact'))
-  }
-  mkdirp.sync(fromRoot('preact'))
-}
-
 const result = spawn.sync(resolveBin('concurrently'), scripts, {
   stdio: 'inherit',
 })
 
 if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
-  const preactPkg = fromRoot('preact/package.json')
-  const preactDir = fromRoot('preact')
-  const cjsFile = glob.sync(fromRoot('preact/**/*.cjs.js'))[0]
-  const esmFile = glob.sync(fromRoot('preact/**/*.esm.js'))[0]
-  fs.writeFileSync(
-    preactPkg,
-    JSON.stringify(
-      {
-        main: path.relative(preactDir, cjsFile),
-        'jsnext:main': path.relative(preactDir, esmFile),
-        module: path.relative(preactDir, esmFile),
-      },
-      null,
-      2,
-    ),
+  writeExtraEntry(
+    'preact',
+    {
+      cjs: glob.sync(fromRoot('preact/**/*.cjs.js'))[0],
+      esm: glob.sync(fromRoot('preact/**/*.esm.js'))[0],
+    },
+    cleanBuildDirs,
   )
 }
 

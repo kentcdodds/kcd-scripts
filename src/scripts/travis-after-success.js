@@ -8,7 +8,7 @@ const {
 } = require('../utils')
 
 console.log('installing and running travis-deploy-once')
-const deployOnceResults = spawn.sync('npx', ['travis-deploy-once'])
+const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@4'])
 if (deployOnceResults.status === 0) {
   runAfterSuccessScripts()
 } else {
@@ -35,7 +35,7 @@ function runAfterSuccessScripts() {
       getConcurrentlyArgs(
         {
           codecov: reportCoverage
-            ? `echo installing codecov && npx -p codecov -c 'echo running codecov && codecov'`
+            ? `echo installing codecov && npx -p codecov@3 -c 'echo running codecov && codecov'`
             : null,
           release: autorelease
             ? `echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'`

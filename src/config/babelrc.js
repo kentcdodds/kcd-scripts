@@ -1,4 +1,6 @@
-const {ifAnyDep, parseEnv} = require('../utils')
+const browserslist = require('browserslist')
+
+const {ifAnyDep, parseEnv, appDirectory} = require('../utils')
 
 const isTest = (process.env.BABEL_ENV || process.env.NODE_ENV) === 'test'
 const isPreact = parseEnv('BUILD_PREACT', false)
@@ -8,9 +10,21 @@ const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
 
+/**
+ * use the strategy declared by browserslist to load browsers configuration.
+ * fallback to the default if don't found custom configuration
+ * @see https://github.com/browserslist/browserslist/blob/master/node.js#L139
+ */
+const browsersConfig = browserslist.loadConfig({path: appDirectory}) || [
+  'ie 10',
+  'ios 7',
+]
+
 const envTargets = isTest
   ? {node: 'current'}
-  : isWebpack || isRollup ? {browsers: ['ie 10', 'ios 7']} : {node: '4.5'}
+  : isWebpack || isRollup
+    ? {browsers: browsersConfig}
+    : {node: '4.5'}
 const envOptions = {modules: false, loose: true, targets: envTargets}
 
 module.exports = {

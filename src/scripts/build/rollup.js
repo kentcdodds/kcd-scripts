@@ -51,6 +51,10 @@ const cleanBuildDirs = !args.includes('--no-clean')
 
 if (cleanBuildDirs) {
   rimraf.sync(fromRoot('dist'))
+
+  if (buildPreact) {
+    rimraf.sync(fromRoot('preact'))
+  }
 }
 
 const result = spawn.sync(resolveBin('concurrently'), scripts, {
@@ -64,7 +68,7 @@ if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
       cjs: glob.sync(fromRoot('preact/**/*.cjs.js'))[0],
       esm: glob.sync(fromRoot('preact/**/*.esm.js'))[0],
     },
-    cleanBuildDirs,
+    false,
   )
 }
 

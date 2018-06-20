@@ -1,5 +1,5 @@
 {
-  "name": "kcd-scripts",
+  "name": "uptrend-scripts",
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
   "engines": {
@@ -7,9 +7,10 @@
     "npm": ">= 5"
   },
   "bin": {
-    "kcd-scripts": "dist/index.js"
+    "uptrend-scripts": "dist/index.js"
   },
   "scripts": {
+    "contributors": "node src contributors",
     "add-contributor": "node src contributors add",
     "test": "node src test",
     "test:update": "node src test --updateSnapshot",
@@ -28,7 +29,7 @@
     "jest.js"
   ],
   "keywords": [],
-  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "author": "Brandon Orther <brandon@uptrend.tech> (http://uptrend.tech/)",
   "license": "MIT",
   "dependencies": {
     "all-contributors-cli": "^4.11.1",
@@ -54,10 +55,11 @@
     "eslint": "^4.19.1",
     "eslint-config-kentcdodds": "^13.0.1",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "glob": "^7.1.2",
     "husky": "^0.14.3",
     "is-ci": "^1.1.0",
-    "jest": "^22.4.3",
+    "jest": "^23.1.0",
     "lint-staged": "^7.0.4",
     "lodash.camelcase": "^4.3.0",
     "lodash.has": "^4.5.2",
@@ -99,12 +101,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kentcdodds/kcd-scripts.git"
+    "url": "https://github.com/uptrend-tech/uptrend-scripts.git"
   },
   "bugs": {
-    "url": "https://github.com/kentcdodds/kcd-scripts/issues"
+    "url": "https://github.com/uptrend-tech/uptrend-scripts/issues"
   },
-  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
+  "homepage": "https://github.com/uptrend-tech/uptrend-scripts#readme",
   "devDependencies": {
     "jest-in-case": "^1.0.2",
     "slash": "^2.0.0"

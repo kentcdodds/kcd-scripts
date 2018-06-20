@@ -38,7 +38,7 @@ May the force be with you.
 
 function getEnv() {
   // this is required to address an issue in cross-spawn
-  // https://github.com/kentcdodds/kcd-scripts/issues/4
+  // https://github.com/uptrend-tech/uptrend-scripts/issues/4
   return Object.keys(process.env)
     .filter(key => process.env[key] !== undefined)
     .reduce(

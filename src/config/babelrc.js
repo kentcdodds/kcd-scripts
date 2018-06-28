@@ -44,7 +44,7 @@ module.exports = {
         ]
       : null,
     isPreact
-      ? [require.resolve('babel-plugin-transform-react-jsx'), {pragma: 'h'}]
+      ? [require.resolve('babel-plugin-transform-react-jsx'), {pragma: 'React.h'}]
       : null,
     [
       require.resolve('babel-plugin-transform-react-remove-prop-types'),

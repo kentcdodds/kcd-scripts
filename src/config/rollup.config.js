@@ -9,6 +9,7 @@ const replace = require('rollup-plugin-replace')
 const uglify = require('rollup-plugin-uglify')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
+const {sizeSnapshot} = require('rollup-plugin-size-snapshot')
 const omit = require('lodash.omit')
 const {
   pkg,
@@ -144,6 +145,7 @@ module.exports = {
       babelrc: true,
     }),
     replace(replacements),
+    sizeSnapshot(),
     minify ? uglify() : null,
     codeSplitting &&
       ((writes = 0) => ({

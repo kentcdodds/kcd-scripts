@@ -6,7 +6,7 @@ const commonjs = require('rollup-plugin-commonjs')
 const nodeResolve = require('rollup-plugin-node-resolve')
 const json = require('rollup-plugin-json')
 const replace = require('rollup-plugin-replace')
-const uglify = require('rollup-plugin-uglify')
+const {terser} = require('rollup-plugin-terser')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
 const {sizeSnapshot} = require('rollup-plugin-size-snapshot')
@@ -146,7 +146,7 @@ module.exports = {
     }),
     replace(replacements),
     sizeSnapshot(),
-    minify ? uglify() : null,
+    minify ? terser() : null,
     codeSplitting &&
       ((writes = 0) => ({
         onwrite() {

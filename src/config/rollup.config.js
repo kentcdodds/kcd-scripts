@@ -30,6 +30,7 @@ const format = process.env.BUILD_FORMAT
 const isPreact = parseEnv('BUILD_PREACT', false)
 const isNode = parseEnv('BUILD_NODE', false)
 const name = process.env.BUILD_NAME || capitalize(camelcase(pkg.name))
+const useSizeSnapshot = parseEnv('BUILD_SIZE_SNAPSHOT', false)
 
 const defaultGlobals = Object.keys(pkg.peerDependencies || {}).reduce(
   (deps, dep) => {
@@ -145,7 +146,7 @@ module.exports = {
       babelrc: true,
     }),
     replace(replacements),
-    sizeSnapshot(),
+    useSizeSnapshot ? sizeSnapshot({printInfo: false}) : null,
     minify ? terser() : null,
     codeSplitting &&
       ((writes = 0) => ({

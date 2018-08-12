@@ -30,6 +30,7 @@ const environment = parsedArgs.environment
   ? `--environment ${parsedArgs.environment}`
   : ''
 const watch = parsedArgs.watch ? '--watch' : ''
+const sizeSnapshot = parsedArgs['size-snapshot']
 
 let formats = ['esm', 'cjs', 'umd', 'umd.min']
 
@@ -100,6 +101,7 @@ function getCommands({preact = false} = {}) {
         `BUILD_MINIFY=${buildMinify}`,
         `NODE_ENV=${nodeEnv}`,
         `BUILD_PREACT=${preact}`,
+        `BUILD_SIZE_SNAPSHOT=${sizeSnapshot}`,
         `BUILD_NODE=${process.env.BUILD_NODE || false}`,
         `BUILD_REACT_NATIVE=${process.env.BUILD_REACT_NATIVE || false}`,
       ].join(' '),

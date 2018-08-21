@@ -12,11 +12,11 @@ const {pkg, path: pkgPath} = readPkgUp.sync({
 })
 const appDirectory = path.dirname(pkgPath)
 
-function resolveKcdScripts() {
-  if (pkg.name === 'kcd-scripts') {
+function resolveItpReactScripts() {
+  if (pkg.name === 'itp-react-scripts') {
     return require.resolve('./').replace(process.cwd(), '.')
   }
-  return resolveBin('kcd-scripts')
+  return resolveBin('itp-react-scripts')
 }
 
 // eslint-disable-next-line complexity
@@ -186,7 +186,7 @@ module.exports = {
   parseEnv,
   pkg,
   resolveBin,
-  resolveKcdScripts,
+  resolveItpReactScripts,
   uniq,
   writeExtraEntry,
 }

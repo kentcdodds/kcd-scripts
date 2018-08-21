@@ -1,6 +1,6 @@
-const {resolveKcdScripts, resolveBin, isOptedOut} = require('../utils')
+const {resolveItpReactScripts, resolveBin, isOptedOut} = require('../utils')
 
-const kcdScripts = resolveKcdScripts()
+const kcdScripts = resolveItpReactScripts()
 const doctoc = resolveBin('doctoc')
 
 module.exports = {

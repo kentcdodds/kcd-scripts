@@ -1,5 +1,5 @@
 {
-  "name": "kcd-scripts",
+  "name": "itp-react-scripts",
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
   "engines": {
@@ -7,7 +7,7 @@
     "npm": ">= 5"
   },
   "bin": {
-    "kcd-scripts": "dist/index.js"
+    "itp-react-scripts": "dist/index.js"
   },
   "scripts": {
     "add-contributor": "node src contributors add",
@@ -28,7 +28,7 @@
     "jest.js"
   ],
   "keywords": [],
-  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "author": "In The Pocket <hello@inthepocket.com> (http://inthepocket.com)",
   "license": "MIT",
   "dependencies": {
     "all-contributors-cli": "^5.0.0",
@@ -101,12 +101,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kentcdodds/kcd-scripts.git"
+    "url": "https://github.com/inthepocket/itp-react-scripts.git"
   },
   "bugs": {
-    "url": "https://github.com/kentcdodds/kcd-scripts/issues"
+    "url": "https://github.com/inthepocket/itp-react-scripts/issues"
   },
-  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
+  "homepage": "https://github.com/inthepocket/itp-react-scripts#readme",
   "devDependencies": {
     "jest-in-case": "^1.0.2",
     "slash": "^2.0.0"

@@ -13,10 +13,10 @@ const {pkg, path: pkgPath} = readPkgUp.sync({
 const appDirectory = path.dirname(pkgPath)
 
 function resolveItpReactScripts() {
-  if (pkg.name === 'itp-react-scripts') {
+  if (pkg.name === '@inthepocket/itp-react-scripts') {
     return require.resolve('./').replace(process.cwd(), '.')
   }
-  return resolveBin('itp-react-scripts')
+  return resolveBin('@inthepocket/itp-react-scripts')
 }
 
 // eslint-disable-next-line complexity

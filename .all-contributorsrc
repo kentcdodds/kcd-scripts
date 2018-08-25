@@ -88,6 +88,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "easybird",
+      "name": "Easybird",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8142934?v=4",
+      "profile": "http://easybird.be",
+      "contributions": [
+        "code",
+        "doc",
+        "infra"
+      ]
     }
   ],
   "repoType": "github"

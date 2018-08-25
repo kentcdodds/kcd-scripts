@@ -1,5 +1,5 @@
 {
-  "name": "itp-react-scripts",
+  "name": "@inthepocket/itp-react-scripts",
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
   "engines": {

@@ -121,5 +121,8 @@
     "hooks": {
       "pre-commit": "npm run precommit"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -37,6 +37,7 @@ for linting, testing, building, and more.
 
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Add EsLint config to your project](#add-eslint-config-to-your-project)
   - [Overriding Config](#overriding-config)
 - [Inspiration](#inspiration)
 - [Other Solutions](#other-solutions)
@@ -51,18 +52,28 @@ This module is distributed via [npm][npm] which is bundled with [node][node] and
 should be installed as one of your project's `devDependencies`:
 
 ```
-npm install --save-dev itp-react-scripts
+npm install --save-dev @inthepocket/itp-react-scripts
 ```
 
 ## Usage
 
-This is a CLI and exposes a bin called `itp-react-scripts`. I don't really plan on
-documenting or testing it super duper well because it's really specific to my
-needs. You'll find all available scripts in `src/scripts`.
+This is a CLI and exposes a bin called `itp-react-scripts`.
+You'll find all available scripts in `src/scripts`.
 
 This project actually dogfoods itself. If you look in the `package.json`, you'll
 find scripts with `node src {scriptName}`. This serves as an example of some
 of the things you can do with `itp-react-scripts`.
+
+### Add EsLint config to your project
+
+Add `npm run lint: "itp-react-scripts lint` to your `package.json` scripts to use it
+
+> Note: To make VCCode recognise eslint: create `.eslintrc` in your project root with the contents of:
+>
+> `{"extends": "./node_modules/@inthepocket/itp-react-scripts/eslint.js"}`
+
+> Note: for now, you'll have to include an `.eslintignore` in your project until
+> [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).
 
 ### Overriding Config
 
@@ -81,7 +92,7 @@ So, if we were to do this for ESLint, you could create an `.eslintrc` with the
 contents of:
 
 ```
-{"extends": "./node_modules/itp-react-scripts/eslint.js"}
+{"extends": "./node_modules/@inthepocket/itp-react-scripts/eslint.js"}
 ```
 
 > Note: for now, you'll have to include an `.eslintignore` in your project until
@@ -90,7 +101,7 @@ contents of:
 Or, for `babel`, a `.babelrc` with:
 
 ```
-{"presets": ["itp-react-scripts/babel"]}
+{"presets": ["@inthepocket/itp-react-scripts/babel"]}
 ```
 
 Or, for `jest`:

@@ -38,6 +38,7 @@ for linting, testing, building, and more.
 - [Installation](#installation)
 - [Usage](#usage)
   - [Add EsLint config to your project](#add-eslint-config-to-your-project)
+  - [Precommit](#precommit)
   - [Overriding Config](#overriding-config)
 - [Inspiration](#inspiration)
 - [Other Solutions](#other-solutions)
@@ -68,12 +69,31 @@ of the things you can do with `itp-react-scripts`.
 
 Add `npm run lint: "itp-react-scripts lint` to your `package.json` scripts to use it
 
+> Note: caching eslint is enabled by default by itp-react-scripts, if you want to disable it, add `---no-cache`
 > Note: To make VCCode recognise eslint: create `.eslintrc` in your project root with the contents of:
 >
 > `{"extends": "./node_modules/@inthepocket/itp-react-scripts/eslint.js"}`
 
 > Note: for now, you'll have to include an `.eslintignore` in your project until
 > [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).
+
+### Precommit
+
+#### Lintstagedrc
+
+##### Default
+
+The default lintstagedrc file can be found [here](/src/config/lintstagedrc.js). It does:
+
+- Updates doctoc in the README.md
+- Updates the contributors in the project (if available)
+- autoformat the project
+- runs the itp-react-scripts linter
+- runs the tests
+
+##### Overwrite
+
+You can overwrite the lintstagedrc by adding config to your own project, [the default lint-staged way](https://github.com/okonet/lint-staged#configuration)
 
 ### Overriding Config
 

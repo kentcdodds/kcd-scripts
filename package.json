@@ -114,9 +114,6 @@
     "jest-in-case": "^1.0.2",
     "slash": "^2.0.0"
   },
-  "czConfig": {
-    "path": "node_modules/cz-conventional-changelog"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run precommit"
@@ -124,5 +121,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }

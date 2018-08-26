@@ -30,12 +30,10 @@ test('resolveItpReactScripts resolves to src/index.js when in the @inthepocket/i
   )
 })
 
-test('resolveItpReactScripts resolves to @inthepocket/itp-react-scripts if not in the itp-react-scripts package', () => {
+test('resolveItpReactScripts resolves to itp-react-scripts if not in the @inthepocket/itp-react-scripts package', () => {
   mockPkg({pkg: {name: 'not-itp-react-scripts'}})
   whichSyncMock.mockImplementationOnce(() => require.resolve('../'))
-  expect(require('../utils').resolveItpReactScripts()).toBe(
-    '@inthepocket/itp-react-scripts',
-  )
+  expect(require('../utils').resolveItpReactScripts()).toBe('itp-react-scripts')
 })
 
 test(`resolveBin resolves to the full path when it's not in $PATH`, () => {

@@ -16,7 +16,7 @@ function resolveItpReactScripts() {
   if (pkg.name === '@inthepocket/itp-react-scripts') {
     return require.resolve('./').replace(process.cwd(), '.')
   }
-  return resolveBin('@inthepocket/itp-react-scripts')
+  return resolveBin('itp-react-scripts')
 }
 
 // eslint-disable-next-line complexity

@@ -1,31 +1,31 @@
-const browserslist = require('browserslist')
+const browserslist = require('browserslist');
 
-const {ifAnyDep, parseEnv, appDirectory} = require('../utils')
+const { ifAnyDep, parseEnv, appDirectory } = require('../utils');
 
-const isTest = (process.env.BABEL_ENV || process.env.NODE_ENV) === 'test'
-const isPreact = parseEnv('BUILD_PREACT', false)
-const isRollup = parseEnv('BUILD_ROLLUP', false)
-const isUMD = process.env.BUILD_FORMAT === 'umd'
-const isWebpack = parseEnv('BUILD_WEBPACK', false)
-const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
-const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
+const isTest = (process.env.BABEL_ENV || process.env.NODE_ENV) === 'test';
+const isPreact = parseEnv('BUILD_PREACT', false);
+const isRollup = parseEnv('BUILD_ROLLUP', false);
+const isUMD = process.env.BUILD_FORMAT === 'umd';
+const isWebpack = parseEnv('BUILD_WEBPACK', false);
+const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack);
+const alias = parseEnv('BUILD_ALIAS', isPreact ? { react: 'preact' } : null);
 
 /**
  * use the strategy declared by browserslist to load browsers configuration.
  * fallback to the default if don't found custom configuration
  * @see https://github.com/browserslist/browserslist/blob/master/node.js#L139
  */
-const browsersConfig = browserslist.loadConfig({path: appDirectory}) || [
+const browsersConfig = browserslist.loadConfig({ path: appDirectory }) || [
   'ie 10',
   'ios 7',
-]
+];
 
 const envTargets = isTest
-  ? {node: 'current'}
+  ? { node: 'current' }
   : isWebpack || isRollup
-    ? {browsers: browsersConfig}
-    : {node: '4.5'}
-const envOptions = {modules: false, loose: true, targets: envTargets}
+    ? { browsers: browsersConfig }
+    : { node: '4.5' };
+const envOptions = { modules: false, loose: true, targets: envTargets };
 
 module.exports = {
   presets: [
@@ -39,19 +39,19 @@ module.exports = {
     // in here just in case we ever do (this would be easy to miss).
     alias
       ? [
-          require.resolve('babel-plugin-module-resolver'),
-          {root: ['./src'], alias},
-        ]
+        require.resolve('babel-plugin-module-resolver'),
+        { root: ['./src'], alias },
+      ]
       : null,
     isPreact
       ? [
-          require.resolve('babel-plugin-transform-react-jsx'),
-          {pragma: 'React.h'},
-        ]
+        require.resolve('babel-plugin-transform-react-jsx'),
+        { pragma: 'React.h' },
+      ]
       : null,
     [
       require.resolve('babel-plugin-transform-react-remove-prop-types'),
-      isPreact ? {removeImport: true} : {mode: 'unsafe-wrap'},
+      isPreact ? { removeImport: true } : { mode: 'unsafe-wrap' },
     ],
     isUMD
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
@@ -64,4 +64,4 @@ module.exports = {
       ? null
       : require.resolve('babel-plugin-transform-es2015-modules-commonjs'),
   ].filter(Boolean),
-}
+};

@@ -1,7 +1,7 @@
-const {resolveItpReactScripts, resolveBin, isOptedOut} = require('../utils')
+const { resolveItpReactScripts, resolveBin, isOptedOut } = require('../utils');
 
-const itpScripts = resolveItpReactScripts()
-const doctoc = resolveBin('doctoc')
+const itpScripts = resolveItpReactScripts();
+const doctoc = resolveBin('doctoc');
 
 module.exports = {
   concurrent: false,
@@ -13,9 +13,9 @@ module.exports = {
     ],
     '**/*.+(js|json|less|css|ts|tsx|md)': [
       isOptedOut('autoformat', null, `${itpScripts} format`),
-      `${itpScripts} lint`,
+      `${itpScripts} lint --fix`,
       `${itpScripts} test --findRelatedTests --passWithNoTests`,
       isOptedOut('autoformat', null, 'git add'),
     ].filter(Boolean),
   },
-}
+};

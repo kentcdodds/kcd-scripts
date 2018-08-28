@@ -19,13 +19,10 @@ module.exports = {
         classes: true,
       },
     ],
-    'max-len': [
+    'react/jsx-filename-extension': [
       'warn',
       {
-        ignoreComments: true,
-        ignoreStrings: true,
-        tabWidth: 2,
-        code: 160,
+        extensions: ['.js', '.jsx'],
       },
     ],
   },

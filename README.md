@@ -4,8 +4,6 @@
 <p>CLI toolbox for common scripts for ours projects</p>
 </div>
 
-<hr />
-
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package]
@@ -72,7 +70,7 @@ Add `npm run lint: "itp-react-scripts lint` to your `package.json` scripts to us
 > Note: caching eslint is enabled by default by itp-react-scripts, if you want to disable it, add `---no-cache`
 > Note: To make VCCode recognise eslint: create `.eslintrc` in your project root with the contents of:
 >
-> `{"extends": "./node_modules/@inthepocket/itp-react-scripts/eslint.js"}`
+> `{"extends": "./node_modules/@inthepocket/itp-react-scripts/dist/config/eslintrc.js"}`
 
 > Note: for now, you'll have to include an `.eslintignore` in your project until
 > [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).

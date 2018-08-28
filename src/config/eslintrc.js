@@ -1,4 +1,4 @@
-const { ifAnyDep } = require('../utils');
+const {ifAnyDep} = require('../utils')
 
 module.exports = {
   extends: [
@@ -7,6 +7,9 @@ module.exports = {
     ifAnyDep('jest', 'plugin:jest/recommended'),
     ifAnyDep('flow-bin', 'plugin:flowtype/recommended'),
     ifAnyDep('react-native', 'plugin:react-native/all'),
+    require.resolve('eslint-config-prettier'),
+    ifAnyDep('flow-bin', 'eslint-config-prettier/flowtype'),
+    require.resolve('eslint-config-prettier/react'),
   ].filter(Boolean),
   rules: {
     'no-use-before-define': [
@@ -31,4 +34,4 @@ module.exports = {
     alert: false,
     __DEV__: true,
   },
-};
+}

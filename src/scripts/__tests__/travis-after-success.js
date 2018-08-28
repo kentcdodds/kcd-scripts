@@ -1,7 +1,7 @@
-import cases from 'jest-in-case'
-import {unquoteSerializer} from './helpers/serializers'
+import cases from 'jest-in-case';
+import { unquoteSerializer } from './helpers/serializers';
 
-expect.addSnapshotSerializer(unquoteSerializer)
+expect.addSnapshotSerializer(unquoteSerializer);
 
 cases(
   'travis-after-success',
@@ -17,45 +17,45 @@ cases(
     runsNothing = false,
   }) => {
     // beforeEach
-    const {sync: crossSpawnSyncMock} = require('cross-spawn')
-    const utils = require('../../utils')
-    utils.resolveBin = (modName, {executable = modName} = {}) => executable
-    const originalEnvs = Object.keys(env).map(envKey => {
-      const orig = process.env[envKey]
-      process.env[envKey] = env[envKey]
-      return orig
-    })
-    const originalLog = console.log
-    const originalExit = process.exit
-    process.exit = jest.fn()
-    console.log = jest.fn()
+    const { sync: crossSpawnSyncMock } = require('cross-spawn');
+    const utils = require('../../utils');
+    utils.resolveBin = (modName, { executable = modName } = {}) => executable;
+    const originalEnvs = Object.keys(env).map((envKey) => {
+      const orig = process.env[envKey];
+      process.env[envKey] = env[envKey];
+      return orig;
+    });
+    const originalLog = console.log;
+    const originalExit = process.exit;
+    process.exit = jest.fn();
+    console.log = jest.fn();
 
     // tests
-    crossSpawnSyncMock.mockClear()
+    crossSpawnSyncMock.mockClear();
     if (version) {
-      utils.pkg.version = version
+      utils.pkg.version = version;
     }
-    utils.hasFile = () => hasCoverageDir
-    process.env.SKIP_CODECOV = isOptedOutOfCoverage
-    require('../travis-after-success')
+    utils.hasFile = () => hasCoverageDir;
+    process.env.SKIP_CODECOV = isOptedOutOfCoverage;
+    require('../travis-after-success');
     if (runsNothing) {
-      expect(console.log.mock.calls).toMatchSnapshot()
+      expect(console.log.mock.calls).toMatchSnapshot();
     } else {
-      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(2)
-      const [firstCall, secondCall] = crossSpawnSyncMock.mock.calls
-      const [scriptOne, calledArgsOne] = firstCall
-      expect([scriptOne, ...calledArgsOne].join(' ')).toMatchSnapshot()
-      const [scriptTwo, calledArgsTwo] = secondCall
-      expect([scriptTwo, ...calledArgsTwo].join(' ')).toMatchSnapshot()
+      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(2);
+      const [firstCall, secondCall] = crossSpawnSyncMock.mock.calls;
+      const [scriptOne, calledArgsOne] = firstCall;
+      expect([scriptOne, ...calledArgsOne].join(' ')).toMatchSnapshot();
+      const [scriptTwo, calledArgsTwo] = secondCall;
+      expect([scriptTwo, ...calledArgsTwo].join(' ')).toMatchSnapshot();
     }
 
     // afterEach
-    process.exit = originalExit
-    console.log = originalLog
-    Object.keys(originalEnvs).forEach(envKey => {
-      process.env[envKey] = env[envKey]
-    })
-    jest.resetModules()
+    process.exit = originalExit;
+    console.log = originalLog;
+    Object.keys(originalEnvs).forEach((envKey) => {
+      process.env[envKey] = env[envKey];
+    });
+    jest.resetModules();
   },
   {
     'calls concurrently with both scripts when on travis': {},
@@ -81,4 +81,4 @@ cases(
       version: '1.2.3',
     },
   },
-)
+);

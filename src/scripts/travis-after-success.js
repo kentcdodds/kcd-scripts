@@ -8,7 +8,7 @@ const {
 } = require('../utils')
 
 console.log('installing and running travis-deploy-once')
-const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@4'])
+const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@5'])
 if (deployOnceResults.status === 0) {
   runAfterSuccessScripts()
 } else {

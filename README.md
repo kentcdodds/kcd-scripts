@@ -67,13 +67,18 @@ of the things you can do with `itp-react-scripts`.
 
 Add `npm run lint: "itp-react-scripts lint` to your `package.json` scripts to use it
 
-> Note: caching eslint is enabled by default by itp-react-scripts, if you want to disable it, add `---no-cache`
-> Note: To make VCCode recognise eslint: create `.eslintrc` in your project root with the contents of:
+> **Note:** caching eslint is enabled by default by itp-react-scripts, if you want to disable it, add `---no-cache`
+
+> **Note:** To make VSCode recognise eslint: create `.eslintrc` in your project root with the contents of:
 >
 > `{"extends": "./node_modules/@inthepocket/itp-react-scripts/dist/config/eslintrc.js"}`
 
-> Note: for now, you'll have to include an `.eslintignore` in your project until
+> **Note:** for now, you'll have to include an `.eslintignore` in your project until
 > [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).
+
+> **FYI:** want to see how your final eslint config looks like?
+> Pipe the result to a log file to take a look.
+> `npm run lint --print-config | > someTemporaryLogFile.log`
 
 ### Precommit
 

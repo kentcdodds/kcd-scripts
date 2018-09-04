@@ -18,7 +18,7 @@ const useDefaultScripts = typeof validateScripts !== 'string'
 const scripts = useDefaultScripts
   ? {
       build: ifScript('build', 'npm run build --silent'),
-      format: precommit ? null : ifScript('format', 'npm run format --list-different'),
+      format: precommit ? null : ifScript('format', 'npm run format --silent -- --list-different'),
       lint: precommit ? null : ifScript('lint', 'npm run lint --silent'),
       test: precommit
         ? null

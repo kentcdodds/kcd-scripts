@@ -1,0 +1,59 @@
+defaults: &defaults
+  docker:
+    - image: iopipe/circleci
+  working_directory: ~/circleci-deployment
+
+version: 2
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: yarn run validate
+      - save_cache:
+          key: v1-dist-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - dist
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          key: v1-dist-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run: cp .npmrc-ci .npmrc
+      - run: yarn run release
+
+workflows:
+  version: 2
+  test_build_deploy:
+    jobs:
+      - install
+      - test:
+          requires:
+            - install
+      - deploy:
+          requires:
+            - install
+            - test
+          filters:
+            branches:
+              only:
+                - master

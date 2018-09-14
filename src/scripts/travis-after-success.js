@@ -1,33 +1,34 @@
-const spawn = require('cross-spawn');
+const spawn = require('cross-spawn')
 const {
   resolveBin,
   getConcurrentlyArgs,
   hasFile,
   pkg,
   parseEnv,
-} = require('../utils');
+} = require('../utils')
 
-console.log('installing and running travis-deploy-once');
-const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@4']);
+console.log('installing and running travis-deploy-once')
+const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@5'])
 if (deployOnceResults.status === 0) {
-  runAfterSuccessScripts();
+  runAfterSuccessScripts()
 } else {
-  process.exit(deployOnceResults.status);
+  process.exit(deployOnceResults.status)
 }
 
 // eslint-disable-next-line complexity
 function runAfterSuccessScripts() {
-  const autorelease = pkg.version === '0.0.0-semantically-released'
-    && parseEnv('TRAVIS', false)
-    && process.env.TRAVIS_BRANCH === 'master'
-    && !parseEnv('TRAVIS_PULL_REQUEST', false);
+  const autorelease =
+    pkg.version === '0.0.0-semantically-released' &&
+    parseEnv('TRAVIS', false) &&
+    process.env.TRAVIS_BRANCH === 'master' &&
+    !parseEnv('TRAVIS_PULL_REQUEST', false)
 
-  const reportCoverage = hasFile('coverage') && !parseEnv('SKIP_CODECOV', false);
+  const reportCoverage = hasFile('coverage') && !parseEnv('SKIP_CODECOV', false)
 
   if (!autorelease && !reportCoverage) {
     console.log(
       'No need to autorelease or report coverage. Skipping travis-after-success script...',
-    );
+    )
   } else {
     const result = spawn.sync(
       resolveBin('concurrently'),
@@ -40,11 +41,11 @@ function runAfterSuccessScripts() {
             ? "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'"
             : null,
         },
-        { killOthers: false },
+        {killOthers: false},
       ),
-      { stdio: 'inherit' },
-    );
+      {stdio: 'inherit'},
+    )
 
-    process.exit(result.status);
+    process.exit(result.status)
   }
 }

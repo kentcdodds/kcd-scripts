@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`travis-after-success calls concurrently with both scripts when on travis 1`] = `npx travis-deploy-once@4`;
+exports[`travis-after-success calls concurrently with both scripts when on travis 1`] = `npx travis-deploy-once@5`;
 
 exports[`travis-after-success calls concurrently with both scripts when on travis 2`] = `concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov@3 -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'"`;
 
-exports[`travis-after-success does not do autorelease script when running on travis but in a pull request 1`] = `npx travis-deploy-once@4`;
+exports[`travis-after-success does not do autorelease script when running on travis but in a pull request 1`] = `npx travis-deploy-once@5`;
 
 exports[`travis-after-success does not do autorelease script when running on travis but in a pull request 2`] = `concurrently --prefix [{name}] --names codecov --prefix-colors bgBlue.bold.reset "echo installing codecov && npx -p codecov@3 -c 'echo running codecov && codecov'"`;
 
-exports[`travis-after-success does not do the autorelease script when the version is different 1`] = `npx travis-deploy-once@4`;
+exports[`travis-after-success does not do the autorelease script when the version is different 1`] = `npx travis-deploy-once@5`;
 
 exports[`travis-after-success does not do the autorelease script when the version is different 2`] = `concurrently --prefix [{name}] --names codecov --prefix-colors bgBlue.bold.reset "echo installing codecov && npx -p codecov@3 -c 'echo running codecov && codecov'"`;
 
-exports[`travis-after-success does not do the codecov script when opted out 1`] = `npx travis-deploy-once@4`;
+exports[`travis-after-success does not do the codecov script when opted out 1`] = `npx travis-deploy-once@5`;
 
 exports[`travis-after-success does not do the codecov script when opted out 2`] = `concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'"`;
 
-exports[`travis-after-success does not do the codecov script when there is no coverage directory 1`] = `npx travis-deploy-once@4`;
+exports[`travis-after-success does not do the codecov script when there is no coverage directory 1`] = `npx travis-deploy-once@5`;
 
 exports[`travis-after-success does not do the codecov script when there is no coverage directory 2`] = `concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'"`;
 

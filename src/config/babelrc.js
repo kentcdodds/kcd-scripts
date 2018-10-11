@@ -3,13 +3,24 @@ const semver = require('semver')
 
 const {ifAnyDep, parseEnv, appDirectory, pkg} = require('../utils')
 
-const isTest = (process.env.BABEL_ENV || process.env.NODE_ENV) === 'test'
+const {BABEL_ENV, NODE_ENV, BUILD_FORMAT} = process.env
+const isTest = (BABEL_ENV || NODE_ENV) === 'test'
 const isPreact = parseEnv('BUILD_PREACT', false)
 const isRollup = parseEnv('BUILD_ROLLUP', false)
-const isUMD = process.env.BUILD_FORMAT === 'umd'
+const isUMD = BUILD_FORMAT === 'umd'
+const isCJS = BUILD_FORMAT === 'cjs'
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
+
+const hasBabelRuntimeDep = Boolean(pkg.dependencies && pkg.dependencies['@babel/runtime'])
+const RUNTIME_HELPERS_WARN = 'You should add @babel/runtime as dependency to your package. It will allow reusing so-called babel helpers from npm rather than bundling their copies into your files.'
+
+if (!treeshake && !hasBabelRuntimeDep) {
+  throw new Error(RUNTIME_HELPERS_WARN)
+} else if (treeshake && !isUMD && !hasBabelRuntimeDep) {
+  console.warn(RUNTIME_HELPERS_WARN)
+}
 
 /**
  * use the strategy declared by browserslist to load browsers configuration.
@@ -40,6 +51,7 @@ module.exports = () => ({
     ),
   ].filter(Boolean),
   plugins: [
+    [require.resolve('@babel/plugin-transform-runtime'), { useESModules: treeshake && !isCJS }],
     require.resolve('babel-plugin-macros'),
     alias
       ? [

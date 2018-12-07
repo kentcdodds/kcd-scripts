@@ -17,16 +17,16 @@ cases(
     hasJestConfigFile = false,
     setup = () => () => {},
     ci = false,
-    precommit = 'false',
+    preCommit = 'false',
   }) => {
     // beforeEach
     // eslint-disable-next-line jest/no-jest-import
     const {run: jestRunMock} = require('jest')
     const originalArgv = process.argv
     const prevCI = mockIsCI
-    const prevPrecommit = process.env.SCRIPTS_PRECOMMIT
+    const prevPreCommit = process.env['SCRIPTS_PRE-COMMIT']
     mockIsCI = ci
-    process.env.SCRIPTS_PRECOMMIT = precommit
+    process.env['SCRIPTS_PRE-COMMIT'] = preCommit
     Object.assign(utils, {
       hasPkgProp: () => pkgHasJestProp,
       hasFile: () => hasJestConfigFile,
@@ -51,7 +51,7 @@ cases(
       // afterEach
       process.argv = originalArgv
       mockIsCI = prevCI
-      process.env.SCRIPTS_PRECOMMIT = prevPrecommit
+      process.env['SCRIPTS_PRE-COMMIT'] = prevPreCommit
       jest.resetModules()
     }
   },
@@ -60,8 +60,8 @@ cases(
     'does not watch on CI': {
       ci: true,
     },
-    'does not watch on SCRIPTS_PRECOMMIT': {
-      precommit: 'true',
+    'does not watch on SCRIPTS_PRE-COMMIT': {
+      preCommit: 'true',
     },
     'does not watch with --no-watch': {
       args: ['--no-watch'],

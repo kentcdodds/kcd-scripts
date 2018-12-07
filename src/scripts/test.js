@@ -8,7 +8,7 @@ const args = process.argv.slice(2)
 
 const watch =
   !isCI &&
-  !parseEnv('SCRIPTS_PRECOMMIT', false) &&
+  !parseEnv('SCRIPTS_PRE-COMMIT', false) &&
   !args.includes('--no-watch') &&
   !args.includes('--coverage') &&
   !args.includes('--updateSnapshot')

@@ -31,7 +31,7 @@ Available Scripts:
   contributors
   format
   lint
-  precommit
+  pre-commit
   test
   travis-after-success
   validate

@@ -12,4 +12,4 @@ exports[`validate does not include "lint" if it doesn't have that script 1`] = `
 
 exports[`validate does not include "test" if it doesn't have that script 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,lint,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset "npm run build --silent" "npm run lint --silent" "npm run flow --silent"`;
 
-exports[`validate doesn't use test or lint if it's in precommit 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "npm run build --silent" "npm run flow --silent"`;
+exports[`validate doesn't use test or lint if it's in pre-commit 1`] = `concurrently --kill-others-on-fail --prefix [{name}] --names build,flow --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "npm run build --silent" "npm run flow --silent"`;

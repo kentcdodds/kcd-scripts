@@ -1,25 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`precommit calls lint-staged CLI with default args 1`] = `lint-staged --config ./src/config/lintstagedrc.js`;
+exports[`pre-commit calls lint-staged CLI with default args 1`] = `lint-staged --config ./src/config/lintstagedrc.js`;
 
-exports[`precommit calls lint-staged CLI with default args 2`] = `npm run validate`;
+exports[`pre-commit calls lint-staged CLI with default args 2`] = `npm run validate`;
 
-exports[`precommit does not use built-in config with .lintstagedrc file 1`] = `lint-staged`;
+exports[`pre-commit does not use built-in config with .lintstagedrc file 1`] = `lint-staged`;
 
-exports[`precommit does not use built-in config with .lintstagedrc file 2`] = `npm run validate`;
+exports[`pre-commit does not use built-in config with .lintstagedrc file 2`] = `npm run validate`;
 
-exports[`precommit does not use built-in config with --config 1`] = `lint-staged --config ./custom-config.js`;
+exports[`pre-commit does not use built-in config with --config 1`] = `lint-staged --config ./custom-config.js`;
 
-exports[`precommit does not use built-in config with --config 2`] = `npm run validate`;
+exports[`pre-commit does not use built-in config with --config 2`] = `npm run validate`;
 
-exports[`precommit does not use built-in config with lint-staged pkg prop 1`] = `lint-staged`;
+exports[`pre-commit does not use built-in config with lint-staged pkg prop 1`] = `lint-staged`;
 
-exports[`precommit does not use built-in config with lint-staged pkg prop 2`] = `npm run validate`;
+exports[`pre-commit does not use built-in config with lint-staged pkg prop 2`] = `npm run validate`;
 
-exports[`precommit does not use built-in config with lint-staged.config.js file 1`] = `lint-staged`;
+exports[`pre-commit does not use built-in config with lint-staged.config.js file 1`] = `lint-staged`;
 
-exports[`precommit does not use built-in config with lint-staged.config.js file 2`] = `npm run validate`;
+exports[`pre-commit does not use built-in config with lint-staged.config.js file 2`] = `npm run validate`;
 
-exports[`precommit forwards args 1`] = `lint-staged --config ./src/config/lintstagedrc.js --verbose`;
+exports[`pre-commit forwards args 1`] = `lint-staged --config ./src/config/lintstagedrc.js --verbose`;
 
-exports[`precommit forwards args 2`] = `npm run validate`;
+exports[`pre-commit forwards args 2`] = `npm run validate`;

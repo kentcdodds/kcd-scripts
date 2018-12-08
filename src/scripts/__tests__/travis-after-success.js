@@ -31,7 +31,6 @@ cases(
     console.log = jest.fn()
 
     // tests
-    crossSpawnSyncMock.mockClear()
     if (version) {
       utils.pkg.version = version
     }

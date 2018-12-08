@@ -17,7 +17,6 @@ cases(
 
     // tests
     process.argv = ['node', '../format', ...args]
-    crossSpawnSyncMock.mockClear()
     require('../format')
     expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
     const [firstCall] = crossSpawnSyncMock.mock.calls

@@ -1,9 +1,6 @@
 import cases from 'jest-in-case'
 import {unquoteSerializer, winPathSerializer} from './helpers/serializers'
 
-jest.mock('jest', () => ({run: jest.fn()}))
-jest.mock('../../config/jest.config', () => ({builtInConfig: true}))
-
 expect.addSnapshotSerializer(unquoteSerializer)
 expect.addSnapshotSerializer(winPathSerializer)
 

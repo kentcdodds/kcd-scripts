@@ -26,7 +26,6 @@ cases(
     const teardown = setup()
 
     process.argv = ['node', '../lint', ...args]
-    crossSpawnSyncMock.mockClear()
 
     try {
       // tests

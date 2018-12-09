@@ -25,7 +25,6 @@ cases(
 
     process.argv = ['node', '../pre-commit', ...args]
     utils.isOptedIn = optIn => optIn === 'pre-commit'
-    crossSpawnSyncMock.mockClear()
 
     try {
       // tests

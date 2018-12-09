@@ -15,7 +15,6 @@ cases(
 
     try {
       // tests
-      crossSpawnSyncMock.mockClear()
       require('../validate')
       expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
       const [firstCall] = crossSpawnSyncMock.mock.calls

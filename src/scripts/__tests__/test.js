@@ -35,7 +35,6 @@ cases(
     const teardown = setup()
 
     process.argv = ['node', '../test', ...args]
-    jestRunMock.mockClear()
 
     try {
       // tests

@@ -70,6 +70,14 @@ const ifDevDep = ifPkgSubProp('devDependencies')
 const ifAnyDep = (deps, t, f) => (hasAnyDep(arrify(deps)) ? t : f)
 const ifScript = ifPkgSubProp('scripts')
 
+function optionalRequire(name) {
+  try {
+    return require.resolve(name)
+  } catch (e) {
+    return undefined
+  }
+}
+
 function parseEnv(name, def) {
   if (envIsSet(name)) {
     try {
@@ -189,4 +197,5 @@ module.exports = {
   resolveKcdScripts,
   uniq,
   writeExtraEntry,
+  optionalRequire,
 }

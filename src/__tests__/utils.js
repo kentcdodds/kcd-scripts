@@ -11,6 +11,16 @@ beforeEach(() => {
   readPkgUpSyncMock = require('read-pkg-up').sync
 })
 
+test(`optionalRequire returns undefined for known-existing module`, () => {
+  expect(
+    require('../utils').optionalRequire('this-module-is-missing'),
+  ).toBeUndefined()
+})
+
+test(`optionalRequire returns undefined for known module`, () => {
+  expect(require('../utils').optionalRequire('prettier')).not.toBeUndefined()
+})
+
 test('pkg is the package.json', () => {
   const myPkg = {name: 'blah'}
   mockPkg({pkg: myPkg})

@@ -49,6 +49,12 @@ module.exports = () => ({
         {pragma: isPreact ? 'React.h' : undefined},
       ],
     ),
+    ifAnyDep(
+      ['flow-bin'],
+      [
+        require.resolve('@babel/preset-flow'),
+      ],
+    )
   ].filter(Boolean),
   plugins: [
     [require.resolve('@babel/plugin-transform-runtime'), { useESModules: treeshake && !isCJS }],

@@ -11,7 +11,7 @@ beforeEach(() => {
   readPkgUpSyncMock = require('read-pkg-up').sync
 })
 
-test(`optionalRequire returns undefined for known-existing module`, () => {
+test(`optionalRequire returns undefined for not existing module`, () => {
   expect(
     require('../utils').optionalRequire('this-module-is-missing'),
   ).toBeUndefined()

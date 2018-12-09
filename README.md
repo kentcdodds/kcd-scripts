@@ -111,6 +111,10 @@ module.exports = Object.assign(jestConfig, {
 > configuring things to make it less magical and more straightforward. Extending
 > can take place on your terms. I think this is actually a great way to do this.
 
+### Flow support
+
+If the `flow-bin` is a dependency on the project the `@babel/preset-flow` will automatically get loaded you only need to install it manually by running `npm install --save-dev @babel/preset-flow`
+
 ## Inspiration
 
 This is inspired by `react-scripts`.

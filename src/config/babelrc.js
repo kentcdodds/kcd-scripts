@@ -13,8 +13,11 @@ const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
 const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
 
-const hasBabelRuntimeDep = Boolean(pkg.dependencies && pkg.dependencies['@babel/runtime'])
-const RUNTIME_HELPERS_WARN = 'You should add @babel/runtime as dependency to your package. It will allow reusing so-called babel helpers from npm rather than bundling their copies into your files.'
+const hasBabelRuntimeDep = Boolean(
+  pkg.dependencies && pkg.dependencies['@babel/runtime'],
+)
+const RUNTIME_HELPERS_WARN =
+  'You should add @babel/runtime as dependency to your package. It will allow reusing so-called babel helpers from npm rather than bundling their copies into your files.'
 
 if (!treeshake && !hasBabelRuntimeDep) {
   throw new Error(RUNTIME_HELPERS_WARN)
@@ -35,8 +38,8 @@ const browsersConfig = browserslist.loadConfig({path: appDirectory}) || [
 const envTargets = isTest
   ? {node: 'current'}
   : isWebpack || isRollup
-    ? {browsers: browsersConfig}
-    : {node: getNodeVersion(pkg)}
+  ? {browsers: browsersConfig}
+  : {node: getNodeVersion(pkg)}
 const envOptions = {modules: false, loose: true, targets: envTargets}
 
 module.exports = () => ({
@@ -49,9 +52,13 @@ module.exports = () => ({
         {pragma: isPreact ? 'React.h' : undefined},
       ],
     ),
+    ifAnyDep(['flow-bin'], [require.resolve('@babel/preset-flow')]),
   ].filter(Boolean),
   plugins: [
-    [require.resolve('@babel/plugin-transform-runtime'), { useESModules: treeshake && !isCJS }],
+    [
+      require.resolve('@babel/plugin-transform-runtime'),
+      {useESModules: treeshake && !isCJS},
+    ],
     require.resolve('babel-plugin-macros'),
     alias
       ? [

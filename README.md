@@ -38,6 +38,7 @@ for linting, testing, building, and more.
 - [Installation](#installation)
 - [Usage](#usage)
   - [Overriding Config](#overriding-config)
+  - [Flow support](#flow-support)
 - [Inspiration](#inspiration)
 - [Other Solutions](#other-solutions)
 - [Contributors](#contributors)
@@ -110,6 +111,10 @@ module.exports = Object.assign(jestConfig, {
 > Note: `kcd-scripts` intentionally does not merge things for you when you start
 > configuring things to make it less magical and more straightforward. Extending
 > can take place on your terms. I think this is actually a great way to do this.
+
+### Flow support
+
+If the `flow-bin` is a dependency on the project the `@babel/preset-flow` will automatically get loaded you only need to install it manually by running `npm install --save-dev @babel/preset-flow`
 
 ## Inspiration
 

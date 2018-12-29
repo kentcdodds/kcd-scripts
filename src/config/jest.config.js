@@ -30,6 +30,7 @@ const jestConfig = {
       statements: 100,
     },
   },
+  forceExit: true,
 }
 
 if (useBuiltInBabelConfig) {

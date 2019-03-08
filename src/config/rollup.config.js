@@ -16,7 +16,6 @@ const {
   hasFile,
   hasPkgProp,
   parseEnv,
-  ifFile,
   fromRoot,
   uniq,
   writeExtraEntry,
@@ -47,16 +46,7 @@ const deps = Object.keys(pkg.dependencies || {})
 const peerDeps = Object.keys(pkg.peerDependencies || {})
 const defaultExternal = umd ? peerDeps : deps.concat(peerDeps)
 
-const input = glob.sync(
-  fromRoot(
-    process.env.BUILD_INPUT ||
-      ifFile(
-        `src/${format}-entry.js`,
-        `src/${format}-entry.js`,
-        'src/index.js',
-      ),
-  ),
-)
+const input = glob.sync(fromRoot(process.env.BUILD_INPUT || 'src/index.js'))
 const codeSplitting = input.length > 1
 
 if (

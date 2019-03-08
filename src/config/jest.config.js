@@ -32,6 +32,10 @@ const jestConfig = {
   },
 }
 
+if (hasFile('tests/setup-env.js')) {
+  jestConfig.setupFilesAfterEnv = [fromRoot('tests/setup-env.js')]
+}
+
 if (useBuiltInBabelConfig) {
   jestConfig.transform = {'^.+\\.js$': here('./babel-transform')}
 }

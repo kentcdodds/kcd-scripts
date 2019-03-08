@@ -28,7 +28,6 @@ Usage: ../ [script] [--flags]
 
 Available Scripts:
   build
-  contributors
   format
   lint
   pre-commit

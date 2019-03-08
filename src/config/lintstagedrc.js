@@ -7,14 +7,10 @@ module.exports = {
   concurrent: false,
   linters: {
     'README.md': [`${doctoc} --maxlevel 3 --notitle`, 'git add'],
-    '.all-contributorsrc': [
-      `${kcdScripts} contributors generate`,
-      'git add README.md',
-    ],
-    '**/*.+(js|json|less|css|ts|tsx|md)': [
+    '*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)': [
       isOptedOut('autoformat', null, `${kcdScripts} format`),
       `${kcdScripts} lint`,
-      `${kcdScripts} test --findRelatedTests --passWithNoTests`,
+      `${kcdScripts} test --findRelatedTests`,
       isOptedOut('autoformat', null, 'git add'),
     ].filter(Boolean),
   },

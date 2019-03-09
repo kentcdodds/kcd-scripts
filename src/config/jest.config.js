@@ -30,6 +30,10 @@ const jestConfig = {
       statements: 100,
     },
   },
+  watchPlugins: [
+    require.resolve('jest-watch-typeahead/filename'),
+    require.resolve('jest-watch-typeahead/testname'),
+  ],
 }
 
 if (hasFile('tests/setup-env.js')) {

@@ -139,7 +139,6 @@ const replacements = Object.entries(
 module.exports = {
   input: codeSplitting ? input : input[0],
   output,
-  experimentalCodeSplitting: codeSplitting,
   external: externalPredicate,
   plugins: [
     isNode ? nodeBuiltIns() : null,

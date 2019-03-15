@@ -97,7 +97,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "shellthor",
+      "name": "Jeff Detmer",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/649578?v=4",
+      "profile": "http://www.jeffdetmer.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "repoType": "github"
+  "repoType": "github",
+  "contributorsPerLine": 7
 }

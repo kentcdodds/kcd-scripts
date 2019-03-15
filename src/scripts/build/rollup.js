@@ -23,8 +23,8 @@ const useBuiltinConfig =
 const config = useBuiltinConfig
   ? `--config ${hereRelative('../../config/rollup.config.js')}`
   : args.includes('--config')
-    ? ''
-    : '--config' // --config will pick up the rollup.config.js file
+  ? ''
+  : '--config' // --config will pick up the rollup.config.js file
 
 const environment = parsedArgs.environment
   ? `--environment ${parsedArgs.environment}`

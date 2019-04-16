@@ -21,5 +21,5 @@ function normalizePaths(value) {
   if (typeof value !== 'string') {
     return value
   }
-  return value.split(process.cwd()).join('<PROJECT_ROOT>')
+  return slash(value.split(process.cwd()).join('<PROJECT_ROOT>'))
 }

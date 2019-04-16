@@ -8,10 +8,16 @@ const {
 } = require('../utils')
 
 console.log('installing and running travis-deploy-once')
-const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@5'])
+const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@5'], {
+  stdio: 'inherit',
+})
 if (deployOnceResults.status === 0) {
   runAfterSuccessScripts()
 } else {
+  console.log(
+    'travis-deploy-once exited with a non-zero exit code',
+    deployOnceResults.status,
+  )
   process.exit(deployOnceResults.status)
 }
 

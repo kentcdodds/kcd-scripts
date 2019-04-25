@@ -106,8 +106,18 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "alexzherdev",
+      "name": "Alex Zherdev",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/93752?v=4",
+      "profile": "https://twitter.com/endymion_r",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoType": "github",
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "repoHost": "https://github.com"
 }

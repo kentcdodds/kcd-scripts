@@ -80,7 +80,7 @@ if (isPreact) {
 const externalPattern = new RegExp(`^(${external.join('|')})($|/)`)
 
 function externalPredicate(id) {
-  const isDep = externalPattern.test(id)
+  const isDep = external.length > 0 && externalPattern.test(id)
   if (umd) {
     // for UMD, we want to bundle all non-peer deps
     return isDep

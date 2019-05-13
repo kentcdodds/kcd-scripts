@@ -51,6 +51,25 @@ test(`resolveBin resolves to the binary if it's in $PATH`, () => {
   expect(whichSyncMock).toHaveBeenCalledWith('cross-env')
 })
 
+describe('for windows', () => {
+  let realpathSync
+
+  beforeEach(() => {
+    jest.doMock('fs', () => ({realpathSync: jest.fn()}))
+    realpathSync = require('fs').realpathSync
+  })
+  afterEach(() => {
+    jest.unmock('fs')
+  })
+
+  test('resolveBin resolves to .bin path when which returns a windows-style cmd', () => {
+    const fullBinPath = '\\project\\node_modules\\.bin\\concurrently.CMD'
+    realpathSync.mockImplementation(() => fullBinPath)
+    expect(require('../utils').resolveBin('concurrently')).toBe(fullBinPath)
+    expect(realpathSync).toHaveBeenCalledTimes(2)
+  })
+})
+
 test('getConcurrentlyArgs gives good args to pass to concurrently', () => {
   expect(
     require('../utils').getConcurrentlyArgs({

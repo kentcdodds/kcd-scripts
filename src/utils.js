@@ -24,6 +24,7 @@ function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
   let pathFromWhich
   try {
     pathFromWhich = fs.realpathSync(which.sync(executable))
+    if (pathFromWhich && pathFromWhich.includes('.CMD')) return pathFromWhich
   } catch (_error) {
     // ignore _error
   }

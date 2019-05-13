@@ -115,6 +115,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "adamdharrington",
+      "name": "Adam Harrington",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/5477801?v=4",
+      "profile": "https://github.com/adamdharrington",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ],
   "repoType": "github",

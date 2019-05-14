@@ -1,5 +1,5 @@
 jest.mock('read-pkg-up', () => ({
-  sync: jest.fn(() => ({pkg: {}, path: '/blah/package.json'})),
+  sync: jest.fn(() => ({package: {}, path: '/blah/package.json'})),
 }))
 jest.mock('which', () => ({sync: jest.fn(() => {})}))
 
@@ -11,9 +11,9 @@ beforeEach(() => {
   readPkgUpSyncMock = require('read-pkg-up').sync
 })
 
-test('pkg is the package.json', () => {
+test('package is the package.json', () => {
   const myPkg = {name: 'blah'}
-  mockPkg({pkg: myPkg})
+  mockPkg({package: myPkg})
   expect(require('../utils').pkg).toBe(myPkg)
 })
 
@@ -24,14 +24,14 @@ test('appDirectory is the dirname to the package.json', () => {
 })
 
 test('resolveKcdScripts resolves to src/index.js when in the kcd-scripts package', () => {
-  mockPkg({pkg: {name: 'kcd-scripts'}})
+  mockPkg({package: {name: 'kcd-scripts'}})
   expect(require('../utils').resolveKcdScripts()).toBe(
     require.resolve('../').replace(process.cwd(), '.'),
   )
 })
 
 test('resolveKcdScripts resolves to kcd-scripts if not in the kcd-scripts package', () => {
-  mockPkg({pkg: {name: 'not-kcd-scripts'}})
+  mockPkg({package: {name: 'not-kcd-scripts'}})
   whichSyncMock.mockImplementationOnce(() => require.resolve('../'))
   expect(require('../utils').resolveKcdScripts()).toBe('kcd-scripts')
 })
@@ -106,7 +106,7 @@ test(`parseEnv returns the default if the environment variable doesn't exist`, (
 })
 
 test('ifAnyDep returns the true argument if true and false argument if false', () => {
-  mockPkg({pkg: {peerDependencies: {react: '*'}}})
+  mockPkg({package: {peerDependencies: {react: '*'}}})
   const t = {a: 'b'}
   const f = {c: 'd'}
   expect(require('../utils').ifAnyDep('react', t, f)).toBe(t)
@@ -114,7 +114,7 @@ test('ifAnyDep returns the true argument if true and false argument if false', (
 })
 
 test('ifAnyDep works with arrays of dependencies', () => {
-  mockPkg({pkg: {peerDependencies: {react: '*'}}})
+  mockPkg({package: {peerDependencies: {react: '*'}}})
   const t = {a: 'b'}
   const f = {c: 'd'}
   expect(require('../utils').ifAnyDep(['preact', 'react'], t, f)).toBe(t)
@@ -122,7 +122,7 @@ test('ifAnyDep works with arrays of dependencies', () => {
 })
 
 test('ifScript returns the true argument if true and the false argument if false', () => {
-  mockPkg({pkg: {scripts: {build: 'echo build'}}})
+  mockPkg({package: {scripts: {build: 'echo build'}}})
   const t = {e: 'f'}
   const f = {g: 'h'}
   expect(require('../utils').ifScript('build', t, f)).toBe(t)
@@ -137,6 +137,6 @@ test('ifFile returns the true argument if true and the false argument if false',
   expect(require('../utils').ifFile('does-not-exist.blah', t, f)).toBe(f)
 })
 
-function mockPkg({pkg = {}, path = '/blah/package.json'}) {
-  readPkgUpSyncMock.mockImplementationOnce(() => ({pkg, path}))
+function mockPkg({package: pkg = {}, path = '/blah/package.json'}) {
+  readPkgUpSyncMock.mockImplementationOnce(() => ({package: pkg, path}))
 }

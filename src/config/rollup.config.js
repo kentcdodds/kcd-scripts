@@ -143,7 +143,10 @@ module.exports = {
   plugins: [
     isNode ? nodeBuiltIns() : null,
     isNode ? nodeGlobals() : null,
-    nodeResolve({preferBuiltins: isNode, jsnext: true, main: true}),
+    nodeResolve({
+      preferBuiltins: isNode,
+      mainFields: ['module', 'main', 'jsnext', 'browser'],
+    }),
     commonjs({include: 'node_modules/**'}),
     json(),
     rollupBabel({

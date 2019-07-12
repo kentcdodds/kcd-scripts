@@ -12,7 +12,7 @@ afterEach(() => {
 test('includes format and git add when not opted out', () => {
   utilsMock.isOptedOut.mockImplementation((key, t, f) => f)
   const config = require('../lintstagedrc')
-  const jsLinter = getJsLinter(config.linters)
+  const jsLinter = getJsLinter(config)
   expect(hasFormat(jsLinter)).toBe(true)
   expect(hasGitAdd(jsLinter)).toBe(true)
 })
@@ -20,7 +20,7 @@ test('includes format and git add when not opted out', () => {
 test('does not include format and git add when opted out', () => {
   utilsMock.isOptedOut.mockImplementation((key, t) => t)
   const config = require('../lintstagedrc')
-  const jsLinter = getJsLinter(config.linters)
+  const jsLinter = getJsLinter(config)
   expect(hasFormat(jsLinter)).toBe(false)
   expect(hasGitAdd(jsLinter)).toBe(false)
 })

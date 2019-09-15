@@ -1,5 +1,5 @@
 {
-  "name": "kcd-scripts",
+  "name": "cod-scripts",
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
   "engines": {
@@ -7,7 +7,7 @@
     "npm": ">= 5"
   },
   "bin": {
-    "kcd-scripts": "dist/index.js"
+    "cod-scripts": "dist/index.js"
   },
   "scripts": {
     "test": "node src test",
@@ -31,7 +31,7 @@
     "jest.js"
   ],
   "keywords": [],
-  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "author": "Chris O'Donnell <dev@codfish.io> (http://codfish.io/)",
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.5.5",
@@ -56,9 +56,8 @@
     "cross-env": "^5.1.4",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
-    "eslint": "^6.1.0",
-    "eslint-config-kentcdodds": "^14.3.4",
-    "eslint-config-prettier": "^6.0.0",
+    "eslint": "^5.15.2",
+    "eslint-config-codfish": "^2.5.0",
     "glob": "^7.1.4",
     "husky": "^3.0.3",
     "is-ci": "^2.0.0",
@@ -69,7 +68,7 @@
     "lodash.has": "^4.5.2",
     "lodash.omit": "^4.5.0",
     "mkdirp": "^0.5.1",
-    "prettier": "^1.18.2",
+    "prettier": "^1.16.4",
     "read-pkg-up": "^6.0.0",
     "resolve": "^1.12.0",
     "rimraf": "^2.6.2",
@@ -89,31 +88,21 @@
   },
   "eslintConfig": {
     "extends": [
-      "kentcdodds",
-      "kentcdodds/jest"
+      "./src/config/eslintrc.js"
     ],
     "rules": {
-      "no-process-exit": "off",
-      "import/no-dynamic-require": "off",
-      "import/no-unassigned-import": "off",
       "no-console": "off",
-      "no-nested-ternary": "off",
-      "no-useless-catch": "off"
+      "global-require": "off"
     }
   },
-  "eslintIgnore": [
-    "node_modules",
-    "coverage",
-    "dist"
-  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kentcdodds/kcd-scripts.git"
+    "url": "https://github.com/codfish/cod-scripts.git"
   },
   "bugs": {
-    "url": "https://github.com/kentcdodds/kcd-scripts/issues"
+    "url": "https://github.com/codfish/cod-scripts/issues"
   },
-  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
+  "homepage": "https://github.com/codfish/cod-scripts#readme",
   "devDependencies": {
     "jest-in-case": "^1.0.2",
     "slash": "^3.0.0"

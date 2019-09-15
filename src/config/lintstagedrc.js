@@ -1,14 +1,22 @@
-const {resolveKcdScripts, resolveBin, isOptedOut} = require('../utils')
+const { resolveCodScripts, resolveBin, isOptedOut } = require('../utils');
 
-const kcdScripts = resolveKcdScripts()
-const doctoc = resolveBin('doctoc')
+const codScripts = resolveCodScripts();
+const doctoc = resolveBin('doctoc');
 
 module.exports = {
   'README.md': [`${doctoc} --maxlevel 3 --notitle`, 'git add'],
-  '*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx|vue)': [
-    isOptedOut('autoformat', null, `${kcdScripts} format`),
-    `${kcdScripts} lint`,
-    `${kcdScripts} test --findRelatedTests`,
+  '*.+(json|yml|yaml|css|less|scss|graphql)': [
+    isOptedOut('autoformat', null, `${codScripts} format --no-eslint`),
     isOptedOut('autoformat', null, 'git add'),
   ].filter(Boolean),
-}
+  '*.md': [
+    isOptedOut('autoformat', null, `${codScripts} format`),
+    // TODO: add markdownlint
+    isOptedOut('autoformat', null, 'git add'),
+  ].filter(Boolean),
+  '*.js': [
+    isOptedOut('autoformat', null, `${codScripts} lint --fix`),
+    `${codScripts} test --findRelatedTests`,
+    isOptedOut('autoformat', null, 'git add'),
+  ].filter(Boolean),
+};

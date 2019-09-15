@@ -1,58 +1,58 @@
-import path from 'path'
-import slash from 'slash'
-import cases from 'jest-in-case'
-import {unquoteSerializer} from '../scripts/__tests__/helpers/serializers'
+import path from 'path';
+import slash from 'slash';
+import cases from 'jest-in-case';
+import { unquoteSerializer } from '../scripts/__tests__/helpers/serializers';
 
-const projectRoot = path.join(__dirname, '../../')
+const projectRoot = path.join(__dirname, '../../');
 
-expect.addSnapshotSerializer(unquoteSerializer)
+expect.addSnapshotSerializer(unquoteSerializer);
 expect.addSnapshotSerializer({
   print: val => slash(val.replace(projectRoot, '<PROJECT_ROOT>/')),
   test: val => typeof val === 'string' && val.includes(projectRoot),
-})
+});
 
 cases(
   'format',
-  ({snapshotLog = false, throws = false, signal = false, args = []}) => {
+  ({ snapshotLog = false, throws = false, signal = false, args = [] }) => {
     // beforeEach
-    const {sync: crossSpawnSyncMock} = require('cross-spawn')
-    const originalExit = process.exit
-    const originalArgv = process.argv
-    const originalLog = console.log
-    process.exit = jest.fn()
-    console.log = jest.fn()
+    const { sync: crossSpawnSyncMock } = require('cross-spawn');
+    const originalExit = process.exit;
+    const originalArgv = process.argv;
+    const originalLog = console.log;
+    process.exit = jest.fn();
+    console.log = jest.fn();
     try {
       // tests
-      process.argv = ['node', '../', ...args]
-      crossSpawnSyncMock.mockClear()
+      process.argv = ['node', '../', ...args];
+      crossSpawnSyncMock.mockClear();
       if (signal) {
-        crossSpawnSyncMock.mockReturnValueOnce({result: 1, signal})
+        crossSpawnSyncMock.mockReturnValueOnce({ result: 1, signal });
       }
-      require('../')
+      require('../');
       if (snapshotLog) {
-        expect(console.log.mock.calls).toMatchSnapshot()
+        expect(console.log.mock.calls).toMatchSnapshot();
       } else if (signal) {
-        expect(process.exit).toHaveBeenCalledTimes(1)
-        expect(process.exit).toHaveBeenCalledWith(1)
-        expect(console.log.mock.calls).toMatchSnapshot()
+        expect(process.exit).toHaveBeenCalledTimes(1);
+        expect(process.exit).toHaveBeenCalledWith(1);
+        expect(console.log.mock.calls).toMatchSnapshot();
       } else {
-        expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
-        const [firstCall] = crossSpawnSyncMock.mock.calls
-        const [script, calledArgs] = firstCall
-        expect([script, ...calledArgs].join(' ')).toMatchSnapshot()
+        expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1);
+        const [firstCall] = crossSpawnSyncMock.mock.calls;
+        const [script, calledArgs] = firstCall;
+        expect([script, ...calledArgs].join(' ')).toMatchSnapshot();
       }
     } catch (error) {
       if (throws) {
-        expect(error.message).toMatchSnapshot()
+        expect(error.message).toMatchSnapshot();
       } else {
-        throw error
+        throw error;
       }
     } finally {
       // afterEach
-      process.exit = originalExit
-      process.argv = originalArgv
-      console.log = originalLog
-      jest.resetModules()
+      process.exit = originalExit;
+      process.argv = originalArgv;
+      console.log = originalLog;
+      jest.resetModules();
     }
   },
   {
@@ -79,6 +79,6 @@ cases(
       signal: 'SIGBREAK',
     },
   },
-)
+);
 
 /* eslint complexity:0 */

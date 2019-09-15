@@ -32,7 +32,6 @@ Available Scripts:
   lint
   pre-commit
   test
-  travis-after-success
   validate
 
 Options:

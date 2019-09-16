@@ -1,9 +1,4 @@
 node_modules/
 dist/
-build/
 coverage/
-out/
-.next/
-docs/
 package-lock.json
-serviceWorker.js

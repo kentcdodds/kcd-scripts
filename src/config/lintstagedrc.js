@@ -10,7 +10,7 @@ module.exports = {
     isOptedOut('autoformat', null, 'git add'),
   ].filter(Boolean),
   '*.md': [
-    isOptedOut('autoformat', null, `${codScripts} format`),
+    isOptedOut('autoformat', null, `${codScripts} format --no-eslint`),
     // TODO: add markdownlint
     isOptedOut('autoformat', null, 'git add'),
   ].filter(Boolean),

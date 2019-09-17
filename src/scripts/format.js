@@ -25,7 +25,9 @@ const write = args.includes('--no-write') ? [] : ['--write'];
 // the full file path, we make that non-absolute so it is treated as a glob,
 // This way the prettierignore will be applied
 const relativeArgs = args.map(a => a.replace(`${process.cwd()}/`, ''));
-const filesToApply = parsedArgs._.length ? [] : ['**/*.+(json|less|css|ts|tsx|md)'];
+const filesToApply = parsedArgs._.length
+  ? []
+  : ['**/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx)'];
 
 // run prettier on all non-js files
 const prettierResult = spawn.sync(

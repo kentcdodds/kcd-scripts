@@ -28,6 +28,7 @@ Usage: ../ [script] [--flags]
 
 Available Scripts:
   build
+  commitlint
   format
   lint
   pre-commit

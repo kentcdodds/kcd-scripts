@@ -14,17 +14,14 @@
     "test:update": "node src test --updateSnapshot",
     "build": "node src build",
     "lint": "node src lint",
+    "commitlint": "node src commitlint",
     "format": "node src format",
     "validate": "node src validate"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "node src pre-commit"
-    }
   },
   "files": [
     "dist",
     "babel.js",
+    "commitlint.js",
     "eslint.js",
     "config.js",
     "prettier.js",
@@ -43,6 +40,8 @@
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.5.5",
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
     "arrify": "^2.0.1",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^24.8.0",
@@ -96,6 +95,34 @@
       "no-useless-catch": "off"
     }
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "node src pre-commit",
+      "commit-msg": "node src commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "./src/config/commitlint.config"
+    ],
+    "rules": {
+      "scope-enum": [
+        2,
+        "always",
+        [
+          "eslint",
+          "babel",
+          "rollup",
+          "commitlint",
+          "jest",
+          "lintstaged",
+          "lint-staged",
+          "husky",
+          "prettier"
+        ]
+      ]
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/codfish/cod-scripts.git"
@@ -105,8 +132,6 @@
   },
   "homepage": "https://github.com/codfish/cod-scripts#readme",
   "devDependencies": {
-    "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-conventional": "^8.1.0",
     "jest-in-case": "^1.0.2",
     "slash": "^3.0.0"
   }

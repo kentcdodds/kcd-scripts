@@ -98,6 +98,33 @@ module.exports = Object.assign(jestConfig, {
 });
 ```
 
+Or, for `commitlint`, a `commitlint.config.js` file or `commitlint` prop in package.json:
+
+```js
+// commitlint.config.js or .commitlintrc.js
+const { commitlint: commitlintConfig } = require('cod-scripts/commitlint');
+
+module.exports = {
+  ...commitlintConfig,
+  rules: {
+    // overrides here
+  },
+};
+```
+
+```json
+// package.json
+{
+  "commitlint": {
+    "extends": ["./node_modules/cod-scripts/commitlint"],
+    "rules": {
+      // your overrides here
+      // https://commitlint.js.org/#/reference-rules
+    }
+  }
+}
+```
+
 > Note: `cod-scripts` intentionally does not merge things for you when you start configuring things
 > to make it less magical and more straightforward. Extending can take place on your terms. I think
 > this is actually a great way to do this.

@@ -55,7 +55,7 @@
     "cross-env": "^6.0.0",
     "cross-spawn": "^7.0.0",
     "doctoc": "^1.4.0",
-    "eslint": "^6.4.0",
+    "eslint": "^5.15.2",
     "eslint-config-codfish": "^5.1.0",
     "glob": "^7.1.4",
     "husky": "^3.0.3",

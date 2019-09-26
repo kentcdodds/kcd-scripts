@@ -18,7 +18,7 @@
 [![downloads][downloads-badge]][npmcharts]
 [![MIT License][license-badge]][license]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
@@ -154,6 +154,7 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="https://twitter.com/endymion_r"><img src="https://avatars3.githubusercontent.com/u/93752?v=4" width="100px;" alt="Alex Zherdev"/><br /><sub><b>Alex Zherdev</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=alexzherdev" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/adamdharrington"><img src="https://avatars0.githubusercontent.com/u/5477801?v=4" width="100px;" alt="Adam Harrington"/><br /><sub><b>Adam Harrington</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=adamdharrington" title="Code">💻</a> <a href="https://github.com/kentcdodds/kcd-scripts/commits?author=adamdharrington" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://afontcu.dev"><img src="https://avatars0.githubusercontent.com/u/9197791?v=4" width="100px;" alt="Adrià Fontcuberta"/><br /><sub><b>Adrià Fontcuberta</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=afontcu" title="Code">💻</a></td>
+    <td align="center"><a href="https://codefund.io"><img src="https://avatars2.githubusercontent.com/u/12481?v=4" width="100px;" alt="Eric Berry"/><br /><sub><b>Eric Berry</b></sub></a><br /><a href="#fundingFinding-coderberry" title="Funding Finding">🔍</a></td>
   </tr>
 </table>
 

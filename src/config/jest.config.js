@@ -32,6 +32,10 @@ const jestConfig = {
   ],
 };
 
+if (hasFile('jest.setup.js')) {
+  jestConfig.setupFilesAfterEnv = [fromRoot('jest.setup.js')];
+}
+
 if (hasFile('setupTests.js')) {
   jestConfig.setupFilesAfterEnv = [fromRoot('setupTests.js')];
 }

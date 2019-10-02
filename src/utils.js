@@ -113,7 +113,7 @@ function getConcurrentlyArgs(scripts, { killOthers = true } = {}) {
     '--names', Object.keys(scripts).join(','),
     '--prefix-colors', prefixColors,
     ...Object.values(scripts).map(s => JSON.stringify(s)), // stringify escapes quotes ✨
-  ].filter(Boolean)
+  ].filter(Boolean);
 }
 
 function isOptedOut(key, t = true, f = false) {

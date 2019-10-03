@@ -42,4 +42,8 @@ if (useBuiltInBabelConfig) {
   jestConfig.transform = { '^.+\\.js$': here('./babel-transform') };
 }
 
+if (jestConfig.testEnvironment === 'jsdom') {
+  jestConfig.setupFiles = [require.resolve('react-app-polyfill/jsdom')];
+}
+
 module.exports = jestConfig;

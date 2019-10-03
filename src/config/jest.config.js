@@ -1,5 +1,5 @@
 const path = require('path');
-const { ifAnyDep, hasFile, hasPkgProp, fromRoot } = require('../utils');
+const { ifAnyDep, hasFile, ifFile, hasPkgProp, fromRoot } = require('../utils');
 
 const here = p => path.join(__dirname, p);
 
@@ -30,22 +30,20 @@ const jestConfig = {
     require.resolve('jest-watch-typeahead/filename'),
     require.resolve('jest-watch-typeahead/testname'),
   ],
+  setupFilesAfterEnv: [
+    ifAnyDep('@testing-library/jest-dom', '@testing-library/jest-dom/extend-expect'),
+    ifFile('jest.setup.js', fromRoot('jest.setup.js')),
+    ifFile('setupTests.js', fromRoot('setupTests.js')),
+    ifFile('tests/setup-env.js', fromRoot('tests/setup-env.js')),
+  ].filter(Boolean),
 };
-
-if (hasFile('jest.setup.js')) {
-  jestConfig.setupFilesAfterEnv = [fromRoot('jest.setup.js')];
-}
-
-if (hasFile('setupTests.js')) {
-  jestConfig.setupFilesAfterEnv = [fromRoot('setupTests.js')];
-}
-
-if (hasFile('tests/setup-env.js')) {
-  jestConfig.setupFilesAfterEnv = [fromRoot('tests/setup-env.js')];
-}
 
 if (useBuiltInBabelConfig) {
   jestConfig.transform = { '^.+\\.js$': here('./babel-transform') };
+}
+
+if (jestConfig.testEnvironment === 'jsdom') {
+  jestConfig.setupFiles = [require.resolve('react-app-polyfill/jsdom')];
 }
 
 module.exports = jestConfig;

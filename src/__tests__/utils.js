@@ -2,6 +2,15 @@ jest.mock('read-pkg-up', () => ({
   sync: jest.fn(() => ({package: {}, path: '/blah/package.json'})),
 }))
 jest.mock('which', () => ({sync: jest.fn(() => {})}))
+jest.mock('cosmiconfig', () => {
+  const actual = jest.requireActual('cosmiconfig')
+
+  function cosmiconfig(name, options) {
+    return actual(name, options)
+  }
+
+  return jest.fn(cosmiconfig)
+})
 
 let whichSyncMock, readPkgUpSyncMock
 
@@ -137,6 +146,30 @@ test('ifFile returns the true argument if true and the false argument if false',
   expect(require('../utils').ifFile('does-not-exist.blah', t, f)).toBe(f)
 })
 
+test('hasLocalConfiguration returns false if no local configuration found', () => {
+  mockCosmiconfig()
+
+  expect(require('../utils').hasLocalConfig('module')).toBe(false)
+})
+
+test('hasLocalConfig returns true if a local configuration found', () => {
+  mockCosmiconfig({config: {}, filepath: 'path/to/config'})
+
+  expect(require('../utils').hasLocalConfig('module')).toBe(true)
+})
+
+test('hasLocalConfiguration returns true if a local config found and it is empty', () => {
+  mockCosmiconfig({isEmpty: true})
+
+  expect(require('../utils').hasLocalConfig('module')).toBe(true)
+})
+
 function mockPkg({package: pkg = {}, path = '/blah/package.json'}) {
   readPkgUpSyncMock.mockImplementationOnce(() => ({package: pkg, path}))
+}
+
+function mockCosmiconfig(result = null) {
+  const cosmiconfig = require('cosmiconfig')
+
+  cosmiconfig.mockImplementationOnce(() => ({searchSync: () => result}))
 }

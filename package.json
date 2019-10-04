@@ -53,6 +53,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "browserslist": "^4.6.6",
     "concurrently": "^4.1.1",
+    "cosmiconfig": "^5.2.1",
     "cross-env": "^5.1.4",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",

@@ -173,7 +173,7 @@ function hasLocalConfig(moduleName, searchOptions = {}) {
   const explorer = cosmiconfig(moduleName, searchOptions)
   const result = explorer.searchSync(pkgPath)
 
-  return result !== null || !result.isEmpty
+  return result !== null
 }
 
 module.exports = {

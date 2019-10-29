@@ -8,7 +8,7 @@ const readPkgUp = require('read-pkg-up')
 const which = require('which')
 const cosmiconfig = require('cosmiconfig')
 
-const {package: pkg, path: pkgPath} = readPkgUp.sync({
+const {packageJson: pkg, path: pkgPath} = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
 })
 const appDirectory = path.dirname(pkgPath)

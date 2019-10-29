@@ -1,5 +1,5 @@
 jest.mock('read-pkg-up', () => ({
-  sync: jest.fn(() => ({package: {}, path: '/blah/package.json'})),
+  sync: jest.fn(() => ({packageJson: {}, path: '/blah/package.json'})),
 }))
 jest.mock('which', () => ({sync: jest.fn(() => {})}))
 jest.mock('cosmiconfig', () => {
@@ -165,7 +165,7 @@ test('hasLocalConfiguration returns true if a local config found and it is empty
 })
 
 function mockPkg({package: pkg = {}, path = '/blah/package.json'}) {
-  readPkgUpSyncMock.mockImplementationOnce(() => ({package: pkg, path}))
+  readPkgUpSyncMock.mockImplementationOnce(() => ({packageJson: pkg, path}))
 }
 
 function mockCosmiconfig(result = null) {

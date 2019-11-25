@@ -18,7 +18,7 @@
 [![downloads][downloads-badge]][npmcharts]
 [![MIT License][license-badge]][license]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-16-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 
@@ -158,6 +158,7 @@ Thanks goes to these people ([emoji key][emojis]):
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/schaab"><img src="https://avatars0.githubusercontent.com/u/1103255?v=4" width="100px;" alt="Jared Schaab"/><br /><sub><b>Jared Schaab</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=schaab" title="Code">💻</a> <a href="https://github.com/kentcdodds/kcd-scripts/commits?author=schaab" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/serkan-sipahi-59b20081/"><img src="https://avatars2.githubusercontent.com/u/1880749?v=4" width="100px;" alt="Bitcollage"/><br /><sub><b>Bitcollage</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=SerkanSipahi" title="Code">💻</a></td>
   </tr>
 </table>
 

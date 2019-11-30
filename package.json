@@ -16,7 +16,8 @@
     "build": "node src build",
     "lint": "node src lint",
     "format": "node src format",
-    "validate": "node src validate"
+    "validate": "node src validate",
+    "prepare": "node src build"
   },
   "husky": {
     "hooks": {

@@ -4,14 +4,11 @@ const glob = require('glob')
 
 const [executor, ignoredBin, script, ...args] = process.argv
 
-if (script) {
-  spawnScript()
-} else {
-  const scriptsPath = path.join(__dirname, 'scripts/')
-  const scriptsAvailable = glob.sync(path.join(__dirname, 'scripts', '*'))
+function listScripts(scriptsPath) {
+  const scriptsAvailable = glob.sync(path.join(scriptsPath, '*'))
   // `glob.sync` returns paths with unix style path separators even on Windows.
   // So we normalize it before attempting to strip out the scripts path.
-  const scriptsAvailableMessage = scriptsAvailable
+  return scriptsAvailable
     .map(path.normalize)
     .map(s =>
       s
@@ -20,20 +17,6 @@ if (script) {
         .replace(/\.js$/, ''),
     )
     .filter(Boolean)
-    .join('\n  ')
-    .trim()
-  const fullMessage = `
-Usage: ${ignoredBin} [script] [--flags]
-
-Available Scripts:
-  ${scriptsAvailableMessage}
-
-Options:
-  All options depend on the script. Docs will be improved eventually, but for most scripts you can assume that the args you pass will be forwarded to the respective tool that's being run under the hood.
-
-May the force be with you.
-  `.trim()
-  console.log(`\n${fullMessage}\n`)
 }
 
 function getEnv() {
@@ -52,8 +35,7 @@ function getEnv() {
     )
 }
 
-function spawnScript() {
-  const relativeScriptPath = path.join(__dirname, './scripts', script)
+function spawnScript(relativeScriptPath) {
   const scriptPath = attemptResolve(relativeScriptPath)
 
   if (!scriptPath) {
@@ -95,3 +77,40 @@ function attemptResolve(...resolveArgs) {
     return null
   }
 }
+
+function runScript(customScriptsPath) {
+  const customScripts = customScriptsPath ? listScripts(customScriptsPath) : []
+
+  const defaultScriptsPath = path.join(__dirname, 'scripts/')
+  const defaultScripts = listScripts(defaultScriptsPath)
+
+  if (script) {
+    const relativeScriptPath = customScripts.includes(script)
+      ? path.join(customScriptsPath, script)
+      : path.join(defaultScriptsPath, script)
+
+    spawnScript(relativeScriptPath)
+  } else {
+    const scriptsAvailableMessage = [
+      ...new Set([...customScripts, ...defaultScripts]),
+    ]
+      .sort()
+      .join('\n  ')
+      .trim()
+
+    const fullMessage = `
+Usage: ${ignoredBin} [script] [--flags]
+
+Available Scripts:
+  ${scriptsAvailableMessage}
+
+Options:
+  All options depend on the script. Docs will be improved eventually, but for most scripts you can assume that the args you pass will be forwarded to the respective tool that's being run under the hood.
+
+May the force be with you.
+  `.trim()
+    console.log(`\n${fullMessage}\n`)
+  }
+}
+
+module.exports = runScript

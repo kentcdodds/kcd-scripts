@@ -15,4 +15,4 @@ if (shouldThrow) {
   )
 }
 
-require('./run-script')
+require('./run-script')()

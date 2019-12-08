@@ -6,7 +6,7 @@ const arrify = require('arrify')
 const has = require('lodash.has')
 const readPkgUp = require('read-pkg-up')
 const which = require('which')
-const cosmiconfig = require('cosmiconfig')
+const {cosmiconfigSync} = require('cosmiconfig')
 
 const {packageJson: pkg, path: pkgPath} = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
@@ -170,8 +170,8 @@ function writeExtraEntry(name, {cjs, esm}, clean = true) {
 }
 
 function hasLocalConfig(moduleName, searchOptions = {}) {
-  const explorer = cosmiconfig(moduleName, searchOptions)
-  const result = explorer.searchSync(pkgPath)
+  const explorerSync = cosmiconfigSync(moduleName, searchOptions)
+  const result = explorerSync.search(pkgPath)
 
   return result !== null
 }

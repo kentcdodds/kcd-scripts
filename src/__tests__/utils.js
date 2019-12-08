@@ -2,14 +2,10 @@ jest.mock('read-pkg-up', () => ({
   sync: jest.fn(() => ({packageJson: {}, path: '/blah/package.json'})),
 }))
 jest.mock('which', () => ({sync: jest.fn(() => {})}))
+
 jest.mock('cosmiconfig', () => {
-  const actual = jest.requireActual('cosmiconfig')
-
-  function cosmiconfig(name, options) {
-    return actual(name, options)
-  }
-
-  return jest.fn(cosmiconfig)
+  const cosmiconfigExports = jest.requireActual('cosmiconfig')
+  return {...cosmiconfigExports, cosmiconfigSync: jest.fn()}
 })
 
 let whichSyncMock, readPkgUpSyncMock
@@ -169,7 +165,7 @@ function mockPkg({package: pkg = {}, path = '/blah/package.json'}) {
 }
 
 function mockCosmiconfig(result = null) {
-  const cosmiconfig = require('cosmiconfig')
+  const {cosmiconfigSync} = require('cosmiconfig')
 
-  cosmiconfig.mockImplementationOnce(() => ({searchSync: () => result}))
+  cosmiconfigSync.mockImplementationOnce(() => ({search: () => result}))
 }

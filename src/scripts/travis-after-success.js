@@ -7,28 +7,33 @@ const {
   parseEnv,
 } = require('../utils')
 
-console.log('installing and running travis-deploy-once')
-const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@5'], {
-  stdio: 'inherit',
-})
-if (deployOnceResults.status === 0) {
-  runAfterSuccessScripts()
+const autorelease =
+  pkg.version === '0.0.0-semantically-released' &&
+  parseEnv('TRAVIS', false) &&
+  process.env.TRAVIS_BRANCH === 'master' &&
+  !parseEnv('TRAVIS_PULL_REQUEST', false)
+
+if (autorelease) {
+  // we only need deploy once for releases
+  console.log('installing and running travis-deploy-once')
+  const deployOnceResults = spawn.sync('npx', ['travis-deploy-once@5'], {
+    stdio: 'inherit',
+  })
+  if (deployOnceResults.status === 0) {
+    runAfterSuccessScripts()
+  } else {
+    console.log(
+      'travis-deploy-once exited with a non-zero exit code',
+      deployOnceResults.status,
+    )
+    process.exit(deployOnceResults.status)
+  }
 } else {
-  console.log(
-    'travis-deploy-once exited with a non-zero exit code',
-    deployOnceResults.status,
-  )
-  process.exit(deployOnceResults.status)
+  runAfterSuccessScripts()
 }
 
 // eslint-disable-next-line complexity
 function runAfterSuccessScripts() {
-  const autorelease =
-    pkg.version === '0.0.0-semantically-released' &&
-    parseEnv('TRAVIS', false) &&
-    process.env.TRAVIS_BRANCH === 'master' &&
-    !parseEnv('TRAVIS_PULL_REQUEST', false)
-
   const reportCoverage = hasFile('coverage') && !parseEnv('SKIP_CODECOV', false)
 
   if (!autorelease && !reportCoverage) {

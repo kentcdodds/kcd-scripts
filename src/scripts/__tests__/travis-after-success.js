@@ -14,7 +14,6 @@ cases(
       TRAVIS_BRANCH: 'master',
       TRAVIS_PULL_REQUEST: 'false',
     },
-    runsNothing = false,
   }) => {
     // beforeEach
     const {sync: crossSpawnSyncMock} = require('cross-spawn')
@@ -37,16 +36,12 @@ cases(
     utils.hasFile = () => hasCoverageDir
     process.env.SKIP_CODECOV = isOptedOutOfCoverage
     require('../travis-after-success')
-    if (runsNothing) {
-      expect(console.log.mock.calls).toMatchSnapshot()
-    } else {
-      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(2)
-      const [firstCall, secondCall] = crossSpawnSyncMock.mock.calls
-      const [scriptOne, calledArgsOne] = firstCall
-      expect([scriptOne, ...calledArgsOne].join(' ')).toMatchSnapshot()
-      const [scriptTwo, calledArgsTwo] = secondCall
-      expect([scriptTwo, ...calledArgsTwo].join(' ')).toMatchSnapshot()
-    }
+
+    expect(console.log.mock.calls).toMatchSnapshot()
+    const commands = crossSpawnSyncMock.mock.calls.map(
+      call => `${call[0]} ${call[1].join(' ')}`,
+    )
+    expect(commands).toMatchSnapshot()
 
     // afterEach
     process.exit = originalExit
@@ -75,7 +70,6 @@ cases(
       },
     },
     'does not run either script when no coverage dir and not the right version': {
-      runsNothing: true,
       hasCoverageDir: false,
       version: '1.2.3',
     },

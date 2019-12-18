@@ -7,8 +7,10 @@ const useBuiltInBabelConfig = !hasFile('.babelrc') && !hasPkgProp('babel')
 
 const ignores = [
   '/node_modules/',
+  '/__fixtures__/',
   '/fixtures/',
   '/__tests__/helpers/',
+  '/__tests__/utils/',
   '__mocks__',
 ]
 

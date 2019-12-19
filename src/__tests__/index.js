@@ -59,6 +59,9 @@ cases(
     'calls node with the script path and args': {
       args: ['test', '--no-watch'],
     },
+    'calls node with the script path and args including inspect-brk argument': {
+      args: ['--inspect-brk=3080', 'test', '--no-watch'],
+    },
     'throws unknown script': {
       args: ['unknown-script'],
       throws: true,

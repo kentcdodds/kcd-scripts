@@ -2,6 +2,8 @@
 
 exports[`format calls node with the script path and args 1`] = `node <PROJECT_ROOT>/src/scripts/test.js --no-watch`;
 
+exports[`format calls node with the script path and args including inspect-brk argument 1`] = `node --inspect-brk=3080 <PROJECT_ROOT>/src/scripts/test.js --no-watch`;
+
 exports[`format does not log for other signals 1`] = `Array []`;
 
 exports[`format logs for SIGKILL signal 1`] = `

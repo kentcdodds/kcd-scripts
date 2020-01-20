@@ -1,12 +1,11 @@
-sudo: false
 language: node_js
 cache: npm
 notifications:
   email: false
 node_js:
-  - '10'
-  - '12'
-  - '13'
+  - 10.13
+  - 12
+  - node
 install: npm install
 script: npm run validate
 after_success: node src travis-after-success

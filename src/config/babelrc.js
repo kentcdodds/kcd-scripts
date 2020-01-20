@@ -81,7 +81,7 @@ module.exports = () => ({
   ].filter(Boolean),
 })
 
-function getNodeVersion({engines: {node: nodeVersion = '8'} = {}}) {
+function getNodeVersion({engines: {node: nodeVersion = '10.13'} = {}}) {
   const oldestVersion = semver
     .validRange(nodeVersion)
     .replace(/[>=<|]/g, ' ')

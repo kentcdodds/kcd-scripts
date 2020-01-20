@@ -11,7 +11,7 @@ Array [
 exports[`travis-after-success calls concurrently with both scripts when on travis 2`] = `
 Array [
   npx travis-deploy-once@5,
-  concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov@3 -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'",
+  concurrently --prefix [{name}] --names codecov,release --prefix-colors bgBlue.bold.reset,bgGreen.bold.reset "echo installing codecov && npx -p codecov@3 -c 'echo running codecov && codecov'" "echo installing semantic-release && npx -p semantic-release@16 -c 'echo running semantic-release && semantic-release'",
 ]
 `;
 
@@ -42,7 +42,7 @@ Array [
 exports[`travis-after-success does not do the codecov script when opted out 2`] = `
 Array [
   npx travis-deploy-once@5,
-  concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'",
+  concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@16 -c 'echo running semantic-release && semantic-release'",
 ]
 `;
 
@@ -57,7 +57,7 @@ Array [
 exports[`travis-after-success does not do the codecov script when there is no coverage directory 2`] = `
 Array [
   npx travis-deploy-once@5,
-  concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@15 -c 'echo running semantic-release && semantic-release'",
+  concurrently --prefix [{name}] --names release --prefix-colors bgBlue.bold.reset "echo installing semantic-release && npx -p semantic-release@16 -c 'echo running semantic-release && semantic-release'",
 ]
 `;
 

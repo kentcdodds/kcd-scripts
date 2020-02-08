@@ -6,7 +6,14 @@ const here = p => path.join(__dirname, p);
 const useBuiltInBabelConfig =
   !hasFile('.babelrc') && !hasFile('.babelrc.js') && !hasPkgProp('babel');
 
-const ignores = ['/node_modules/', '/fixtures/', '/__tests__/helpers/', '__mocks__'];
+const ignores = [
+  '/node_modules/',
+  '/__fixtures__/',
+  '/fixtures/',
+  '/__tests__/helpers/',
+  '/__tests__/utils/',
+  '__mocks__',
+];
 
 const jestConfig = {
   roots: [fromRoot('src')],

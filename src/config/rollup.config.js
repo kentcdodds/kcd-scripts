@@ -1,11 +1,11 @@
 const path = require('path');
+const commonjs = require('@rollup/plugin-commonjs');
+const json = require('@rollup/plugin-json');
+const nodeResolve = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
 const glob = require('glob');
 const camelcase = require('lodash.camelcase');
 const rollupBabel = require('rollup-plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
-const nodeResolve = require('rollup-plugin-node-resolve');
-const json = require('rollup-plugin-json');
-const replace = require('rollup-plugin-replace');
 const { terser } = require('rollup-plugin-terser');
 const nodeBuiltIns = require('rollup-plugin-node-builtins');
 const nodeGlobals = require('rollup-plugin-node-globals');
@@ -27,7 +27,9 @@ const esm = format === 'esm';
 const umd = format === 'umd';
 
 const defaultGlobals = Object.keys(pkg.peerDependencies || {}).reduce((deps, dep) => {
-  return { ...deps, [dep]: capitalize(camelcase(dep)) };
+  // eslint-disable-next-line no-param-reassign
+  deps[dep] = capitalize(camelcase(dep));
+  return deps;
 }, {});
 
 const deps = Object.keys(pkg.dependencies || {});

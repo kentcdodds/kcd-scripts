@@ -1,7 +1,7 @@
 const path = require('path');
 const spawn = require('cross-spawn');
 const yargsParser = require('yargs-parser');
-const { hasPkgProp, resolveBin, hasFile, resolveCodScripts } = require('../utils');
+const { resolveBin, hasFile, hasLocalConfig, resolveCodScripts } = require('../utils');
 
 const args = process.argv.slice(2);
 const parsedArgs = yargsParser(args);
@@ -9,12 +9,7 @@ const parsedArgs = yargsParser(args);
 const here = p => path.join(__dirname, p);
 const hereRelative = p => here(p).replace(process.cwd(), '.');
 
-const useBuiltinConfig =
-  !args.includes('--config') &&
-  !hasFile('.prettierrc') &&
-  !hasFile('prettier.config.js') &&
-  !hasPkgProp('prettierrc');
-
+const useBuiltinConfig = !args.includes('--config') && !hasLocalConfig('prettier');
 const config = useBuiltinConfig ? ['--config', hereRelative('../config/prettierrc.js')] : [];
 const useBuiltinIgnore = !args.includes('--ignore-path') && !hasFile('.prettierignore');
 const ignore = useBuiltinIgnore ? ['--ignore-path', hereRelative('../config/prettierignore')] : [];

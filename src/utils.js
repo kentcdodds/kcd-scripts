@@ -6,8 +6,9 @@ const arrify = require('arrify');
 const has = require('lodash.has');
 const readPkgUp = require('read-pkg-up');
 const which = require('which');
+const { cosmiconfigSync } = require('cosmiconfig');
 
-const { package: pkg, path: pkgPath } = readPkgUp.sync({
+const { packageJson, path: pkgPath } = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
 });
 const appDirectory = path.dirname(pkgPath);
@@ -39,7 +40,7 @@ function resolveBin(modName, { executable = modName, cwd = process.cwd() } = {})
 }
 
 function resolveCodScripts() {
-  if (pkg.name === 'cod-scripts') {
+  if (packageJson.name === 'cod-scripts') {
     return require.resolve('./').replace(process.cwd(), '.');
   }
   return resolveBin('cod-scripts');
@@ -49,7 +50,7 @@ const fromRoot = (...p) => path.join(appDirectory, ...p);
 const hasFile = (...p) => fs.existsSync(fromRoot(...p));
 const ifFile = (files, t, f) => (arrify(files).some(file => hasFile(file)) ? t : f);
 
-const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop));
+const hasPkgProp = props => arrify(props).some(prop => has(packageJson, prop));
 
 const hasPkgSubProp = pkgProp => props => hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`));
 
@@ -159,12 +160,20 @@ function writeExtraEntry(name, { cjs, esm }, clean = true) {
   );
 }
 
+function hasLocalConfig(moduleName, searchOptions = {}) {
+  const explorerSync = cosmiconfigSync(moduleName, searchOptions);
+  const result = explorerSync.search(pkgPath);
+
+  return result !== null;
+}
+
 module.exports = {
   appDirectory,
   envIsSet,
   fromRoot,
   getConcurrentlyArgs,
   hasFile,
+  hasLocalConfig,
   hasPkgProp,
   hasScript,
   ifAnyDep,
@@ -176,7 +185,7 @@ module.exports = {
   isOptedIn,
   isOptedOut,
   parseEnv,
-  pkg,
+  pkg: packageJson,
   resolveBin,
   resolveCodScripts,
   uniq,

@@ -8,11 +8,8 @@
 
 [![Build Status][build-badge]][build] [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package] [![downloads][downloads-badge]][npmcharts]
-[![MIT License][license-badge]][license]
-
-[![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]
-
-[![Watch on GitHub][github-watch-badge]][github-watch]
+[![MIT License][license-badge]][license] [![PRs Welcome][prs-badge]][prs]
+[![Code of Conduct][coc-badge]][coc] [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star] [![Tweet][twitter-badge]][twitter]
 
 ## The problem
@@ -43,8 +40,9 @@ testing, building, and more.
 This module is distributed via [npm][npm] which is bundled with [node][node] and should be installed
 as one of your project's `devDependencies`:
 
-```
+```sh
 npm install --save-dev cod-scripts
+npm install --save @babel/runtime
 ```
 
 ## Usage
@@ -137,7 +135,7 @@ loaded when you use the default babel config that comes with `cod-scripts`. If y
 
 ## Inspiration
 
-This is inspired by `react-scripts`.
+This was forked from `kentcdodds/kcd-scripts`. This is inspired by `react-scripts`.
 
 ## LICENSE
 

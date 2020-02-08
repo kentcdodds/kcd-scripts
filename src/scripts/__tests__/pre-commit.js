@@ -24,7 +24,6 @@ cases(
     process.exit = jest.fn();
 
     process.argv = ['node', '../pre-commit', ...args];
-    utils.isOptedIn = optIn => optIn === 'pre-commit'; // eslint-disable-line
 
     try {
       // tests

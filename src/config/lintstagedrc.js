@@ -1,4 +1,4 @@
-const { resolveCodScripts, resolveBin, isOptedOut } = require('../utils');
+const { resolveCodScripts, resolveBin } = require('../utils');
 
 const codScripts = resolveCodScripts();
 const doctoc = resolveBin('doctoc');
@@ -8,10 +8,7 @@ const doctoc = resolveBin('doctoc');
 module.exports = {
   'README.md': [`${doctoc} --maxlevel 3 --notitle`],
   '*.+(json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx|vue)': [
-    isOptedOut('autoformat', null, `${codScripts} format --no-eslint`),
+    `${codScripts} format --no-eslint`,
   ].filter(Boolean),
-  '*.js': [
-    isOptedOut('autoformat', null, `${codScripts} lint --fix`),
-    `${codScripts} test --findRelatedTests`,
-  ].filter(Boolean),
+  '*.js': [`${codScripts} lint --fix`, `${codScripts} test --findRelatedTests`].filter(Boolean),
 };

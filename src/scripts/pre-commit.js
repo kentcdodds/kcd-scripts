@@ -1,6 +1,6 @@
 const path = require('path');
 const spawn = require('cross-spawn');
-const { hasPkgProp, hasFile, resolveBin } = require('../utils');
+const { hasPkgProp, hasFile, ifScript, resolveBin } = require('../utils');
 
 const here = p => path.join(__dirname, p);
 const hereRelative = p => here(p).replace(process.cwd(), '.');
@@ -19,7 +19,7 @@ const lintStagedResult = spawn.sync(resolveBin('lint-staged'), [...config, ...ar
   stdio: 'inherit',
 });
 
-if (lintStagedResult.status === 0) {
+if (lintStagedResult.status === 0 && ifScript('validate', true)) {
   const validateResult = spawn.sync('npm', ['run', 'validate'], {
     stdio: 'inherit',
   });

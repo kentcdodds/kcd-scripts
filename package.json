@@ -57,6 +57,7 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "browserslist": "^4.8.7",
+    "chalk": "^3.0.0",
     "concurrently": "^5.1.0",
     "cosmiconfig": "^6.0.0",
     "cross-env": "^7.0.0",

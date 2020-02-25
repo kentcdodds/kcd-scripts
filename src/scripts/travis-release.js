@@ -8,9 +8,14 @@ const autorelease =
   !parseEnv('TRAVIS_PULL_REQUEST', false)
 
 if (autorelease) {
-  const result = spawn.sync('npx', ['semantic-release@17'], {
-    stdio: 'inherit',
-  })
+  const buildResult = spawn.sync('npm', ['run', 'build'], {stdio: 'inherit'})
+  if (buildResult.status === 0) {
+    const result = spawn.sync('npx', ['semantic-release@17'], {
+      stdio: 'inherit',
+    })
 
-  process.exit(result.status)
+    process.exit(result.status)
+  } else {
+    process.exit(buildResult.status)
+  }
 }

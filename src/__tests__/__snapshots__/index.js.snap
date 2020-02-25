@@ -35,6 +35,7 @@ Available Scripts:
   pre-commit
   test
   travis-after-success
+  travis-release
   validate
 
 Options:

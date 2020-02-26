@@ -3,7 +3,7 @@ cache: npm
 notifications:
   email: false
 node_js:
-  - 10.13
+  - 10.18
   - 12
   - node
 install: npm install
@@ -13,6 +13,7 @@ script:
 branches:
   only:
     - master
+    - next
 
 jobs:
   include:

@@ -3,7 +3,7 @@
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
   "engines": {
-    "node": ">=10.13",
+    "node": ">=10.18",
     "npm": ">=6",
     "yarn": ">=1"
   },
@@ -32,7 +32,7 @@
     "jest.js"
   ],
   "keywords": [],
-  "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
+  "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)",
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.8.4",

@@ -3,10 +3,12 @@ const spawn = require('cross-spawn')
 const glob = require('glob')
 const {pkg, parseEnv, hasScript} = require('../utils')
 
+const releaseBranches = ['master', 'next', 'next-major', 'beta', 'alpha']
+
 const autorelease =
   pkg.version === '0.0.0-semantically-released' &&
   parseEnv('TRAVIS', false) &&
-  process.env.TRAVIS_BRANCH === 'master' &&
+  releaseBranches.includes(process.env.TRAVIS_BRANCH) &&
   !parseEnv('TRAVIS_PULL_REQUEST', false)
 
 function main() {

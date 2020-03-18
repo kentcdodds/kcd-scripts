@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://codefund.io/properties/447/visit-sponsor">
-    <img src="https://codefund.io/properties/447/sponsor" />
-  </a>
-</p>
-
 <div align="center">
 <h1>kcd-scripts 🛠📦</h1>
 

@@ -18,11 +18,6 @@
     "format": "node src format",
     "validate": "node src validate"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "node src pre-commit"
-    }
-  },
   "files": [
     "dist",
     "babel.js",

@@ -4,21 +4,21 @@
 <p>CLI toolbox for common scripts for my projects</p>
 </div>
 
-<hr />
+---
 
+<!-- prettier-ignore-start -->
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package]
-[![downloads][downloads-badge]][npmcharts]
+[![downloads][downloads-badge]][npmtrends]
 [![MIT License][license-badge]][license]
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-17-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
-
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
-[![Tweet][twitter-badge]][twitter]
+<!-- prettier-ignore-end -->
 
 ## The problem
 
@@ -41,7 +41,10 @@ for linting, testing, building, and more.
   - [Flow support](#flow-support)
 - [Inspiration](#inspiration)
 - [Other Solutions](#other-solutions)
-- [Contributors](#contributors)
+- [Issues](#issues)
+  - [🐛 Bugs](#-bugs)
+  - [💡 Feature Requests](#-feature-requests)
+- [Contributors ✨](#contributors-)
 - [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -62,8 +65,8 @@ documenting or testing it super duper well because it's really specific to my
 needs. You'll find all available scripts in `src/scripts`.
 
 This project actually dogfoods itself. If you look in the `package.json`, you'll
-find scripts with `node src {scriptName}`. This serves as an example of some
-of the things you can do with `kcd-scripts`.
+find scripts with `node src {scriptName}`. This serves as an example of some of
+the things you can do with `kcd-scripts`.
 
 ### Overriding Config
 
@@ -72,8 +75,8 @@ configuration for things and have that plug directly into the way things work
 with `kcd-scripts`. There are various ways that it works, but basically if you
 want to have your own config for something, just add the configuration and
 `kcd-scripts` will use that instead of it's own internal config. In addition,
-`kcd-scripts` exposes its configuration so you can use it and override only
-the parts of the config you need to.
+`kcd-scripts` exposes its configuration so you can use it and override only the
+parts of the config you need to.
 
 This can be a very helpful way to make editor integration work for tools like
 ESLint which require project-based ESLint configuration to be present to work.
@@ -114,7 +117,10 @@ module.exports = Object.assign(jestConfig, {
 
 ### Flow support
 
-If the `flow-bin` is a dependency on the project the `@babel/preset-flow` will automatically get loaded when you use the default babel config that comes with `kcd-scripts`. If you customised your `.babelrc`-file you might need to manually add `@babel/preset-flow` to the `presets`-section.
+If the `flow-bin` is a dependency on the project the `@babel/preset-flow` will
+automatically get loaded when you use the default babel config that comes with
+`kcd-scripts`. If you customised your `.babelrc`-file you might need to manually
+add `@babel/preset-flow` to the `presets`-section.
 
 ## Inspiration
 
@@ -125,7 +131,25 @@ This is inspired by `react-scripts`.
 I'm not aware of any, if you are please [make a pull request][prs] and add it
 here! Again, this is a very specific-to-me solution.
 
-## Contributors
+## Issues
+
+_Looking to contribute? Look for the [Good First Issue][good-first-issue]
+label._
+
+### 🐛 Bugs
+
+Please file an issue for bugs, missing documentation, or unexpected behavior.
+
+[**See Bugs**][bugs]
+
+### 💡 Feature Requests
+
+Please file an issue to suggest new features. Vote on feature requests by adding
+a 👍. This helps maintainers prioritize what to work on.
+
+[**See Feature Requests**][requests]
+
+## Contributors ✨
 
 Thanks goes to these people ([emoji key][emojis]):
 
@@ -161,6 +185,7 @@ Thanks goes to these people ([emoji key][emojis]):
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.
@@ -170,28 +195,24 @@ Contributions of any kind welcome!
 
 MIT
 
-[npm]: https://www.npmjs.com/
+<!-- prettier-ignore-start -->
+[npm]: https://www.npmjs.com
 [node]: https://nodejs.org
 [build-badge]: https://img.shields.io/travis/kentcdodds/kcd-scripts.svg?style=flat-square
 [build]: https://travis-ci.org/kentcdodds/kcd-scripts
-[coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/kcd-scripts.svg?style=flat-square
-[coverage]: https://codecov.io/github/kentcdodds/kcd-scripts
 [version-badge]: https://img.shields.io/npm/v/kcd-scripts.svg?style=flat-square
 [package]: https://www.npmjs.com/package/kcd-scripts
 [downloads-badge]: https://img.shields.io/npm/dm/kcd-scripts.svg?style=flat-square
-[npmcharts]: http://npmcharts.com/compare/kcd-scripts
+[npmtrends]: http://www.npmtrends.com/kcd-scripts
 [license-badge]: https://img.shields.io/npm/l/kcd-scripts.svg?style=flat-square
 [license]: https://github.com/kentcdodds/kcd-scripts/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
-[donate-badge]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/kentcdodds/kcd-scripts/blob/master/other/CODE_OF_CONDUCT.md
-[github-watch-badge]: https://img.shields.io/github/watchers/kentcdodds/kcd-scripts.svg?style=social
-[github-watch]: https://github.com/kentcdodds/kcd-scripts/watchers
-[github-star-badge]: https://img.shields.io/github/stars/kentcdodds/kcd-scripts.svg?style=social
-[github-star]: https://github.com/kentcdodds/kcd-scripts/stargazers
-[twitter]: https://twitter.com/intent/tweet?text=Check%20out%20kcd-scripts!%20https://github.com/kentcdodds/kcd-scripts%20%F0%9F%91%8D
-[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/kentcdodds/kcd-scripts.svg?style=social
-[emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
-[all-contributors]: https://github.com/kentcdodds/all-contributors
+[emojis]: https://github.com/all-contributors/all-contributors#emoji-key
+[all-contributors]: https://github.com/all-contributors/all-contributors
+[bugs]: https://github.com/kentcdodds/kcd-scripts/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+sort%3Acreated-desc+label%3Abug
+[requests]: https://github.com/kentcdodds/kcd-scripts/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3Aenhancement
+[good-first-issue]: https://github.com/kentcdodds/kcd-scripts/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc+label%3Aenhancement+label%3A%22good+first+issue%22
+<!-- prettier-ignore-end -->

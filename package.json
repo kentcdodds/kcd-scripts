@@ -18,18 +18,14 @@
     "format": "node src format",
     "validate": "node src validate"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "node src pre-commit"
-    }
-  },
   "files": [
     "dist",
     "babel.js",
-    "eslint.js",
     "config.js",
-    "prettier.js",
-    "jest.js"
+    "eslint.js",
+    "husky.js",
+    "jest.js",
+    "prettier.js"
   ],
   "keywords": [],
   "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)",

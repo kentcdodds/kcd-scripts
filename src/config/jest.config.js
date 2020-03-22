@@ -1,7 +1,7 @@
 const path = require('path')
 const {ifAnyDep, hasFile, hasPkgProp, fromRoot} = require('../utils')
 
-const here = (p) => path.join(__dirname, p)
+const here = p => path.join(__dirname, p)
 
 const useBuiltInBabelConfig = !hasFile('.babelrc') && !hasPkgProp('babel')
 

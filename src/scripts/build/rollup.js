@@ -14,8 +14,8 @@ const {
 const crossEnv = resolveBin('cross-env')
 const rollup = resolveBin('rollup')
 const args = process.argv.slice(2)
-const here = (p) => path.join(__dirname, p)
-const hereRelative = (p) => here(p).replace(process.cwd(), '.')
+const here = p => path.join(__dirname, p)
+const hereRelative = p => here(p).replace(process.cwd(), '.')
 const parsedArgs = yargsParser(args)
 
 const useBuiltinConfig =

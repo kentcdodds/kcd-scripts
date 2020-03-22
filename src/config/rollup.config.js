@@ -21,8 +21,8 @@ const {
   writeExtraEntry,
 } = require('../utils')
 
-const here = (p) => path.join(__dirname, p)
-const capitalize = (s) => s[0].toUpperCase() + s.slice(1)
+const here = p => path.join(__dirname, p)
+const capitalize = s => s[0].toUpperCase() + s.slice(1)
 
 const minify = parseEnv('BUILD_MINIFY', false)
 const format = process.env.BUILD_FORMAT
@@ -51,7 +51,7 @@ const codeSplitting = input.length > 1
 
 if (
   codeSplitting &&
-  uniq(input.map((single) => path.basename(single))).length !== input.length
+  uniq(input.map(single => path.basename(single))).length !== input.length
 ) {
   throw new Error(
     'Filenames of code-splitted entries should be unique to get deterministic output filenames.' +
@@ -165,8 +165,8 @@ module.exports = {
           }
 
           input
-            .filter((single) => single.indexOf('index.js') === -1)
-            .forEach((single) => {
+            .filter(single => single.indexOf('index.js') === -1)
+            .forEach(single => {
               const chunk = path.basename(single)
 
               writeExtraEntry(chunk.replace(/\..+$/, ''), {

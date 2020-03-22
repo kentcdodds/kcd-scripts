@@ -49,13 +49,13 @@ cases(
       args: ['--config', './custom-config.js'],
     },
     'does not use built-in config with .lintstagedrc file': {
-      hasFile: (filename) => filename === '.lintstagedrc',
+      hasFile: filename => filename === '.lintstagedrc',
     },
     'does not use built-in config with lint-staged.config.js file': {
-      hasFile: (filename) => filename === 'lint-staged.config.js',
+      hasFile: filename => filename === 'lint-staged.config.js',
     },
     'does not use built-in config with lint-staged pkg prop': {
-      hasPkgProp: (prop) => prop === 'lint-staged',
+      hasPkgProp: prop => prop === 'lint-staged',
     },
     'forwards args': {
       args: ['--verbose'],

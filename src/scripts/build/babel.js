@@ -6,7 +6,7 @@ const glob = require('glob')
 const {hasPkgProp, fromRoot, resolveBin, hasFile} = require('../../utils')
 
 let args = process.argv.slice(2)
-const here = (p) => path.join(__dirname, p)
+const here = p => path.join(__dirname, p)
 
 const parsedArgs = yargsParser(args)
 
@@ -33,7 +33,7 @@ const outDir = useSpecifiedOutDir ? [] : ['--out-dir', builtInOutDir]
 if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
   rimraf.sync(fromRoot('dist'))
 } else {
-  args = args.filter((a) => a !== '--no-clean')
+  args = args.filter(a => a !== '--no-clean')
 }
 
 const result = spawn.sync(
@@ -46,12 +46,12 @@ const result = spawn.sync(
 const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir)
 const ignoredPatterns = (parsedArgs.ignore || builtInIgnore)
   .split(',')
-  .map((pattern) => path.join(pathToOutDir, pattern))
+  .map(pattern => path.join(pathToOutDir, pattern))
 const ignoredFiles = ignoredPatterns.reduce(
   (all, pattern) => [...all, ...glob.sync(pattern)],
   [],
 )
-ignoredFiles.forEach((ignoredFile) => {
+ignoredFiles.forEach(ignoredFile => {
   rimraf.sync(ignoredFile)
 })
 

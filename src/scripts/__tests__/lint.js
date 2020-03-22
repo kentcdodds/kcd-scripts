@@ -55,22 +55,22 @@ cases(
       args: ['--config', './custom-config.js'],
     },
     'does not use built-in config with .eslintrc file': {
-      hasFile: (filename) => filename === '.eslintrc',
+      hasFile: filename => filename === '.eslintrc',
     },
     'does not use built-in config with .eslintrc.js file': {
-      hasFile: (filename) => filename === '.eslintrc.js',
+      hasFile: filename => filename === '.eslintrc.js',
     },
     'does not use built-in config with eslintConfig pkg prop': {
-      hasPkgProp: (prop) => prop === 'eslintConfig',
+      hasPkgProp: prop => prop === 'eslintConfig',
     },
     'does not use built-in ignore with --ignore-path': {
       args: ['--ignore-path', './my-ignore'],
     },
     'does not use built-in ignore with .eslintignore file': {
-      hasFile: (filename) => filename === '.eslintignore',
+      hasFile: filename => filename === '.eslintignore',
     },
     'does not use built-in ignore with eslintIgnore pkg prop': {
-      hasPkgProp: (prop) => prop === 'eslintIgnore',
+      hasPkgProp: prop => prop === 'eslintIgnore',
     },
     '--no-cache will disable caching': {
       args: ['--no-cache'],

@@ -7,8 +7,8 @@ const projectRoot = path.join(__dirname, '../../')
 
 expect.addSnapshotSerializer(unquoteSerializer)
 expect.addSnapshotSerializer({
-  print: (val) => slash(val.replace(projectRoot, '<PROJECT_ROOT>/')),
-  test: (val) => typeof val === 'string' && val.includes(projectRoot),
+  print: val => slash(val.replace(projectRoot, '<PROJECT_ROOT>/')),
+  test: val => typeof val === 'string' && val.includes(projectRoot),
 })
 
 cases(

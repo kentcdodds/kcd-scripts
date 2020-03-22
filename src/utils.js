@@ -50,21 +50,22 @@ function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
 const fromRoot = (...p) => path.join(appDirectory, ...p)
 const hasFile = (...p) => fs.existsSync(fromRoot(...p))
 const ifFile = (files, t, f) =>
-  arrify(files).some(file => hasFile(file)) ? t : f
+  arrify(files).some((file) => hasFile(file)) ? t : f
 
-const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop))
+const hasPkgProp = (props) => arrify(props).some((prop) => has(pkg, prop))
 
-const hasPkgSubProp = pkgProp => props =>
-  hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`))
+const hasPkgSubProp = (pkgProp) => (props) =>
+  hasPkgProp(arrify(props).map((p) => `${pkgProp}.${p}`))
 
-const ifPkgSubProp = pkgProp => (props, t, f) =>
+const ifPkgSubProp = (pkgProp) => (props, t, f) =>
   hasPkgSubProp(pkgProp)(props) ? t : f
 
 const hasScript = hasPkgSubProp('scripts')
 const hasPeerDep = hasPkgSubProp('peerDependencies')
 const hasDep = hasPkgSubProp('dependencies')
 const hasDevDep = hasPkgSubProp('devDependencies')
-const hasAnyDep = args => [hasDep, hasDevDep, hasPeerDep].some(fn => fn(args))
+const hasAnyDep = (args) =>
+  [hasDep, hasDevDep, hasPeerDep].some((fn) => fn(args))
 
 const ifPeerDep = ifPkgSubProp('peerDependencies')
 const ifDep = ifPkgSubProp('dependencies')

@@ -13,7 +13,7 @@ if (script) {
   // So we normalize it before attempting to strip out the scripts path.
   const scriptsAvailableMessage = scriptsAvailable
     .map(path.normalize)
-    .map(s =>
+    .map((s) =>
       s
         .replace(scriptsPath, '')
         .replace(/__tests__/, '')
@@ -40,7 +40,7 @@ function getEnv() {
   // this is required to address an issue in cross-spawn
   // https://github.com/kentcdodds/kcd-scripts/issues/4
   return Object.keys(process.env)
-    .filter(key => process.env[key] !== undefined)
+    .filter((key) => process.env[key] !== undefined)
     .reduce(
       (envCopy, key) => {
         envCopy[key] = process.env[key]
@@ -56,7 +56,7 @@ function spawnScript() {
   // get all the arguments of the script and find the position of our script commands
   const args = process.argv.slice(2)
   const scriptIndex = args.findIndex(
-    x =>
+    (x) =>
       x === 'format' ||
       x === 'lint' ||
       x === 'pre-commit' ||

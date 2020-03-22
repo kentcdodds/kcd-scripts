@@ -4,8 +4,8 @@ const yargsParser = require('yargs-parser')
 const {hasPkgProp, resolveBin, hasFile, fromRoot} = require('../utils')
 
 let args = process.argv.slice(2)
-const here = p => path.join(__dirname, p)
-const hereRelative = p => here(p).replace(process.cwd(), '.')
+const here = (p) => path.join(__dirname, p)
+const hereRelative = (p) => here(p).replace(process.cwd(), '.')
 const parsedArgs = yargsParser(args)
 
 const useBuiltinConfig =
@@ -43,7 +43,7 @@ if (filesGiven) {
   // we need to take all the flag-less arguments (the files that should be linted)
   // and filter out the ones that aren't js files. Otherwise json or css files
   // may be passed through
-  args = args.filter(a => !parsedArgs._.includes(a) || /\.jsx?$/.test(a))
+  args = args.filter((a) => !parsedArgs._.includes(a) || /\.jsx?$/.test(a))
 }
 
 const result = spawn.sync(

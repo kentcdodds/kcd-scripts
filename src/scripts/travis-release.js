@@ -15,7 +15,7 @@ function main() {
   if (autorelease) {
     if (hasScript('build') && pkg.files) {
       let needToBuild = pkg.files.filter(
-        fileGlob => glob.sync(fileGlob).length < 1,
+        (fileGlob) => glob.sync(fileGlob).length < 1,
       )
       if (needToBuild.length) {
         const buildResult = spawn.sync('npm', ['run', 'build'], {
@@ -26,7 +26,7 @@ function main() {
           return
         }
         needToBuild = pkg.files.filter(
-          fileGlob => glob.sync(fileGlob).length < 1,
+          (fileGlob) => glob.sync(fileGlob).length < 1,
         )
         if (needToBuild.length) {
           const list = needToBuild.join(', ')

@@ -19,7 +19,7 @@ cases(
     const {sync: crossSpawnSyncMock} = require('cross-spawn')
     const utils = require('../../utils')
     utils.resolveBin = (modName, {executable = modName} = {}) => executable
-    const originalEnvs = Object.keys(env).map(envKey => {
+    const originalEnvs = Object.keys(env).map((envKey) => {
       const orig = process.env[envKey]
       process.env[envKey] = env[envKey]
       return orig
@@ -39,14 +39,14 @@ cases(
 
     expect(console.log.mock.calls).toMatchSnapshot()
     const commands = crossSpawnSyncMock.mock.calls.map(
-      call => `${call[0]} ${call[1].join(' ')}`,
+      (call) => `${call[0]} ${call[1].join(' ')}`,
     )
     expect(commands).toMatchSnapshot()
 
     // afterEach
     process.exit = originalExit
     console.log = originalLog
-    Object.keys(originalEnvs).forEach(envKey => {
+    Object.keys(originalEnvs).forEach((envKey) => {
       process.env[envKey] = env[envKey]
     })
     jest.resetModules()

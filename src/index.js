@@ -2,10 +2,7 @@
 let shouldThrow = false
 
 try {
-  const [major, minor] = process.version
-    .slice(1)
-    .split('.')
-    .map(Number)
+  const [major, minor] = process.version.slice(1).split('.').map(Number)
   shouldThrow =
     require(`${process.cwd()}/package.json`).name === 'kcd-scripts' &&
     (major < 10 || (major === 10 && minor < 18))

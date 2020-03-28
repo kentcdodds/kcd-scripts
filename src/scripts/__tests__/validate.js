@@ -16,9 +16,8 @@ cases(
     try {
       // tests
       require('../validate')
-      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
       const [firstCall] = crossSpawnSyncMock.mock.calls
-      const [script, calledArgs] = firstCall
+      const [script, calledArgs] = firstCall || ['', []]
       expect([script, ...calledArgs].join(' ')).toMatchSnapshot()
     } catch (error) {
       throw error
@@ -57,6 +56,9 @@ cases(
           process.env['SCRIPTS_PRE-COMMIT'] = previousVal
         }
       }),
+    },
+    'exits if there are no scripts to be run': {
+      setup: withDefaultSetup(setupWithScripts([])),
     },
   },
 )

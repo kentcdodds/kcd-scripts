@@ -198,8 +198,10 @@ MIT
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com
 [node]: https://nodejs.org
-[build-badge]: https://img.shields.io/travis/kentcdodds/kcd-scripts.svg?style=flat-square
-[build]: https://travis-ci.org/kentcdodds/kcd-scripts
+[build-badge]: https://img.shields.io/travis/com/kentcdodds/kcd-scripts.svg?style=flat-square
+[build]: https://travis-ci.com/kentcdodds/kcd-scripts
+[coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/kcd-scripts.svg?style=flat-square
+[coverage]: https://codecov.io/github/kentcdodds/kcd-scripts
 [version-badge]: https://img.shields.io/npm/v/kcd-scripts.svg?style=flat-square
 [package]: https://www.npmjs.com/package/kcd-scripts
 [downloads-badge]: https://img.shields.io/npm/dm/kcd-scripts.svg?style=flat-square

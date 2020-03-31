@@ -28,7 +28,7 @@ cases(
       if (signal) {
         crossSpawnSyncMock.mockReturnValueOnce({ result: 1, signal });
       }
-      require('../');
+      require('..');
       if (snapshotLog) {
         expect(console.log.mock.calls).toMatchSnapshot();
       } else if (signal) {

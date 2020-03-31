@@ -7,5 +7,5 @@ test('requiring some files does not blow up', () => {
   require('../lintstagedrc');
   require('../prettierrc');
   require('../rollup.config');
-  require('../').getRollupConfig();
+  require('..').getRollupConfig();
 });

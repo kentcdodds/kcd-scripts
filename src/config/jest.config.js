@@ -15,8 +15,10 @@ const ignores = [
   '__mocks__',
 ];
 
+const hasSrcDir = hasFile('src');
+
 const jestConfig = {
-  roots: [fromRoot('src')],
+  roots: [fromRoot(hasSrcDir ? 'src' : '')],
   testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
   testURL: 'http://localhost',
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],

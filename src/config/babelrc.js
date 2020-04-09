@@ -1,7 +1,7 @@
 const browserslist = require('browserslist')
 const semver = require('semver')
 
-const {ifAnyDep, parseEnv, appDirectory, pkg} = require('../utils')
+const {ifAnyDep, parseEnv, appDirectory, pkg, ifFile} = require('../utils')
 
 const {BABEL_ENV, NODE_ENV, BUILD_FORMAT} = process.env
 const isTest = (BABEL_ENV || NODE_ENV) === 'test'
@@ -53,7 +53,7 @@ module.exports = () => ({
       ],
     ),
     ifAnyDep(['flow-bin'], [require.resolve('@babel/preset-flow')]),
-    ifAnyDep(['typescript'], [require.resolve('@babel/preset-typescript')]),
+    ifFile(['tsconfig.json'], [require.resolve('@babel/preset-typescript')]),
   ].filter(Boolean),
   plugins: [
     [

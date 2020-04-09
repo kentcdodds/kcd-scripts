@@ -39,6 +39,7 @@ for linting, testing, building, and more.
 - [Usage](#usage)
   - [Overriding Config](#overriding-config)
   - [Flow support](#flow-support)
+  - [TypeScript Support](#typescript-support)
 - [Inspiration](#inspiration)
 - [Other Solutions](#other-solutions)
 - [Issues](#issues)
@@ -121,6 +122,17 @@ If the `flow-bin` is a dependency on the project the `@babel/preset-flow` will
 automatically get loaded when you use the default babel config that comes with
 `kcd-scripts`. If you customised your `.babelrc`-file you might need to manually
 add `@babel/preset-flow` to the `presets`-section.
+
+### TypeScript Support
+
+If the `typescript` is a dependency on the project the
+`@babel/preset-typescript` will automatically get loaded when you use the
+default babel config that comes with `kcd-scripts`. If you customised your
+`.babelrc`-file you might need to manually add `@babel/preset-typescript` to the
+`presets`-section.
+
+`kcd-scripts` will automatically load any `.ts` and `.tsx` files, including the
+default entry point, so you don't have to worry about rollup configuration.
 
 ## Inspiration
 

@@ -39,6 +39,7 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-flow": "^7.9.0",
     "@babel/preset-react": "^7.9.1",
+    "@babel/preset-typescript": "^7.9.0",
     "@babel/runtime": "^7.9.2",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-json": "^4.0.2",

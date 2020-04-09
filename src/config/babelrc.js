@@ -53,6 +53,7 @@ module.exports = () => ({
       ],
     ),
     ifAnyDep(['flow-bin'], [require.resolve('@babel/preset-flow')]),
+    ifAnyDep(['typescript'], [require.resolve('@babel/preset-typescript')]),
   ].filter(Boolean),
   plugins: [
     [

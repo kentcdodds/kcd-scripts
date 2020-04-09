@@ -15,6 +15,7 @@ const {
   pkg,
   hasFile,
   hasPkgProp,
+  hasAnyDep,
   parseEnv,
   fromRoot,
   uniq,
@@ -46,7 +47,9 @@ const deps = Object.keys(pkg.dependencies || {})
 const peerDeps = Object.keys(pkg.peerDependencies || {})
 const defaultExternal = umd ? peerDeps : deps.concat(peerDeps)
 
-const input = glob.sync(fromRoot(process.env.BUILD_INPUT || 'src/index.{js,ts,tsx}'))
+const input = glob.sync(
+  fromRoot(process.env.BUILD_INPUT || 'src/index.{js,ts,tsx}'),
+)
 const codeSplitting = input.length > 1
 
 if (
@@ -136,7 +139,7 @@ const replacements = Object.entries(
   return acc
 }, {})
 
-const extensions = ['.js', '.ts', '.tsx'];
+const extensions = ['.js', '.ts', '.tsx']
 
 module.exports = {
   input: codeSplitting ? input : input[0],
@@ -155,7 +158,7 @@ module.exports = {
     rollupBabel({
       presets: babelPresets,
       babelrc: !useBuiltinConfig,
-      runtimeHelpers: useBuiltinConfig,
+      runtimeHelpers: hasAnyDep('@babel/runtime'),
       extensions,
     }),
     replace(replacements),

@@ -46,7 +46,7 @@ const deps = Object.keys(pkg.dependencies || {})
 const peerDeps = Object.keys(pkg.peerDependencies || {})
 const defaultExternal = umd ? peerDeps : deps.concat(peerDeps)
 
-const input = glob.sync(fromRoot(process.env.BUILD_INPUT || 'src/index.js'))
+const input = glob.sync(fromRoot(process.env.BUILD_INPUT || 'src/index.{js,ts,tsx}'))
 const codeSplitting = input.length > 1
 
 if (
@@ -136,6 +136,8 @@ const replacements = Object.entries(
   return acc
 }, {})
 
+const extensions = ['.js', '.ts', '.tsx'];
+
 module.exports = {
   input: codeSplitting ? input : input[0],
   output,
@@ -146,6 +148,7 @@ module.exports = {
     nodeResolve({
       preferBuiltins: isNode,
       mainFields: ['module', 'main', 'jsnext', 'browser'],
+      extensions,
     }),
     commonjs({include: 'node_modules/**'}),
     json(),
@@ -153,6 +156,7 @@ module.exports = {
       presets: babelPresets,
       babelrc: !useBuiltinConfig,
       runtimeHelpers: useBuiltinConfig,
+      extensions,
     }),
     replace(replacements),
     useSizeSnapshot ? sizeSnapshot({printInfo: false}) : null,

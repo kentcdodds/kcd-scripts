@@ -16,6 +16,7 @@ const {
   hasFile,
   hasPkgProp,
   hasAnyDep,
+  hasTypescript,
   parseEnv,
   fromRoot,
   uniq,
@@ -48,7 +49,10 @@ const peerDeps = Object.keys(pkg.peerDependencies || {})
 const defaultExternal = umd ? peerDeps : deps.concat(peerDeps)
 
 const input = glob.sync(
-  fromRoot(process.env.BUILD_INPUT || 'src/index.{js,ts,tsx}'),
+  fromRoot(
+    process.env.BUILD_INPUT ||
+      (hasTypescript ? 'src/index.{js,ts,tsx}' : 'src/index.js'),
+  ),
 )
 const codeSplitting = input.length > 1
 
@@ -139,7 +143,11 @@ const replacements = Object.entries(
   return acc
 }, {})
 
-const extensions = ['.js', '.ts', '.tsx']
+// TODO: reuse `defaults` from `node-resolve` plugin when this issue is resolved https://github.com/rollup/plugins/issues/299
+const defaultExtensions = ['.mjs', '.js', '.json', '.node']
+const extensions = hasTypescript
+  ? defaultExtensions.concat(['.ts', '.tsx'])
+  : defaultExtensions
 
 module.exports = {
   input: codeSplitting ? input : input[0],

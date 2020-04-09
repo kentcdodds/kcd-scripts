@@ -72,6 +72,9 @@ const ifDevDep = ifPkgSubProp('devDependencies')
 const ifAnyDep = (deps, t, f) => (hasAnyDep(arrify(deps)) ? t : f)
 const ifScript = ifPkgSubProp('scripts')
 
+const hasTypescript = hasAnyDep('typescript') && hasFile('tsconfig.json')
+const ifTypescript = (t, f) => (hasTypescript ? t : f)
+
 function parseEnv(name, def) {
   if (envIsSet(name)) {
     try {
@@ -175,6 +178,8 @@ module.exports = {
   ifFile,
   ifPeerDep,
   ifScript,
+  hasTypescript,
+  ifTypescript,
   parseEnv,
   pkg,
   resolveBin,

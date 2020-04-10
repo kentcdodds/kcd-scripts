@@ -15,7 +15,7 @@ const {
   pkg,
   hasFile,
   hasPkgProp,
-  hasAnyDep,
+  hasDep,
   hasTypescript,
   parseEnv,
   fromRoot,
@@ -166,7 +166,7 @@ module.exports = {
     rollupBabel({
       presets: babelPresets,
       babelrc: !useBuiltinConfig,
-      runtimeHelpers: hasAnyDep('@babel/runtime'),
+      runtimeHelpers: hasDep('@babel/runtime'),
       extensions,
     }),
     replace(replacements),

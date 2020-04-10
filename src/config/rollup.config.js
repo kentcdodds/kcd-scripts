@@ -15,6 +15,8 @@ const {
   pkg,
   hasFile,
   hasPkgProp,
+  hasDep,
+  hasTypescript,
   parseEnv,
   fromRoot,
   uniq,
@@ -46,7 +48,12 @@ const deps = Object.keys(pkg.dependencies || {})
 const peerDeps = Object.keys(pkg.peerDependencies || {})
 const defaultExternal = umd ? peerDeps : deps.concat(peerDeps)
 
-const input = glob.sync(fromRoot(process.env.BUILD_INPUT || 'src/index.js'))
+const input = glob.sync(
+  fromRoot(
+    process.env.BUILD_INPUT ||
+      (hasTypescript ? 'src/index.{js,ts,tsx}' : 'src/index.js'),
+  ),
+)
 const codeSplitting = input.length > 1
 
 if (
@@ -136,6 +143,12 @@ const replacements = Object.entries(
   return acc
 }, {})
 
+// TODO: reuse `defaults` from `node-resolve` plugin when this issue is resolved https://github.com/rollup/plugins/issues/299
+const defaultExtensions = ['.mjs', '.js', '.json', '.node']
+const extensions = hasTypescript
+  ? defaultExtensions.concat(['.ts', '.tsx'])
+  : defaultExtensions
+
 module.exports = {
   input: codeSplitting ? input : input[0],
   output,
@@ -146,13 +159,15 @@ module.exports = {
     nodeResolve({
       preferBuiltins: isNode,
       mainFields: ['module', 'main', 'jsnext', 'browser'],
+      extensions,
     }),
     commonjs({include: 'node_modules/**'}),
     json(),
     rollupBabel({
       presets: babelPresets,
       babelrc: !useBuiltinConfig,
-      runtimeHelpers: useBuiltinConfig,
+      runtimeHelpers: hasDep('@babel/runtime'),
+      extensions,
     }),
     replace(replacements),
     useSizeSnapshot ? sizeSnapshot({printInfo: false}) : null,

@@ -1,4 +1,5 @@
 const path = require('path')
+const {DEFAULT_EXTENSIONS} = require('@babel/core')
 const spawn = require('cross-spawn')
 const yargsParser = require('yargs-parser')
 const rimraf = require('rimraf')
@@ -20,6 +21,11 @@ const config = useBuiltinConfig
   ? ['--presets', here('../../config/babelrc.js')]
   : []
 
+const extensions =
+  args.includes('--extensions') || args.includes('--x')
+    ? []
+    : ['--extensions', [...DEFAULT_EXTENSIONS, '.ts', '.tsx']]
+
 const builtInIgnore = '**/__tests__/**,**/__mocks__/**'
 
 const ignore = args.includes('--ignore') ? [] : ['--ignore', builtInIgnore]
@@ -38,7 +44,9 @@ if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
 
 const result = spawn.sync(
   resolveBin('@babel/cli', {executable: 'babel'}),
-  [...outDir, ...copyFiles, ...ignore, ...config, 'src'].concat(args),
+  [...outDir, ...copyFiles, ...ignore, ...extensions, ...config, 'src'].concat(
+    args,
+  ),
   {stdio: 'inherit'},
 )
 

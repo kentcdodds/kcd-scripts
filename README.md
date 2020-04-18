@@ -125,7 +125,7 @@ add `@babel/preset-flow` to the `presets`-section.
 
 ### TypeScript Support
 
-If the `tsconfig.json`-file is present in the project root directory and the
+If the `tsconfig.json`-file is present in the project root directory and 
 `typescript` is a dependency the `@babel/preset-typescript` will automatically
 get loaded when you use the default babel config that comes with `kcd-scripts`.
 If you customised your `.babelrc`-file you might need to manually add
@@ -133,6 +133,8 @@ If you customised your `.babelrc`-file you might need to manually add
 
 `kcd-scripts` will automatically load any `.ts` and `.tsx` files, including the
 default entry point, so you don't have to worry about any rollup configuration.
+
+`tsc --noemit` will run during lint-staged to verify that files will compile.
 
 ## Inspiration
 

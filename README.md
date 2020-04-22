@@ -6,11 +6,8 @@
 
 <hr />
 
-[![Build Status][build-badge]][build] [![Code Coverage][coverage-badge]][coverage]
 [![version][version-badge]][package] [![downloads][downloads-badge]][npmcharts]
 [![MIT License][license-badge]][license] [![PRs Welcome][prs-badge]][prs]
-[![Code of Conduct][coc-badge]][coc] [![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star] [![Tweet][twitter-badge]][twitter]
 
 ## The problem
 
@@ -135,7 +132,8 @@ loaded when you use the default babel config that comes with `cod-scripts`. If y
 
 ## Inspiration
 
-This was forked from `kentcdodds/kcd-scripts`. This is inspired by `react-scripts`.
+This was forked from `kentcdodds/kcd-scripts`. This is
+[inspired by `react-scripts`](https://github.com/kentcdodds/kcd-scripts#inspiration).
 
 ## LICENSE
 
@@ -143,26 +141,11 @@ MIT
 
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
-[build-badge]: https://img.shields.io/travis/codfish/cod-scripts.svg?style=flat-square
-[build]: https://travis-ci.org/codfish/cod-scripts
-[coverage-badge]: https://img.shields.io/codecov/c/github/codfish/cod-scripts.svg?style=flat-square
-[coverage]: https://codecov.io/github/codfish/cod-scripts
+[npmcharts]: http://npmcharts.com/compare/cod-scripts
 [version-badge]: https://img.shields.io/npm/v/cod-scripts.svg?style=flat-square
 [package]: https://www.npmjs.com/package/cod-scripts
 [downloads-badge]: https://img.shields.io/npm/dm/cod-scripts.svg?style=flat-square
-[npmcharts]: http://npmcharts.com/compare/cod-scripts
 [license-badge]: https://img.shields.io/npm/l/cod-scripts.svg?style=flat-square
 [license]: https://github.com/codfish/cod-scripts/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
-[donate-badge]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
-[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/codfish/cod-scripts/blob/master/other/CODE_OF_CONDUCT.md
-[github-watch-badge]: https://img.shields.io/github/watchers/codfish/cod-scripts.svg?style=social
-[github-watch]: https://github.com/codfish/cod-scripts/watchers
-[github-star-badge]: https://img.shields.io/github/stars/codfish/cod-scripts.svg?style=social
-[github-star]: https://github.com/codfish/cod-scripts/stargazers
-[twitter]:
-  https://twitter.com/intent/tweet?text=Check%20out%20cod-scripts!%20https://github.com/codfish/cod-scripts%20%F0%9F%91%8D
-[twitter-badge]:
-  https://img.shields.io/twitter/url/https/github.com/codfish/cod-scripts.svg?style=social

@@ -9,14 +9,10 @@
 [![version][version-badge]][package] [![downloads][downloads-badge]][npmcharts]
 [![MIT License][license-badge]][license] [![PRs Welcome][prs-badge]][prs]
 
-## The problem
+## Motivation
 
-I do a bunch of open source and want to make it easier to maintain so many projects.
-
-## This solution
-
-This is a CLI that abstracts away all configuration for my open source projects for linting,
-testing, building, and more.
+This helps me maintain personal & work projects without duplication. This is a CLI that abstracts
+away all configuration for my open source projects for linting, testing, building, and more.
 
 ## Table of Contents
 

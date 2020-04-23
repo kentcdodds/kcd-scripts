@@ -7,7 +7,8 @@
 <hr />
 
 [![version][version-badge]][package] [![downloads][downloads-badge]][npmcharts]
-[![MIT License][license-badge]][license] [![PRs Welcome][prs-badge]][prs]
+[![GitHub Workflow Status][actions-badge]][actions-badge] [![MIT License][license-badge]][license]
+[![PRs Welcome][prs-badge]][prs]
 
 ## Motivation
 
@@ -145,3 +146,4 @@ MIT
 [license]: https://github.com/codfish/cod-scripts/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
+[actions-badge]: https://img.shields.io/github/workflow/status/codfish/cod-scripts/Release/master

@@ -8,7 +8,8 @@
 
 [![version][version-badge]][package] [![downloads][downloads-badge]][npmcharts]
 [![GitHub Workflow Status][actions-badge]][actions-badge] [![MIT License][license-badge]][license]
-[![PRs Welcome][prs-badge]][prs]
+[![PRs Welcome][prs-badge]][prs] [![Semantic Release][semantic-release-badge]][semantic-release]
+[![Commitizen friendly][commitizen-badge]][commitizen]
 
 ## Motivation
 
@@ -138,12 +139,18 @@ MIT
 
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
+[semantic-release]: https://github.com/semantic-release/semantic-release
+[semantic-release-badge]:
+  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[prs]: http://makeapullrequest.com
+[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[commitizen]: http://commitizen.github.io/cz-cli/
+[commitizen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [npmcharts]: http://npmcharts.com/compare/cod-scripts
 [version-badge]: https://img.shields.io/npm/v/cod-scripts.svg?style=flat-square
 [package]: https://www.npmjs.com/package/cod-scripts
 [downloads-badge]: https://img.shields.io/npm/dm/cod-scripts.svg?style=flat-square
 [license-badge]: https://img.shields.io/npm/l/cod-scripts.svg?style=flat-square
 [license]: https://github.com/codfish/cod-scripts/blob/master/LICENSE
-[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[prs]: http://makeapullrequest.com
+[actions]: https://github.com/codfish/cod-scripts/actions
 [actions-badge]: https://img.shields.io/github/workflow/status/codfish/cod-scripts/Release/master

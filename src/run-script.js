@@ -46,6 +46,7 @@ function spawnScript() {
     x =>
       x === 'format' ||
       x === 'lint' ||
+      x === 'commitlint' ||
       x === 'pre-commit' ||
       x === 'test' ||
       x === 'validate' ||

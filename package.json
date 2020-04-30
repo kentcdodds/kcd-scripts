@@ -77,7 +77,7 @@
     "read-pkg-up": "^7.0.1",
     "resolve": "^1.17.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.7.5",
+    "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",

@@ -14,7 +14,11 @@ const {packageJson: pkg, path: pkgPath} = readPkgUp.sync({
 const appDirectory = path.dirname(pkgPath)
 
 function resolveKcdScripts() {
-  if (pkg.name === 'kcd-scripts') {
+  if (
+    pkg.name === 'kcd-scripts' ||
+    // this happens on install of husky within kcd-scripts locally
+    appDirectory.includes(path.join(__dirname, '..'))
+  ) {
     return require.resolve('./').replace(process.cwd(), '.')
   }
   return resolveBin('kcd-scripts')

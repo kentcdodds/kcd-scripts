@@ -34,15 +34,15 @@ cases(
       setup: withDefaultSetup(setupWithScripts()),
     },
     [`does not include "lint" if it doesn't have that script`]: {
-      setup: withDefaultSetup(setupWithScripts(['test', 'build', 'flow'])),
+      setup: withDefaultSetup(setupWithScripts(['test', 'build', 'typecheck'])),
     },
     [`does not include "test" if it doesn't have that script`]: {
-      setup: withDefaultSetup(setupWithScripts(['lint', 'build', 'flow'])),
+      setup: withDefaultSetup(setupWithScripts(['lint', 'build', 'typecheck'])),
     },
     [`does not include "build" if it doesn't have that script`]: {
-      setup: withDefaultSetup(setupWithScripts(['test', 'lint', 'flow'])),
+      setup: withDefaultSetup(setupWithScripts(['test', 'lint', 'typecheck'])),
     },
-    [`does not include "flow" if it doesn't have that script`]: {
+    [`does not include "typecheck" if it doesn't have that script`]: {
       setup: withDefaultSetup(setupWithScripts(['test', 'build', 'lint'])),
     },
     'allows you to specify your own npm scripts': {
@@ -63,7 +63,7 @@ cases(
   },
 )
 
-function setupWithScripts(scripts = ['test', 'lint', 'build', 'flow']) {
+function setupWithScripts(scripts = ['test', 'lint', 'build', 'typecheck']) {
   return function setup() {
     const utils = require('../../utils')
     const originalIfScript = utils.ifScript

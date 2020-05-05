@@ -22,7 +22,7 @@ const scripts = useDefaultScripts
       test: preCommit
         ? null
         : ifScript('test', 'npm run test --silent -- --coverage'),
-      flow: ifScript('flow', 'npm run flow --silent'),
+      typecheck: ifScript('typecheck', 'npm run typecheck --silent'),
     }
   : validateScripts.split(',').reduce((scriptsToRun, name) => {
       scriptsToRun[name] = `npm run ${name} --silent`

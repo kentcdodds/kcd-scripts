@@ -58,7 +58,6 @@ module.exports = () => ({
         {pragma: isPreact ? 'React.h' : undefined},
       ],
     ),
-    ifAnyDep(['flow-bin'], [require.resolve('@babel/preset-flow')]),
     ifTypescript([require.resolve('@babel/preset-typescript')]),
   ].filter(Boolean),
   plugins: [

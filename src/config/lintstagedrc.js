@@ -10,5 +10,8 @@ module.exports = {
     `${kcdScripts} lint`,
     `${kcdScripts} test --findRelatedTests`,
   ],
-  '*.+(ts|tsx)': ifTypescript ? [`tsc --noEmit`] : undefined,
+  '!(types)/**/*.(ts|tsx)': ifTypescript ? [`tsc --noEmit`] : undefined,
+  'types/!(__tests__)/**/*.(ts|tsx)': ifTypescript
+    ? [`tsc --noEmit`]
+    : undefined,
 }

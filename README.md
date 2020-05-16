@@ -35,6 +35,7 @@ for linting, testing, building, and more.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Installation](#installation)
 - [Usage](#usage)
   - [Overriding Config](#overriding-config)
@@ -134,7 +135,8 @@ If you customised your `.babelrc`-file you might need to manually add
 `kcd-scripts` will automatically load any `.ts` and `.tsx` files, including the
 default entry point, so you don't have to worry about any rollup configuration.
 
-`tsc --noemit` will run during lint-staged to verify that files will compile.
+`tsc --build tsconfig.json` will run during before committing to verify that files will compile.
+So make sure to add the `noEmit` flag to the `tsconfig.json`'s `compilerOptions`.
 
 ## Inspiration
 

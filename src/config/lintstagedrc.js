@@ -1,4 +1,4 @@
-const {resolveKcdScripts, resolveBin, ifTypescript} = require('../utils')
+const {resolveKcdScripts, resolveBin} = require('../utils')
 
 const kcdScripts = resolveKcdScripts()
 const doctoc = resolveBin('doctoc')
@@ -10,5 +10,4 @@ module.exports = {
     `${kcdScripts} lint`,
     `${kcdScripts} test --findRelatedTests`,
   ],
-  '*.+(ts|tsx)': ifTypescript ? [`tsc --noEmit`] : undefined,
 }

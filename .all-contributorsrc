@@ -193,6 +193,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Lukas-Kullmann",
+      "name": "Lukas",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/387547?v=4",
+      "profile": "https://github.com/Lukas-Kullmann",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ]
 }

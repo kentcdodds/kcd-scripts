@@ -1,11 +1,14 @@
 const path = require('path')
+const {babel: rollupBabel} = require('@rollup/plugin-babel')
 const commonjs = require('@rollup/plugin-commonjs')
 const json = require('@rollup/plugin-json')
-const nodeResolve = require('@rollup/plugin-node-resolve')
+const {
+  DEFAULTS: nodeResolveDefaults,
+  nodeResolve,
+} = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
 const glob = require('glob')
 const camelcase = require('lodash.camelcase')
-const rollupBabel = require('rollup-plugin-babel')
 const {terser} = require('rollup-plugin-terser')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
@@ -143,11 +146,9 @@ const replacements = Object.entries(
   return acc
 }, {})
 
-// TODO: reuse `defaults` from `node-resolve` plugin when this issue is resolved https://github.com/rollup/plugins/issues/299
-const defaultExtensions = ['.mjs', '.js', '.json', '.node']
 const extensions = hasTypescript
-  ? defaultExtensions.concat(['.ts', '.tsx'])
-  : defaultExtensions
+  ? [...nodeResolveDefaults.extensions, '.ts', '.tsx']
+  : nodeResolveDefaults.extensions
 
 module.exports = {
   input: codeSplitting ? input : input[0],
@@ -166,7 +167,7 @@ module.exports = {
     rollupBabel({
       presets: babelPresets,
       babelrc: !useBuiltinConfig,
-      runtimeHelpers: hasDep('@babel/runtime'),
+      babelHelpers: hasDep('@babel/runtime') ? 'runtime' : 'bundled',
       extensions,
     }),
     replace(replacements),

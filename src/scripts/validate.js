@@ -18,6 +18,9 @@ const useDefaultScripts = typeof validateScripts !== 'string'
 const scripts = useDefaultScripts
   ? {
       build: ifScript('build', 'npm run build --silent'),
+      format: preCommit
+        ? null
+        : ifScript('format', 'npm run format -- --check'),
       lint: preCommit ? null : ifScript('lint', 'npm run lint --silent'),
       test: preCommit
         ? null

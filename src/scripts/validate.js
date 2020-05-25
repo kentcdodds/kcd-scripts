@@ -24,10 +24,13 @@ const scripts = useDefaultScripts
         : ifScript('test', 'npm run test --silent -- --coverage'),
       typecheck: ifScript('typecheck', 'npm run typecheck --silent'),
     }
-  : validateScripts.split(',').reduce((scriptsToRun, name) => {
-      scriptsToRun[name] = `npm run ${name} --silent`
-      return scriptsToRun
-    }, {})
+  : validateScripts.split(',').reduce(
+      (scriptsToRun, name) => ({
+        ...scriptsToRun,
+        [name]: `npm run ${name} --silent`,
+      }),
+      {},
+    )
 
 const scriptCount = Object.values(scripts).filter(Boolean).length
 

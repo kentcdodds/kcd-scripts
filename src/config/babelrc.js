@@ -55,7 +55,7 @@ module.exports = () => ({
       ['react', 'preact'],
       [
         require.resolve('@babel/preset-react'),
-        {pragma: isPreact ? 'React.h' : undefined},
+        {pragma: isPreact ? 'h' : undefined},
       ],
     ),
     ifTypescript([require.resolve('@babel/preset-typescript')]),

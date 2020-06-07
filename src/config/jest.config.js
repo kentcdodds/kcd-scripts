@@ -16,7 +16,11 @@ const ignores = [
 
 const jestConfig = {
   roots: [fromRoot('src')],
-  testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
+  testEnvironment: ifAnyDep(
+    ['webpack', 'rollup', 'react', 'preact'],
+    'jsdom',
+    'node',
+  ),
   testURL: 'http://localhost',
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   collectCoverageFrom: ['src/**/*.+(js|jsx|ts|tsx)'],

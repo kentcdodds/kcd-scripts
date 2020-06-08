@@ -2,6 +2,7 @@ const browserslist = require('browserslist')
 const semver = require('semver')
 
 const {
+  ifDep,
   ifAnyDep,
   ifTypescript,
   parseEnv,
@@ -55,7 +56,7 @@ module.exports = () => ({
       ['react', 'preact'],
       [
         require.resolve('@babel/preset-react'),
-        {pragma: isPreact ? 'h' : undefined},
+        {pragma: isPreact ? ifDep('preact-compat', 'React.h', 'h') : undefined},
       ],
     ),
     ifTypescript([require.resolve('@babel/preset-typescript')]),

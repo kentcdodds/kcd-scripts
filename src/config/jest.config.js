@@ -27,7 +27,9 @@ const jestConfig = {
   testMatch: ['**/__tests__/**/*.+(js|jsx|ts|tsx)'],
   testPathIgnorePatterns: [...ignores],
   coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.js$'],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\](?!preact).+\\.(js|jsx)$',
+  ],
   coverageThreshold: {
     global: {
       branches: 100,

@@ -14,7 +14,7 @@
 [![MIT License][license-badge]][license]
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-21-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
@@ -199,6 +199,9 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="https://kubajastrz.com"><img src="https://avatars0.githubusercontent.com/u/6443113?v=4" width="100px;" alt=""/><br /><sub><b>Jakub Jastrzębski</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=KubaJastrz" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Lukas-Kullmann"><img src="https://avatars0.githubusercontent.com/u/387547?v=4" width="100px;" alt=""/><br /><sub><b>Lukas</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=Lukas-Kullmann" title="Code">💻</a> <a href="https://github.com/kentcdodds/kcd-scripts/commits?author=Lukas-Kullmann" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/mihar-22"><img src="https://avatars2.githubusercontent.com/u/14304599?v=4" width="100px;" alt=""/><br /><sub><b>Rahim Alwer</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=mihar-22" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/ghostd"><img src="https://avatars1.githubusercontent.com/u/1098399?v=4" width="100px;" alt=""/><br /><sub><b>Vincent Ricard</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=ghostd" title="Code">💻</a></td>
   </tr>
 </table>
 

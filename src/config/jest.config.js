@@ -47,7 +47,7 @@ if (hasFile('tests/setup-env.js')) {
 }
 
 if (useBuiltInBabelConfig) {
-  jestConfig.transform = {'^.+\\.js$': here('./babel-transform')}
+  jestConfig.transform = {'^.+\\.(js|jsx|ts|tsx)$': here('./babel-transform')}
 }
 
 module.exports = jestConfig

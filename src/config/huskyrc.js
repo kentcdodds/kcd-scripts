@@ -4,6 +4,6 @@ const kcdScripts = resolveKcdScripts()
 
 module.exports = {
   hooks: {
-    'pre-commit': `${kcdScripts} pre-commit`,
+    'pre-commit': `"${kcdScripts}" pre-commit`,
   },
 }

@@ -14,7 +14,7 @@
 [![MIT License][license-badge]][license]
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-23-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
@@ -202,6 +202,7 @@ Thanks goes to these people ([emoji key][emojis]):
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/ghostd"><img src="https://avatars1.githubusercontent.com/u/1098399?v=4" width="100px;" alt=""/><br /><sub><b>Vincent Ricard</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=ghostd" title="Code">💻</a></td>
+    <td align="center"><a href="http://timdeschryver.dev"><img src="https://avatars1.githubusercontent.com/u/28659384?v=4" width="100px;" alt=""/><br /><sub><b>Tim Deschryver</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=timdeschryver" title="Code">💻</a></td>
   </tr>
 </table>
 

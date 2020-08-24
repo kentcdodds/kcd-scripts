@@ -35,7 +35,6 @@ for linting, testing, building, and more.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Installation](#installation)
 - [Usage](#usage)
   - [Overriding Config](#overriding-config)
@@ -126,7 +125,7 @@ add `@babel/preset-flow` to the `presets`-section.
 
 ### TypeScript Support
 
-If the `tsconfig.json`-file is present in the project root directory and 
+If the `tsconfig.json`-file is present in the project root directory and
 `typescript` is a dependency the `@babel/preset-typescript` will automatically
 get loaded when you use the default babel config that comes with `kcd-scripts`.
 If you customised your `.babelrc`-file you might need to manually add
@@ -135,8 +134,9 @@ If you customised your `.babelrc`-file you might need to manually add
 `kcd-scripts` will automatically load any `.ts` and `.tsx` files, including the
 default entry point, so you don't have to worry about any rollup configuration.
 
-`tsc --build tsconfig.json` will run during before committing to verify that files will compile.
-So make sure to add the `noEmit` flag to the `tsconfig.json`'s `compilerOptions`.
+`tsc --build tsconfig.json` will run during before committing to verify that
+files will compile. So make sure to add the `noEmit` flag to the
+`tsconfig.json`'s `compilerOptions`.
 
 ## Inspiration
 
@@ -208,6 +208,7 @@ Thanks goes to these people ([emoji key][emojis]):
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.

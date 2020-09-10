@@ -1,17 +1,28 @@
 const path = require('path');
+const { babel: rollupBabel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const json = require('@rollup/plugin-json');
-const nodeResolve = require('@rollup/plugin-node-resolve');
+const { DEFAULTS: nodeResolveDefaults, nodeResolve } = require('@rollup/plugin-node-resolve');
+
 const replace = require('@rollup/plugin-replace');
 const glob = require('glob');
 const camelcase = require('lodash.camelcase');
-const rollupBabel = require('rollup-plugin-babel');
 const { terser } = require('rollup-plugin-terser');
 const nodeBuiltIns = require('rollup-plugin-node-builtins');
 const nodeGlobals = require('rollup-plugin-node-globals');
 const { sizeSnapshot } = require('rollup-plugin-size-snapshot');
 const omit = require('lodash.omit');
-const { pkg, hasFile, hasPkgProp, parseEnv, fromRoot, uniq, writeExtraEntry } = require('../utils');
+const {
+  pkg,
+  hasFile,
+  hasPkgProp,
+  hasDep,
+  hasTypescript,
+  parseEnv,
+  fromRoot,
+  uniq,
+  writeExtraEntry,
+} = require('../utils');
 
 const here = p => path.join(__dirname, p);
 const capitalize = s => s[0].toUpperCase() + s.slice(1);
@@ -36,7 +47,9 @@ const deps = Object.keys(pkg.dependencies || {});
 const peerDeps = Object.keys(pkg.peerDependencies || {});
 const defaultExternal = umd ? peerDeps : deps.concat(peerDeps);
 
-const input = glob.sync(fromRoot(process.env.BUILD_INPUT || 'src/index.js'));
+const input = glob.sync(
+  fromRoot(process.env.BUILD_INPUT || (hasTypescript ? 'src/index.{js,ts,tsx}' : 'src/index.js')),
+);
 const codeSplitting = input.length > 1;
 
 if (codeSplitting && uniq(input.map(single => path.basename(single))).length !== input.length) {
@@ -117,6 +130,10 @@ const replacements = Object.entries(umd ? process.env : omit(process.env, ['NODE
   {},
 );
 
+const extensions = hasTypescript
+  ? [...nodeResolveDefaults.extensions, '.ts', '.tsx']
+  : nodeResolveDefaults.extensions;
+
 module.exports = {
   input: codeSplitting ? input : input[0],
   output,
@@ -127,13 +144,15 @@ module.exports = {
     nodeResolve({
       preferBuiltins: isNode,
       mainFields: ['module', 'main', 'jsnext', 'browser'],
+      extensions,
     }),
     commonjs({ include: 'node_modules/**' }),
     json(),
     rollupBabel({
       presets: babelPresets,
       babelrc: !useBuiltinConfig,
-      runtimeHelpers: useBuiltinConfig,
+      babelHelpers: hasDep('@babel/runtime') ? 'runtime' : 'bundled',
+      extensions,
     }),
     replace(replacements),
     useSizeSnapshot ? sizeSnapshot({ printInfo: false }) : null,

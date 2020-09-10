@@ -159,6 +159,7 @@ module.exports = {
   hasLocalConfig,
   hasPkgProp,
   hasScript,
+  hasDep,
   ifAnyDep,
   ifDep,
   ifDevDep,

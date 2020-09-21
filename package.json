@@ -1,6 +1,6 @@
 {
   "name": "kcd-scripts",
-  "version": "0.0.0-semantically-released",
+  "version": "6.5.0",
   "description": "CLI for common scripts for my projects",
   "engines": {
     "node": ">=10.18",

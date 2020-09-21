@@ -56,6 +56,7 @@ test(`resolveBin resolves to the binary if it's in $PATH`, () => {
   expect(whichSyncMock).toHaveBeenCalledWith('cross-env')
 })
 
+// eslint-disable-next-line no-restricted-globals
 describe('for windows', () => {
   let realpathSync
 

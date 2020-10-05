@@ -23,6 +23,12 @@ const jestConfig = {
   ),
   testURL: 'http://localhost',
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
+  moduleDirectories: [
+    'node_modules',
+    fromRoot('src'),
+    'shared',
+    fromRoot('tests'),
+  ],
   collectCoverageFrom: ['src/**/*.+(js|jsx|ts|tsx)'],
   testMatch: ['**/__tests__/**/*.+(js|jsx|ts|tsx)'],
   testPathIgnorePatterns: [...ignores],

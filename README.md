@@ -221,8 +221,8 @@ MIT
 <!-- prettier-ignore-start -->
 [npm]: https://www.npmjs.com
 [node]: https://nodejs.org
-[build-badge]: https://img.shields.io/travis/com/kentcdodds/kcd-scripts.svg?style=flat-square
-[build]: https://travis-ci.com/kentcdodds/kcd-scripts
+[build-badge]: https://img.shields.io/github/workflow/status/kentcdodds/kcd-scripts/validate/main?logo=github&style=flat-square
+[build]: https://github.com/kentcdodds/kcd-scripts/actions?query=workflow%3Avalidate
 [coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/kcd-scripts.svg?style=flat-square
 [coverage]: https://codecov.io/github/kentcdodds/kcd-scripts
 [version-badge]: https://img.shields.io/npm/v/kcd-scripts.svg?style=flat-square

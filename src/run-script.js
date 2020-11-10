@@ -4,7 +4,7 @@ const glob = require('glob')
 
 const [executor, ignoredBin, script] = process.argv
 
-if (script) {
+if (script && script !== '--help' && script !== 'help') {
   spawnScript()
 } else {
   const scriptsPath = path.join(__dirname, 'scripts/')

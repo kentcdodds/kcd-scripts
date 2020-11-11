@@ -118,7 +118,7 @@ function getConcurrentlyArgs(scripts, {killOthers = true} = {}) {
   const prefixColors = Object.keys(scripts)
     .reduce(
       (pColors, _s, i) =>
-        pColors.concat([`${colors[i % colors.length]}.bold.reset`]),
+        pColors.concat([`${colors[i % colors.length]}.bold.white`]),
       [],
     )
     .join(',')

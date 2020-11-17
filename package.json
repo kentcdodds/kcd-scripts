@@ -3,7 +3,7 @@
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
   "engines": {
-    "node": ">=10.13",
+    "node": ">=10.18",
     "npm": ">=6",
     "yarn": ">=1"
   },
@@ -25,8 +25,10 @@
     "commitlint.js",
     "eslint.js",
     "config.js",
-    "prettier.js",
-    "jest.js"
+    "eslint.js",
+    "husky.js",
+    "jest.js",
+    "prettier.js"
   ],
   "keywords": [],
   "author": "Chris O'Donnell <dev@codfish.io> (http://codfish.io/)",
@@ -38,9 +40,9 @@
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
-    "@babel/preset-flow": "^7.12.1",
-    "@babel/preset-react": "^7.12.1",
-    "@babel/runtime": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "@babel/preset-typescript": "^7.12.1",
+    "@babel/runtime": "^7.12.5",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@rollup/plugin-babel": "^5.2.1",
@@ -48,21 +50,23 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@rollup/plugin-replace": "^2.3.4",
+    "@types/jest": "^26.0.15",
     "arrify": "^2.0.1",
-    "babel-jest": "^26.6.1",
+    "babel-jest": "^26.6.3",
     "babel-plugin-macros": "^2.6.1",
     "babel-plugin-minify-dead-code-elimination": "^0.5.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
-    "browserslist": "^4.14.6",
+    "browserslist": "^4.14.7",
+    "chalk": "^4.1.0",
     "concurrently": "^5.3.0",
     "cosmiconfig": "^7.0.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.3",
     "doctoc": "^1.4.0",
-    "eslint": "^7.12.1",
-    "eslint-config-codfish": "^7.0.0",
+    "eslint": "^7.13.0",
+    "eslint-config-codfish": "^8.0.0",
     "glob": "^7.1.5",
     "husky": "^4.3.0",
     "is-ci": "^2.0.0",
@@ -76,16 +80,16 @@
     "prettier": "^2.1.2",
     "react-app-polyfill": "^2.0.0",
     "read-pkg-up": "^7.0.1",
-    "resolve": "^1.18.1",
+    "resolve": "^1.19.0",
     "rimraf": "^3.0.0",
-    "rollup": "^2.33.0",
+    "rollup": "^2.33.2",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-size-snapshot": "^0.12.0",
     "rollup-plugin-terser": "^7.0.2",
     "semver": "^7.3.2",
     "which": "^2.0.2",
-    "yargs-parser": "^20.2.3"
+    "yargs-parser": "^20.2.4"
   },
   "devDependencies": {
     "jest-in-case": "^1.0.2",
@@ -103,12 +107,6 @@
       "import/no-dynamic-require": "off",
       "import/no-unassigned-import": "off",
       "no-nested-ternary": "off"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "node src pre-commit",
-      "commit-msg": "node src commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "commitlint": {
@@ -135,7 +133,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codfish/cod-scripts.git"
+    "url": "https://github.com/codfish/cod-scripts"
   },
   "bugs": {
     "url": "https://github.com/codfish/cod-scripts/issues"

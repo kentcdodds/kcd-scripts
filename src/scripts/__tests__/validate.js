@@ -3,7 +3,7 @@ import { unquoteSerializer } from './helpers/serializers';
 
 expect.addSnapshotSerializer(unquoteSerializer);
 
-function setupWithScripts(scripts = ['test', 'lint', 'build', 'flow']) {
+function setupWithScripts(scripts = ['test', 'lint', 'build', 'typecheck']) {
   return function setup() {
     const utils = require('../../utils');
     const originalIfScript = utils.ifScript;
@@ -56,9 +56,8 @@ cases(
     try {
       // tests
       require('../validate');
-      expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1);
       const [firstCall] = crossSpawnSyncMock.mock.calls;
-      const [script, calledArgs] = firstCall;
+      const [script, calledArgs] = firstCall || ['', []];
       expect([script, ...calledArgs].join(' ')).toMatchSnapshot();
     } catch (error) {
       throw error;
@@ -75,15 +74,15 @@ cases(
       setup: withDefaultSetup(setupWithScripts()),
     },
     [`does not include "lint" if it doesn't have that script`]: {
-      setup: withDefaultSetup(setupWithScripts(['test', 'build', 'flow'])),
+      setup: withDefaultSetup(setupWithScripts(['test', 'build', 'typecheck'])),
     },
     [`does not include "test" if it doesn't have that script`]: {
-      setup: withDefaultSetup(setupWithScripts(['lint', 'build', 'flow'])),
+      setup: withDefaultSetup(setupWithScripts(['lint', 'build', 'typecheck'])),
     },
     [`does not include "build" if it doesn't have that script`]: {
-      setup: withDefaultSetup(setupWithScripts(['test', 'lint', 'flow'])),
+      setup: withDefaultSetup(setupWithScripts(['test', 'lint', 'typecheck'])),
     },
-    [`does not include "flow" if it doesn't have that script`]: {
+    [`does not include "typecheck" if it doesn't have that script`]: {
       setup: withDefaultSetup(setupWithScripts(['test', 'build', 'lint'])),
     },
     'allows you to specify your own npm scripts': {
@@ -97,6 +96,9 @@ cases(
           process.env['SCRIPTS_PRE-COMMIT'] = previousVal;
         };
       }),
+    },
+    'exits if there are no scripts to be run': {
+      setup: withDefaultSetup(setupWithScripts([])),
     },
   },
 );

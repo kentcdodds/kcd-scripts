@@ -15,13 +15,12 @@ const ignores = [
   '__mocks__',
 ];
 
-const hasSrcDir = hasFile('src');
-
 const jestConfig = {
-  roots: [fromRoot(hasSrcDir ? 'src' : '')],
+  roots: [fromRoot(hasFile('src') ? 'src' : '')],
   testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
   testURL: 'http://localhost',
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
+  moduleDirectories: ['node_modules', fromRoot('src'), 'shared', fromRoot('tests')],
   collectCoverageFrom: ['src/**/*.+(js|jsx|ts|tsx)'],
   testMatch: ['**/__tests__/**/*.+(js|jsx|ts|tsx)', '**/?(*.)+(spec|test).[jt]s?(x)'],
   testPathIgnorePatterns: [...ignores],
@@ -39,16 +38,22 @@ const jestConfig = {
     require.resolve('jest-watch-typeahead/filename'),
     require.resolve('jest-watch-typeahead/testname'),
   ],
-  setupFilesAfterEnv: [
-    ifAnyDep('@testing-library/jest-dom', '@testing-library/jest-dom/extend-expect'),
-    ifFile('jest.setup.js', fromRoot('jest.setup.js')),
-    ifFile('setupTests.js', fromRoot('setupTests.js')),
-    ifFile('tests/setup-env.js', fromRoot('tests/setup-env.js')),
-  ].filter(Boolean),
 };
 
+const setupFilesAfterEnv = [
+  ifAnyDep('@testing-library/jest-dom', '@testing-library/jest-dom/extend-expect'),
+  ifFile('jest.setup.js', fromRoot('jest.setup.js')),
+  ifFile('setupTests.js', fromRoot('setupTests.js')),
+  ifFile('setupTests.js', fromRoot('setupTests.js')),
+  ifFile('tests/setup-env.js', fromRoot('tests/setup-env.js')),
+].filter(Boolean);
+
+if (setupFilesAfterEnv.length) {
+  jestConfig.setupFilesAfterEnv = setupFilesAfterEnv;
+}
+
 if (useBuiltInBabelConfig) {
-  jestConfig.transform = { '^.+\\.js$': here('./babel-transform') };
+  jestConfig.transform = { '^.+\\.(js|jsx|ts|tsx)$': here('./babel-transform') };
 }
 
 if (jestConfig.testEnvironment === 'jsdom') {

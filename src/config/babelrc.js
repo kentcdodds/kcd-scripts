@@ -1,7 +1,7 @@
 const browserslist = require('browserslist');
 const semver = require('semver');
 
-const { ifAnyDep, parseEnv, appDirectory, pkg } = require('../utils');
+const { ifDep, ifAnyDep, ifTypescript, parseEnv, appDirectory, pkg } = require('../utils');
 
 const { BABEL_ENV, NODE_ENV, BUILD_FORMAT } = process.env;
 const isTest = (BABEL_ENV || NODE_ENV) === 'test';
@@ -39,14 +39,13 @@ function getNodeVersion({ engines: { node: nodeVersion = '10.13' } = {} }) {
 }
 
 /**
- * Use the strategy declared by browserslist to load browsers configuration.
+ * use the strategy declared by browserslist to load browsers configuration.
  * fallback to the default if don't found custom configuration
  *
  * @see https://github.com/browserslist/browserslist/blob/master/node.js#L139
  */
 const browsersConfig = browserslist.loadConfig({ path: appDirectory }) || ['ie 10', 'ios 7'];
 
-// eslint-disable-next-line
 const envTargets = isTest
   ? { node: 'current' }
   : isWebpack || isRollup
@@ -59,9 +58,12 @@ module.exports = () => ({
     [require.resolve('@babel/preset-env'), envOptions],
     ifAnyDep(
       ['react', 'preact'],
-      [require.resolve('@babel/preset-react'), { pragma: isPreact ? 'React.h' : undefined }],
+      [
+        require.resolve('@babel/preset-react'),
+        { pragma: isPreact ? ifDep('react', 'React.h', 'h') : undefined },
+      ],
     ),
-    ifAnyDep(['flow-bin'], [require.resolve('@babel/preset-flow')]),
+    ifTypescript([require.resolve('@babel/preset-typescript')]),
   ].filter(Boolean),
   plugins: [
     [require.resolve('@babel/plugin-transform-runtime'), { useESModules: treeshake && !isCJS }],

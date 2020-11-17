@@ -24,8 +24,9 @@ jobs:
 
       - name: lint commits
         run:
-          npx commitlint --config="./src/config/commitlint.config.js" --from="origin/${{
-          github.base_ref }}" --to="origin/${{ github.head_ref }}"
+          npx commitlint --config="./src/config/commitlint.config.js"
+          --from="origin/${{ github.base_ref }}" --to="origin/${{
+          github.head_ref }}"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 

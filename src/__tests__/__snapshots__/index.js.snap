@@ -25,7 +25,7 @@ Array [
 exports[`format logs help with no args 1`] = `
 Array [
   Array [
-    
+
 Usage: ../ [script] [--flags]
 
 Available Scripts:

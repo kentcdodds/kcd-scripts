@@ -8,7 +8,7 @@ const readPkgUp = require('read-pkg-up');
 const which = require('which');
 const { cosmiconfigSync } = require('cosmiconfig');
 
-const { packageJson, path: pkgPath } = readPkgUp.sync({
+const { packageJson: pkg, path: pkgPath } = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
 });
 const appDirectory = path.dirname(pkgPath);
@@ -40,7 +40,11 @@ function resolveBin(modName, { executable = modName, cwd = process.cwd() } = {})
 }
 
 function resolveCodScripts() {
-  if (packageJson.name === 'cod-scripts') {
+  if (
+    pkg.name === 'cod-scripts' ||
+    // this happens on install of husky within cod-scripts locally
+    appDirectory.includes(path.join(__dirname, '..'))
+  ) {
     return require.resolve('./').replace(process.cwd(), '.');
   }
   return resolveBin('cod-scripts');
@@ -50,7 +54,7 @@ const fromRoot = (...p) => path.join(appDirectory, ...p);
 const hasFile = (...p) => fs.existsSync(fromRoot(...p));
 const ifFile = (files, t, f) => (arrify(files).some(file => hasFile(file)) ? t : f);
 
-const hasPkgProp = props => arrify(props).some(prop => has(packageJson, prop));
+const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop));
 
 const hasPkgSubProp = pkgProp => props => hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`));
 
@@ -72,6 +76,9 @@ function envIsSet(name) {
   // eslint-disable-next-line no-prototype-builtins
   return process.env.hasOwnProperty(name) && process.env[name] && process.env[name] !== 'undefined';
 }
+
+const hasTypescript = hasAnyDep('typescript') && hasFile('tsconfig.json');
+const ifTypescript = (t, f) => (hasTypescript ? t : f);
 
 function parseEnv(name, def) {
   if (envIsSet(name)) {
@@ -166,8 +173,10 @@ module.exports = {
   ifFile,
   ifPeerDep,
   ifScript,
+  hasTypescript,
+  ifTypescript,
   parseEnv,
-  pkg: packageJson,
+  pkg,
   resolveBin,
   resolveCodScripts,
   uniq,

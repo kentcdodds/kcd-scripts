@@ -1,6 +1,6 @@
 const path = require('path');
 const spawn = require('cross-spawn');
-const { hasPkgProp, hasFile, ifScript, resolveBin } = require('../utils');
+const { hasPkgProp, hasFile, resolveBin, ifScript, hasTypescript } = require('../utils');
 
 const here = p => path.join(__dirname, p);
 const hereRelative = p => here(p).replace(process.cwd(), '.');
@@ -19,12 +19,28 @@ const lintStagedResult = spawn.sync(resolveBin('lint-staged'), [...config, ...ar
   stdio: 'inherit',
 });
 
-if (lintStagedResult.status === 0 && ifScript('validate', true)) {
+if (lintStagedResult.status !== 0) {
+  process.exit(lintStagedResult.status);
+}
+
+if (hasTypescript) {
+  const tscResult = spawn.sync(
+    resolveBin('typescript', { executable: 'tsc' }),
+    ['--build', 'tsconfig.json'],
+    { stdio: 'inherit' },
+  );
+
+  if (tscResult.status !== 0) {
+    process.exit(tscResult.status);
+  }
+}
+
+if (ifScript('validate', true)) {
   const validateResult = spawn.sync('npm', ['run', 'validate'], {
     stdio: 'inherit',
   });
 
   process.exit(validateResult.status);
-} else {
-  process.exit(lintStagedResult.status);
 }
+
+process.exit(0);

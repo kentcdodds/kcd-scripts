@@ -42,15 +42,8 @@ function attemptResolve(...resolveArgs) {
 function spawnScript() {
   // get all the arguments of the script and find the position of our script commands
   const args = process.argv.slice(2);
-  const scriptIndex = args.findIndex(
-    x =>
-      x === 'format' ||
-      x === 'lint' ||
-      x === 'commitlint' ||
-      x === 'pre-commit' ||
-      x === 'test' ||
-      x === 'validate' ||
-      x === 'build',
+  const scriptIndex = args.findIndex(x =>
+    ['build', 'format', 'lint', 'pre-commit', 'test', 'validate', 'commitlint'].includes(x),
   );
 
   // Extract the node arguments so we can pass them to node later on

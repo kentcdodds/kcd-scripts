@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const spawn = require('cross-spawn')
 const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
 const arrify = require('arrify')
@@ -167,6 +168,20 @@ function hasLocalConfig(moduleName, searchOptions = {}) {
   return result !== null
 }
 
+function generateTypeDefs() {
+  return spawn.sync(
+    resolveBin('typescript', {executable: 'tsc'}),
+    // prettier-ignore
+    [
+      '--declaration',
+      '--emitDeclarationOnly',
+      '--noEmit', 'false',
+      '--outDir', fromRoot('dist'),
+    ],
+    {stdio: 'inherit'},
+  )
+}
+
 module.exports = {
   appDirectory,
   fromRoot,
@@ -175,6 +190,7 @@ module.exports = {
   hasLocalConfig,
   hasPkgProp,
   hasScript,
+  hasAnyDep,
   hasDep,
   ifAnyDep,
   ifDep,
@@ -190,4 +206,5 @@ module.exports = {
   resolveKcdScripts,
   uniq,
   writeExtraEntry,
+  generateTypeDefs,
 }

@@ -14,8 +14,6 @@
     "paths": {
       "*": ["*", "../tests/*"]
     },
-    "preserveWatchOutput": true,
-    "incremental": true,
-    "tsBuildInfoFile": "../.cache/kcd-scripts/.tsbuildinfo"
+    "preserveWatchOutput": true
   }
 }

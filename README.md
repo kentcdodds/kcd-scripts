@@ -197,6 +197,7 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="http://timdeschryver.dev"><img src="https://avatars1.githubusercontent.com/u/28659384?v=4" width="100px;" alt=""/><br /><sub><b>Tim Deschryver</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=timdeschryver" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/eddyw"><img src="https://avatars0.githubusercontent.com/u/1407526?v=4" width="100px;" alt=""/><br /><sub><b>Eddy Wilson</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/pulls?q=is%3Apr+reviewed-by%3Aeddyw" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://ricardobusquet.com"><img src="https://avatars1.githubusercontent.com/u/7198302?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo Busquet</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/pulls?q=is%3Apr+reviewed-by%3Arbusquet" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="http://peter.hozak.info/"><img src="https://avatars0.githubusercontent.com/u/1087670?v=4" width="100px;" alt=""/><br /><sub><b>Peter Hozák</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/pulls?q=is%3Apr+reviewed-by%3Aaprillion" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 

@@ -1,5 +1,4 @@
 {
-  "exclude": ["node_modules"],
   "include": ["../../src/**/*"],
   "compilerOptions": {
     "isolatedModules": true,

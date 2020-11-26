@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 const spawn = require('cross-spawn')
 const glob = require('glob')
 const rimraf = require('rimraf')
@@ -9,6 +10,8 @@ const {
   fromRoot,
   getConcurrentlyArgs,
   writeExtraEntry,
+  hasTypescript,
+  generateTypeDefs,
 } = require('../../utils')
 
 const crossEnv = resolveBin('cross-env')
@@ -46,9 +49,9 @@ const getCommand = (env, ...flags) =>
     .join(' ')
 
 const buildPreact = args.includes('--p-react')
-const scripts = buildPreact
-  ? getPReactScripts()
-  : getConcurrentlyArgs(getCommands())
+const scripts = getConcurrentlyArgs(
+  buildPreact ? getPReactCommands() : getCommands(),
+)
 
 const cleanBuildDirs = !args.includes('--no-clean')
 
@@ -60,25 +63,56 @@ if (cleanBuildDirs) {
   }
 }
 
-const result = spawn.sync(resolveBin('concurrently'), scripts, {
-  stdio: 'inherit',
-})
+function go() {
+  let result = spawn.sync(resolveBin('concurrently'), scripts, {
+    stdio: 'inherit',
+  })
 
-if (result.status === 0 && buildPreact && !args.includes('--no-package-json')) {
-  writeExtraEntry(
-    'preact',
-    {
-      cjs: glob.sync(fromRoot('preact/**/*.cjs.js'))[0],
-      esm: glob.sync(fromRoot('preact/**/*.esm.js'))[0],
-    },
-    false,
-  )
+  if (result.status !== 0) return result.status
+
+  if (buildPreact && !args.includes('--no-package-json')) {
+    writeExtraEntry(
+      'preact',
+      {
+        cjs: glob.sync(fromRoot('preact/**/*.cjs.js'))[0],
+        esm: glob.sync(fromRoot('preact/**/*.esm.js'))[0],
+      },
+      false,
+    )
+  }
+
+  if (hasTypescript && !args.includes('--no-ts-defs')) {
+    console.log('Generating TypeScript definitions')
+    result = generateTypeDefs()
+    if (result.status !== 0) return result.status
+
+    for (const format of formats) {
+      const [formatFile] = glob.sync(fromRoot(`dist/*.${format}.js`))
+      const {name} = path.parse(formatFile)
+      // make a .d.ts file for every generated file that re-exports index.d.ts
+      fs.writeFileSync(fromRoot('dist', `${name}.d.ts`), 'export * from ".";\n')
+    }
+
+    // because typescript generates type defs for ignored files, we need to
+    // remove the ignored files
+    const ignoredFiles = [
+      ...glob.sync(fromRoot('dist', '**/__tests__/**')),
+      ...glob.sync(fromRoot('dist', '**/__mocks__/**')),
+    ]
+    ignoredFiles.forEach(ignoredFile => {
+      rimraf.sync(ignoredFile)
+    })
+    console.log('TypeScript definitions generated')
+  }
+
+  return result.status
 }
 
-function getPReactScripts() {
-  const reactCommands = prefixKeys('react.', getCommands())
-  const preactCommands = prefixKeys('preact.', getCommands({preact: true}))
-  return getConcurrentlyArgs(Object.assign(reactCommands, preactCommands))
+function getPReactCommands() {
+  return {
+    ...prefixKeys('react.', getCommands()),
+    ...prefixKeys('preact.', getCommands({preact: true})),
+  }
 }
 
 function prefixKeys(prefix, object) {
@@ -111,4 +145,4 @@ function getCommands({preact = false} = {}) {
   }, {})
 }
 
-process.exit(result.status)
+process.exit(go())

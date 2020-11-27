@@ -48,8 +48,15 @@ const jestConfig = {
   ],
 }
 
-if (hasFile('tests/setup-env.js')) {
-  jestConfig.setupFilesAfterEnv = [fromRoot('tests/setup-env.js')]
+const setupFiles = [
+  'tests/setup-env.js',
+  'tests/setup-env.ts',
+  'tests/setup-env.tsx',
+]
+for (const setupFile of setupFiles) {
+  if (hasFile(setupFile)) {
+    jestConfig.setupFilesAfterEnv = [fromRoot(setupFile)]
+  }
 }
 
 if (useBuiltInBabelConfig) {

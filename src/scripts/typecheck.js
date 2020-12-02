@@ -11,9 +11,9 @@ if (!hasAnyDep('typescript')) {
   )
 }
 
-if (!parsedArgs.project && !hasFile('tsconfig.json')) {
+if (!parsedArgs.project && !parsedArgs.build && !hasFile('tsconfig.json')) {
   throw new Error(
-    'Cannot use the "typecheck" script without --project in a project that does not have a tsconfig.json file.',
+    'Cannot use the "typecheck" script without --project or --build in a project that does not have a tsconfig.json file.',
   )
 }
 

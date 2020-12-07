@@ -64,15 +64,16 @@ function go() {
   )
   if (result.status !== 0) return result.status
 
+  const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir)
+
   if (hasTypescript && !args.includes('--no-ts-defs')) {
     console.log('Generating TypeScript definitions')
-    result = generateTypeDefs()
+    result = generateTypeDefs(pathToOutDir)
     console.log('TypeScript definitions generated')
     if (result.status !== 0) return result.status
   }
 
   // because babel will copy even ignored files, we need to remove the ignored files
-  const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir)
   const ignoredPatterns = (parsedArgs.ignore || builtInIgnore)
     .split(',')
     .map(pattern => path.join(pathToOutDir, pattern))

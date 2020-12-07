@@ -168,7 +168,7 @@ function hasLocalConfig(moduleName, searchOptions = {}) {
   return result !== null
 }
 
-function generateTypeDefs() {
+function generateTypeDefs(outputDir) {
   return spawn.sync(
     resolveBin('typescript', {executable: 'tsc'}),
     // prettier-ignore
@@ -176,7 +176,7 @@ function generateTypeDefs() {
       '--declaration',
       '--emitDeclarationOnly',
       '--noEmit', 'false',
-      '--outDir', fromRoot('dist'),
+      '--outDir', outputDir,
     ],
     {stdio: 'inherit'},
   )

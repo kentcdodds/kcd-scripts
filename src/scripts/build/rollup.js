@@ -83,7 +83,7 @@ function go() {
 
   if (hasTypescript && !args.includes('--no-ts-defs')) {
     console.log('Generating TypeScript definitions')
-    result = generateTypeDefs()
+    result = generateTypeDefs(fromRoot('dist'))
     if (result.status !== 0) return result.status
 
     for (const format of formats) {

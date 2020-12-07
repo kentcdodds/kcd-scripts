@@ -198,6 +198,7 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="https://github.com/eddyw"><img src="https://avatars0.githubusercontent.com/u/1407526?v=4" width="100px;" alt=""/><br /><sub><b>Eddy Wilson</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/pulls?q=is%3Apr+reviewed-by%3Aeddyw" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://ricardobusquet.com"><img src="https://avatars1.githubusercontent.com/u/7198302?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo Busquet</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/pulls?q=is%3Apr+reviewed-by%3Arbusquet" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="http://peter.hozak.info/"><img src="https://avatars0.githubusercontent.com/u/1087670?v=4" width="100px;" alt=""/><br /><sub><b>Peter Hozák</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/pulls?q=is%3Apr+reviewed-by%3Aaprillion" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/marcosvega91"><img src="https://avatars2.githubusercontent.com/u/5365582?v=4" width="100px;" alt=""/><br /><sub><b>Marco Moretti</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=marcosvega91" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -46,6 +46,8 @@ const setupFilesAfterEnv = [
   ifFile('setupTests.js', fromRoot('setupTests.js')),
   ifFile('setupTests.js', fromRoot('setupTests.js')),
   ifFile('tests/setup-env.js', fromRoot('tests/setup-env.js')),
+  ifFile('tests/setup-env.ts', fromRoot('tests/setup-env.ts')),
+  ifFile('tests/setup-env.tsx', fromRoot('tests/setup-env.tsx')),
 ].filter(Boolean);
 
 if (setupFilesAfterEnv.length) {

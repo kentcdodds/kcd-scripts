@@ -6,11 +6,15 @@
 
 ---
 
-[![version][version-badge]][package] [![downloads][downloads-badge]][npmcharts]
+<!-- prettier-ignore-start -->
+[![version][version-badge]][package]
+[![downloads][downloads-badge]][npmcharts]
 [![GitHub Workflow Status][actions-badge]][actions-badge]
-[![MIT License][license-badge]][license] [![PRs Welcome][prs-badge]][prs]
+[![MIT License][license-badge]][license]
+[![PRs Welcome][prs-badge]][prs]
 [![Semantic Release][semantic-release-badge]][semantic-release]
 [![Commitizen friendly][commitizen-badge]][commitizen]
+<!-- prettier-ignore-end -->
 
 ## Motivation
 
@@ -26,9 +30,7 @@ linting, testing, building, and more.
 - [Installation](#installation)
 - [Usage](#usage)
   - [Overriding Config](#overriding-config)
-  - [Flow support](#flow-support)
   - [TypeScript Support](#typescript-support)
-- [Inspiration](#inspiration)
 - [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -129,18 +131,6 @@ module.exports = {
 > configuring things to make it less magical and more straightforward. Extending
 > can take place on your terms. I think this is actually a great way to do this.
 
-### Flow support
-
-If the `flow-bin` is a dependency on the project the `@babel/preset-flow` will
-automatically get loaded when you use the default babel config that comes with
-`cod-scripts`. If you customised your `.babelrc`-file you might need to manually
-add `@babel/preset-flow` to the `presets`-section.
-
-## Inspiration
-
-This was forked from `kentcdodds/kcd-scripts`. This is inspired by
-`react-scripts`.
-
 ### TypeScript Support
 
 If the `tsconfig.json`-file is present in the project root directory and
@@ -152,34 +142,32 @@ If you customised your `.babelrc`-file you might need to manually add
 `cod-scripts` will automatically load any `.ts` and `.tsx` files, including the
 default entry point, so you don't have to worry about any rollup configuration.
 
-`tsc --build tsconfig.json` will run during before committing to verify that
-files will compile. So make sure to add the `noEmit` flag to the
-`tsconfig.json`'s `compilerOptions`.
+If you have a `typecheck` script (normally set to `kcd-scripts typecheck`) that
+will be run as part of the `validate` script (which is run as part of the
+`pre-commit` script as well).
+
+TypeScript definition files will also automatically be generated during the
+`build` script.
 
 ## LICENSE
 
 MIT
 
 <!-- prettier-ignore-start -->
-
 [npm]: https://www.npmjs.com
 [node]: https://nodejs.org
 [semantic-release]: https://github.com/semantic-release/semantic-release
-[semantic-release-badge]:
-  https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release-badge]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [prs]: http://makeapullrequest.com
-[prs-badge]:
-  https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [commitizen]: http://commitizen.github.io/cz-cli/
-[commitizen-badge]:
-  https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
+[commitizen-badge]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [npmcharts]: http://npmcharts.com/compare/cod-scripts
 [version-badge]: https://img.shields.io/npm/v/cod-scripts.svg?style=flat-square
 [package]: https://www.npmjs.com/package/cod-scripts
-[downloads-badge]:
-  https://img.shields.io/npm/dm/cod-scripts.svg?style=flat-square
+[downloads-badge]: https://img.shields.io/npm/dm/cod-scripts.svg?style=flat-square
 [license-badge]: https://img.shields.io/npm/l/cod-scripts.svg?style=flat-square
 [license]: https://github.com/codfish/cod-scripts/blob/master/LICENSE
 [actions]: https://github.com/codfish/cod-scripts/actions
-[actions-badge]:
-  https://img.shields.io/github/workflow/status/codfish/cod-scripts/Release/master
+[actions-badge]: https://img.shields.io/github/workflow/status/codfish/cod-scripts/Release/master
+<!-- prettier-ignore-end -->

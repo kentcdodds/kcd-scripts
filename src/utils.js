@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const spawn = require('cross-spawn');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const arrify = require('arrify');
@@ -111,7 +112,7 @@ function getConcurrentlyArgs(scripts, { killOthers = true } = {}) {
     return all;
   }, {});
   const prefixColors = Object.keys(scripts)
-    .reduce((pColors, _s, i) => pColors.concat([`${colors[i % colors.length]}.bold.reset`]), [])
+    .reduce((pColors, _s, i) => pColors.concat([`${colors[i % colors.length]}.bold.white`]), [])
     .join(',');
 
   // prettier-ignore
@@ -158,6 +159,20 @@ function hasLocalConfig(moduleName, searchOptions = {}) {
   return result !== null;
 }
 
+function generateTypeDefs() {
+  return spawn.sync(
+    resolveBin('typescript', { executable: 'tsc' }),
+    // prettier-ignore
+    [
+      '--declaration',
+      '--emitDeclarationOnly',
+      '--noEmit', 'false',
+      '--outDir', fromRoot('dist'),
+    ],
+    { stdio: 'inherit' },
+  );
+}
+
 module.exports = {
   appDirectory,
   fromRoot,
@@ -166,6 +181,7 @@ module.exports = {
   hasLocalConfig,
   hasPkgProp,
   hasScript,
+  hasAnyDep,
   hasDep,
   ifAnyDep,
   ifDep,
@@ -181,4 +197,5 @@ module.exports = {
   resolveCodScripts,
   uniq,
   writeExtraEntry,
+  generateTypeDefs,
 };

@@ -16,6 +16,10 @@ const useBuiltinConfig =
 
 const config = useBuiltinConfig ? ['--config', hereRelative('../config/eslintrc.js')] : [];
 
+const defaultExtensions = 'js,ts,tsx';
+const ext = args.includes('--ext') ? [] : ['--ext', defaultExtensions];
+const extensions = (parsedArgs.ext || defaultExtensions).split(',');
+
 const useBuiltinIgnore =
   !args.includes('--ignore-path') && !hasFile('.eslintignore') && !hasPkgProp('eslintIgnore');
 
@@ -32,12 +36,12 @@ if (filesGiven) {
   // we need to take all the flag-less arguments (the files that should be linted)
   // and filter out the ones that aren't js files. Otherwise json or css files
   // may be passed through
-  args = args.filter(a => !parsedArgs._.includes(a) || /\.(jsx|js)?$/.test(a));
+  args = args.filter(a => !parsedArgs._.includes(a) || extensions.some(e => a.endsWith(e)));
 }
 
 const result = spawn.sync(
   resolveBin('eslint'),
-  [...config, ...ignore, ...cache, ...args, ...filesToApply],
+  [...config, ...ext, ...ignore, ...cache, ...args, ...filesToApply],
   { stdio: 'inherit' },
 );
 

@@ -8,7 +8,7 @@ Array [
   "--names",
   "build,lint,test,validate,a,b,c,d,e,f,g,h,i,j",
   "--prefix-colors",
-  "bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset,bgCyan.bold.reset,bgWhite.bold.reset,bgRed.bold.reset,bgBlack.bold.reset,bgYellow.bold.reset,bgBlue.bold.reset,bgGreen.bold.reset,bgMagenta.bold.reset,bgCyan.bold.reset,bgWhite.bold.reset,bgRed.bold.reset",
+  "bgBlue.bold.white,bgGreen.bold.white,bgMagenta.bold.white,bgCyan.bold.white,bgWhite.bold.white,bgRed.bold.white,bgBlack.bold.white,bgYellow.bold.white,bgBlue.bold.white,bgGreen.bold.white,bgMagenta.bold.white,bgCyan.bold.white,bgWhite.bold.white,bgRed.bold.white",
   "\\"echo build\\"",
   "\\"echo lint\\"",
   "\\"echo test\\"",

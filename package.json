@@ -28,7 +28,8 @@
     "eslint.js",
     "husky.js",
     "jest.js",
-    "prettier.js"
+    "prettier.js",
+    "shared-tsconfig.json"
   ],
   "keywords": [],
   "author": "Chris O'Donnell <dev@codfish.io> (http://codfish.io/)",
@@ -54,11 +55,11 @@
     "arrify": "^2.0.1",
     "babel-jest": "^26.6.3",
     "babel-plugin-macros": "^3.0.0",
-    "babel-plugin-minify-dead-code-elimination": "^0.5.0",
+    "babel-plugin-minify-dead-code-elimination": "^0.5.1",
     "babel-plugin-module-resolver": "^4.0.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
-    "browserslist": "^4.15.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "browserslist": "^4.14.7",
     "chalk": "^4.1.0",
     "concurrently": "^5.3.0",
     "cosmiconfig": "^7.0.0",
@@ -67,21 +68,23 @@
     "doctoc": "^1.4.0",
     "eslint": "^7.15.0",
     "eslint-config-codfish": "^8.1.0",
+    "eslint-config-prettier": "^6.15.0",
     "glob": "^7.1.5",
     "husky": "^4.3.0",
     "is-ci": "^2.0.0",
     "jest": "^26.6.1",
+    "jest-serializer-path": "^0.1.15",
     "jest-watch-typeahead": "^0.6.1",
     "lint-staged": "^10.5.3",
     "lodash.camelcase": "^4.3.0",
     "lodash.has": "^4.5.2",
     "lodash.omit": "^4.5.0",
     "mkdirp": "^1.0.4",
-    "prettier": "^2.2.1",
+    "prettier": "2.2.1",
     "react-app-polyfill": "^2.0.0",
     "read-pkg-up": "^7.0.1",
     "resolve": "^1.19.0",
-    "rimraf": "^3.0.0",
+    "rimraf": "^3.0.2",
     "rollup": "^2.34.2",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
@@ -90,10 +93,6 @@
     "semver": "^7.3.4",
     "which": "^2.0.2",
     "yargs-parser": "^20.2.4"
-  },
-  "devDependencies": {
-    "jest-in-case": "^1.0.2",
-    "slash": "^3.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -106,7 +105,10 @@
       "no-useless-catch": "off",
       "import/no-dynamic-require": "off",
       "import/no-unassigned-import": "off",
-      "no-nested-ternary": "off"
+      "no-nested-ternary": "off",
+      "no-use-before-define": "off",
+      "no-restricted-syntax": "off",
+      "no-param-reassign": "off"
     }
   },
   "commitlint": {
@@ -138,5 +140,9 @@
   "bugs": {
     "url": "https://github.com/codfish/cod-scripts/issues"
   },
-  "homepage": "https://github.com/codfish/cod-scripts#readme"
+  "homepage": "https://github.com/codfish/cod-scripts#readme",
+  "devDependencies": {
+    "jest-in-case": "^1.0.2",
+    "slash": "^3.0.0"
+  }
 }

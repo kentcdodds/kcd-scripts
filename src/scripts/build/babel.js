@@ -1,9 +1,17 @@
 const path = require('path');
+const { DEFAULT_EXTENSIONS } = require('@babel/core');
 const spawn = require('cross-spawn');
 const yargsParser = require('yargs-parser');
 const rimraf = require('rimraf');
 const glob = require('glob');
-const { hasPkgProp, fromRoot, resolveBin, hasFile } = require('../../utils');
+const {
+  hasPkgProp,
+  fromRoot,
+  resolveBin,
+  hasFile,
+  hasTypescript,
+  generateTypeDefs,
+} = require('../../utils');
 
 let args = process.argv.slice(2);
 const here = p => path.join(__dirname, p);
@@ -17,6 +25,11 @@ const useBuiltinConfig =
   !hasFile('babel.config.js') &&
   !hasPkgProp('babel');
 const config = useBuiltinConfig ? ['--presets', here('../../config/babelrc.js')] : [];
+
+const extensions =
+  args.includes('--extensions') || args.includes('--x')
+    ? []
+    : ['--extensions', [...DEFAULT_EXTENSIONS, '.ts', '.tsx']];
 
 const builtInIgnore = '**/__tests__/**,**/__mocks__/**';
 
@@ -34,20 +47,35 @@ if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
   args = args.filter(a => a !== '--no-clean');
 }
 
-const result = spawn.sync(
-  resolveBin('@babel/cli', { executable: 'babel' }),
-  [...outDir, ...copyFiles, ...ignore, ...config, 'src'].concat(args),
-  { stdio: 'inherit' },
-);
+function go() {
+  let result = spawn.sync(
+    resolveBin('@babel/cli', { executable: 'babel' }),
+    [...outDir, ...copyFiles, ...ignore, ...extensions, ...config, 'src'].concat(args),
+    { stdio: 'inherit' },
+  );
+  if (result.status !== 0) return result.status;
 
-// because babel will copy even ignored files, we need to remove the ignored files
-const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir);
-const ignoredPatterns = (parsedArgs.ignore || builtInIgnore)
-  .split(',')
-  .map(pattern => path.join(pathToOutDir, pattern));
-const ignoredFiles = ignoredPatterns.reduce((all, pattern) => [...all, ...glob.sync(pattern)], []);
-ignoredFiles.forEach(ignoredFile => {
-  rimraf.sync(ignoredFile);
-});
+  if (hasTypescript && !args.includes('--no-ts-defs')) {
+    console.log('Generating TypeScript definitions');
+    result = generateTypeDefs();
+    console.log('TypeScript definitions generated');
+    if (result.status !== 0) return result.status;
+  }
 
-process.exit(result.status);
+  // because babel will copy even ignored files, we need to remove the ignored files
+  const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir);
+  const ignoredPatterns = (parsedArgs.ignore || builtInIgnore)
+    .split(',')
+    .map(pattern => path.join(pathToOutDir, pattern));
+  const ignoredFiles = ignoredPatterns.reduce(
+    (all, pattern) => [...all, ...glob.sync(pattern)],
+    [],
+  );
+  ignoredFiles.forEach(ignoredFile => {
+    rimraf.sync(ignoredFile);
+  });
+
+  return result.status;
+}
+
+process.exit(go());

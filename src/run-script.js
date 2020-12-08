@@ -4,6 +4,38 @@ const glob = require('glob');
 
 const [executor, ignoredBin, script] = process.argv;
 
+if (script && script !== '--help' && script !== 'help') {
+  spawnScript();
+} else {
+  const scriptsPath = path.join(__dirname, 'scripts/');
+  const scriptsAvailable = glob.sync(path.join(__dirname, 'scripts', '*'));
+  // `glob.sync` returns paths with unix style path separators even on Windows.
+  // So we normalize it before attempting to strip out the scripts path.
+  const scriptsAvailableMessage = scriptsAvailable
+    .map(path.normalize)
+    .map(s =>
+      s
+        .replace(scriptsPath, '')
+        .replace(/__tests__/, '')
+        .replace(/\.js$/, ''),
+    )
+    .filter(Boolean)
+    .join('\n  ')
+    .trim();
+  const fullMessage = `
+Usage: ${ignoredBin} [script] [--flags]
+
+Available Scripts:
+  ${scriptsAvailableMessage}
+
+Options:
+  All options depend on the script. Docs will be improved eventually, but for most scripts you can assume that the args you pass will be forwarded to the respective tool that's being run under the hood.
+
+May the force be with you.
+  `.trim();
+  console.log(`\n${fullMessage}\n`);
+}
+
 function getEnv() {
   // this is required to address an issue in cross-spawn
   // https://github.com/kentcdodds/kcd-scripts/issues/4
@@ -42,15 +74,17 @@ function attemptResolve(...resolveArgs) {
 function spawnScript() {
   // get all the arguments of the script and find the position of our script commands
   const args = process.argv.slice(2);
-  const scriptIndex = args.findIndex(
-    x =>
-      x === 'format' ||
-      x === 'lint' ||
-      x === 'commitlint' ||
-      x === 'pre-commit' ||
-      x === 'test' ||
-      x === 'validate' ||
-      x === 'build',
+  const scriptIndex = args.findIndex(x =>
+    [
+      'build',
+      'format',
+      'lint',
+      'pre-commit',
+      'test',
+      'validate',
+      'commitlint',
+      'typecheck',
+    ].includes(x),
   );
 
   // Extract the node arguments so we can pass them to node later on
@@ -82,36 +116,4 @@ function spawnScript() {
   } else {
     process.exit(result.status);
   }
-}
-
-if (script) {
-  spawnScript();
-} else {
-  const scriptsPath = path.join(__dirname, 'scripts/');
-  const scriptsAvailable = glob.sync(path.join(__dirname, 'scripts', '*'));
-  // `glob.sync` returns paths with unix style path separators even on Windows.
-  // So we normalize it before attempting to strip out the scripts path.
-  const scriptsAvailableMessage = scriptsAvailable
-    .map(path.normalize)
-    .map(s =>
-      s
-        .replace(scriptsPath, '')
-        .replace(/__tests__/, '')
-        .replace(/\.js$/, ''),
-    )
-    .filter(Boolean)
-    .join('\n  ')
-    .trim();
-  const fullMessage = `
-Usage: ${ignoredBin} [script] [--flags]
-
-Available Scripts:
-  ${scriptsAvailableMessage}
-
-Options:
-  All options depend on the script. Docs will be improved eventually, but for most scripts you can assume that the args you pass will be forwarded to the respective tool that's being run under the hood.
-
-May the force be with you.
-  `.trim();
-  console.log(`\n${fullMessage}\n`);
 }

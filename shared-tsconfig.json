@@ -1,0 +1,19 @@
+{
+  "exclude": ["node_modules"],
+  "include": ["../../src/**/*"],
+  "compilerOptions": {
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "jsx": "react",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "../../src",
+    "paths": {
+      "*": ["*", "../tests/*"]
+    },
+    "preserveWatchOutput": true
+  }
+}

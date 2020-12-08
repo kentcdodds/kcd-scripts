@@ -3,7 +3,7 @@
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
   "engines": {
-    "node": ">=10.13",
+    "node": ">=10.18",
     "npm": ">=6",
     "yarn": ">=1"
   },
@@ -25,67 +25,74 @@
     "commitlint.js",
     "eslint.js",
     "config.js",
+    "eslint.js",
+    "husky.js",
+    "jest.js",
     "prettier.js",
-    "jest.js"
+    "shared-tsconfig.json"
   ],
   "keywords": [],
   "author": "Chris O'Donnell <dev@codfish.io> (http://codfish.io/)",
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/preset-flow": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
-    "@babel/runtime": "^7.11.2",
-    "@commitlint/cli": "^9.1.2",
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "@rollup/plugin-babel": "^5.2.1",
-    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
-    "@rollup/plugin-replace": "^2.3.3",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "@rollup/plugin-replace": "^2.3.4",
+    "@types/jest": "^26.0.17",
     "arrify": "^2.0.1",
-    "babel-jest": "^26.3.0",
-    "babel-plugin-macros": "^2.6.1",
-    "babel-plugin-minify-dead-code-elimination": "^0.5.0",
+    "babel-jest": "^26.6.3",
+    "babel-plugin-macros": "^3.0.0",
+    "babel-plugin-minify-dead-code-elimination": "^0.5.1",
     "babel-plugin-module-resolver": "^4.0.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
-    "browserslist": "^4.14.2",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "browserslist": "^4.14.7",
+    "chalk": "^4.1.0",
     "concurrently": "^5.3.0",
     "cosmiconfig": "^7.0.0",
-    "cross-env": "^7.0.0",
+    "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
-    "doctoc": "^1.4.0",
-    "eslint": "^7.8.1",
-    "eslint-config-codfish": "^6.0.1",
+    "doctoc": "^2.0.0",
+    "eslint": "^7.15.0",
+    "eslint-config-codfish": "^8.2.0",
+    "eslint-config-prettier": "^7.0.0",
     "glob": "^7.1.5",
-    "husky": "^4.3.0",
+    "husky": "^4.3.5",
     "is-ci": "^2.0.0",
-    "jest": "^26.4.2",
+    "jest": "^26.6.1",
+    "jest-serializer-path": "^0.1.15",
     "jest-watch-typeahead": "^0.6.1",
-    "lint-staged": "^10.3.0",
+    "lint-staged": "^10.5.3",
     "lodash.camelcase": "^4.3.0",
     "lodash.has": "^4.5.2",
     "lodash.omit": "^4.5.0",
     "mkdirp": "^1.0.4",
-    "prettier": "^2.1.1",
-    "react-app-polyfill": "^1.0.3",
+    "prettier": "2.2.1",
+    "react-app-polyfill": "^2.0.0",
     "read-pkg-up": "^7.0.1",
-    "resolve": "^1.17.0",
-    "rimraf": "^3.0.0",
-    "rollup": "^2.26.11",
+    "resolve": "^1.19.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.34.2",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-size-snapshot": "^0.12.0",
     "rollup-plugin-terser": "^7.0.2",
-    "semver": "^7.3.2",
+    "semver": "^7.3.4",
     "which": "^2.0.2",
-    "yargs-parser": "^20.0.0"
+    "yargs-parser": "^20.2.4"
   },
   "eslintConfig": {
     "extends": [
@@ -98,13 +105,10 @@
       "no-useless-catch": "off",
       "import/no-dynamic-require": "off",
       "import/no-unassigned-import": "off",
-      "no-nested-ternary": "off"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "node src pre-commit",
-      "commit-msg": "node src commitlint -E HUSKY_GIT_PARAMS"
+      "no-nested-ternary": "off",
+      "no-use-before-define": "off",
+      "no-restricted-syntax": "off",
+      "no-param-reassign": "off"
     }
   },
   "commitlint": {
@@ -112,26 +116,17 @@
       "./src/config/commitlint.config"
     ],
     "rules": {
-      "scope-enum": [
-        2,
-        "always",
-        [
-          "eslint",
-          "babel",
-          "rollup",
-          "commitlint",
-          "jest",
-          "lintstaged",
-          "lint-staged",
-          "husky",
-          "prettier"
-        ]
+      "scope-case": [
+        0
+      ],
+      "subject-case": [
+        0
       ]
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codfish/cod-scripts.git"
+    "url": "https://github.com/codfish/cod-scripts"
   },
   "bugs": {
     "url": "https://github.com/codfish/cod-scripts/issues"

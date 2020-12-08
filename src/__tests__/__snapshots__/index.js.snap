@@ -35,6 +35,7 @@ Available Scripts:
   lint
   pre-commit
   test
+  typecheck
   validate
 
 Options:

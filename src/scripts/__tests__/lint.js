@@ -75,8 +75,18 @@ cases(
     '--no-cache will disable caching': {
       args: ['--no-cache'],
     },
+    'supports custom --ext': {
+      args: ['--ext', 'js'],
+    },
     'runs on given files, but only js files': {
-      args: ['./src/index.js', './package.json', './src/index.css', './src/component.js'],
+      args: [
+        './src/index.js',
+        './package.json',
+        './src/index.css',
+        './src/thing.ts',
+        './src/lib.tsx',
+        './src/component.js',
+      ],
     },
   },
 );

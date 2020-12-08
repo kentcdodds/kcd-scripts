@@ -116,20 +116,11 @@
       "./src/config/commitlint.config"
     ],
     "rules": {
-      "scope-enum": [
-        2,
-        "always",
-        [
-          "eslint",
-          "babel",
-          "rollup",
-          "commitlint",
-          "jest",
-          "lintstaged",
-          "lint-staged",
-          "husky",
-          "prettier"
-        ]
+      "scope-case": [
+        0
+      ],
+      "subject-case": [
+        0
       ]
     }
   },

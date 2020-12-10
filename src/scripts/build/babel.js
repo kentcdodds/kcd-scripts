@@ -42,11 +42,16 @@ const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files']
 const useSpecifiedOutDir = args.includes('--out-dir')
 const builtInOutDir = 'dist'
 const outDir = useSpecifiedOutDir ? [] : ['--out-dir', builtInOutDir]
+const noTypeDefinitions = args.includes('--no-ts-defs')
 
 if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
   rimraf.sync(fromRoot('dist'))
 } else {
   args = args.filter(a => a !== '--no-clean')
+}
+
+if (noTypeDefinitions) {
+  args = args.filter(a => a !== '--no-ts-defs')
 }
 
 function go() {
@@ -66,7 +71,7 @@ function go() {
 
   const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir)
 
-  if (hasTypescript && !args.includes('--no-ts-defs')) {
+  if (hasTypescript && !noTypeDefinitions) {
     console.log('Generating TypeScript definitions')
     result = generateTypeDefs(pathToOutDir)
     console.log('TypeScript definitions generated')

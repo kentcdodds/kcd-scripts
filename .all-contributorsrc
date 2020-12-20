@@ -267,6 +267,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "rafgraph",
+      "name": "Rafael Pedicini",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/11911299?v=4",
+      "profile": "http://rafgraph.dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }

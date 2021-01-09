@@ -81,7 +81,7 @@ module.exports = () => ({
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,
     [require.resolve('@babel/plugin-proposal-class-properties'), {loose: true}],
-    require.resolve('babel-plugin-minify-dead-code-elimination'),
+    ['babel-plugin-minify-dead-code-elimination', {keepFnName: isTest}],
     treeshake
       ? null
       : require.resolve('@babel/plugin-transform-modules-commonjs'),

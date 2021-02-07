@@ -74,10 +74,13 @@ module.exports = () => ({
           {root: ['./src'], alias},
         ]
       : null,
-    [
-      require.resolve('babel-plugin-transform-react-remove-prop-types'),
-      isPreact ? {removeImport: true} : {mode: 'unsafe-wrap'},
-    ],
+    ifAnyDep(
+      ['react', 'preact'],
+      [
+        require.resolve('babel-plugin-transform-react-remove-prop-types'),
+        isPreact ? {removeImport: true} : {mode: 'unsafe-wrap'},
+      ],
+    ),
     isUMD
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,

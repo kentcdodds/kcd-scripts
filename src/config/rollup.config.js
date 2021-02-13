@@ -1,4 +1,5 @@
 const path = require('path')
+const builtInModules = require('builtin-modules')
 const {babel: rollupBabel} = require('@rollup/plugin-babel')
 const commonjs = require('@rollup/plugin-commonjs')
 const json = require('@rollup/plugin-json')
@@ -49,7 +50,9 @@ const defaultGlobals = Object.keys(pkg.peerDependencies || {}).reduce(
 
 const deps = Object.keys(pkg.dependencies || {})
 const peerDeps = Object.keys(pkg.peerDependencies || {})
-const defaultExternal = umd ? peerDeps : deps.concat(peerDeps)
+const defaultExternal = builtInModules.concat(
+  umd ? peerDeps : deps.concat(peerDeps),
+)
 
 const globals = parseEnv(
   'BUILD_GLOBALS',

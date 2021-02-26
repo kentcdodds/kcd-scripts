@@ -39,14 +39,19 @@ const ignore = args.includes('--ignore') ? [] : ['--ignore', builtInIgnore];
 
 const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files'];
 
-const useSpecifiedOutDir = args.includes('--out-dir') || args.includes('-d');
+const useSpecifiedOutDir = args.includes('--out-dir');
 const builtInOutDir = 'dist';
 const outDir = useSpecifiedOutDir ? [] : ['--out-dir', builtInOutDir];
+const noTypeDefinitions = args.includes('--no-ts-defs');
 
 if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
   rimraf.sync(fromRoot('dist'));
 } else {
   args = args.filter(a => a !== '--no-clean');
+}
+
+if (noTypeDefinitions) {
+  args = args.filter(a => a !== '--no-ts-defs');
 }
 
 function go() {
@@ -64,15 +69,16 @@ function go() {
   );
   if (result.status !== 0) return result.status;
 
-  if (hasTypescript && !args.includes('--no-ts-defs')) {
+  const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir);
+
+  if (hasTypescript && !noTypeDefinitions) {
     console.log('Generating TypeScript definitions');
-    result = generateTypeDefs();
+    result = generateTypeDefs(pathToOutDir);
     console.log('TypeScript definitions generated');
     if (result.status !== 0) return result.status;
   }
 
   // because babel will copy even ignored files, we need to remove the ignored files
-  const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir);
   const ignoredPatterns = (parsedArgs.ignore || builtInIgnore)
     .split(',')
     .map(pattern => path.join(pathToOutDir, pattern));

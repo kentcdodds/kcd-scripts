@@ -5,6 +5,7 @@ const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const arrify = require('arrify');
 const has = require('lodash.has');
+const glob = require('glob');
 const readPkgUp = require('read-pkg-up');
 const which = require('which');
 const { cosmiconfigSync } = require('cosmiconfig');
@@ -173,7 +174,7 @@ function hasLocalConfig(moduleName, searchOptions = {}) {
   return result !== null;
 }
 
-function generateTypeDefs() {
+function generateTypeDefs(outputDir) {
   return spawn.sync(
     resolveBin('typescript', { executable: 'tsc' }),
     // prettier-ignore
@@ -181,10 +182,41 @@ function generateTypeDefs() {
       '--declaration',
       '--emitDeclarationOnly',
       '--noEmit', 'false',
-      '--outDir', fromRoot('dist'),
+      '--outDir', outputDir,
     ],
     { stdio: 'inherit' },
   );
+}
+
+function getRollupInputs() {
+  const buildInputGlob =
+    process.env.BUILD_INPUT ||
+    (hasTypescript ? 'src/index.{js,ts,tsx}' : 'src/index.js');
+  const input = glob.sync(fromRoot(buildInputGlob));
+  if (!input.length) {
+    throw new Error(`Unable to find files with this glob: ${buildInputGlob}`);
+  }
+  return input;
+}
+
+function getRollupOutput(format = process.env.BUILD_FORMAT) {
+  const minify = parseEnv('BUILD_MINIFY', false);
+  const filenameSuffix = process.env.BUILD_FILENAME_SUFFIX || '';
+  const filename = [
+    pkg.name,
+    filenameSuffix,
+    `.${format}`,
+    minify ? '.min' : null,
+    '.js',
+  ]
+    .filter(Boolean)
+    .join('');
+
+  const isPreact = parseEnv('BUILD_PREACT', false);
+  const filenamePrefix =
+    process.env.BUILD_FILENAME_PREFIX || (isPreact ? 'preact/' : '');
+  const dirpath = path.join(...[filenamePrefix, 'dist'].filter(Boolean));
+  return { dirpath, filename };
 }
 
 module.exports = {
@@ -212,4 +244,6 @@ module.exports = {
   uniq,
   writeExtraEntry,
   generateTypeDefs,
+  getRollupInputs,
+  getRollupOutput,
 };

@@ -11,16 +11,6 @@ jest.mock('cosmiconfig', () => {
 let whichSyncMock;
 let readPkgUpSyncMock;
 
-function mockPkg({ package: pkg = {}, path = '/blah/package.json' }) {
-  readPkgUpSyncMock.mockImplementationOnce(() => ({ packageJson: pkg, path }));
-}
-
-function mockCosmiconfig(result = null) {
-  const { cosmiconfigSync } = require('cosmiconfig');
-
-  cosmiconfigSync.mockImplementationOnce(() => ({ search: () => result }));
-}
-
 beforeEach(() => {
   jest.resetModules();
   whichSyncMock = require('which').sync;
@@ -171,3 +161,24 @@ test('hasLocalConfiguration returns true if a local config found and it is empty
 
   expect(require('../utils').hasLocalConfig('module')).toBe(true);
 });
+
+test('should generate typescript definitions into provided folder', () => {
+  whichSyncMock.mockImplementationOnce(() => require.resolve('../'));
+  const { sync: crossSpawnSyncMock } = require('cross-spawn');
+  require('../utils').generateTypeDefs('destination folder');
+  expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1);
+  const args = crossSpawnSyncMock.mock.calls[0][1];
+  const outDirIndex = args.findIndex(arg => arg === '--outDir') + 1;
+
+  expect(args[outDirIndex]).toBe('destination folder');
+});
+
+function mockPkg({ package: pkg = {}, path = '/blah/package.json' }) {
+  readPkgUpSyncMock.mockImplementationOnce(() => ({ packageJson: pkg, path }));
+}
+
+function mockCosmiconfig(result = null) {
+  const { cosmiconfigSync } = require('cosmiconfig');
+
+  cosmiconfigSync.mockImplementationOnce(() => ({ search: () => result }));
+}

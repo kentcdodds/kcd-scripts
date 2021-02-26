@@ -17,6 +17,7 @@ const isRollup = parseEnv('BUILD_ROLLUP', false);
 const isUMD = BUILD_FORMAT === 'umd';
 const isCJS = BUILD_FORMAT === 'cjs';
 const isWebpack = parseEnv('BUILD_WEBPACK', false);
+const isMinify = parseEnv('BUILD_MINIFY', false);
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack);
 const alias = parseEnv('BUILD_ALIAS', isPreact ? { react: 'preact' } : null);
 
@@ -89,10 +90,13 @@ module.exports = () => ({
           { root: ['./src'], alias },
         ]
       : null,
-    [
-      require.resolve('babel-plugin-transform-react-remove-prop-types'),
-      isPreact ? { removeImport: true } : { mode: 'unsafe-wrap' },
-    ],
+    ifAnyDep(
+      ['react', 'preact'],
+      [
+        require.resolve('babel-plugin-transform-react-remove-prop-types'),
+        isPreact ? { removeImport: true } : { mode: 'unsafe-wrap' },
+      ],
+    ),
     isUMD
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,
@@ -100,7 +104,9 @@ module.exports = () => ({
       require.resolve('@babel/plugin-proposal-class-properties'),
       { loose: true },
     ],
-    require.resolve('babel-plugin-minify-dead-code-elimination'),
+    isMinify
+      ? require.resolve('babel-plugin-minify-dead-code-elimination')
+      : null,
     treeshake
       ? null
       : require.resolve('@babel/plugin-transform-modules-commonjs'),

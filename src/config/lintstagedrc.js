@@ -10,5 +10,8 @@ module.exports = {
   '*.+(json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx|vue)': [
     `${codScripts} format --no-eslint`,
   ].filter(Boolean),
-  '*.js': [`${codScripts} lint --fix`, `${codScripts} test --findRelatedTests`].filter(Boolean),
+  '*.js': [
+    `${codScripts} lint --fix`,
+    `${codScripts} test --findRelatedTests`,
+  ].filter(Boolean),
 };

@@ -1,7 +1,12 @@
 const path = require('path');
 const spawn = require('cross-spawn');
 const yargsParser = require('yargs-parser');
-const { resolveBin, hasFile, hasLocalConfig, resolveCodScripts } = require('../utils');
+const {
+  resolveBin,
+  hasFile,
+  hasLocalConfig,
+  resolveCodScripts,
+} = require('../utils');
 
 const args = process.argv.slice(2);
 const parsedArgs = yargsParser(args);
@@ -9,10 +14,16 @@ const parsedArgs = yargsParser(args);
 const here = p => path.join(__dirname, p);
 const hereRelative = p => here(p).replace(process.cwd(), '.');
 
-const useBuiltinConfig = !args.includes('--config') && !hasLocalConfig('prettier');
-const config = useBuiltinConfig ? ['--config', hereRelative('../config/prettierrc.js')] : [];
-const useBuiltinIgnore = !args.includes('--ignore-path') && !hasFile('.prettierignore');
-const ignore = useBuiltinIgnore ? ['--ignore-path', hereRelative('../config/prettierignore')] : [];
+const useBuiltinConfig =
+  !args.includes('--config') && !hasLocalConfig('prettier');
+const config = useBuiltinConfig
+  ? ['--config', hereRelative('../config/prettierrc.js')]
+  : [];
+const useBuiltinIgnore =
+  !args.includes('--ignore-path') && !hasFile('.prettierignore');
+const ignore = useBuiltinIgnore
+  ? ['--ignore-path', hereRelative('../config/prettierignore')]
+  : [];
 
 const write = args.includes('--no-write') ? [] : ['--write'];
 
@@ -36,8 +47,12 @@ if (prettierResult.status !== 0 || args.includes('--no-eslint')) {
 }
 
 // run eslint for js files (`eslint-plugin-prettier` will run prettier for us)
-const eslintResult = spawn.sync(resolveCodScripts(), ['lint', '--fix'].concat(args), {
-  stdio: 'inherit',
-});
+const eslintResult = spawn.sync(
+  resolveCodScripts(),
+  ['lint', '--fix'].concat(args),
+  {
+    stdio: 'inherit',
+  },
+);
 
 process.exit(eslintResult.status);

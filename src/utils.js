@@ -14,7 +14,10 @@ const { packageJson: pkg, path: pkgPath } = readPkgUp.sync({
 });
 const appDirectory = path.dirname(pkgPath);
 
-function resolveBin(modName, { executable = modName, cwd = process.cwd() } = {}) {
+function resolveBin(
+  modName,
+  { executable = modName, cwd = process.cwd() } = {},
+) {
   let pathFromWhich;
   try {
     pathFromWhich = fs.realpathSync(which.sync(executable));
@@ -53,13 +56,16 @@ function resolveCodScripts() {
 
 const fromRoot = (...p) => path.join(appDirectory, ...p);
 const hasFile = (...p) => fs.existsSync(fromRoot(...p));
-const ifFile = (files, t, f) => (arrify(files).some(file => hasFile(file)) ? t : f);
+const ifFile = (files, t, f) =>
+  arrify(files).some(file => hasFile(file)) ? t : f;
 
 const hasPkgProp = props => arrify(props).some(prop => has(pkg, prop));
 
-const hasPkgSubProp = pkgProp => props => hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`));
+const hasPkgSubProp = pkgProp => props =>
+  hasPkgProp(arrify(props).map(p => `${pkgProp}.${p}`));
 
-const ifPkgSubProp = pkgProp => (props, t, f) => (hasPkgSubProp(pkgProp)(props) ? t : f);
+const ifPkgSubProp = pkgProp => (props, t, f) =>
+  hasPkgSubProp(pkgProp)(props) ? t : f;
 
 const hasScript = hasPkgSubProp('scripts');
 const hasPeerDep = hasPkgSubProp('peerDependencies');
@@ -74,8 +80,11 @@ const ifAnyDep = (deps, t, f) => (hasAnyDep(arrify(deps)) ? t : f);
 const ifScript = ifPkgSubProp('scripts');
 
 function envIsSet(name) {
-  // eslint-disable-next-line no-prototype-builtins
-  return process.env.hasOwnProperty(name) && process.env[name] && process.env[name] !== 'undefined';
+  return (
+    process.env.hasOwnProperty(name) &&
+    process.env[name] &&
+    process.env[name] !== 'undefined'
+  );
 }
 
 const hasTypescript = hasAnyDep('typescript') && hasFile('tsconfig.json');
@@ -112,7 +121,11 @@ function getConcurrentlyArgs(scripts, { killOthers = true } = {}) {
     return all;
   }, {});
   const prefixColors = Object.keys(scripts)
-    .reduce((pColors, _s, i) => pColors.concat([`${colors[i % colors.length]}.bold.white`]), [])
+    .reduce(
+      (pColors, _s, i) =>
+        pColors.concat([`${colors[i % colors.length]}.bold.white`]),
+      [],
+    )
     .join(',');
 
   // prettier-ignore
@@ -121,7 +134,8 @@ function getConcurrentlyArgs(scripts, { killOthers = true } = {}) {
     '--prefix', '[{name}]',
     '--names', Object.keys(scripts).join(','),
     '--prefix-colors', prefixColors,
-    ...Object.values(scripts).map(s => JSON.stringify(s)), // stringify escapes quotes ✨
+    ...Object.values(scripts)
+      .map(s => JSON.stringify(s)), // stringify escapes quotes ✨
   ].filter(Boolean);
 }
 

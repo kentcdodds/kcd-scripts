@@ -20,9 +20,17 @@ const jestConfig = {
   testEnvironment: ifAnyDep(['webpack', 'rollup', 'react'], 'jsdom', 'node'),
   testURL: 'http://localhost',
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
-  moduleDirectories: ['node_modules', fromRoot('src'), 'shared', fromRoot('tests')],
+  moduleDirectories: [
+    'node_modules',
+    fromRoot('src'),
+    'shared',
+    fromRoot('tests'),
+  ],
   collectCoverageFrom: ['src/**/*.+(js|jsx|ts|tsx)'],
-  testMatch: ['**/__tests__/**/*.+(js|jsx|ts|tsx)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+  testMatch: [
+    '**/__tests__/**/*.+(js|jsx|ts|tsx)',
+    '**/?(*.)+(spec|test).[jt]s?(x)',
+  ],
   testPathIgnorePatterns: [...ignores],
   coveragePathIgnorePatterns: [...ignores, 'src/(umd|cjs|esm)-entry.js$'],
   transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
@@ -41,7 +49,10 @@ const jestConfig = {
 };
 
 const setupFilesAfterEnv = [
-  ifAnyDep('@testing-library/jest-dom', '@testing-library/jest-dom/extend-expect'),
+  ifAnyDep(
+    '@testing-library/jest-dom',
+    '@testing-library/jest-dom/extend-expect',
+  ),
   ifFile('jest.setup.js', fromRoot('jest.setup.js')),
   ifFile('setupTests.js', fromRoot('setupTests.js')),
   ifFile('setupTests.js', fromRoot('setupTests.js')),
@@ -55,7 +66,9 @@ if (setupFilesAfterEnv.length) {
 }
 
 if (useBuiltInBabelConfig) {
-  jestConfig.transform = { '^.+\\.(js|jsx|ts|tsx)$': here('./babel-transform') };
+  jestConfig.transform = {
+    '^.+\\.(js|jsx|ts|tsx)$': here('./babel-transform'),
+  };
 }
 
 if (jestConfig.testEnvironment === 'jsdom') {

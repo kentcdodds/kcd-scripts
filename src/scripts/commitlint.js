@@ -15,7 +15,9 @@ const useBuiltinConfig =
   !hasFile('.commitlintrc.yml') &&
   !hasPkgProp('commitlint');
 
-const config = useBuiltinConfig ? ['--config', hereRelative('../config/commitlint.config.js')] : [];
+const config = useBuiltinConfig
+  ? ['--config', hereRelative('../config/commitlint.config.js')]
+  : [];
 
 const result = spawn.sync(resolveBin('commitlint'), [...config, ...args], {
   stdio: 'inherit',

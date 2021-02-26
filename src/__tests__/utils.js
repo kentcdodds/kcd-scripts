@@ -117,7 +117,9 @@ test('parseEnv parses the existing environment variable', () => {
 
 test(`parseEnv returns the default if the environment variable doesn't exist`, () => {
   const defaultVal = { hello: 'world' };
-  expect(require('../utils').parseEnv('DOES_NOT_EXIST', defaultVal)).toBe(defaultVal);
+  expect(require('../utils').parseEnv('DOES_NOT_EXIST', defaultVal)).toBe(
+    defaultVal,
+  );
 });
 
 test('ifAnyDep returns the true argument if true and false argument if false', () => {

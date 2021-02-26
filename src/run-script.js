@@ -72,7 +72,8 @@ function attemptResolve(...resolveArgs) {
 }
 
 function spawnScript() {
-  // get all the arguments of the script and find the position of our script commands
+  // get all the arguments of the script and find the position of our script
+  // commands
   const args = process.argv.slice(2);
   const scriptIndex = args.findIndex(x =>
     [

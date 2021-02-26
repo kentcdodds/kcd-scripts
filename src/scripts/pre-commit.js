@@ -13,7 +13,9 @@ const useBuiltInConfig =
   !hasFile('lint-staged.config.js') &&
   !hasPkgProp('lint-staged');
 
-const config = useBuiltInConfig ? ['--config', hereRelative('../config/lintstagedrc.js')] : [];
+const config = useBuiltInConfig
+  ? ['--config', hereRelative('../config/lintstagedrc.js')]
+  : [];
 
 function go() {
   let result;

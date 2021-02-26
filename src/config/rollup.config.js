@@ -2,7 +2,10 @@ const path = require('path');
 const { babel: rollupBabel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const json = require('@rollup/plugin-json');
-const { DEFAULTS: nodeResolveDefaults, nodeResolve } = require('@rollup/plugin-node-resolve');
+const {
+  DEFAULTS: nodeResolveDefaults,
+  nodeResolve,
+} = require('@rollup/plugin-node-resolve');
 
 const replace = require('@rollup/plugin-replace');
 const glob = require('glob');
@@ -37,22 +40,31 @@ const useSizeSnapshot = parseEnv('BUILD_SIZE_SNAPSHOT', false);
 const esm = format === 'esm';
 const umd = format === 'umd';
 
-const defaultGlobals = Object.keys(pkg.peerDependencies || {}).reduce((deps, dep) => {
-  // eslint-disable-next-line no-param-reassign
-  deps[dep] = capitalize(camelcase(dep));
-  return deps;
-}, {});
+const defaultGlobals = Object.keys(pkg.peerDependencies || {}).reduce(
+  (deps, dep) => {
+    // eslint-disable-next-line no-param-reassign
+    deps[dep] = capitalize(camelcase(dep));
+    return deps;
+  },
+  {},
+);
 
 const deps = Object.keys(pkg.dependencies || {});
 const peerDeps = Object.keys(pkg.peerDependencies || {});
 const defaultExternal = umd ? peerDeps : deps.concat(peerDeps);
 
 const input = glob.sync(
-  fromRoot(process.env.BUILD_INPUT || (hasTypescript ? 'src/index.{js,ts,tsx}' : 'src/index.js')),
+  fromRoot(
+    process.env.BUILD_INPUT ||
+      (hasTypescript ? 'src/index.{js,ts,tsx}' : 'src/index.js'),
+  ),
 );
 const codeSplitting = input.length > 1;
 
-if (codeSplitting && uniq(input.map(single => path.basename(single))).length !== input.length) {
+if (
+  codeSplitting &&
+  uniq(input.map(single => path.basename(single))).length !== input.length
+) {
   throw new Error(
     'Filenames of code-splitted entries should be unique to get deterministic output filenames.' +
       `\nReceived those: ${input}.`,
@@ -60,10 +72,13 @@ if (codeSplitting && uniq(input.map(single => path.basename(single))).length !==
 }
 
 const filenameSuffix = process.env.BUILD_FILENAME_SUFFIX || '';
-const filenamePrefix = process.env.BUILD_FILENAME_PREFIX || (isPreact ? 'preact/' : '');
+const filenamePrefix =
+  process.env.BUILD_FILENAME_PREFIX || (isPreact ? 'preact/' : '');
 const globals = parseEnv(
   'BUILD_GLOBALS',
-  isPreact ? Object.assign(defaultGlobals, { preact: 'preact' }) : defaultGlobals,
+  isPreact
+    ? Object.assign(defaultGlobals, { preact: 'preact' })
+    : defaultGlobals,
 );
 const external = parseEnv(
   'BUILD_EXTERNAL',
@@ -91,7 +106,13 @@ function externalPredicate(id) {
   return isDep || (!isRelative && !path.isAbsolute(id)) || isNodeModule;
 }
 
-const filename = [pkg.name, filenameSuffix, `.${format}`, minify ? '.min' : null, '.js']
+const filename = [
+  pkg.name,
+  filenameSuffix,
+  `.${format}`,
+  minify ? '.min' : null,
+  '.js',
+]
   .filter(Boolean)
   .join('');
 
@@ -116,19 +137,18 @@ const useBuiltinConfig =
   !hasPkgProp('babel');
 const babelPresets = useBuiltinConfig ? [here('../config/babelrc.js')] : [];
 
-const replacements = Object.entries(umd ? process.env : omit(process.env, ['NODE_ENV'])).reduce(
-  (acc, [key, value]) => {
-    let val;
-    if (value === 'true' || value === 'false' || Number.isInteger(+value)) {
-      val = value;
-    } else {
-      val = JSON.stringify(value);
-    }
-    acc[`process.env.${key}`] = val;
-    return acc;
-  },
-  {},
-);
+const replacements = Object.entries(
+  umd ? process.env : omit(process.env, ['NODE_ENV']),
+).reduce((acc, [key, value]) => {
+  let val;
+  if (value === 'true' || value === 'false' || Number.isInteger(+value)) {
+    val = value;
+  } else {
+    val = JSON.stringify(value);
+  }
+  acc[`process.env.${key}`] = val;
+  return acc;
+}, {});
 
 const extensions = hasTypescript
   ? [...nodeResolveDefaults.extensions, '.ts', '.tsx']

@@ -1,5 +1,10 @@
 const spawn = require('cross-spawn');
-const { parseEnv, resolveBin, ifScript, getConcurrentlyArgs } = require('../utils');
+const {
+  parseEnv,
+  resolveBin,
+  ifScript,
+  getConcurrentlyArgs,
+} = require('../utils');
 
 // pre-commit runs linting and tests on the relevant files
 // so those scripts don't need to be run if we're running
@@ -14,7 +19,9 @@ const scripts = useDefaultScripts
   ? {
       build: ifScript('build', 'npm run build --silent'),
       lint: preCommit ? null : ifScript('lint', 'npm run lint --silent'),
-      test: preCommit ? null : ifScript('test', 'npm run test --silent -- --coverage'),
+      test: preCommit
+        ? null
+        : ifScript('test', 'npm run test --silent -- --coverage'),
       typecheck: ifScript('typecheck', 'npm run typecheck --silent'),
     }
   : validateScripts.split(',').reduce(
@@ -28,9 +35,13 @@ const scripts = useDefaultScripts
 const scriptCount = Object.values(scripts).filter(Boolean).length;
 
 if (scriptCount > 0) {
-  const result = spawn.sync(resolveBin('concurrently'), getConcurrentlyArgs(scripts), {
-    stdio: 'inherit',
-  });
+  const result = spawn.sync(
+    resolveBin('concurrently'),
+    getConcurrentlyArgs(scripts),
+    {
+      stdio: 'inherit',
+    },
+  );
 
   process.exit(result.status);
 } else {

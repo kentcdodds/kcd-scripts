@@ -24,7 +24,9 @@ const useBuiltinConfig =
   !hasFile('.babelrc.js') &&
   !hasFile('babel.config.js') &&
   !hasPkgProp('babel');
-const config = useBuiltinConfig ? ['--presets', here('../../config/babelrc.js')] : [];
+const config = useBuiltinConfig
+  ? ['--presets', here('../../config/babelrc.js')]
+  : [];
 
 const extensions =
   args.includes('--extensions') || args.includes('--x')
@@ -50,7 +52,14 @@ if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
 function go() {
   let result = spawn.sync(
     resolveBin('@babel/cli', { executable: 'babel' }),
-    [...outDir, ...copyFiles, ...ignore, ...extensions, ...config, 'src'].concat(args),
+    [
+      ...outDir,
+      ...copyFiles,
+      ...ignore,
+      ...extensions,
+      ...config,
+      'src',
+    ].concat(args),
     { stdio: 'inherit' },
   );
   if (result.status !== 0) return result.status;

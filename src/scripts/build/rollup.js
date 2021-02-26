@@ -21,7 +21,8 @@ const here = p => path.join(__dirname, p);
 const hereRelative = p => here(p).replace(process.cwd(), '.');
 const parsedArgs = yargsParser(args);
 
-const useBuiltinConfig = !args.includes('--config') && !hasFile('rollup.config.js');
+const useBuiltinConfig =
+  !args.includes('--config') && !hasFile('rollup.config.js');
 // eslint-disable-next-line
 const config = useBuiltinConfig
   ? `--config ${hereRelative('../../config/rollup.config.js')}`
@@ -29,7 +30,9 @@ const config = useBuiltinConfig
   ? ''
   : '--config'; // --config will pick up the rollup.config.js file
 
-const environment = parsedArgs.environment ? `--environment ${parsedArgs.environment}` : '';
+const environment = parsedArgs.environment
+  ? `--environment ${parsedArgs.environment}`
+  : '';
 const watch = parsedArgs.watch ? '--watch' : '';
 const sizeSnapshot = parsedArgs['size-snapshot'];
 
@@ -47,7 +50,9 @@ const getCommand = (env, ...flags) =>
     .join(' ');
 
 const buildPreact = args.includes('--p-react');
-const scripts = getConcurrentlyArgs(buildPreact ? getPReactCommands() : getCommands());
+const scripts = getConcurrentlyArgs(
+  buildPreact ? getPReactCommands() : getCommands(),
+);
 
 const cleanBuildDirs = !args.includes('--no-clean');
 
@@ -86,7 +91,10 @@ function go() {
       const [formatFile] = glob.sync(fromRoot(`dist/*.${format}.js`));
       const { name } = path.parse(formatFile);
       // make a .d.ts file for every generated file that re-exports index.d.ts
-      fs.writeFileSync(fromRoot('dist', `${name}.d.ts`), 'export * from ".";\n');
+      fs.writeFileSync(
+        fromRoot('dist', `${name}.d.ts`),
+        'export * from ".";\n',
+      );
     }
 
     // because typescript generates type defs for ignored files, we need to

@@ -24,8 +24,12 @@ if (!parsedArgs.project && !parsedArgs.build && !parsedArgs.noBuild) {
   args = ['--build', ...args];
 }
 
-const result = spawn.sync(resolveBin('typescript', { executable: 'tsc' }), args, {
-  stdio: 'inherit',
-});
+const result = spawn.sync(
+  resolveBin('typescript', { executable: 'tsc' }),
+  args,
+  {
+    stdio: 'inherit',
+  },
+);
 
 process.exit(result.status);

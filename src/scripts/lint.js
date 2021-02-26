@@ -14,20 +14,30 @@ const useBuiltinConfig =
   !hasFile('.eslintrc.js') &&
   !hasPkgProp('eslintConfig');
 
-const config = useBuiltinConfig ? ['--config', hereRelative('../config/eslintrc.js')] : [];
+const config = useBuiltinConfig
+  ? ['--config', hereRelative('../config/eslintrc.js')]
+  : [];
 
 const defaultExtensions = 'js,ts,tsx';
 const ext = args.includes('--ext') ? [] : ['--ext', defaultExtensions];
 const extensions = (parsedArgs.ext || defaultExtensions).split(',');
 
 const useBuiltinIgnore =
-  !args.includes('--ignore-path') && !hasFile('.eslintignore') && !hasPkgProp('eslintIgnore');
+  !args.includes('--ignore-path') &&
+  !hasFile('.eslintignore') &&
+  !hasPkgProp('eslintIgnore');
 
-const ignore = useBuiltinIgnore ? ['--ignore-path', hereRelative('../config/eslintignore')] : [];
+const ignore = useBuiltinIgnore
+  ? ['--ignore-path', hereRelative('../config/eslintignore')]
+  : [];
 
 const cache = args.includes('--no-cache')
   ? []
-  : ['--cache', '--cache-location', fromRoot('node_modules/.cache/.eslintcache')];
+  : [
+      '--cache',
+      '--cache-location',
+      fromRoot('node_modules/.cache/.eslintcache'),
+    ];
 
 const filesGiven = parsedArgs._.length > 0;
 const filesToApply = filesGiven ? [] : ['.'];
@@ -36,7 +46,9 @@ if (filesGiven) {
   // we need to take all the flag-less arguments (the files that should be linted)
   // and filter out the ones that aren't js files. Otherwise json or css files
   // may be passed through
-  args = args.filter(a => !parsedArgs._.includes(a) || extensions.some(e => a.endsWith(e)));
+  args = args.filter(
+    a => !parsedArgs._.includes(a) || extensions.some(e => a.endsWith(e)),
+  );
 }
 
 const result = spawn.sync(

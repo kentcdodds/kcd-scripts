@@ -102,13 +102,26 @@
       "no-console": "off",
       "no-process-exit": "off",
       "global-require": "off",
+      "no-prototype-builtins": "off",
       "no-useless-catch": "off",
       "import/no-dynamic-require": "off",
       "import/no-unassigned-import": "off",
       "no-nested-ternary": "off",
       "no-use-before-define": "off",
       "no-restricted-syntax": "off",
-      "no-param-reassign": "off"
+      "no-param-reassign": "off",
+      "max-len": [
+        "error",
+        80,
+        2,
+        {
+          "ignoreUrls": true,
+          "ignoreComments": true,
+          "ignoreRegExpLiterals": true,
+          "ignoreStrings": true,
+          "ignoreTemplateLiterals": true
+        }
+      ]
     }
   },
   "commitlint": {

@@ -7,4 +7,4 @@ module.exports = {
   lintStaged: require('./lintstagedrc'),
   prettier: require('./prettierrc'),
   getRollupConfig: () => require('./rollup.config'),
-};
+}

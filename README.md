@@ -87,7 +87,7 @@ Or, for `babel`, a `.babelrc` with:
 Or, for `jest`:
 
 ```js
-const { jest: jestConfig } = require('cod-scripts/config');
+const {jest: jestConfig} = require('cod-scripts/config')
 
 module.exports = Object.assign(jestConfig, {
   // your overrides here
@@ -96,7 +96,7 @@ module.exports = Object.assign(jestConfig, {
   transform: {
     '\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest/preprocessor.js',
   },
-});
+})
 ```
 
 Or, for `commitlint`, a `commitlint.config.js` file or `commitlint` prop in
@@ -104,14 +104,14 @@ package.json:
 
 ```js
 // commitlint.config.js or .commitlintrc.js
-const { commitlint: commitlintConfig } = require('cod-scripts/commitlint');
+const {commitlint: commitlintConfig} = require('cod-scripts/commitlint')
 
 module.exports = {
   ...commitlintConfig,
   rules: {
     // overrides here
   },
-};
+}
 ```
 
 ```json

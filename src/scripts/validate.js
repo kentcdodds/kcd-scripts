@@ -1,19 +1,19 @@
-const spawn = require('cross-spawn');
+const spawn = require('cross-spawn')
 const {
   parseEnv,
   resolveBin,
   ifScript,
   getConcurrentlyArgs,
-} = require('../utils');
+} = require('../utils')
 
 // pre-commit runs linting and tests on the relevant files
 // so those scripts don't need to be run if we're running
 // this in the context of a pre-commit hook.
-const preCommit = parseEnv('SCRIPTS_PRE-COMMIT', false);
+const preCommit = parseEnv('SCRIPTS_PRE-COMMIT', false)
 
-const validateScripts = process.argv[2];
+const validateScripts = process.argv[2]
 
-const useDefaultScripts = typeof validateScripts !== 'string';
+const useDefaultScripts = typeof validateScripts !== 'string'
 
 const scripts = useDefaultScripts
   ? {
@@ -30,9 +30,9 @@ const scripts = useDefaultScripts
         [name]: `npm run ${name} --silent`,
       }),
       {},
-    );
+    )
 
-const scriptCount = Object.values(scripts).filter(Boolean).length;
+const scriptCount = Object.values(scripts).filter(Boolean).length
 
 if (scriptCount > 0) {
   const result = spawn.sync(
@@ -41,9 +41,9 @@ if (scriptCount > 0) {
     {
       stdio: 'inherit',
     },
-  );
+  )
 
-  process.exit(result.status);
+  process.exit(result.status)
 } else {
-  process.exit(0);
+  process.exit(0)
 }

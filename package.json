@@ -101,6 +101,10 @@
     ],
     "rules": {
       "no-console": "off",
+      "semi": "off",
+      "babel/semi": "off",
+      "object-curly-spacing": "off",
+      "babel/object-curly-spacing": "off",
       "no-process-exit": "off",
       "global-require": "off",
       "no-prototype-builtins": "off",

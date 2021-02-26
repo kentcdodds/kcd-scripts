@@ -1,7 +1,7 @@
-const { resolveCodScripts, resolveBin } = require('../utils');
+const {resolveCodScripts, resolveBin} = require('../utils')
 
-const codScripts = resolveCodScripts();
-const doctoc = resolveBin('doctoc');
+const codScripts = resolveCodScripts()
+const doctoc = resolveBin('doctoc')
 
 // differs from kcd because of my eslint setup. Want to format everything other
 // than js first, then format + lint js using eslint with prettier plugin
@@ -14,4 +14,4 @@ module.exports = {
     `${codScripts} lint --fix`,
     `${codScripts} test --findRelatedTests`,
   ].filter(Boolean),
-};
+}

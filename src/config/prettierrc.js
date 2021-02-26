@@ -17,4 +17,4 @@ module.exports = {
   jsxBracketSameLine: false,
   proseWrap: 'always',
   vueIndentScriptAndStyle: false,
-};
+}

@@ -1,9 +1,9 @@
-const path = require('path');
-const { DEFAULT_EXTENSIONS } = require('@babel/core');
-const spawn = require('cross-spawn');
-const yargsParser = require('yargs-parser');
-const rimraf = require('rimraf');
-const glob = require('glob');
+const path = require('path')
+const {DEFAULT_EXTENSIONS} = require('@babel/core')
+const spawn = require('cross-spawn')
+const yargsParser = require('yargs-parser')
+const rimraf = require('rimraf')
+const glob = require('glob')
 const {
   hasPkgProp,
   fromRoot,
@@ -11,47 +11,52 @@ const {
   hasFile,
   hasTypescript,
   generateTypeDefs,
-} = require('../../utils');
+} = require('../../utils')
 
-let args = process.argv.slice(2);
-const here = p => path.join(__dirname, p);
+let args = process.argv.slice(2)
+const here = p => path.join(__dirname, p)
 
-const parsedArgs = yargsParser(args);
+const parsedArgs = yargsParser(args)
 
 const useBuiltinConfig =
   !args.includes('--presets') &&
   !hasFile('.babelrc') &&
   !hasFile('.babelrc.js') &&
   !hasFile('babel.config.js') &&
-  !hasPkgProp('babel');
+  !hasPkgProp('babel')
 const config = useBuiltinConfig
   ? ['--presets', here('../../config/babelrc.js')]
-  : [];
+  : []
 
 const extensions =
   args.includes('--extensions') || args.includes('--x')
     ? []
-    : ['--extensions', [...DEFAULT_EXTENSIONS, '.ts', '.tsx']];
+    : ['--extensions', [...DEFAULT_EXTENSIONS, '.ts', '.tsx']]
 
-const builtInIgnore = '**/__tests__/**,**/__mocks__/**';
+const builtInIgnore = '**/__tests__/**,**/__mocks__/**'
 
-const ignore = args.includes('--ignore') ? [] : ['--ignore', builtInIgnore];
+const ignore = args.includes('--ignore') ? [] : ['--ignore', builtInIgnore]
 
-const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files'];
+const copyFiles = args.includes('--no-copy-files') ? [] : ['--copy-files']
 
-const useSpecifiedOutDir = args.includes('--out-dir') || args.includes('-d');
-const builtInOutDir = 'dist';
-const outDir = useSpecifiedOutDir ? [] : ['--out-dir', builtInOutDir];
+const useSpecifiedOutDir = args.includes('--out-dir')
+const builtInOutDir = 'dist'
+const outDir = useSpecifiedOutDir ? [] : ['--out-dir', builtInOutDir]
+const noTypeDefinitions = args.includes('--no-ts-defs')
 
 if (!useSpecifiedOutDir && !args.includes('--no-clean')) {
-  rimraf.sync(fromRoot('dist'));
+  rimraf.sync(fromRoot('dist'))
 } else {
-  args = args.filter(a => a !== '--no-clean');
+  args = args.filter(a => a !== '--no-clean')
+}
+
+if (noTypeDefinitions) {
+  args = args.filter(a => a !== '--no-ts-defs')
 }
 
 function go() {
   let result = spawn.sync(
-    resolveBin('@babel/cli', { executable: 'babel' }),
+    resolveBin('@babel/cli', {executable: 'babel'}),
     [
       ...outDir,
       ...copyFiles,
@@ -60,31 +65,32 @@ function go() {
       ...config,
       'src',
     ].concat(args),
-    { stdio: 'inherit' },
-  );
-  if (result.status !== 0) return result.status;
+    {stdio: 'inherit'},
+  )
+  if (result.status !== 0) return result.status
 
-  if (hasTypescript && !args.includes('--no-ts-defs')) {
-    console.log('Generating TypeScript definitions');
-    result = generateTypeDefs();
-    console.log('TypeScript definitions generated');
-    if (result.status !== 0) return result.status;
+  const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir)
+
+  if (hasTypescript && !noTypeDefinitions) {
+    console.log('Generating TypeScript definitions')
+    result = generateTypeDefs(pathToOutDir)
+    console.log('TypeScript definitions generated')
+    if (result.status !== 0) return result.status
   }
 
   // because babel will copy even ignored files, we need to remove the ignored files
-  const pathToOutDir = fromRoot(parsedArgs.outDir || builtInOutDir);
   const ignoredPatterns = (parsedArgs.ignore || builtInIgnore)
     .split(',')
-    .map(pattern => path.join(pathToOutDir, pattern));
+    .map(pattern => path.join(pathToOutDir, pattern))
   const ignoredFiles = ignoredPatterns.reduce(
     (all, pattern) => [...all, ...glob.sync(pattern)],
     [],
-  );
+  )
   ignoredFiles.forEach(ignoredFile => {
-    rimraf.sync(ignoredFile);
-  });
+    rimraf.sync(ignoredFile)
+  })
 
-  return result.status;
+  return result.status
 }
 
-process.exit(go());
+process.exit(go())

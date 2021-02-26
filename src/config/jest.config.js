@@ -1,10 +1,10 @@
-const path = require('path');
-const { ifAnyDep, hasFile, ifFile, hasPkgProp, fromRoot } = require('../utils');
+const path = require('path')
+const {ifAnyDep, hasFile, ifFile, hasPkgProp, fromRoot} = require('../utils')
 
-const here = p => path.join(__dirname, p);
+const here = p => path.join(__dirname, p)
 
 const useBuiltInBabelConfig =
-  !hasFile('.babelrc') && !hasFile('.babelrc.js') && !hasPkgProp('babel');
+  !hasFile('.babelrc') && !hasFile('.babelrc.js') && !hasPkgProp('babel')
 
 const ignores = [
   '/node_modules/',
@@ -13,7 +13,7 @@ const ignores = [
   '/__tests__/helpers/',
   '/__tests__/utils/',
   '__mocks__',
-];
+]
 
 const jestConfig = {
   roots: [fromRoot(hasFile('src') ? 'src' : '')],
@@ -46,7 +46,7 @@ const jestConfig = {
     require.resolve('jest-watch-typeahead/filename'),
     require.resolve('jest-watch-typeahead/testname'),
   ],
-};
+}
 
 const setupFilesAfterEnv = [
   ifAnyDep(
@@ -59,20 +59,20 @@ const setupFilesAfterEnv = [
   ifFile('tests/setup-env.js', fromRoot('tests/setup-env.js')),
   ifFile('tests/setup-env.ts', fromRoot('tests/setup-env.ts')),
   ifFile('tests/setup-env.tsx', fromRoot('tests/setup-env.tsx')),
-].filter(Boolean);
+].filter(Boolean)
 
 if (setupFilesAfterEnv.length) {
-  jestConfig.setupFilesAfterEnv = setupFilesAfterEnv;
+  jestConfig.setupFilesAfterEnv = setupFilesAfterEnv
 }
 
 if (useBuiltInBabelConfig) {
   jestConfig.transform = {
     '^.+\\.(js|jsx|ts|tsx)$': here('./babel-transform'),
-  };
+  }
 }
 
 if (jestConfig.testEnvironment === 'jsdom') {
-  jestConfig.setupFiles = [require.resolve('react-app-polyfill/jsdom')];
+  jestConfig.setupFiles = [require.resolve('react-app-polyfill/jsdom')]
 }
 
-module.exports = jestConfig;
+module.exports = jestConfig

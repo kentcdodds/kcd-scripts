@@ -1,12 +1,12 @@
-import cases from 'jest-in-case';
-import { unquoteSerializer } from './helpers/serializers';
+import cases from 'jest-in-case'
+import {unquoteSerializer} from './helpers/serializers'
 
-jest.mock('jest', () => ({ run: jest.fn() }));
-jest.mock('../../config/jest.config', () => ({ builtInConfig: true }));
-let mockIsCI = false;
-jest.mock('is-ci', () => mockIsCI);
+jest.mock('jest', () => ({run: jest.fn()}))
+jest.mock('../../config/jest.config', () => ({builtInConfig: true}))
+let mockIsCI = false
+jest.mock('is-ci', () => mockIsCI)
 
-expect.addSnapshotSerializer(unquoteSerializer);
+expect.addSnapshotSerializer(unquoteSerializer)
 
 cases(
   'test',
@@ -21,37 +21,37 @@ cases(
   }) => {
     // beforeEach
     // eslint-disable-next-line jest/no-jest-import
-    const { run: jestRunMock } = require('jest');
-    const originalArgv = process.argv;
-    const prevCI = mockIsCI;
-    const prevPreCommit = process.env['SCRIPTS_PRE-COMMIT'];
-    mockIsCI = ci;
-    process.env['SCRIPTS_PRE-COMMIT'] = preCommit;
+    const {run: jestRunMock} = require('jest')
+    const originalArgv = process.argv
+    const prevCI = mockIsCI
+    const prevPreCommit = process.env['SCRIPTS_PRE-COMMIT']
+    mockIsCI = ci
+    process.env['SCRIPTS_PRE-COMMIT'] = preCommit
     Object.assign(utils, {
       hasPkgProp: () => pkgHasJestProp,
       hasFile: () => hasJestConfigFile,
-    });
-    process.exit = jest.fn();
-    const teardown = setup();
+    })
+    process.exit = jest.fn()
+    const teardown = setup()
 
-    process.argv = ['node', '../test', ...args];
+    process.argv = ['node', '../test', ...args]
 
     try {
       // tests
-      require('../test');
-      expect(jestRunMock).toHaveBeenCalledTimes(1);
-      const [firstCall] = jestRunMock.mock.calls;
-      const [jestArgs] = firstCall;
-      expect(jestArgs.join(' ')).toMatchSnapshot();
+      require('../test')
+      expect(jestRunMock).toHaveBeenCalledTimes(1)
+      const [firstCall] = jestRunMock.mock.calls
+      const [jestArgs] = firstCall
+      expect(jestArgs.join(' ')).toMatchSnapshot()
     } catch (error) {
-      throw error;
+      throw error
     } finally {
-      teardown();
+      teardown()
       // afterEach
-      process.argv = originalArgv;
-      mockIsCI = prevCI;
-      process.env['SCRIPTS_PRE-COMMIT'] = prevPreCommit;
-      jest.resetModules();
+      process.argv = originalArgv
+      mockIsCI = prevCI
+      process.env['SCRIPTS_PRE-COMMIT'] = prevPreCommit
+      jest.resetModules()
     }
   },
   {
@@ -84,4 +84,4 @@ cases(
       args: ['--coverage', '--watch'],
     },
   },
-);
+)

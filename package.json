@@ -63,7 +63,7 @@
     "cross-spawn": "^7.0.3",
     "doctoc": "^2.0.0",
     "eslint": "^7.21.0",
-    "eslint-config-kentcdodds": "^17.4.0",
+    "eslint-config-kentcdodds": "^17.4.1",
     "glob": "^7.1.6",
     "husky": "^5.1.2",
     "is-ci": "^3.0.0",

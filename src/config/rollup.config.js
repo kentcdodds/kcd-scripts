@@ -145,7 +145,7 @@ module.exports = {
       mainFields: ['module', 'main', 'jsnext', 'browser'],
       extensions,
     }),
-    commonjs({include: 'node_modules/**'}),
+    commonjs({include: /node_modules/i}),
     json(),
     rollupBabel({
       presets: babelPresets,

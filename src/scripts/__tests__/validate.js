@@ -10,7 +10,7 @@ cases(
     const {sync: crossSpawnSyncMock} = require('cross-spawn')
     const originalExit = process.exit
     process.exit = jest.fn()
-    process.env['SCRIPTS_PRE-COMMIT'] = 'false'
+    process.env.SCRIPTS_PRE_COMMIT = 'false'
     const teardown = setup()
 
     try {
@@ -50,10 +50,10 @@ cases(
     },
     [`doesn't use test or lint if it's in pre-commit`]: {
       setup: withDefaultSetup(() => {
-        const previousVal = process.env['SCRIPTS_PRE-COMMIT']
-        process.env['SCRIPTS_PRE-COMMIT'] = 'true'
+        const previousVal = process.env.SCRIPTS_PRE_COMMIT
+        process.env.SCRIPTS_PRE_COMMIT = 'true'
         return function teardown() {
-          process.env['SCRIPTS_PRE-COMMIT'] = previousVal
+          process.env.SCRIPTS_PRE_COMMIT = previousVal
         }
       }),
     },

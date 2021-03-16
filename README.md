@@ -205,6 +205,7 @@ Thanks goes to these people ([emoji key][emojis]):
   <tr>
     <td align="center"><a href="https://github.com/mpeyper"><img src="https://avatars0.githubusercontent.com/u/23029903?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Michael Peyper</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=mpeyper" title="Code">💻</a></td>
     <td align="center"><a href="https://www.zhihu.com/people/lucas-hc/activities"><img src="https://avatars.githubusercontent.com/u/19988985?v=4?s=100" width="100px;" alt=""/><br /><sub><b>HOU Ce</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=HOUCe" title="Code">💻</a></td>
+    <td align="center"><a href="https://codepen.io/ariperkkio/"><img src="https://avatars.githubusercontent.com/u/14806298?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ari Perkkiö</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=AriPerkkio" title="Code">💻</a> <a href="https://github.com/kentcdodds/kcd-scripts/commits?author=AriPerkkio" title="Tests">⚠️</a></td>
   </tr>
 </table>
 

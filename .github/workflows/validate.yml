@@ -13,26 +13,58 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
 
       - name: install dependencies
         run: npm install --no-save
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - run: npm run build
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: lint js
         run: npm run lint
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: run tests
         run: npm run test
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           CI: true
+
+  pr-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: install dependencies
+        run: npm install --no-save
+
+      - run: npm run build
+
+      - name: publish to npm
+        id: pr-publish
+        run: |
+          version="0.0.0-PR-${PR}--$(echo ${SHA} | cut -c -7)"
+          npm version $version --no-git-tag-version
+          npm publish --access public --tag pr
+          echo "::set-output name=pr_version::$version"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PR: ${{ github.event.number }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🚀 PR version published: `${{ steps.pr-publish.outputs.pr_version }}`'
+            })

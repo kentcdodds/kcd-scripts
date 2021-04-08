@@ -10,10 +10,11 @@ jest.mock('cosmiconfig', () => {
 
 jest.mock('cpy')
 
-let whichSyncMock, readPkgUpSyncMock, cpy
+let whichSyncMock, readPkgUpSyncMock, cpy, nodePath
 
 beforeEach(() => {
   jest.resetModules()
+  nodePath = require('path')
   whichSyncMock = require('which').sync
   readPkgUpSyncMock = require('read-pkg-up').sync
   cpy = require('cpy')
@@ -175,7 +176,7 @@ test('should generate typescript definitions into provided folder', async () => 
 
   expect(cpy).toHaveBeenCalledTimes(1)
   expect(cpy).toHaveBeenCalledWith('**/*.d.ts', '../dist', {
-    cwd: '/blah/src',
+    cwd: `${nodePath.sep}blah${nodePath.sep}src`,
     parents: true,
   })
 })

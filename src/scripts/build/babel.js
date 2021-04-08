@@ -97,4 +97,4 @@ async function go() {
   return result.status
 }
 
-process.exit(go())
+go().then(process.exit)

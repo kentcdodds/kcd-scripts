@@ -59,6 +59,7 @@
     "chalk": "^4.1.0",
     "concurrently": "^6.0.0",
     "cosmiconfig": "^7.0.0",
+    "cpy": "^8.1.2",
     "cross-env": "^7.0.3",
     "cross-spawn": "^7.0.3",
     "doctoc": "^2.0.0",

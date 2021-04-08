@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const cpy = require('cpy')
 const spawn = require('cross-spawn')
 const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
@@ -169,8 +170,8 @@ function hasLocalConfig(moduleName, searchOptions = {}) {
   return result !== null
 }
 
-function generateTypeDefs(outputDir) {
-  return spawn.sync(
+async function generateTypeDefs(outputDir) {
+  const result = spawn.sync(
     resolveBin('typescript', {executable: 'tsc'}),
     // prettier-ignore
     [
@@ -181,6 +182,10 @@ function generateTypeDefs(outputDir) {
     ],
     {stdio: 'inherit'},
   )
+  if (result.status !== 0) return result
+
+  await cpy('**/*.d.ts', '../dist', {cwd: fromRoot('src'), parents: true})
+  return result
 }
 
 function getRollupInputs() {

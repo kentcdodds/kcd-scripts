@@ -54,7 +54,7 @@ if (noTypeDefinitions) {
   args = args.filter(a => a !== '--no-ts-defs')
 }
 
-function go() {
+async function go() {
   let result = spawn.sync(
     resolveBin('@babel/cli', {executable: 'babel'}),
     [
@@ -73,18 +73,22 @@ function go() {
 
   if (hasTypescript && !noTypeDefinitions) {
     console.log('Generating TypeScript definitions')
-    result = generateTypeDefs(pathToOutDir)
-    console.log('TypeScript definitions generated')
+    result = await generateTypeDefs(pathToOutDir)
     if (result.status !== 0) return result.status
+    console.log('TypeScript definitions generated')
   }
 
   // because babel will copy even ignored files, we need to remove the ignored files
   const ignoredPatterns = (parsedArgs.ignore || builtInIgnore)
     .split(',')
     .map(pattern => path.join(pathToOutDir, pattern))
+
+  // type def files are compiled to an empty file and they're useless
+  // so we'll get rid of those too.
+  const typeDefCompiledFiles = path.join(pathToOutDir, '**/*.d.js')
   const ignoredFiles = ignoredPatterns.reduce(
     (all, pattern) => [...all, ...glob.sync(pattern)],
-    [],
+    [typeDefCompiledFiles],
   )
   ignoredFiles.forEach(ignoredFile => {
     rimraf.sync(ignoredFile)

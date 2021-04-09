@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`format --config arg can be used for a custom config 1`] = `prettier --write **/*.+(js|json|less|css|ts|tsx|md) --config ./my-config.js`;
+exports[`format --config arg can be used for a custom config 1`] = `prettier --write **/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --config ./my-config.js`;
 
-exports[`format --ignore-path arg can be used for a custom ignore file 1`] = `prettier --write **/*.+(js|json|less|css|ts|tsx|md) --ignore-path ./.myignore`;
+exports[`format --ignore-path arg can be used for a custom ignore file 1`] = `prettier --write **/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --ignore-path ./.myignore`;
 
-exports[`format --no-write prevents --write argument from being added 1`] = `prettier **/*.+(js|json|less|css|ts|tsx|md) --no-write`;
+exports[`format --no-write prevents --write argument from being added 1`] = `prettier **/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --no-write`;
 
 exports[`format calls prettier CLI with args 1`] = `prettier --write my-src/**/*.js`;

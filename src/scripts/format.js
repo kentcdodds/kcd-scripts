@@ -30,7 +30,7 @@ const relativeArgs = args.map(a => a.replace(`${process.cwd()}/`, ''))
 
 const filesToApply = parsedArgs._.length
   ? []
-  : ['**/*.+(js|json|less|css|ts|tsx|md)']
+  : ['**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)']
 
 const result = spawn.sync(
   resolveBin('prettier'),

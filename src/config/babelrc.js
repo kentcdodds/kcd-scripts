@@ -1,6 +1,5 @@
 const browserslist = require('browserslist')
 const semver = require('semver')
-
 const {
   ifDep,
   ifAnyDep,
@@ -66,46 +65,54 @@ const envTargets = isTest
   : {node: getNodeVersion(pkg)}
 const envOptions = {modules: false, loose: true, targets: envTargets}
 
-module.exports = () => ({
-  presets: [
-    [require.resolve('@babel/preset-env'), envOptions],
-    ifAnyDep(
-      ['react', 'preact'],
+module.exports = api => {
+  // Cache the returned value forever and don't call this function again.
+  api.cache(true)
+
+  return {
+    presets: [
+      [require.resolve('@babel/preset-env'), envOptions],
+      ifAnyDep(
+        ['react', 'preact'],
+        [
+          require.resolve('@babel/preset-react'),
+          {pragma: isPreact ? ifDep('react', 'React.h', 'h') : undefined},
+        ],
+      ),
+      ifTypescript([require.resolve('@babel/preset-typescript')]),
+    ].filter(Boolean),
+    plugins: [
       [
-        require.resolve('@babel/preset-react'),
-        {pragma: isPreact ? ifDep('react', 'React.h', 'h') : undefined},
+        require.resolve('@babel/plugin-transform-runtime'),
+        {useESModules: treeshake && !isCJS},
       ],
-    ),
-    ifTypescript([require.resolve('@babel/preset-typescript')]),
-  ].filter(Boolean),
-  plugins: [
-    [
-      require.resolve('@babel/plugin-transform-runtime'),
-      {useESModules: treeshake && !isCJS},
-    ],
-    require.resolve('babel-plugin-macros'),
-    alias
-      ? [
-          require.resolve('babel-plugin-module-resolver'),
-          {root: ['./src'], alias},
-        ]
-      : null,
-    ifAnyDep(
-      ['react', 'preact'],
+      require.resolve('babel-plugin-macros'),
+      alias
+        ? [
+            require.resolve('babel-plugin-module-resolver'),
+            {root: ['./src'], alias},
+          ]
+        : null,
+      ifAnyDep(
+        ['react', 'preact'],
+        [
+          require.resolve('babel-plugin-transform-react-remove-prop-types'),
+          isPreact ? {removeImport: true} : {mode: 'unsafe-wrap'},
+        ],
+      ),
+      isUMD
+        ? require.resolve('babel-plugin-transform-inline-environment-variables')
+        : null,
       [
-        require.resolve('babel-plugin-transform-react-remove-prop-types'),
-        isPreact ? {removeImport: true} : {mode: 'unsafe-wrap'},
+        require.resolve('@babel/plugin-proposal-class-properties'),
+        {loose: true},
       ],
-    ),
-    isUMD
-      ? require.resolve('babel-plugin-transform-inline-environment-variables')
-      : null,
-    [require.resolve('@babel/plugin-proposal-class-properties'), {loose: true}],
-    isMinify
-      ? require.resolve('babel-plugin-minify-dead-code-elimination')
-      : null,
-    treeshake
-      ? null
-      : require.resolve('@babel/plugin-transform-modules-commonjs'),
-  ].filter(Boolean),
-})
+      isMinify
+        ? require.resolve('babel-plugin-minify-dead-code-elimination')
+        : null,
+      treeshake
+        ? null
+        : require.resolve('@babel/plugin-transform-modules-commonjs'),
+    ].filter(Boolean),
+  }
+}

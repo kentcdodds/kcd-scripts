@@ -117,6 +117,7 @@
   "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
   "devDependencies": {
     "jest-in-case": "^1.0.2",
+    "jest-snapshot-serializer-raw": "^1.2.0",
     "slash": "^3.0.0"
   }
 }

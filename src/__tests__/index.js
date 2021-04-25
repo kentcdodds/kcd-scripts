@@ -1,7 +1,7 @@
 import path from 'path'
 import slash from 'slash'
 import cases from 'jest-in-case'
-import {unquoteSerializer} from '../scripts/__tests__/helpers/serializers'
+import * as unquoteSerializer from 'jest-snapshot-serializer-raw/always'
 
 const projectRoot = path.join(__dirname, '../../')
 

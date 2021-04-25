@@ -1,12 +1,9 @@
 import cases from 'jest-in-case'
-import * as unquoteSerializer from 'jest-snapshot-serializer-raw/always'
 
 jest.mock('jest', () => ({run: jest.fn()}))
 jest.mock('../../config/jest.config', () => ({builtInConfig: true}))
 let mockIsCI = false
 jest.mock('is-ci', () => mockIsCI)
-
-expect.addSnapshotSerializer(unquoteSerializer)
 
 cases(
   'test',

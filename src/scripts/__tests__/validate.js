@@ -1,5 +1,5 @@
 import cases from 'jest-in-case'
-import {unquoteSerializer} from './helpers/serializers'
+import * as unquoteSerializer from 'jest-snapshot-serializer-raw/always'
 
 expect.addSnapshotSerializer(unquoteSerializer)
 

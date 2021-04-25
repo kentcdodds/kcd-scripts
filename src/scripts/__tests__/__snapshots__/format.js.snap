@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`format --config arg can be used for a custom config 1`] = `prettier --ignore-path ./src/config/prettierignore --write **/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx) --config ./my-config.js`;
+exports[`format --config arg can be used for a custom config 1`] = `prettier --ignore-path ./src/config/prettierignore --write **/*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --config ./my-config.js`;
 
-exports[`format --config arg can be used for a custom config 2`] = `prettier --ignore-path ./src/config/prettierignore --write **/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx) --config ./my-config.js`;
+exports[`format --config arg can be used for a custom config 2`] = `prettier --ignore-path ./src/config/prettierignore --write **/*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --config ./my-config.js`;
 
-exports[`format --ignore-path arg can be used for a custom ignore file 1`] = `prettier --write **/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx) --ignore-path ./.myignore`;
+exports[`format --ignore-path arg can be used for a custom ignore file 1`] = `prettier --write **/*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --ignore-path ./.myignore`;
 
-exports[`format --ignore-path arg can be used for a custom ignore file 2`] = `prettier --write **/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx) --ignore-path ./.myignore`;
+exports[`format --ignore-path arg can be used for a custom ignore file 2`] = `prettier --write **/*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --ignore-path ./.myignore`;
 
-exports[`format --no-write prevents --write argument from being added 1`] = `prettier --ignore-path ./src/config/prettierignore **/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx) --no-write`;
+exports[`format --no-write prevents --write argument from being added 1`] = `prettier --ignore-path ./src/config/prettierignore **/*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --no-write`;
 
-exports[`format --no-write prevents --write argument from being added 2`] = `prettier --ignore-path ./src/config/prettierignore **/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx) --no-write`;
+exports[`format --no-write prevents --write argument from being added 2`] = `prettier --ignore-path ./src/config/prettierignore **/*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue) --no-write`;
 
 exports[`format calls prettier CLI with args 1`] = `prettier --ignore-path ./src/config/prettierignore --write my-src/**/*.js`;
 

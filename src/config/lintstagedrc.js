@@ -7,7 +7,7 @@ const doctoc = resolveBin('doctoc')
 // than js first, then format + lint js using eslint with prettier plugin
 module.exports = {
   'README.md': [`${doctoc} --maxlevel 3 --notitle`],
-  '*.+(json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx|vue)': [
+  '*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)': [
     `${codScripts} format --no-eslint`,
   ].filter(Boolean),
   '*.js': [

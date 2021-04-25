@@ -24,9 +24,9 @@ cases(
     const {run: jestRunMock} = require('jest')
     const originalArgv = process.argv
     const prevCI = mockIsCI
-    const prevPreCommit = process.env['SCRIPTS_PRE-COMMIT']
+    const prevPreCommit = process.env.SCRIPTS_PRE_COMMIT
     mockIsCI = ci
-    process.env['SCRIPTS_PRE-COMMIT'] = preCommit
+    process.env.SCRIPTS_PRE_COMMIT = preCommit
     Object.assign(utils, {
       hasPkgProp: () => pkgHasJestProp,
       hasFile: () => hasJestConfigFile,
@@ -50,7 +50,7 @@ cases(
       // afterEach
       process.argv = originalArgv
       mockIsCI = prevCI
-      process.env['SCRIPTS_PRE-COMMIT'] = prevPreCommit
+      process.env.SCRIPTS_PRE_COMMIT = prevPreCommit
       jest.resetModules()
     }
   },
@@ -59,7 +59,7 @@ cases(
     'does not watch on CI': {
       ci: true,
     },
-    'does not watch on SCRIPTS_PRE-COMMIT': {
+    'does not watch on SCRIPTS_PRE_COMMIT': {
       preCommit: 'true',
     },
     'does not watch with --no-watch': {

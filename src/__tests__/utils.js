@@ -8,13 +8,16 @@ jest.mock('cosmiconfig', () => {
   return {...cosmiconfigExports, cosmiconfigSync: jest.fn()}
 })
 
-let whichSyncMock
-let readPkgUpSyncMock
+jest.mock('cpy')
+
+let whichSyncMock, readPkgUpSyncMock, cpy, nodePath
 
 beforeEach(() => {
   jest.resetModules()
+  nodePath = require('path')
   whichSyncMock = require('which').sync
   readPkgUpSyncMock = require('read-pkg-up').sync
+  cpy = require('cpy')
 })
 
 test('package is the package.json', () => {
@@ -162,15 +165,21 @@ test('hasLocalConfiguration returns true if a local config found and it is empty
   expect(require('../utils').hasLocalConfig('module')).toBe(true)
 })
 
-test('should generate typescript definitions into provided folder', () => {
+test('should generate typescript definitions into provided folder', async () => {
   whichSyncMock.mockImplementationOnce(() => require.resolve('../'))
   const {sync: crossSpawnSyncMock} = require('cross-spawn')
-  require('../utils').generateTypeDefs('destination folder')
+  await require('../utils').generateTypeDefs('destination folder')
   expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
   const args = crossSpawnSyncMock.mock.calls[0][1]
   const outDirIndex = args.findIndex(arg => arg === '--outDir') + 1
 
   expect(args[outDirIndex]).toBe('destination folder')
+
+  expect(cpy).toHaveBeenCalledTimes(1)
+  expect(cpy).toHaveBeenCalledWith('**/*.d.ts', '../dist', {
+    cwd: `${nodePath.sep}blah${nodePath.sep}src`,
+    parents: true,
+  })
 })
 
 function mockPkg({package: pkg = {}, path = '/blah/package.json'}) {

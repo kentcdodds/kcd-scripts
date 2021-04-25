@@ -12,7 +12,6 @@ const camelcase = require('lodash.camelcase')
 const {terser} = require('rollup-plugin-terser')
 const nodeBuiltIns = require('rollup-plugin-node-builtins')
 const nodeGlobals = require('rollup-plugin-node-globals')
-const {sizeSnapshot} = require('rollup-plugin-size-snapshot')
 const omit = require('lodash.omit')
 const {
   pkg,
@@ -35,7 +34,6 @@ const format = process.env.BUILD_FORMAT
 const isPreact = parseEnv('BUILD_PREACT', false)
 const isNode = parseEnv('BUILD_NODE', false)
 const name = process.env.BUILD_NAME || capitalize(camelcase(pkg.name))
-const useSizeSnapshot = parseEnv('BUILD_SIZE_SNAPSHOT', false)
 
 const esm = format === 'esm'
 const umd = format === 'umd'
@@ -148,7 +146,7 @@ module.exports = {
       mainFields: ['module', 'main', 'jsnext', 'browser'],
       extensions,
     }),
-    commonjs({include: 'node_modules/**'}),
+    commonjs({include: /node_modules/i}),
     json(),
     rollupBabel({
       presets: babelPresets,
@@ -157,7 +155,6 @@ module.exports = {
       extensions,
     }),
     replace(replacements),
-    useSizeSnapshot ? sizeSnapshot({printInfo: false}) : null,
     minify ? terser() : null,
     codeSplitting &&
       ((writes = 0) => ({

@@ -1,7 +1,4 @@
 import cases from 'jest-in-case'
-import * as unquoteSerializer from 'jest-snapshot-serializer-raw/always'
-
-expect.addSnapshotSerializer(unquoteSerializer)
 
 cases(
   'validate',

@@ -1,11 +1,9 @@
 import path from 'path'
 import slash from 'slash'
 import cases from 'jest-in-case'
-import * as unquoteSerializer from 'jest-snapshot-serializer-raw/always'
 
 const projectRoot = path.join(__dirname, '../../')
 
-expect.addSnapshotSerializer(unquoteSerializer)
 expect.addSnapshotSerializer({
   print: val => slash(val.replace(projectRoot, '<PROJECT_ROOT>/')),
   test: val => typeof val === 'string' && val.includes(projectRoot),

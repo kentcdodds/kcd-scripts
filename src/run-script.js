@@ -41,9 +41,15 @@ function getEnv() {
   // https://github.com/kentcdodds/kcd-scripts/issues/4
   return Object.keys(process.env)
     .filter(key => process.env[key] !== undefined)
-    .reduce((envCopy, key) => ({...envCopy, [key]: process.env[key]}), {
-      [`SCRIPTS_${script.toUpperCase()}`]: true,
-    })
+    .reduce(
+      (envCopy, key) => {
+        envCopy[key] = process.env[key]
+        return envCopy
+      },
+      {
+        [`SCRIPTS_${script.toUpperCase().replace(/-/g, '_')}`]: true,
+      },
+    )
 }
 
 function handleSignal(result) {

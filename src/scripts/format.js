@@ -33,7 +33,7 @@ const write = args.includes('--no-write') ? [] : ['--write']
 const relativeArgs = args.map(a => a.replace(`${process.cwd()}/`, ''))
 const filesToApply = parsedArgs._.length
   ? []
-  : ['**/*.+(md|json|yml|yaml|css|less|scss|sass|graphql|ts|tsx)']
+  : ['**/*.+(json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)']
 
 // run prettier on all non-js files
 const prettierResult = spawn.sync(

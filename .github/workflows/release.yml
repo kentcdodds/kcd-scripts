@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+      - main
+      - alpha
+      - beta
+      - next
+      - 'next-major'
+      - '+([0-9])?(.{+([0-9]),x}).x'
 
 jobs:
   release:
@@ -27,7 +33,7 @@ jobs:
           CI: true
 
       - name: semantic release
-        uses: codfish/semantic-release-action@v1
+        uses: docker://ghcr.io/codfish/semantic-release-action:v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

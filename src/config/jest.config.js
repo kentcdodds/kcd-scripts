@@ -46,7 +46,10 @@ const jestConfig = {
     require.resolve('jest-watch-typeahead/filename'),
     require.resolve('jest-watch-typeahead/testname'),
   ],
-  snapshotSerializers: [require.resolve('jest-serializer-path')],
+  snapshotSerializers: [
+    require.resolve('jest-serializer-path'),
+    require.resolve('jest-snapshot-serializer-raw/always'),
+  ],
 }
 
 const setupFiles = [

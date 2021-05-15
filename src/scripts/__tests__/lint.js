@@ -1,11 +1,7 @@
 import cases from 'jest-in-case'
-import {
-  unquoteSerializer,
-  winPathSerializer,
-  relativePathSerializer,
-} from './helpers/serializers'
 
-expect.addSnapshotSerializer(unquoteSerializer)
+import {winPathSerializer, relativePathSerializer} from './helpers/serializers'
+
 expect.addSnapshotSerializer(winPathSerializer)
 expect.addSnapshotSerializer(relativePathSerializer)
 

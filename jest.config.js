@@ -1,9 +1,10 @@
-const {jest: jestConfig} = require('./src/config')
+const {jest} = require('./src/config')
 
-module.exports = Object.assign(jestConfig, {
-  coverageThreshold: null,
-  testPathIgnorePatterns: [
-    ...jestConfig.testPathIgnorePatterns,
-    './src/scripts/test.js',
-  ],
-})
+ module.exports = {
+   ...jest,
+   coverageThreshold: null,
+   snapshotSerializers: [
+     ...jest.snapshotSerializers,
+     'jest-snapshot-serializer-raw/always',
+   ],
+ }

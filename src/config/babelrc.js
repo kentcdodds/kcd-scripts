@@ -39,8 +39,7 @@ if (!treeshake && !hasBabelRuntimeDep && !isTest) {
  * @see https://github.com/browserslist/browserslist/blob/master/node.js#L139
  */
 const browsersConfig = browserslist.loadConfig({path: appDirectory}) || [
-  'ie 10',
-  'ios 7',
+  'defaults',
 ]
 
 const envTargets = isTest

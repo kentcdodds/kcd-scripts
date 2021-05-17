@@ -1,10 +1,10 @@
 const {jest} = require('./src/config')
 
- module.exports = {
-   ...jest,
-   coverageThreshold: null,
-   snapshotSerializers: [
-     ...jest.snapshotSerializers,
-     'jest-snapshot-serializer-raw/always',
-   ],
- }
+module.exports = {
+  ...jest,
+  coverageThreshold: null,
+  testPathIgnorePatterns: [
+    ...jest.testPathIgnorePatterns,
+    './src/scripts/test.js',
+  ],
+}

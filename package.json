@@ -71,7 +71,7 @@
     "jest": "^27.0.1",
     "jest-serializer-path": "^0.1.15",
     "jest-snapshot-serializer-raw": "^1.2.0",
-    "jest-watch-typeahead": "^0.6.3",
+    "jest-watch-typeahead": "^0.6.4",
     "lint-staged": "^10.5.4",
     "lodash.camelcase": "^4.3.0",
     "lodash.has": "^4.5.2",

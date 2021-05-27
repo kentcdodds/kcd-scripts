@@ -99,6 +99,7 @@
       "import/no-dynamic-require": "off",
       "import/no-import-module-exports": "off",
       "import/no-unassigned-import": "off",
+      "import/extensions": "off",
       "no-console": "off",
       "no-nested-ternary": "off",
       "no-useless-catch": "off"

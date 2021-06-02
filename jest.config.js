@@ -1,9 +1,10 @@
-const {jest: jestConfig} = require('./src/config')
+const {jest} = require('./src/config')
 
-module.exports = Object.assign(jestConfig, {
+module.exports = {
+  ...jest,
   coverageThreshold: null,
   testPathIgnorePatterns: [
-    ...jestConfig.testPathIgnorePatterns,
+    ...jest.testPathIgnorePatterns,
     './src/scripts/test.js',
   ],
-})
+}

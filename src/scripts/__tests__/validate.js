@@ -1,7 +1,4 @@
 import cases from 'jest-in-case'
-import {unquoteSerializer} from './helpers/serializers'
-
-expect.addSnapshotSerializer(unquoteSerializer)
 
 function setupWithScripts(scripts = ['test', 'lint', 'build', 'typecheck']) {
   return function setup() {

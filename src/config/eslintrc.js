@@ -9,7 +9,7 @@ const useBuiltinPrettierConfig = !hasLocalConfig('prettier')
 const useBuiltinBabelConfig = !hasLocalConfig('babel')
 
 module.exports = {
-  extends: [require.resolve('eslint-config-codfish')].filter(Boolean),
+  extends: require.resolve('eslint-config-codfish'),
   parserOptions: {
     babelOptions: useBuiltinBabelConfig
       ? {configFile: hereRelative('./babelrc.js')}

@@ -69,7 +69,7 @@
     "cross-spawn": "^7.0.3",
     "doctoc": "^2.0.0",
     "eslint": "^7.27.0",
-    "eslint-config-codfish": "^10.1.0",
+    "eslint-config-codfish": "^10.2.0",
     "glob": "^7.1.7",
     "husky": "^6.0.0",
     "is-ci": "^3.0.0",

@@ -136,9 +136,11 @@ This is inspired by `react-scripts`.
 
 ## Other Solutions
 
-If you are aware of any please [make a pull request][prs] and add it
-here! Again, this is a very specific-to-me solution.
-- [Rollpkg](https://github.com/rafgraph/rollpkg) - convention over config build tool to create packages with TypeScript and Rollup.
+If you are aware of any please [make a pull request][prs] and add it here!
+Again, this is a very specific-to-me solution.
+
+- [Rollpkg](https://github.com/rafgraph/rollpkg) - convention over config build
+  tool to create packages with TypeScript and Rollup.
 
 ## Issues
 

@@ -9,8 +9,14 @@ const args = process.argv.slice(2)
 
 const useBuiltInConfig =
   !args.includes('--config') &&
+  !args.includes('-c') &&
   !hasFile('.lintstagedrc') &&
   !hasFile('lint-staged.config.js') &&
+  !hasFile('lintstagedrc.json') &&
+  !hasFile('lintstagedrc.yml') &&
+  !hasFile('lintstagedrc.yaml') &&
+  !hasFile('lintstagedrc.js') &&
+  !hasFile('lintstagedrc.cjs') &&
   !hasPkgProp('lint-staged')
 
 const config = useBuiltInConfig

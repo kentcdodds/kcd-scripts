@@ -87,7 +87,7 @@ Or, for `babel`, a `.babelrc` with:
 Or, for `jest`:
 
 ```js
-const {jest: jestConfig} = require('cod-scripts/config')
+const { jest: jestConfig } = require('cod-scripts/config')
 
 module.exports = Object.assign(jestConfig, {
   // your overrides here
@@ -99,15 +99,27 @@ module.exports = Object.assign(jestConfig, {
 })
 ```
 
+Or, for `lint-staged`:
+
+```js
+// lint-staged.config.js or .lintstagedrc.js
+const { lintStaged } = require('cod-scripts/config')
+
+module.exports = {
+  ...lintStaged,
+  'README.md': [`${doctoc} --maxlevel 3 --notitle`],
+}
+```
+
 Or, for `commitlint`, a `commitlint.config.js` file or `commitlint` prop in
 package.json:
 
 ```js
 // commitlint.config.js or .commitlintrc.js
-const {commitlint: commitlintConfig} = require('cod-scripts/commitlint')
+const { commitlint } = require('cod-scripts/config')
 
 module.exports = {
-  ...commitlintConfig,
+  ...commitlint,
   rules: {
     // overrides here
   },

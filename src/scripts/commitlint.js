@@ -19,8 +19,12 @@ const config = useBuiltinConfig
   ? ['--config', hereRelative('../config/commitlint.config.js')]
   : []
 
-const result = spawn.sync(resolveBin('commitlint'), [...config, ...args], {
-  stdio: 'inherit',
-})
+const result = spawn.sync(
+  resolveBin('@commitlint/cli', {executable: 'commitlint'}),
+  [...config, ...args],
+  {
+    stdio: 'inherit',
+  },
+)
 
 process.exit(result.status)

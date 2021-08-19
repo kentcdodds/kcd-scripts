@@ -28,6 +28,7 @@ linting, testing, building, and more.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Installation](#installation)
+  - [Husky Setup](#husky-setup)
 - [Usage](#usage)
   - [Overriding Config](#overriding-config)
   - [TypeScript Support](#typescript-support)
@@ -44,6 +45,42 @@ should be installed as one of your project's `devDependencies`:
 npm install --save-dev cod-scripts
 npm install --save @babel/runtime
 ```
+
+### Husky Setup
+
+In order to take advantage of the `pre-commit` script & `lint-staged`
+configuration in `cod-scripts`, you'll need to setup husky in addition to
+installing this package.
+
+#### First time installing `cod-scripts`
+
+If this is the first time installing `cod-scripts` in your project, run the
+following:
+
+```sh
+npx husky install
+npm set-script prepare "husky install"
+npx husky add .husky/pre-commit 'npx --no-install cod-scripts pre-commit'
+npx husky add .husky/commit-msg 'npx --no-install cod-scripts commitlint --edit "$1"'
+```
+
+> **Note**: See the [overriding `lint-staged`](#lint-staged) section below to
+> see how you can extend the `lint-staged` script from `cod-scripts`.
+
+#### Upgrading from an older version of `cod-scripts`
+
+Just running the following should work:
+
+```sh
+npm exec -- github:typicode/husky-4-to-7 --remove-v4-config
+npm set-script prepare "husky install"
+```
+
+**Important**: You will need to edit `.husky/commit-msg` after running the above
+command. Change `-E HUSKY_GIT_PARAMS` --> `--edit $1`.
+
+> **Note**: Run `npm install -g npm` if the above command fails. You may be
+> running an older version of `npm` that doesn't have the `exec` command.
 
 ## Usage
 
@@ -68,21 +105,27 @@ parts of the config you need to.
 This can be a very helpful way to make editor integration work for tools like
 ESLint which require project-based ESLint configuration to be present to work.
 
+#### `eslint`
+
 So, if we were to do this for ESLint, you could create an `.eslintrc` with the
 contents of:
 
-```
+```json
 {"extends": "./node_modules/cod-scripts/eslint.js"}
 ```
 
 > Note: for now, you'll have to include an `.eslintignore` in your project until
 > [this eslint issue is resolved](https://github.com/eslint/eslint/issues/9227).
 
+#### `babel`
+
 Or, for `babel`, a `.babelrc` with:
 
+```json
+{"presets": ["cod-scripts/babel"]}
 ```
-{ "presets": ["cod-scripts/babel"] }
-```
+
+#### `jest`
 
 Or, for `jest`:
 
@@ -99,15 +142,31 @@ module.exports = Object.assign(jestConfig, {
 })
 ```
 
+#### `lint-staged`
+
+Or, for `lint-staged`:
+
+```js
+// lint-staged.config.js or .lintstagedrc.js
+const {lintStaged} = require('cod-scripts/config')
+
+module.exports = {
+  ...lintStaged,
+  'README.md': [`${doctoc} --maxlevel 3 --notitle`],
+}
+```
+
+#### `commitlint`
+
 Or, for `commitlint`, a `commitlint.config.js` file or `commitlint` prop in
 package.json:
 
 ```js
 // commitlint.config.js or .commitlintrc.js
-const {commitlint: commitlintConfig} = require('cod-scripts/commitlint')
+const {commitlint} = require('cod-scripts/config')
 
 module.exports = {
-  ...commitlintConfig,
+  ...commitlint,
   rules: {
     // overrides here
   },

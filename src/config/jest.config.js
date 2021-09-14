@@ -1,5 +1,5 @@
 const path = require('path')
-const {ifAnyDep, hasFile, hasPkgProp, fromRoot} = require('../utils')
+const {ifAnyDep, hasFile, hasPkgProp} = require('../utils')
 
 const here = p => path.join(__dirname, p)
 
@@ -15,7 +15,7 @@ const ignores = [
 ]
 
 const jestConfig = {
-  roots: [fromRoot('src')],
+  roots: ['<rootDir>/src'],
   testEnvironment: ifAnyDep(
     ['webpack', 'rollup', 'react', 'preact'],
     'jsdom',
@@ -23,7 +23,7 @@ const jestConfig = {
   ),
   testURL: 'http://localhost',
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
-  modulePaths: [fromRoot('src'), 'shared', fromRoot('tests')],
+  modulePaths: ['<rootDir>/src', 'shared', '<rootDir>/tests'],
   collectCoverageFrom: ['src/**/*.+(js|jsx|ts|tsx)'],
   testMatch: ['**/__tests__/**/*.+(js|jsx|ts|tsx)'],
   testPathIgnorePatterns: [...ignores],
@@ -54,7 +54,7 @@ const setupFiles = [
 ]
 for (const setupFile of setupFiles) {
   if (hasFile(setupFile)) {
-    jestConfig.setupFilesAfterEnv = [fromRoot(setupFile)]
+    jestConfig.setupFilesAfterEnv = `<rootDir>/${setupFile}`
   }
 }
 

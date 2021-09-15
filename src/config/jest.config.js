@@ -54,7 +54,7 @@ const setupFiles = [
 ]
 for (const setupFile of setupFiles) {
   if (hasFile(setupFile)) {
-    jestConfig.setupFilesAfterEnv = `<rootDir>/${setupFile}`
+    jestConfig.setupFilesAfterEnv = [`<rootDir>/${setupFile}`]
   }
 }
 

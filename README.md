@@ -210,6 +210,7 @@ Thanks goes to these people ([emoji key][emojis]):
     <td align="center"><a href="https://codepen.io/ariperkkio/"><img src="https://avatars.githubusercontent.com/u/14806298?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ari Perkkiö</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=AriPerkkio" title="Code">💻</a> <a href="https://github.com/kentcdodds/kcd-scripts/commits?author=AriPerkkio" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://solverfox.dev"><img src="https://avatars.githubusercontent.com/u/12292047?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sebastian Silbermann</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=eps1lon" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/nstepien"><img src="https://avatars.githubusercontent.com/u/567105?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nicolas Stepien</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=nstepien" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/KSVarun"><img src="https://avatars.githubusercontent.com/u/15784650?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Varun</b></sub></a><br /><a href="https://github.com/kentcdodds/kcd-scripts/commits?author=KSVarun" title="Documentation">📖</a></td>
   </tr>
 </table>
 

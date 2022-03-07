@@ -24,10 +24,10 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
 
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
 
@@ -54,12 +54,12 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
 
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
 
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1

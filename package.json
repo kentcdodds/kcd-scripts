@@ -2,20 +2,19 @@
   "name": "kcd-scripts",
   "version": "0.0.0-semantically-released",
   "description": "CLI for common scripts for my projects",
-  "engines": {
-    "node": "^12.22.0 || ^14.17.0 || >=16.0.0",
-    "npm": ">=6"
+  "keywords": [],
+  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme",
+  "bugs": {
+    "url": "https://github.com/kentcdodds/kcd-scripts/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kentcdodds/kcd-scripts"
+  },
+  "license": "MIT",
+  "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)",
   "bin": {
     "kcd-scripts": "dist/index.js"
-  },
-  "scripts": {
-    "test": "node src test",
-    "test:update": "node src test --updateSnapshot",
-    "build": "node src build",
-    "lint": "node src lint",
-    "format": "node src format",
-    "validate": "node src validate"
   },
   "files": [
     "dist",
@@ -27,70 +26,13 @@
     "prettier.js",
     "shared-tsconfig.json"
   ],
-  "keywords": [],
-  "author": "Kent C. Dodds <me@kentcdodds.com> (https://kentcdodds.com)",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.8",
-    "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/preset-typescript": "^7.16.7",
-    "@babel/runtime": "^7.17.8",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^21.0.3",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "@rollup/plugin-replace": "^4.0.0",
-    "@types/jest": "^27.4.1",
-    "arrify": "^2.0.1",
-    "babel-jest": "^27.5.1",
-    "babel-plugin-macros": "^3.1.0",
-    "babel-plugin-minify-dead-code-elimination": "^0.5.1",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "browserslist": "^4.20.2",
-    "builtin-modules": "^3.2.0",
-    "chalk": "^4.1.2",
-    "concurrently": "^7.1.0",
-    "cosmiconfig": "^7.0.1",
-    "cpy": "^8.1.2",
-    "cross-env": "^7.0.3",
-    "cross-spawn": "^7.0.3",
-    "doctoc": "^2.1.0",
-    "eslint": "^8.12.0",
-    "eslint-config-kentcdodds": "^20.2.0",
-    "glob": "^7.2.0",
-    "husky": "^4.3.8",
-    "is-ci": "^3.0.1",
-    "jest": "^27.5.1",
-    "jest-serializer-path": "^0.1.15",
-    "jest-snapshot-serializer-raw": "^1.2.0",
-    "jest-watch-typeahead": "^1.0.0",
-    "lint-staged": "^12.3.7",
-    "lodash.camelcase": "^4.3.0",
-    "lodash.has": "^4.5.2",
-    "lodash.omit": "^4.5.0",
-    "mkdirp": "^1.0.4",
-    "prettier": "2.6.2",
-    "read-pkg-up": "^7.0.1",
-    "resolve": "^1.22.0",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.70.1",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "semver": "^7.3.5",
-    "which": "^2.0.2",
-    "yargs-parser": "^21.0.1"
-  },
-  "devDependencies": {
-    "jest-in-case": "^1.0.2",
-    "slash": "^3.0.0"
+  "scripts": {
+    "build": "node src build",
+    "format": "node src format",
+    "lint": "node src lint",
+    "test": "node src test",
+    "test:update": "node src test --updateSnapshot",
+    "validate": "node src validate"
   },
   "eslintConfig": {
     "extends": [
@@ -98,14 +40,14 @@
       "kentcdodds/jest"
     ],
     "rules": {
-      "no-process-exit": "off",
-      "import/no-dynamic-require": "off",
-      "import/no-import-module-exports": "off",
-      "import/no-unassigned-import": "off",
-      "import/extensions": "off",
       "no-console": "off",
       "no-nested-ternary": "off",
-      "no-useless-catch": "off"
+      "no-process-exit": "off",
+      "no-useless-catch": "off",
+      "import/extensions": "off",
+      "import/no-dynamic-require": "off",
+      "import/no-import-module-exports": "off",
+      "import/no-unassigned-import": "off"
     }
   },
   "eslintIgnore": [
@@ -113,12 +55,70 @@
     "coverage",
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kentcdodds/kcd-scripts"
+  "dependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@babel/runtime": "^7.18.6",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-replace": "^4.0.0",
+    "@types/jest": "^27.5.2",
+    "arrify": "^2.0.1",
+    "babel-jest": "^28.1.2",
+    "babel-plugin-macros": "^3.1.0",
+    "babel-plugin-minify-dead-code-elimination": "^0.5.2",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.4",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "browserslist": "^4.21.1",
+    "builtin-modules": "^3.3.0",
+    "chalk": "^4.1.2",
+    "concurrently": "^7.2.2",
+    "cosmiconfig": "^7.0.1",
+    "cpy": "^8.1.2",
+    "cross-env": "^7.0.3",
+    "cross-spawn": "^7.0.3",
+    "doctoc": "^2.2.0",
+    "eslint": "^8.18.0",
+    "eslint-config-kentcdodds": "^20.3.1",
+    "glob": "^8.0.3",
+    "husky": "^4.3.8",
+    "is-ci": "^3.0.1",
+    "jest": "^28.1.2",
+    "jest-environment-jsdom": "^28.1.2",
+    "jest-serializer-path": "^0.1.15",
+    "jest-snapshot-serializer-raw": "^1.2.0",
+    "jest-watch-typeahead": "^1.1.0",
+    "lint-staged": "^12.5.0",
+    "lodash.camelcase": "^4.3.0",
+    "lodash.has": "^4.5.2",
+    "lodash.omit": "^4.5.0",
+    "mkdirp": "^1.0.4",
+    "prettier": "2.7.1",
+    "read-pkg-up": "^7.0.1",
+    "resolve": "^1.22.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.75.7",
+    "rollup-plugin-polyfill-node": "^0.9.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "semver": "^7.3.7",
+    "which": "^2.0.2",
+    "yargs-parser": "^21.0.1"
   },
-  "bugs": {
-    "url": "https://github.com/kentcdodds/kcd-scripts/issues"
+  "devDependencies": {
+    "jest-in-case": "^1.0.2",
+    "slash": "^3.0.0"
   },
-  "homepage": "https://github.com/kentcdodds/kcd-scripts#readme"
+  "engines": {
+    "node": "^12.22.0 || ^14.17.0 || ^16.10.0 || >=17.0.0",
+    "npm": ">=6"
+  }
 }

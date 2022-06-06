@@ -9,10 +9,9 @@ const {
 } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
 const camelcase = require('lodash.camelcase')
-const {terser} = require('rollup-plugin-terser')
-const nodeBuiltIns = require('rollup-plugin-node-builtins')
-const nodeGlobals = require('rollup-plugin-node-globals')
 const omit = require('lodash.omit')
+const nodePolyfills = require('rollup-plugin-polyfill-node')
+const {terser} = require('rollup-plugin-terser')
 const {
   pkg,
   hasFile,
@@ -133,13 +132,13 @@ const output = [
   },
 ]
 
+/** @returns {import('rollup').RollupOptions} */
 module.exports = {
   input: codeSplitting ? input : input[0],
   output,
   external: externalPredicate,
   plugins: [
-    isNode ? nodeBuiltIns() : null,
-    isNode ? nodeGlobals() : null,
+    isNode ? nodePolyfills() : null,
     nodeResolve({
       preferBuiltins: isNode,
       mainFields: ['module', 'main', 'jsnext', 'browser'],

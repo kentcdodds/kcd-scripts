@@ -28,20 +28,20 @@ cases(
       }
       require('..')
       if (snapshotLog) {
-        expect(console.log.mock.calls).toMatchSnapshot()
+        expect(console.log.mock.calls).toMatchSnapshot('format snapshotLog')
       } else if (signal) {
         expect(process.exit).toHaveBeenCalledTimes(1)
         expect(process.exit).toHaveBeenCalledWith(1)
-        expect(console.log.mock.calls).toMatchSnapshot()
+        expect(console.log.mock.calls).toMatchSnapshot('format signal')
       } else {
         expect(crossSpawnSyncMock).toHaveBeenCalledTimes(1)
         const [firstCall] = crossSpawnSyncMock.mock.calls
         const [script, calledArgs] = firstCall
-        expect([script, ...calledArgs].join(' ')).toMatchSnapshot()
+        expect([script, ...calledArgs].join(' ')).toMatchSnapshot('format script')
       }
     } catch (error) {
       if (throws) {
-        expect(error.message).toMatchSnapshot()
+        expect(error.message).toMatchSnapshot('format error')
       } else {
         throw error
       }

@@ -8,8 +8,8 @@ jobs:
 
     strategy:
       matrix:
-        # Test with Node.js v12 (LTS), v14 (LTS), and v16 (latest)
-        node: [12.x, 14.x, 15.x, 16.x]
+        # Test with Node.js v14 (LTS), v16 (LTS), and v18
+        node: [14.x, 16.x, 18.x]
 
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -38,11 +38,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: install dependencies

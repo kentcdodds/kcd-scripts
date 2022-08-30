@@ -54,7 +54,7 @@ function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
   }
 }
 
-const fromRoot = (...p) => path.join(appDirectory, ...p)
+const fromRoot = (...p) => path.posix.join(appDirectory, ...p)
 const hasFile = (...p) => fs.existsSync(fromRoot(...p))
 const ifFile = (files, t, f) =>
   arrify(files).some(file => hasFile(file)) ? t : f

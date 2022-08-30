@@ -101,7 +101,7 @@ function go() {
       const isCodesplitting = rollupInputs.length > 1
 
       const outputs = isCodesplitting
-        ? glob.sync(fromRoot(path.join(dirpath, format, '*.js')))
+        ? glob.sync(fromRoot(path.posix.join(dirpath, format, '*.js')))
         : [fromRoot(path.join(dirpath, filename))]
 
       for (const output of outputs) {

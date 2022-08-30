@@ -14,6 +14,7 @@ const ignores = [
   '__mocks__',
 ]
 
+/** @type {import('@jest/types').Config.InitialOptions} */
 const jestConfig = {
   roots: ['<rootDir>/src'],
   testEnvironment: ifAnyDep(
@@ -21,7 +22,9 @@ const jestConfig = {
     'jsdom',
     'node',
   ),
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    url: 'http://localhost',
+  },
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   modulePaths: ['<rootDir>/src', 'shared', '<rootDir>/tests'],
   collectCoverageFrom: ['src/**/*.+(js|jsx|ts|tsx)'],

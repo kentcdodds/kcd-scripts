@@ -331,6 +331,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "nickmccurdy",
+      "name": "Nick McCurdy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/927220?v=4",
+      "profile": "https://nickmccurdy.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

@@ -54,7 +54,7 @@ function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
   }
 }
 
-const fromRoot = (...p) => path.posix.join(appDirectory, ...p)
+const fromRoot = (...p) => path.join(appDirectory, ...p)
 const toPOSIX = p => p.split(path.sep).join(path.posix.sep)
 const hasFile = (...p) => fs.existsSync(fromRoot(...p))
 const ifFile = (files, t, f) =>
@@ -193,7 +193,7 @@ function getRollupInputs() {
   const buildInputGlob =
     process.env.BUILD_INPUT ||
     (hasTypescript ? 'src/index.{js,ts,tsx}' : 'src/index.js')
-  const input = glob.sync(fromRoot(buildInputGlob))
+  const input = glob.sync(toPOSIX(fromRoot(buildInputGlob)))
   if (!input.length) {
     throw new Error(`Unable to find files with this glob: ${buildInputGlob}`)
   }

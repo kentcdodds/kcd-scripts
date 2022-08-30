@@ -2,13 +2,19 @@ const path = require('path')
 const spawn = require('cross-spawn')
 const glob = require('glob')
 
+function toPOSIX(file) {
+  return file.split(path.sep).join(path.posix.sep)
+}
+
 const [executor, ignoredBin, script] = process.argv
 
 if (script && script !== '--help' && script !== 'help') {
   spawnScript()
 } else {
   const scriptsPath = path.join(__dirname, 'scripts/')
-  const scriptsAvailable = glob.sync(path.posix.join(__dirname, 'scripts', '*'))
+  const scriptsAvailable = glob.sync(
+    toPOSIX(path.join(__dirname, 'scripts', '*')),
+  )
   // `glob.sync` returns paths with unix style path separators even on Windows.
   // So we normalize it before attempting to strip out the scripts path.
   const scriptsAvailableMessage = scriptsAvailable

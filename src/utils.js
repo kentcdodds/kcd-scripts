@@ -55,6 +55,7 @@ function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
 }
 
 const fromRoot = (...p) => path.posix.join(appDirectory, ...p)
+const toPOSIX = p => p.split(path.sep).join(path.posix.sep)
 const hasFile = (...p) => fs.existsSync(fromRoot(...p))
 const ifFile = (files, t, f) =>
   arrify(files).some(file => hasFile(file)) ? t : f
@@ -222,6 +223,7 @@ function getRollupOutput(format = process.env.BUILD_FORMAT) {
 module.exports = {
   appDirectory,
   fromRoot,
+  toPOSIX,
   getConcurrentlyArgs,
   hasFile,
   hasLocalConfig,

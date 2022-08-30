@@ -1,10 +1,7 @@
 const path = require('path')
 const spawn = require('cross-spawn')
 const glob = require('glob')
-
-function toPOSIX(file) {
-  return file.split(path.sep).join(path.posix.sep)
-}
+const {toPOSIX} = require('./utils')
 
 const [executor, ignoredBin, script] = process.argv
 

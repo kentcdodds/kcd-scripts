@@ -8,6 +8,7 @@ const {
   hasFile,
   resolveBin,
   fromRoot,
+  toPOSIX,
   getConcurrentlyArgs,
   writeExtraEntry,
   hasTypescript,
@@ -76,8 +77,8 @@ function go() {
     writeExtraEntry(
       'preact',
       {
-        cjs: glob.sync(fromRoot('preact/**/*.cjs.js'))[0],
-        esm: glob.sync(fromRoot('preact/**/*.esm.js'))[0],
+        cjs: glob.sync(toPOSIX(fromRoot('preact/**/*.cjs.js')))[0],
+        esm: glob.sync(toPOSIX(fromRoot('preact/**/*.esm.js')))[0],
       },
       false,
     )
@@ -101,7 +102,7 @@ function go() {
       const isCodesplitting = rollupInputs.length > 1
 
       const outputs = isCodesplitting
-        ? glob.sync(fromRoot(path.join(dirpath, format, '*.js')))
+        ? glob.sync(toPOSIX(fromRoot(path.posix.join(dirpath, format, '*.js'))))
         : [fromRoot(path.join(dirpath, filename))]
 
       for (const output of outputs) {
@@ -123,8 +124,8 @@ function go() {
     // because typescript generates type defs for ignored files, we need to
     // remove the ignored files
     const ignoredFiles = [
-      ...glob.sync(fromRoot('dist', '**/__tests__/**')),
-      ...glob.sync(fromRoot('dist', '**/__mocks__/**')),
+      ...glob.sync(toPOSIX(fromRoot('dist', '**/__tests__/**'))),
+      ...glob.sync(toPOSIX(fromRoot('dist', '**/__mocks__/**'))),
     ]
     ignoredFiles.forEach(ignoredFile => {
       rimraf.sync(ignoredFile)

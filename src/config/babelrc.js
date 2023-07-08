@@ -19,7 +19,10 @@ const isCJS = BUILD_FORMAT === 'cjs'
 const isWebpack = parseEnv('BUILD_WEBPACK', false)
 const isMinify = parseEnv('BUILD_MINIFY', false)
 const treeshake = parseEnv('BUILD_TREESHAKE', isRollup || isWebpack)
-const alias = parseEnv('BUILD_ALIAS', isPreact ? {react: 'preact'} : null)
+const alias = parseEnv(
+  'BUILD_ALIAS',
+  isPreact ? {react: 'preact/compat'} : null,
+)
 
 const hasBabelRuntimeDep = Boolean(
   pkg.dependencies && pkg.dependencies['@babel/runtime'],

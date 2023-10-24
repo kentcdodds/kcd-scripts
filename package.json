@@ -78,7 +78,7 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "browserslist": "^4.21.3",
+    "browserslist": "4.21.3",
     "builtin-modules": "^3.3.0",
     "chalk": "^4.1.2",
     "concurrently": "^7.3.0",
@@ -116,6 +116,9 @@
   "devDependencies": {
     "jest-in-case": "^1.0.2",
     "slash": "^3.0.0"
+  },
+  "overrides": {
+    "caniuse-lite": "1.0.30001553"
   },
   "engines": {
     "node": "^14.17.0 || ^16.10.0 || >=17.0.0",

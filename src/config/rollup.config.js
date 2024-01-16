@@ -11,7 +11,7 @@ const replace = require('@rollup/plugin-replace')
 const camelcase = require('lodash.camelcase')
 const omit = require('lodash.omit')
 const nodePolyfills = require('rollup-plugin-polyfill-node')
-const {terser} = require('rollup-plugin-terser')
+const terser = require('@rollup/plugin-terser')
 const {
   pkg,
   hasFile,

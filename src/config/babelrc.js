@@ -48,8 +48,8 @@ const browsersConfig = browserslist.loadConfig({path: appDirectory}) || [
 const envTargets = isTest
   ? {node: 'current'}
   : isWebpack || isRollup
-  ? {browsers: browsersConfig}
-  : {node: getNodeVersion(pkg)}
+    ? {browsers: browsersConfig}
+    : {node: getNodeVersion(pkg)}
 const envOptions = {modules: false, loose: true, targets: envTargets}
 
 module.exports = () => ({
@@ -86,7 +86,10 @@ module.exports = () => ({
     isUMD
       ? require.resolve('babel-plugin-transform-inline-environment-variables')
       : null,
-    [require.resolve('@babel/plugin-proposal-class-properties'), {loose: true}],
+    [
+      require.resolve('@babel/plugin-transform-class-properties'),
+      {loose: true},
+    ],
     isMinify
       ? require.resolve('babel-plugin-minify-dead-code-elimination')
       : null,

@@ -37,6 +37,13 @@ function resolveBin(modName, {executable = modName, cwd = process.cwd()} = {}) {
     // ignore _error
   }
   try {
+    if (modName === 'rollup') {
+      // Rollup uses subpath exports without exporting package.json which is problematic
+      // Convert to absolute path first
+      const modPkgPathDist = require.resolve('rollup/dist/rollup.js')
+      const modPkgDirDist = path.dirname(modPkgPathDist)
+      modName = path.join(modPkgDirDist, '..')
+    }
     const modPkgPath = require.resolve(`${modName}/package.json`)
     const modPkgDir = path.dirname(modPkgPath)
     const {bin} = require(modPkgPath)

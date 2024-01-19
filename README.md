@@ -141,6 +141,9 @@ Again, this is a very specific-to-me solution.
 
 - [Rollpkg](https://github.com/rafgraph/rollpkg) - convention over config build
   tool to create packages with TypeScript and Rollup.
+- [bebbi-scripts](https://github.com/bebbi/bebbi-scripts) - like kcd-scripts but
+  ✅ tsc, ✅ `esm`/`cjs`/`types`, ✅ in TS, ✅ yarn 3, ✅ init package.json,
+  ✅ yarn workspace, ✅ extensible (babel, storybook, ..), 🚫 yarn pnp, 🚫 npm
 
 ## Issues
 

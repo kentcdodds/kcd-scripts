@@ -210,12 +210,17 @@ function getRollupInputs() {
 function getRollupOutput(format = process.env.BUILD_FORMAT) {
   const minify = parseEnv('BUILD_MINIFY', false)
   const filenameSuffix = process.env.BUILD_FILENAME_SUFFIX || ''
+  const ext =
+    {
+      esm: '.mjs',
+      cjs: '.cjs',
+    }[format] || '.js'
   const filename = [
     pkg.name,
     filenameSuffix,
     `.${format}`,
     minify ? '.min' : null,
-    '.js',
+    ext,
   ]
     .filter(Boolean)
     .join('')

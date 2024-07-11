@@ -190,3 +190,17 @@ function mockCosmiconfig(result = null) {
 
   cosmiconfigSync.mockImplementationOnce(() => ({search: () => result}))
 }
+
+test.each([
+  {format: 'cjs', extension: '.cjs'},
+  {format: 'esm', extension: '.mjs'},
+  {format: 'umd', extension: '.js'},
+  {format: 'amd', extension: '.js'},
+])(
+  'file extension in rollupOutput with $format should be $extension',
+  ({format, extension}) => {
+    expect(
+      require('../utils').getRollupOutput(format).filename.endsWith(extension),
+    ).toBeTruthy()
+  },
+)

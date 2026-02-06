@@ -77,8 +77,8 @@ function go() {
     writeExtraEntry(
       'preact',
       {
-        cjs: glob.sync(toPOSIX(fromRoot('preact/**/*.cjs.js')))[0],
-        esm: glob.sync(toPOSIX(fromRoot('preact/**/*.esm.js')))[0],
+        cjs: glob.sync(toPOSIX(fromRoot('preact/**/*.cjs.cjs')))[0],
+        esm: glob.sync(toPOSIX(fromRoot('preact/**/*.esm.mjs')))[0],
       },
       false,
     )
